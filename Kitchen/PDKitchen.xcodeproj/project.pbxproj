@@ -20,6 +20,10 @@
 		32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C121A441A9F00ABC8B0 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C171A441A9F00ABC8B0 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */; };
+		32CBFB211A4709D30057EDF6 /* PDBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB201A4709D30057EDF6 /* PDBaseView.m */; };
+		32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */; };
+		32CBFB2A1A470A730057EDF6 /* PDOrderLogisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB291A470A730057EDF6 /* PDOrderLogisticsView.m */; };
 		32CCB2D01A45AFB500CB2BA2 /* PDOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */; };
 		32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */; };
 		32D0E7C81A415E7C00D1F190 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E7C71A415E7C00D1F190 /* main.m */; };
@@ -108,6 +112,14 @@
 		32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
 		32868C161A441A9F00ABC8B0 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 		32868C171A441A9F00ABC8B0 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		32CBFB091A46FC400057EDF6 /* PDOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderCell.h; sourceTree = "<group>"; };
+		32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderCell.m; sourceTree = "<group>"; };
+		32CBFB1F1A4709D30057EDF6 /* PDBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseView.h; sourceTree = "<group>"; };
+		32CBFB201A4709D30057EDF6 /* PDBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseView.m; sourceTree = "<group>"; };
+		32CBFB251A470A4A0057EDF6 /* PDOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderDetailView.h; sourceTree = "<group>"; };
+		32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderDetailView.m; sourceTree = "<group>"; };
+		32CBFB281A470A730057EDF6 /* PDOrderLogisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderLogisticsView.h; sourceTree = "<group>"; };
+		32CBFB291A470A730057EDF6 /* PDOrderLogisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderLogisticsView.m; sourceTree = "<group>"; };
 		32CCB2CE1A45AFB500CB2BA2 /* PDOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderViewController.h; sourceTree = "<group>"; };
 		32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderViewController.m; sourceTree = "<group>"; };
 		32CCB2D11A45B00400CB2BA2 /* PDOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderDetailViewController.h; sourceTree = "<group>"; };
@@ -306,8 +318,14 @@
 		32CCB2CD1A45AF8F00CB2BA2 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				32CBFB091A46FC400057EDF6 /* PDOrderCell.h */,
+				32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */,
 				32CCB2CE1A45AFB500CB2BA2 /* PDOrderViewController.h */,
 				32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */,
+				32CBFB281A470A730057EDF6 /* PDOrderLogisticsView.h */,
+				32CBFB291A470A730057EDF6 /* PDOrderLogisticsView.m */,
+				32CBFB251A470A4A0057EDF6 /* PDOrderDetailView.h */,
+				32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */,
 				32CCB2D11A45B00400CB2BA2 /* PDOrderDetailViewController.h */,
 				32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */,
 			);
@@ -536,6 +554,8 @@
 			children = (
 				32D0E87D1A419B1900D1F190 /* PDBaseTableViewCell.h */,
 				32D0E87E1A419B1900D1F190 /* PDBaseTableViewCell.m */,
+				32CBFB1F1A4709D30057EDF6 /* PDBaseView.h */,
+				32CBFB201A4709D30057EDF6 /* PDBaseView.m */,
 				32D0E8471A4164BC00D1F190 /* PDBaseViewController.h */,
 				32D0E8481A4164BC00D1F190 /* PDBaseViewController.m */,
 				32D0E84A1A4164D600D1F190 /* PDBaseTableViewController.h */,
@@ -753,9 +773,11 @@
 				32868C051A44159300ABC8B0 /* README.md in Sources */,
 				32D0E8391A41611A00D1F190 /* SVProgressHUD.m in Sources */,
 				32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */,
+				32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */,
 				32D0E8051A41601200D1F190 /* AFURLConnectionOperation.m in Sources */,
 				326CB71D1A4282DC00D2BADE /* PDRightFooterView.m in Sources */,
 				32D0E81E1A41602200D1F190 /* UIButton+AFNetworking.m in Sources */,
+				32CBFB2A1A470A730057EDF6 /* PDOrderLogisticsView.m in Sources */,
 				32D0E81C1A41602200D1F190 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				32D0E8041A41601200D1F190 /* AFSecurityPolicy.m in Sources */,
 				32D0E8821A419B5800D1F190 /* PDCenterCell.m in Sources */,
@@ -763,6 +785,7 @@
 				32D0E8651A416D9600D1F190 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				32D0E89E1A41A1E200D1F190 /* PDAddressViewController.m in Sources */,
 				32D0E8491A4164BC00D1F190 /* PDBaseViewController.m in Sources */,
+				32CBFB211A4709D30057EDF6 /* PDBaseView.m in Sources */,
 				32D0E8211A41602200D1F190 /* UIRefreshControl+AFNetworking.m in Sources */,
 				32D0E8221A41602200D1F190 /* UIWebView+AFNetworking.m in Sources */,
 				32D0E82E1A41603E00D1F190 /* MMDrawerVisualState.m in Sources */,
@@ -773,6 +796,7 @@
 				32D0E87F1A419B1900D1F190 /* PDBaseTableViewCell.m in Sources */,
 				32D0E88C1A41A0A000D1F190 /* PDNewsViewController.m in Sources */,
 				32D0E82D1A41603E00D1F190 /* MMDrawerController.m in Sources */,
+				32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */,
 				32D0E8961A41A15500D1F190 /* PDCouponViewController.m in Sources */,
 				32D0E8021A41601200D1F190 /* AFHTTPSessionManager.m in Sources */,
 				32D0E81D1A41602200D1F190 /* UIAlertView+AFNetworking.m in Sources */,

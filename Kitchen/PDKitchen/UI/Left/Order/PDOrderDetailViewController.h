@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 mtf. All rights reserved.
 //
 
-#import "PDBaseTableViewController.h"
+#import "PDBaseViewController.h"
 
-@interface PDOrderDetailViewController : PDBaseTableViewController
+@interface PDOrderDetailViewController : PDBaseViewController
 
 @end

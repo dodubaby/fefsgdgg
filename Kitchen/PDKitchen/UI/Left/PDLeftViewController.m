@@ -8,6 +8,7 @@
 
 #import "PDLeftViewController.h"
 #import "DemoViewController.h"
+#import "PDOrderViewController.h"
 #import "PDFavoritesViewController.h"
 #import "PDCouponViewController.h"
 #import "PDNewsViewController.h"
@@ -85,6 +86,9 @@
             //
         {
         
+            vc = [PDOrderViewController new];
+            vc.title = list[indexPath.row];
+            [self pushVC:vc];
             
         }
             break;

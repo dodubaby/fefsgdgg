@@ -7,31 +7,63 @@
 //
 
 #import "PDOrderViewController.h"
+#import "PDOrderDetailViewController.h"
+#import "PDOrderCell.h"
 
 @interface PDOrderViewController ()
+{
 
+        NSMutableArray *list;
+}
 @end
 
 @implementation PDOrderViewController
 
+- (void)setupData{
+    
+    list = [[NSMutableArray alloc] init];
+    [list addObject:@"小炒肉"];
+    [list addObject:@"小鸡炖蘑菇"];
+    [list addObject:@"北京烤鸭"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = @"我的订单";
+    
+    [self setupData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [PDOrderCell cellHeightWithData:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return list.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PDOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+    if (!cell) {
+        cell = [[PDOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+    }
+    //cell.textLabel.text = list[indexPath.row];
+    [cell setData:nil];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    PDOrderDetailViewController *vc = [[PDOrderDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end
