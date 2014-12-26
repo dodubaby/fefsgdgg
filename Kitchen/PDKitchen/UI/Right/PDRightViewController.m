@@ -87,6 +87,8 @@
 -(void)pdRightFooterView:(PDRightFooterView *)view submitWithTotal:(CGFloat)totalPrice{
 
     NSLog(@"submit");
+
+    
 }
 
 @end

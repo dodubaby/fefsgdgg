@@ -104,7 +104,7 @@
 
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
 
-    
+    NSLog(@"add");
 }
 
 @end

@@ -34,8 +34,7 @@
     if (self) {
         //
         
-        
-        NSLog(@"self.width == %f",self.width);
+        //NSLog(@"self.width == %f",self.width);
         
         thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 130)];
         [self addSubview:thumbnail];
