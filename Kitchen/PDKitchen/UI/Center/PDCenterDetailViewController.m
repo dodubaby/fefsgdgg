@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "PDCenterDetailViewController.h"
 #import "PDCommentsViewController.h"
+#import "PDCommentsInputViewController.h"
 #import "PDCenterCell.h"
 #import "PDOwnerCell.h"
 #import "PDCommentCell.h"
+
+#import "AppDelegate.h"
 
 @interface PDDetailCellItem : NSObject
 @property (nonatomic,strong) Class cellClazz;
@@ -23,7 +26,7 @@
 @end
 
 
-@interface PDCenterDetailViewController()
+@interface PDCenterDetailViewController()<PDBaseTableViewCellDelegate>
 
 {
     NSMutableArray *list;
@@ -103,6 +106,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     //cell.textLabel.text = list[indexPath.row];
+    cell.delegate = self;
     [cell setData:nil];
     return cell;
 }
@@ -115,6 +119,30 @@
 // 分享
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell shareWithData:(id)data{
 
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    //[delegate loginWeibo];
+    
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"分享"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"微博", @"微信朋友圈",@"微信好友",nil];
+    [sheet showInView:self.view clickedBlock:^(NSInteger buttonIndex) {
+        //
+        NSLog(@"%ld",buttonIndex);
+        
+        switch (buttonIndex) {
+            case 0: //微博 
+            {
+                //[delegate performSelector:@selector(loginWeibo) withObject:nil afterDelay:0.5];
+                
+                [delegate performSelector:@selector(loginWeixin) withObject:nil afterDelay:0.5];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
 }
 
 // 收藏
@@ -125,6 +153,9 @@
 // 留言
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell commentWithData:(id)data{
 
+    PDCommentsInputViewController *vc = [[PDCommentsInputViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 @end
