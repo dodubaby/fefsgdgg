@@ -28,12 +28,60 @@
 }
 
 
+-(void)loginWithType:(NSNumber *)type
+               phone:(NSString *)phone
+             account:(NSString *)thirdpartID
+        verification:(NSString *)verification
+             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:type forKey:@"type"];
+    
+    if (phone) {   // 手机验证码登录
+        [parameters setObject:phone forKey:@"phone"];
+        if (verification) {
+            [parameters setObject:verification forKey:@"verification"];
+        }
+    }else{  // 微信微博QQ的 userid
+        [parameters setObject:thirdpartID forKey:@"account"];
+    }
+
+    [_HTTPEngine POST:kPathOfLogin parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+        
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"result   %@",result);
+        
+        int code = [result[@"Header"][@"Code"] intValue];
+        NSString *msg = result[@"Header"][@"Message"];
+        if (code == 200) {
+            success(operation,responseObject);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+
+    
+}
+
+
 - (void)operationFrameWithFrameID:(NSString *)FrameID
                          devideID:(NSString *)DeviceID
                              name:(NSString *)Name
                            action:(NSString *)Action
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;{
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:FrameID forKey:@"FrameID"];

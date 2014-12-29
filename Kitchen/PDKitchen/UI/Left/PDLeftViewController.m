@@ -31,19 +31,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     
     list = [[NSMutableArray alloc] initWithObjects:
-            @"我的订单",
-            @"我的收藏",
-            @"我的优惠券",
-            @"消息",
-            @"给我评分",
-            @"设置", nil];
+            @{@"我的订单":@"menu_order"},
+            @{@"我的收藏":@"menu_favorite"},
+            @{@"我的优惠券":@"menu_coupon"},
+            @{@"消息":@"menu_news"},
+            @{@"给我评分":@"menu_score"},
+            @{@"设置":@"menu_settings"}, nil];
     
-    leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(20, 120, kAppWidth*2/3.0f-2*20, list.count*44) style:UITableViewStylePlain];
+    leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, 165, list.count*50) style:UITableViewStylePlain];
     leftTableView.delegate = self;
     leftTableView.dataSource = self;
+    leftTableView.rowHeight = 50.0f;
     [self.view addSubview:leftTableView];
+    leftTableView.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
 }
 
 
@@ -57,7 +60,6 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     return 1;
 }
 
@@ -70,8 +72,18 @@
     PDBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
         cell = [[PDBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     }
-    cell.textLabel.text = list[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+    
+    
+    NSDictionary *data = list[indexPath.row];
+    NSString *key = data.allKeys[0];
+    NSString *value = [data objectForKey:key];
+    
+    cell.imageView.image = [UIImage imageNamed:value];
+    cell.textLabel.text = key;
     [cell setData:nil];
     return cell;
 }
@@ -81,13 +93,16 @@
     
     UIViewController *vc = nil;
     
+    NSDictionary *data = list[indexPath.row];
+    NSString *key = data.allKeys[0];
+    
     switch (indexPath.row) {
         case 0:
             //
         {
         
             vc = [PDOrderViewController new];
-            vc.title = list[indexPath.row];
+            vc.title = key;
             [self pushVC:vc];
             
         }
@@ -96,7 +111,7 @@
             //
         {
             vc = [PDFavoritesViewController new];
-            vc.title = list[indexPath.row];
+            vc.title = key;
             [self pushVC:vc];
             
         }
@@ -106,7 +121,7 @@
         {
             
             vc = [PDCouponViewController new];
-            vc.title = list[indexPath.row];
+            vc.title = key;
             [self pushVC:vc];
         }
             break;
@@ -114,7 +129,7 @@
             //
         {
             vc = [PDNewsViewController new];
-            vc.title = list[indexPath.row];
+            vc.title = key;
             [self pushVC:vc];
             
         }
@@ -132,7 +147,7 @@
         {
             
             vc = [PDSettingsViewController new];
-            vc.title = list[indexPath.row];
+            vc.title = key;
             [self pushVC:vc];
         }
             break;

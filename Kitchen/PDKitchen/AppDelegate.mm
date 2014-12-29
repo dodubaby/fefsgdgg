@@ -46,8 +46,8 @@
                                              initWithCenterViewController:navigationController
                                              leftDrawerViewController:leftSideDrawerViewController
                                              rightDrawerViewController:rightSideDrawerViewController];
-    [drawerController setMaximumRightDrawerWidth:kAppWidth*2/3.0f];
-    [drawerController setMaximumLeftDrawerWidth:kAppWidth*2/3.0f];
+    [drawerController setMaximumRightDrawerWidth:255];
+    [drawerController setMaximumLeftDrawerWidth:165];
     
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];

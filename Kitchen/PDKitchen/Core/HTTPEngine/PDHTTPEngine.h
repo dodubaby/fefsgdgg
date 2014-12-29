@@ -12,10 +12,20 @@
 #import "JSONJoy.h"
 #import "PDBaseModel.h"
 
+// API path
+// 登录
+#define kPathOfLogin @"/user/login"
+
 @interface PDHTTPEngine : NSObject
 
 @property (nonatomic,strong) AFHTTPRequestOperationManager *HTTPEngine;
 
 + (PDHTTPEngine *)sharedInstance;
 
+-(void)loginWithType:(NSNumber *)type
+               phone:(NSString *)phone
+             account:(NSString *)thirdpartID
+        verification:(NSString *)verification
+             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

@@ -28,16 +28,21 @@
         
         name = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap-120, 20)];
         [self addSubview:name];
+        name.font = [UIFont systemFontOfSize:12];
+        name.textColor = [UIColor colorWithHexString:@"#999999"];
         
         time = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-120, kCellLeftGap, 120, 20)];
         [self addSubview:time];
         time.textAlignment = NSTextAlignmentRight;
+        time.font = [UIFont systemFontOfSize:12];
+        time.textColor = [UIColor colorWithHexString:@"#999999"];
         
         content = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, name.bottom+kCellLeftGap, kAppWidth-2*kCellLeftGap, 0)];
         [self addSubview:content];
-        content.font = [UIFont systemFontOfSize:14];
+        content.font = [UIFont systemFontOfSize:15];
         content.lineBreakMode = NSLineBreakByWordWrapping;
         content.numberOfLines = 0;
+        content.textColor = [UIColor colorWithHexString:@"#999999"];
         
     }
     
@@ -57,7 +62,7 @@
     
     CGFloat h = 3*kCellLeftGap+20;
     
-    CGSize size= [kCellContent sizeWithFontCompatible:[UIFont systemFontOfSize:14]
+    CGSize size= [kCellContent sizeWithFontCompatible:[UIFont systemFontOfSize:15]
                                              constrainedToSize:CGSizeMake(kAppWidth-2*kCellLeftGap, MAXFLOAT)
                                         lineBreakMode:NSLineBreakByWordWrapping];
                   

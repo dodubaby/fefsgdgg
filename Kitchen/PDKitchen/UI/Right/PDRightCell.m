@@ -37,6 +37,8 @@
     if (self) {
         //
 
+        
+        
         if (kAppWidth>320) {
             buttonStartX = 180;
         }else{
@@ -49,16 +51,20 @@
         
         name = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, (h-20)/2, 80, 20)];
         [self addSubview:name];
+        name.font = [UIFont systemFontOfSize:15];
+        name.textColor = [UIColor colorWithHexString:@"#333333"];
         
         price = [[UILabel alloc] initWithFrame:CGRectMake(name.right+kCellLeftGap, (h-20)/2, 60, 20)];
         [self addSubview:price];
         price.backgroundColor = [UIColor clearColor];
-        
+        price.font = [UIFont systemFontOfSize:15];
+        price.textColor = [UIColor colorWithHexString:@"#333333"];
         
         count = [[UILabel alloc] initWithFrame:CGRectMake(buttonStartX, (h-20)/2, 70, 20)];
         [self addSubview:count];
         count.textAlignment = NSTextAlignmentCenter;
-        
+        count.font = [UIFont systemFontOfSize:15];
+        count.textColor = [UIColor colorWithHexString:@"#333333"];
         
         reduceButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX, (h-20)/2, 20, 20)];
         [self addSubview:reduceButton];
@@ -115,7 +121,7 @@
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
-    return 44;
+    return 55;
 }
 
 

@@ -11,4 +11,7 @@
 
 @interface PDBaseModel : NSObject
 
+@property (nonatomic,strong) NSNumber *code;
+@property (nonatomic,strong) NSString *err_msg;
+
 @end

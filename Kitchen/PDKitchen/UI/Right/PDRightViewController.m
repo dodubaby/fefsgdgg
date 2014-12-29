@@ -35,12 +35,10 @@
     
     [self setupData];
     
-    
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
     self.tableView.tableHeaderView = header;
     
-    
-    footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 120)];
+    footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
     footer.delegate = self;
     self.tableView.tableFooterView = footer;
 }
@@ -63,6 +61,7 @@
     if (!cell) {
         cell = [[PDRightCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.delegate = self;
     [cell setData:nil];

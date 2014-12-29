@@ -26,14 +26,20 @@
         
         price = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
         [self addSubview:price];
-        price.textAlignment = NSTextAlignmentCenter;
+        price.textAlignment = NSTextAlignmentRight;
+        price.font = [UIFont systemFontOfSize:15];
+        price.textColor = [UIColor colorWithHexString:@"#666666"];
+        price.text = @"3份美食 共计113元";
         
-        price.text = @"total: ¥300";
-        
-        submit = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
+        submit = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 30)];
         [self addSubview:submit];
         [submit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [submit setTitle:@"submit" forState:UIControlStateNormal];
+        [submit setTitle:@"提交订单" forState:UIControlStateNormal];
+        submit.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
+        [submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        submit.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        submit.layer.cornerRadius = 4;
+        
         
         [submit handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdRightFooterView:submitWithTotal:)]) {
@@ -50,15 +56,16 @@
 -(void)setTotalPrice:(CGFloat)totalPrice{
 
     _totalPrice = totalPrice;
-    price.text = [NSString stringWithFormat: @"total: ¥%.2f",_totalPrice];
+    price.text = [NSString stringWithFormat: @"3份美食 共计113元"];
 }
 
 -(void)layoutSubviews{
 
     [super layoutSubviews];
     
-    price.frame = CGRectMake((self.width - price.width)/2, 10, price.width, price.height);
-    submit.frame = CGRectMake((self.width - submit.width)/2, 60, submit.width, submit.height);
+    [price sizeToFit];
+    price.frame = CGRectMake(self.width - price.width - 10, 10, price.width, price.height);
+    submit.frame = CGRectMake(self.width - submit.width - 10, price.bottom+10, submit.width, submit.height);
     
 }
 
