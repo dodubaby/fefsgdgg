@@ -9,7 +9,7 @@
 #import "PDBaseTableViewController.h"
 #import "PDBaseTableViewCell.h"
 
-@interface PDOrderInquiryTableViewController : PDBaseTableViewController<PDBaseTableViewCellDelegate>
+@interface PDOrderInquiryTableViewController : PDBaseTableViewController<PDBaseTableViewCellDelegate,UITextFieldDelegate>
 
 
 @end

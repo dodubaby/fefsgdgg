@@ -20,7 +20,9 @@
     UILabel *timelab;
     UILabel *phonelab;
     UILabel *addresslab;
-    UIButton *submitbtn;
+    UIButton *receivebtn;
+    UIButton *finishbtn;
+    UIButton *cancelbtn;
     
 }
 @end
@@ -42,9 +44,8 @@
         [self addSubview:newmarkimg];
         newmarkimg.backgroundColor = [UIColor grayColor];
 
-        totallab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, sortimg.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
-        [self addSubview:totallab];
-        NSInteger height=totallab.bottom;
+        
+        NSInteger height=sortimg.bottom;
         for (int i=0; i<5; i++) {
             everyla[i]=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, height+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
             height=everyla[i].bottom;
@@ -54,23 +55,43 @@
         [self addSubview:msglab];
         
         timelab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, msglab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
-        
         [self addSubview:timelab];
         
         phonelab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, timelab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
-        
         [self addSubview:phonelab];
         
         addresslab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, phonelab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
-        
         [self addSubview:addresslab];
         
-        submitbtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap, addresslab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2-40, 40)];
-        [self addSubview:submitbtn];
-        [submitbtn setTitle:@"确认订单" forState:UIControlStateNormal];
-        [submitbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        totallab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, addresslab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
+        [self addSubview:totallab];
         
-        [submitbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        
+        receivebtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap, totallab.bottom+kCellLeftGap, 100, 40)];
+        [self addSubview:receivebtn];
+        [receivebtn setTitle:@"接单" forState:UIControlStateNormal];
+        [receivebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [receivebtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+            }
+        }];
+        
+        finishbtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap+120, totallab.bottom+kCellLeftGap, 120, 40)];
+        [self addSubview:finishbtn];
+        [finishbtn setTitle:@"完成" forState:UIControlStateNormal];
+        [finishbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [finishbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+            }
+        }];
+        
+        cancelbtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap+240, totallab.bottom+kCellLeftGap, 120, 40)];
+        [self addSubview:cancelbtn];
+        [cancelbtn setTitle:@"确认退单" forState:UIControlStateNormal];
+        [cancelbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [cancelbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
                 [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
             }
@@ -91,15 +112,24 @@
     phonelab.text=@"下单人电话";
     addresslab.text=@"下单人地址";
     if (self.type==OrderTypeToday) {
-        submitbtn.hidden=NO;
+        receivebtn.hidden=NO;
+        finishbtn.hidden=NO;
+        cancelbtn.hidden=NO;
     }else{
-        submitbtn.hidden=YES;
+        receivebtn.hidden=YES;
+        finishbtn.hidden=YES;
+        cancelbtn.hidden=YES;
     }
     [self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
 
+    if (1) {
+        
+    }else{
+        
+    }
     return 270+(20+kCellLeftGap)*4;
 }
 

@@ -84,7 +84,8 @@
             }
         }];
     }else{
-        
+        AppDelegate *app=[[UIApplication sharedApplication] delegate];
+        [app changetoLoginViewController];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
