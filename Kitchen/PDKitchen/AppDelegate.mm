@@ -32,6 +32,10 @@
     [WeiboSDK registerApp:kWeiboAppKey];
     
     
+    // 登录
+    _loginViewController = [[PDLoginViewController alloc] init];
+    
+    
     UIViewController * leftSideDrawerViewController = [[PDLeftViewController alloc] init];
     
     UIViewController * centerViewController = [[PDCenterViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -74,9 +78,37 @@
     [_window makeKeyAndVisible];
     
     
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLogin) name:kShowLoginNotificationKey object:nil];
+    
     
     return YES;
+}
+
+-(void)showLogin{
+    
+    _loginNavViewController = [[UINavigationController alloc] initWithRootViewController:_loginViewController];
+
+    [_window.rootViewController addChildViewController:_loginNavViewController];
+    [_window.rootViewController.view addSubview:_loginNavViewController.view];
+    
+    _loginNavViewController.view.top = kAppHeight;
+    [UIView animateWithDuration:0.3 animations:^{
+        _loginNavViewController.view.top = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)removeLogin{
+
+    _loginNavViewController.view.top = 0;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        _loginNavViewController.view.top = kAppHeight-20;
+    } completion:^(BOOL finished) {
+        [_loginNavViewController removeFromParentViewController];
+        [_loginNavViewController.view removeFromSuperview];
+    }];
 }
 
 -(void)loginWeixin{

@@ -35,9 +35,11 @@
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
     
-    
+
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_logo"]];
     self.navigationItem.titleView = logo;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self setupLeftMenuButton];
     [self setupRightMenuButton];

@@ -14,6 +14,8 @@
     
     CGFloat buttonStartX;
     
+    UIImageView *line;
+    
     UILabel *name;
     UILabel *price;
     
@@ -37,17 +39,15 @@
     if (self) {
         //
 
-        
-        
-        if (kAppWidth>320) {
-            buttonStartX = 180;
-        }else{
-            buttonStartX = 135;
-        }
+        buttonStartX = 135;
         
         amount = 3;
-        
         CGFloat h = [PDRightCell cellHeightWithData:nil];
+        
+        line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 1.0)];
+        [self addSubview:line];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
+        
         
         name = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, (h-20)/2, 80, 20)];
         [self addSubview:name];
@@ -60,21 +60,21 @@
         price.font = [UIFont systemFontOfSize:15];
         price.textColor = [UIColor colorWithHexString:@"#333333"];
         
-        count = [[UILabel alloc] initWithFrame:CGRectMake(buttonStartX, (h-20)/2, 70, 20)];
+        count = [[UILabel alloc] initWithFrame:CGRectMake(buttonStartX, (h-20)/2, 110, 20)];
         [self addSubview:count];
         count.textAlignment = NSTextAlignmentCenter;
         count.font = [UIFont systemFontOfSize:15];
         count.textColor = [UIColor colorWithHexString:@"#333333"];
         
-        reduceButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX, (h-20)/2, 20, 20)];
+        CGFloat cellHeight = [[self class] cellHeightWithData:nil];
+    
+        reduceButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX, (cellHeight-40)/2, 40, 40)];
         [self addSubview:reduceButton];
-        [reduceButton setTitle:@"-" forState:UIControlStateNormal];
-        [reduceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [reduceButton setImage:[UIImage imageNamed:@"od_reduce"] forState:UIControlStateNormal];
         
-        addButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX+50, (h-20)/2, 20, 20)];
+        addButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX+70, (cellHeight-40)/2, 40, 40)];
         [self addSubview:addButton];
-        [addButton setTitle:@"+" forState:UIControlStateNormal];
-        [addButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [addButton setImage:[UIImage imageNamed:@"od_add"] forState:UIControlStateNormal];
         
         // ------
         [reduceButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
@@ -117,7 +117,7 @@
     
     count.text = [NSString stringWithFormat:@"%ld",amount];
     
-    [self showDebugRect];
+    //[self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{

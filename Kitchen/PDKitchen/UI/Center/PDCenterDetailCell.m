@@ -1,35 +1,36 @@
 //
-//  PDCenterCell.m
+//  PDCenterDetailCell.m
 //  PDKitchen
 //
-//  Created by bright on 14/12/17.
+//  Created by bright on 14/12/30.
 //  Copyright (c) 2014年 mtf. All rights reserved.
 //
 
-#import "PDCenterCell.h"
+#import "PDCenterDetailCell.h"
 
-
-@interface PDCenterCell()
+@interface PDCenterDetailCell()
 {
-
+    
     UIImageView *thumbnail;
-    UIImageView *avatar;
     
     UILabel *name;
     UILabel *price;
     UILabel *person;
-    UILabel *from;
+    UILabel *like;
+    
+    UIButton *share;
+    UIButton *favorite;
     
     UIButton *addButton;
 }
 @end
 
-@implementation PDCenterCell
+@implementation PDCenterDetailCell
 
 
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-
+    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
@@ -44,32 +45,51 @@
         thumbnail.layer.borderWidth = 0.5f;
         thumbnail.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        avatar = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, thumbnail.bottom + 15, 45, 45)];
-        [self addSubview:avatar];
-        avatar.backgroundColor = [UIColor clearColor];
-        avatar.layer.borderWidth = 0.5f;
-        avatar.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
-        
-        
-        name = [[UILabel alloc] initWithFrame:CGRectMake(avatar.right + kCellLeftGap, avatar.top, 120, 20)];
+        name = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, thumbnail.bottom+20, 120, 20)];
         [self addSubview:name];
         name.font = [UIFont systemFontOfSize:15];
         name.textColor = [UIColor colorWithHexString:@"#333333"];
+        
+        person = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, name.bottom+kCellLeftGap, 100, 20)];
+        [self addSubview:person];
+        person.font = [UIFont systemFontOfSize:13];
+        person.textColor = [UIColor colorWithHexString:@"#666666"];
+        
+        like = [[UILabel alloc] initWithFrame:CGRectMake(120, person.top, 120, 20)];
+        [self addSubview:like];
+        like.font = [UIFont systemFontOfSize:13];
+        like.textColor = [UIColor colorWithHexString:@"#666666"];
         
         price = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth - kCellLeftGap -100, thumbnail.bottom+20, 100, 40)];
         price.textAlignment = NSTextAlignmentRight;
         [self addSubview:price];
         price.font = [UIFont systemFontOfSize:30];
         
-//        person = [[UILabel alloc] initWithFrame:CGRectMake(price.right+kCellLeftGap, thumbnail.bottom+kCellLeftGap, 100, 20)];
-//        [self addSubview:person];
+        share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, person.bottom+10, 50, 30)];
+        [self addSubview:share];
+        [share setTitle:@"分享" forState:UIControlStateNormal];
+        [share setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
-        from = [[UILabel alloc] initWithFrame:CGRectMake(avatar.right + kCellLeftGap, avatar.top + 22, 120, 20)];
-        [self addSubview:from];
-        from.font = [UIFont systemFontOfSize:13];
-        from.textColor = [UIColor colorWithHexString:@"#666666"];
+        [share handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:shareWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self shareWithData:nil];
+            }
+        }];
         
-        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap, avatar.bottom +5, 90, 30)];
+        
+        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, person.bottom+10, 50, 30)];
+        [self addSubview:favorite];
+        [favorite setTitle:@"收藏" forState:UIControlStateNormal];
+        [favorite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        [favorite handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:favoriteWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:nil];
+            }
+        }];
+        
+        
+        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap,  person.bottom + 10, 90, 30)];
         [self addSubview:addButton];
         UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:addButton.size];
         [addButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -90,14 +110,14 @@
 }
 
 -(void)configData:(id)data{
-
-    name.text = @"name";
-    price.text = @"price";
+    
+    name.text = @"肉酱面";
+    person.text = @"4234人吃过";
+    like.text = @"235人";
+    price.text = @"25.5";
     [price sizeToFit];
     price.right = kAppWidth - kCellLeftGap;
-//    person.text = @"person";
-    [person sizeToFit];
-    from.text = @"from";
+    //    person.text = @"person";
     
     //[self showDebugRect];
 }
@@ -108,5 +128,6 @@
     
     //return 210;
 }
+
 
 @end

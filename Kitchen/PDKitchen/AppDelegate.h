@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PDConfig.h"
+
+#import "PDLoginViewController.h"
 
 #import "WXApi.h"
 #import "WeiboSDK.h"
@@ -21,9 +24,18 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+
+@property (nonatomic,strong) PDLoginViewController *loginViewController;
+@property (nonatomic,strong) UINavigationController *loginNavViewController;
+
 @property (strong, nonatomic) NSString *wbtoken;
 @property (strong, nonatomic) NSString *wbCurrentUserID;
 @property (strong, nonatomic) NSDate   *wbExpirationDate; // 授权过期日期
+
+
+- (void)showLogin;
+- (void)removeLogin;
+
 -(void)loginWeibo;
 
 -(void)loginWeixin;

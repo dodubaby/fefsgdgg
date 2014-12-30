@@ -15,4 +15,7 @@
 
 @interface PDBaseViewController : UIViewController
 
+-(void)backButtonTaped:(id)sender;
+-(void)setupBackButton;
+
 @end

@@ -35,14 +35,18 @@
     
     [self setupData];
     
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    header.textAlignment = NSTextAlignmentCenter;
+    header.font = [UIFont boldSystemFontOfSize:18];
+    header.textColor = [UIColor colorWithHexString:@"#333333"];
+    header.text = @"提交订单";
+    
     self.tableView.tableHeaderView = header;
     
     footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
     footer.delegate = self;
     self.tableView.tableFooterView = footer;
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

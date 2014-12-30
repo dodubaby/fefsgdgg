@@ -32,7 +32,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"消息中心";
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self setupBackButton];
+    
     [self setupData];
+    
+    [self.navigationController.navigationBar showDebugRect];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

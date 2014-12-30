@@ -27,6 +27,20 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)backButtonTaped:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)setupBackButton{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor greenColor];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    [button setImage:[UIImage imageNamed:@"center_back"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

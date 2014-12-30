@@ -13,6 +13,8 @@
     UILabel *name;
     UILabel *content;
     UILabel *time;
+    
+    UIImageView *line;
 }
 
 @end
@@ -25,6 +27,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
+        
+        line = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, kAppWidth-2*kCellLeftGap, 1.0)];
+        [self addSubview:line];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
         
         name = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap-120, 20)];
         [self addSubview:name];
@@ -43,10 +49,13 @@
         content.lineBreakMode = NSLineBreakByWordWrapping;
         content.numberOfLines = 0;
         content.textColor = [UIColor colorWithHexString:@"#999999"];
-        
     }
     
     return self;
+}
+
+-(void)hiddenLine:(BOOL) hide{
+    line.hidden = hide;
 }
 
 -(void)configData:(id)data{

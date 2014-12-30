@@ -7,6 +7,7 @@
 //
 
 #import "PDBaseViewController.h"
+#import "PDConfig.h"
 
 @interface PDSettingsViewController : PDBaseViewController
 

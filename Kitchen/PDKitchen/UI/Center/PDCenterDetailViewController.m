@@ -10,7 +10,7 @@
 #import "PDCenterDetailViewController.h"
 #import "PDCommentsViewController.h"
 #import "PDCommentsInputViewController.h"
-#import "PDCenterCell.h"
+#import "PDCenterDetailCell.h"
 #import "PDOwnerCell.h"
 #import "PDCommentCell.h"
 
@@ -24,7 +24,6 @@
 
 @implementation PDDetailCellItem
 @end
-
 
 @interface PDCenterDetailViewController()<PDBaseTableViewCellDelegate>
 
@@ -43,7 +42,7 @@
 
     PDDetailCellItem *item = nil;
     item = [PDDetailCellItem new];
-    item.cellClazz = [PDCenterCell class];
+    item.cellClazz = [PDCenterDetailCell class];
     [list addObject:item];
     
 
@@ -63,6 +62,10 @@
     [super viewDidLoad];
     self.navigationItem.title = @"详情";
     
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self setupBackButton];
     [self setupRightMenuButton];
     
     [self setupData];
@@ -162,6 +165,16 @@
     //cell.textLabel.text = list[indexPath.row];
     cell.delegate = self;
     [cell setData:nil];
+    
+    if ([cell isKindOfClass:[PDCommentCell class]]) {
+        PDCommentCell *commentCell = (PDCommentCell *)cell;
+        if (indexPath.row == 2) {
+            [commentCell hiddenLine:YES];
+        }else{
+            [commentCell hiddenLine:NO];
+        }
+    }
+    
     return cell;
 }
 

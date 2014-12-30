@@ -10,21 +10,26 @@
 
 @interface PDOwnerCell()
 {
-    UIButton *share;
-    UIButton *favorite;
+    UIView *back;
     
     UILabel *phone;
     
     UIImageView *avatar;
     UILabel *name;
+    UIButton *comment;
+    
+    UILabel *about;
+    
+    UIImageView *line;
     
     UILabel *age;
     UILabel *hometown;
     UILabel *skill;
     
-    UILabel *about;
-    
-    UIButton *comment;
+    UILabel *ageHint;
+    UILabel *hometownHint;
+    UILabel *skillHint;
+
     
 }
 @end
@@ -35,65 +40,61 @@
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        //
-        share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, 50, 30)];
-        [self addSubview:share];
-        [share setTitle:@"分享" forState:UIControlStateNormal];
-        [share setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
-        [share handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:shareWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self shareWithData:nil];
-            }
-        }];
-        
-        
-        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, kCellLeftGap, 50, 30)];
-        [self addSubview:favorite];
-        [favorite setTitle:@"收藏" forState:UIControlStateNormal];
-        [favorite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        [favorite handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:favoriteWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:nil];
-            }
-        }];
-        
-        phone = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, share.bottom + kCellLeftGap, kAppWidth - 2*kCellLeftGap, 20)];
+        phone = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth - 2*kCellLeftGap, 20)];
         [self addSubview:phone];
+        phone.font = [UIFont systemFontOfSize:15];
+        phone.textColor = [UIColor colorWithHexString:@"#666666"];
         
+        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, phone.bottom+10, kAppWidth - 2*10, 250)];
+        [self addSubview:back];
+        back.layer.borderWidth = 0.5f;
+        back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        avatar = [[UIImageView alloc] initWithFrame:CGRectMake((kAppWidth-60)/2, phone.bottom + kCellLeftGap, 80, 80)];
-        [self addSubview:avatar];
+        //
+//        share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, 50, 30)];
+//        [self addSubview:share];
+//        [share setTitle:@"分享" forState:UIControlStateNormal];
+//        [share setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        
+//        [share handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+//            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:shareWithData:)]) {
+//                [self.delegate pdBaseTableViewCellDelegate:self shareWithData:nil];
+//            }
+//        }];
+//        
+//        
+//        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, kCellLeftGap, 50, 30)];
+//        [self addSubview:favorite];
+//        [favorite setTitle:@"收藏" forState:UIControlStateNormal];
+//        [favorite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        
+//        [favorite handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+//            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:favoriteWithData:)]) {
+//                [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:nil];
+//            }
+//        }];
         
+
+        avatar = [[UIImageView alloc] initWithFrame:CGRectMake(35, 15, 45, 45)];
+        [back addSubview:avatar];
+        avatar.backgroundColor = [UIColor clearColor];
+        avatar.layer.borderWidth = 0.5f;
+        avatar.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        name = [[UILabel alloc] initWithFrame:CGRectMake(avatar.right + kCellLeftGap, phone.bottom + kCellLeftGap+40, 90, 20)];
-        [self addSubview:name];
+        name = [[UILabel alloc] initWithFrame:CGRectMake(avatar.right + kCellLeftGap, avatar.top+10, 90, 20)];
+        [back addSubview:name];
+        name.font = [UIFont systemFontOfSize:14];
+        name.textColor = [UIColor colorWithHexString:@"#666666"];
         
-        CGFloat w = (kAppWidth - 4*kCellLeftGap)/3.0f;
-        
-        age = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, avatar.bottom + kCellLeftGap, w, 20)];
-        [self addSubview:age];
-        age.textAlignment = NSTextAlignmentCenter;
-        
-        hometown = [[UILabel alloc] initWithFrame:CGRectMake(age.right + kCellLeftGap, avatar.bottom + kCellLeftGap, w, 20)];
-        [self addSubview:hometown];
-        hometown.textAlignment = NSTextAlignmentCenter;
-        
-        skill = [[UILabel alloc] initWithFrame:CGRectMake(hometown.right + kCellLeftGap, avatar.bottom + kCellLeftGap, w, 20)];
-        [self addSubview:skill];
-        skill.textAlignment = NSTextAlignmentCenter;
-        
-        about = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, age.bottom + kCellLeftGap, kAppWidth-2*kCellLeftGap, 20)];
-        [self addSubview:about];
-        about.numberOfLines = 0;
-        about.font = [UIFont systemFontOfSize:14];
-        
-        
-        comment = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, about.bottom+kCellLeftGap, 110,30)];
-        [self addSubview:comment];
+        comment = [[UIButton alloc] initWithFrame:CGRectMake(back.width - 90 -10, avatar.top+10, 90,30)];
+        [back addSubview:comment];
         [comment setTitle:@"给厨师留言" forState:UIControlStateNormal];
         [comment setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        comment.titleLabel.font = [UIFont systemFontOfSize:14];
+        comment.layer.cornerRadius = 4;
+        comment.layer.borderWidth = 0.5f;
+        comment.layer.borderColor = [UIColor colorWithHexString:@"#c14a41"].CGColor;
         
         [comment handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:commentWithData:)]) {
@@ -101,6 +102,56 @@
             }
         }];
         
+        about = [[UILabel alloc] initWithFrame:CGRectMake(avatar.left, avatar.bottom +10, back.width-35-10, 20)];
+        [back addSubview:about];
+        about.numberOfLines = 0;
+        about.font = [UIFont systemFontOfSize:12];
+        about.textColor = [UIColor colorWithHexString:@"#999999"];
+        
+        line = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, back.width - 20, 0.5)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
+        [back addSubview:line];
+        
+        CGFloat w = (back.width - 20)/3.0f;
+        
+        age = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, w, 20)];
+        [back addSubview:age];
+        age.textAlignment = NSTextAlignmentCenter;
+        age.font = [UIFont systemFontOfSize:18];
+        age.textColor = [UIColor colorWithHexString:@"#666666"];
+        
+        hometown = [[UILabel alloc] initWithFrame:CGRectMake(age.right, 0, w, 20)];
+        [back addSubview:hometown];
+        hometown.textAlignment = NSTextAlignmentCenter;
+        hometown.font = [UIFont systemFontOfSize:18];
+        hometown.textColor = [UIColor colorWithHexString:@"#666666"];
+        
+        skill = [[UILabel alloc] initWithFrame:CGRectMake(hometown.right, 0, w, 20)];
+        [back addSubview:skill];
+        skill.textAlignment = NSTextAlignmentCenter;
+        skill.font = [UIFont systemFontOfSize:18];
+        skill.textColor = [UIColor colorWithHexString:@"#666666"];
+        
+        ageHint = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, w, 20)];
+        [back addSubview:ageHint];
+        ageHint.textAlignment = NSTextAlignmentCenter;
+        ageHint.font = [UIFont systemFontOfSize:12];
+        ageHint.textColor = [UIColor colorWithHexString:@"#999999"];
+        ageHint.text = @"厨师年龄";
+        
+        hometownHint = [[UILabel alloc] initWithFrame:CGRectMake(age.right, 0, w, 20)];
+        [back addSubview:hometownHint];
+        hometownHint.textAlignment = NSTextAlignmentCenter;
+        hometownHint.font = [UIFont systemFontOfSize:12];
+        hometownHint.textColor = [UIColor colorWithHexString:@"#999999"];
+        hometownHint.text = @"厨师籍贯";
+        
+        skillHint = [[UILabel alloc] initWithFrame:CGRectMake(hometown.right, 0, w, 20)];
+        [back addSubview:skillHint];
+        skillHint.textAlignment = NSTextAlignmentCenter;
+        skillHint.font = [UIFont systemFontOfSize:12];
+        skillHint.textColor = [UIColor colorWithHexString:@"#999999"];
+        skillHint.text = @"擅长菜系";
     }
     
     return self;
@@ -108,23 +159,45 @@
 
 -(void)configData:(id)data{
     
-    phone.text = @"订餐电话：24547687698798";
+    phone.text = @"订餐电话：18901234567";
     
     name.text = @"超级大厨";
     
     age.text = @"43";
     hometown.text = @"四川";
-    skill.text = @"川菜，湘菜";
+    skill.text = @"川菜湘菜";
     
     about.text = kCellContent;
     [about sizeToFit];
     
-    comment.top = about.bottom+kCellLeftGap;
+    line.top = about.bottom +12;
+    
+    age.top = hometown.top = skill.top = line.top + 10;
+    
+    ageHint.top = hometownHint.top = skillHint.top = age.bottom + 10;
+    
+    back.height = ageHint.bottom + 10;
 }
 
-
 +(CGFloat )cellHeightWithData:(id)data{
-    return 350;
+    CGFloat h = 0;
+    
+    // 电话高度
+    h = h + kCellLeftGap + 20 + 10;
+    
+    // 头像高度
+    h = h + 15 +45 + 10;
+    
+    // 介绍高度
+    CGSize size= [kCellContent sizeWithFontCompatible:[UIFont systemFontOfSize:12]
+                                    constrainedToSize:CGSizeMake(kAppWidth-2*kCellLeftGap-35-10, MAXFLOAT)
+                                        lineBreakMode:NSLineBreakByWordWrapping];
+    h = h + size.height + 10;
+    
+    // 附加高度
+    h = h+20+10+20+10+10;
+
+    return h;
 }
 
 @end

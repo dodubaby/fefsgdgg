@@ -16,4 +16,6 @@
 
 @interface PDCommentCell : PDBaseTableViewCell
 
+-(void)hiddenLine:(BOOL) hide;
+
 @end

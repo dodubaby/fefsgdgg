@@ -12,6 +12,8 @@
 @interface PDNewsCell()
 {
     
+    UIView *back;
+    
     UIImageView *thumbnail;
     UIImageView *mark;
     
@@ -33,18 +35,25 @@
     if (self) {
         //
         
+        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 140+30)];
+        [self addSubview:back];
+        back.layer.borderWidth = 0.5f;
+        back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
         NSLog(@"self.width == %f",self.width);
         
         thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 130)];
         [self addSubview:thumbnail];
         thumbnail.backgroundColor = [UIColor clearColor];
+        thumbnail.layer.borderWidth = 0.5f;
+        thumbnail.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        mark = [[UIImageView alloc] initWithFrame:CGRectMake(thumbnail.width - 40, 0, 40, 40)];
+        mark = [[UIImageView alloc] initWithFrame:CGRectMake(thumbnail.width - 32, 5, 27, 27)];
         [thumbnail addSubview:mark];
         mark.backgroundColor = [UIColor clearColor];
+        mark.image = [UIImage imageNamed:@"news_mark"];
         
-        name = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, thumbnail.bottom+kCellLeftGap, 120, 20)];
+        name = [[UILabel alloc] initWithFrame:CGRectMake(2*kCellLeftGap, thumbnail.bottom+kCellLeftGap, 120, 20)];
         [self addSubview:name];
         name.font = [UIFont systemFontOfSize:15];
         name.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -71,11 +80,11 @@
     name.text = @"怎样做用户喜欢？";
     time.text = @"三天前";
     time.right = kAppWidth - 35;
-    [self showDebugRect];
+    //[self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
-    return 140+35;
+    return 140+40;
 }
 
 

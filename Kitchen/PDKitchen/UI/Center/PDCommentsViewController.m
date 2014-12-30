@@ -33,6 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"评论";
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self setupBackButton];
     [self setupData];
     
     // pull
@@ -69,6 +73,12 @@
     }
     //cell.textLabel.text = list[indexPath.row];
     [cell setData:nil];
+    
+    if (indexPath.row == 0) {
+        [cell hiddenLine:YES];
+    }else{
+        [cell hiddenLine:NO];
+    }
     return cell;
 }
 

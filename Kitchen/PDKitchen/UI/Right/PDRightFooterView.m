@@ -11,8 +11,12 @@
 @interface PDRightFooterView()
 {
     
+    UIImageView *line;
+             
     UILabel *price;
     UIButton *submit;
+    
+    
 }
 
 @end
@@ -24,6 +28,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 1.0)];
+        [self addSubview:line];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
+        
         price = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
         [self addSubview:price];
         price.textAlignment = NSTextAlignmentRight;
@@ -33,13 +41,14 @@
         
         submit = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 30)];
         [self addSubview:submit];
-        [submit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:submit.size];
+        [submit setBackgroundImage:image forState:UIControlStateNormal];
         [submit setTitle:@"提交订单" forState:UIControlStateNormal];
         submit.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
         [submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         submit.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         submit.layer.cornerRadius = 4;
-        
+        submit.clipsToBounds = YES;
         
         [submit handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdRightFooterView:submitWithTotal:)]) {
@@ -47,7 +56,7 @@
             }
         }];
         
-        [self showDebugRect];
+        //[self showDebugRect];
     }
     
     return self;

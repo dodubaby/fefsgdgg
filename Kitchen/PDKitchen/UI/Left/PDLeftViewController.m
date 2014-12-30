@@ -42,13 +42,13 @@
             @{@"设置":@"menu_settings"}, nil];
     
     leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, 165, list.count*50) style:UITableViewStylePlain];
+    leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     leftTableView.delegate = self;
     leftTableView.dataSource = self;
     leftTableView.rowHeight = 50.0f;
     [self.view addSubview:leftTableView];
     leftTableView.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
 }
-
 
 -(void)pushVC:(UIViewController *)vc{
 
@@ -73,10 +73,22 @@
     if (!cell) {
         cell = [[PDBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
         cell.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
+        
+        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, leftTableView.width - 10, 1.0)];
+        [cell addSubview:line];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
+        line.tag = 111;
     }
+    
+    UIImageView *line = (UIImageView *)[cell viewWithTag:111];
+    if (indexPath.row == 0) { // 第一个没有线
+        line.hidden = YES;
+    }else{
+        line.hidden = NO;
+    }
+    
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
-    
     
     NSDictionary *data = list[indexPath.row];
     NSString *key = data.allKeys[0];
@@ -100,10 +112,17 @@
         case 0:
             //
         {
-        
-            vc = [PDOrderViewController new];
-            vc.title = key;
-            [self pushVC:vc];
+            
+            
+            if (1) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
+            }else{
+            
+                vc = [PDOrderViewController new];
+                vc.title = key;
+                [self pushVC:vc];
+
+            }
             
         }
             break;
