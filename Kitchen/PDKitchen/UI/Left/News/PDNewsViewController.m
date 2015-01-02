@@ -39,7 +39,7 @@
     
     [self setupData];
     
-    [self.navigationController.navigationBar showDebugRect];
+    //[self.navigationController.navigationBar showDebugRect];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

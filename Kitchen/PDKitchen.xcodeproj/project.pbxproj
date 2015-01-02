@@ -35,6 +35,15 @@
 		3274DDB31A5300A90079D176 /* lg_send_code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDAE1A5300A90079D176 /* lg_send_code@2x.png */; };
 		3274DDB41A5300A90079D176 /* lg_weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDAF1A5300A90079D176 /* lg_weibo@2x.png */; };
 		3274DDB51A5300A90079D176 /* lg_weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDB01A5300A90079D176 /* lg_weixin@2x.png */; };
+		3274DDBD1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDBA1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt */; };
+		3274DDBF1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDBC1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDC01A53B2080079D176 /* CoreTelephony.framework */; };
+		3274DDC71A53CF090079D176 /* dt_favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDC31A53CF090079D176 /* dt_favorite@2x.png */; };
+		3274DDC81A53CF090079D176 /* dt_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDC41A53CF090079D176 /* dt_phone@2x.png */; };
+		3274DDC91A53CF090079D176 /* dt_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDC51A53CF090079D176 /* dt_share@2x.png */; };
+		3274DDCA1A53CF090079D176 /* dt_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDC61A53CF090079D176 /* dt_up@2x.png */; };
+		3274DDCE1A53DB330079D176 /* cm_food@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDCC1A53DB330079D176 /* cm_food@2x.png */; };
+		3274DDCF1A53DB330079D176 /* cm_owner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDCD1A53DB330079D176 /* cm_owner@2x.png */; };
 		32868C041A44159300ABC8B0 /* JSONJoy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C021A44159300ABC8B0 /* JSONJoy.m */; };
 		32868C051A44159300ABC8B0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 32868C031A44159300ABC8B0 /* README.md */; };
 		32868C081A44174100ABC8B0 /* PDBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C071A44174100ABC8B0 /* PDBaseModel.m */; };
@@ -43,6 +52,7 @@
 		32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C121A441A9F00ABC8B0 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C171A441A9F00ABC8B0 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		32C783151A56B7720051CB60 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
 		32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */; };
 		32CBFB211A4709D30057EDF6 /* PDBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB201A4709D30057EDF6 /* PDBaseView.m */; };
 		32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */; };
@@ -159,6 +169,16 @@
 		3274DDAE1A5300A90079D176 /* lg_send_code@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_send_code@2x.png"; sourceTree = "<group>"; };
 		3274DDAF1A5300A90079D176 /* lg_weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_weibo@2x.png"; sourceTree = "<group>"; };
 		3274DDB01A5300A90079D176 /* lg_weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_weixin@2x.png"; sourceTree = "<group>"; };
+		3274DDBA1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README IOS SDK 2.3.1.txt"; sourceTree = "<group>"; };
+		3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		3274DDBC1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		3274DDC01A53B2080079D176 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3274DDC31A53CF090079D176 /* dt_favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dt_favorite@2x.png"; sourceTree = "<group>"; };
+		3274DDC41A53CF090079D176 /* dt_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dt_phone@2x.png"; sourceTree = "<group>"; };
+		3274DDC51A53CF090079D176 /* dt_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dt_share@2x.png"; sourceTree = "<group>"; };
+		3274DDC61A53CF090079D176 /* dt_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dt_up@2x.png"; sourceTree = "<group>"; };
+		3274DDCC1A53DB330079D176 /* cm_food@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm_food@2x.png"; sourceTree = "<group>"; };
+		3274DDCD1A53DB330079D176 /* cm_owner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm_owner@2x.png"; sourceTree = "<group>"; };
 		32868C011A44159300ABC8B0 /* JSONJoy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONJoy.h; sourceTree = "<group>"; };
 		32868C021A44159300ABC8B0 /* JSONJoy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONJoy.m; sourceTree = "<group>"; };
 		32868C031A44159300ABC8B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -338,6 +358,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C783151A56B7720051CB60 /* TencentOpenAPI.framework in Frameworks */,
+				3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */,
 				32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */,
 				32F97B3C1A4AC7D30052B2D3 /* Security.framework in Frameworks */,
 				32F97B441A4AC8220052B2D3 /* libWeChatSDK.a in Frameworks */,
@@ -355,6 +377,8 @@
 		3220A69B1A51A1910017656F /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3274DDCB1A53DB330079D176 /* common */,
+				3274DDC21A53CF090079D176 /* detail */,
 				3274DDAB1A5300A90079D176 /* login */,
 				3274DDA41A52B0580079D176 /* news */,
 				3274DD971A527D2A0079D176 /* order */,
@@ -436,6 +460,36 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		3274DDB91A53AE0A0079D176 /* iOS SDK 2.3.1 arm64 */ = {
+			isa = PBXGroup;
+			children = (
+				3274DDBA1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt */,
+				3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */,
+				3274DDBC1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = "iOS SDK 2.3.1 arm64";
+			sourceTree = "<group>";
+		};
+		3274DDC21A53CF090079D176 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				3274DDC31A53CF090079D176 /* dt_favorite@2x.png */,
+				3274DDC41A53CF090079D176 /* dt_phone@2x.png */,
+				3274DDC51A53CF090079D176 /* dt_share@2x.png */,
+				3274DDC61A53CF090079D176 /* dt_up@2x.png */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		3274DDCB1A53DB330079D176 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				3274DDCC1A53DB330079D176 /* cm_food@2x.png */,
+				3274DDCD1A53DB330079D176 /* cm_owner@2x.png */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
 		32868C001A44159300ABC8B0 /* JSONJoy */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +569,7 @@
 		32D0E7B91A415E7C00D1F190 = {
 			isa = PBXGroup;
 			children = (
+				3274DDC01A53B2080079D176 /* CoreTelephony.framework */,
 				32F97B3D1A4AC7DF0052B2D3 /* AdSupport.framework */,
 				32F97B3B1A4AC7D30052B2D3 /* Security.framework */,
 				32F97B391A4AC7C50052B2D3 /* ImageIO.framework */,
@@ -567,6 +622,7 @@
 		32D0E7EB1A41600100D1F190 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				3274DDB91A53AE0A0079D176 /* iOS SDK 2.3.1 arm64 */,
 				32F97B3F1A4AC8220052B2D3 /* WeChatSDK_1.5 */,
 				32F97B251A4ABC2E0052B2D3 /* libWeiboSDK */,
 				32868C091A441A9F00ABC8B0 /* EGOImageLoader */,
@@ -975,25 +1031,33 @@
 				3220A6AF1A51A5EC0017656F /* center_logo@2x.png in Resources */,
 				3220A6B01A51A5EC0017656F /* center_menu@2x.png in Resources */,
 				3220A6A51A51A1BE0017656F /* menu_coupon@2x.png in Resources */,
+				3274DDCE1A53DB330079D176 /* cm_food@2x.png in Resources */,
 				3220A6AA1A51A1BE0017656F /* menu_settings@2x.png in Resources */,
 				3274DD9D1A5280930079D176 /* center_back@2x.png in Resources */,
+				3274DDCF1A53DB330079D176 /* cm_owner@2x.png in Resources */,
+				3274DDC71A53CF090079D176 /* dt_favorite@2x.png in Resources */,
 				3274DD9B1A527D2A0079D176 /* od_reduce@2x.png in Resources */,
 				32D0E7D61A415E7C00D1F190 /* LaunchScreen.xib in Resources */,
 				3274DD961A5276480079D176 /* st_refresh@2x.png in Resources */,
 				3220A6A41A51A1BE0017656F /* menu_address@2x.png in Resources */,
 				32F97B321A4ABC2F0052B2D3 /* WeiboSDK.bundle in Resources */,
 				3220A6A81A51A1BE0017656F /* menu_order@2x.png in Resources */,
+				3274DDBF1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				32F97B381A4ABF540052B2D3 /* top_tip_panel@2x.png in Resources */,
 				3274DD951A5276480079D176 /* st_logo@2x.png in Resources */,
 				3220A6B11A51A5EC0017656F /* center_order@2x.png in Resources */,
 				3220A6A71A51A1BE0017656F /* menu_news@2x.png in Resources */,
+				3274DDC91A53CF090079D176 /* dt_share@2x.png in Resources */,
 				32D0E7D31A415E7C00D1F190 /* Images.xcassets in Resources */,
 				3274DDA61A52B0580079D176 /* news_mark@2x.png in Resources */,
 				3274DDB31A5300A90079D176 /* lg_send_code@2x.png in Resources */,
+				3274DDCA1A53CF090079D176 /* dt_up@2x.png in Resources */,
 				3274DD9A1A527D2A0079D176 /* od_add@2x.png in Resources */,
 				32D0E8381A41611A00D1F190 /* SVProgressHUD.bundle in Resources */,
 				32F97B451A4AC8220052B2D3 /* read_me.txt in Resources */,
 				3274DDB51A5300A90079D176 /* lg_weixin@2x.png in Resources */,
+				3274DDC81A53CF090079D176 /* dt_phone@2x.png in Resources */,
+				3274DDBD1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +1251,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1206,6 +1281,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

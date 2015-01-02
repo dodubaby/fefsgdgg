@@ -15,8 +15,10 @@
 
 #import "LoveTopTipView.h"
 
-@interface AppDelegate ()
-
+@interface AppDelegate ()<TencentSessionDelegate>
+{
+    TencentOAuth *tencentOAuth;
+}
 @end
 
 @implementation AppDelegate
@@ -26,13 +28,18 @@
     // Override point for customization after application launch.
     
     //向微信注册
-    [WXApi registerApp:@"wxd930ea5d5a258f4f" withDescription:@"demo 2.0"];
+    [WXApi registerApp:kWeixinAppID withDescription:@"demo 2.0"];
     
+    // 微博
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:kWeiboAppKey];
     
+    // QQ
+    NSString *appid = kQQAppID;
+    tencentOAuth = [[TencentOAuth alloc] initWithAppId:appid
+                                           andDelegate:self];
     
-    // 登录
+    // 登录页面
     _loginViewController = [[PDLoginViewController alloc] init];
     
     
@@ -299,6 +306,8 @@
         if (accessToken)
         {
             self.wbtoken = accessToken;
+            
+           
         }
         NSString* userID = [sendMessageToWeiboResponse.authResponse userID];
         if (userID) {
@@ -325,6 +334,11 @@
         
         
         [alert show];
+        
+        // 登录成功
+        if (response.statusCode == 0) {
+             [self removeLogin];
+        }
 
     }
     else if ([response isKindOfClass:WBPaymentResponse.class])
@@ -341,14 +355,79 @@
     }
 }
 
+
+-(void)loginQQ{
+
+   NSArray *permissions = [NSArray arrayWithObjects:
+                   kOPEN_PERMISSION_GET_USER_INFO,
+                   kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                   kOPEN_PERMISSION_ADD_ALBUM,
+                   kOPEN_PERMISSION_ADD_IDOL,
+                   kOPEN_PERMISSION_ADD_ONE_BLOG,
+                   kOPEN_PERMISSION_ADD_PIC_T,
+                   kOPEN_PERMISSION_ADD_SHARE,
+                   kOPEN_PERMISSION_ADD_TOPIC,
+                   kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                   kOPEN_PERMISSION_DEL_IDOL,
+                   kOPEN_PERMISSION_DEL_T,
+                   kOPEN_PERMISSION_GET_FANSLIST,
+                   kOPEN_PERMISSION_GET_IDOLLIST,
+                   kOPEN_PERMISSION_GET_INFO,
+                   kOPEN_PERMISSION_GET_OTHER_INFO,
+                   kOPEN_PERMISSION_GET_REPOST_LIST,
+                   kOPEN_PERMISSION_LIST_ALBUM,
+                   kOPEN_PERMISSION_UPLOAD_PIC,
+                   kOPEN_PERMISSION_GET_VIP_INFO,
+                   kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                   kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
+                   kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
+                   nil];
+    
+    [tencentOAuth authorize:permissions inSafari:NO];
+}
+
+/**
+ * 登录成功后的回调
+ */
+- (void)tencentDidLogin{
+
+    NSLog(@"tencentDidLogin");
+    
+    NSLog(@"accessToken %@",tencentOAuth.accessToken);
+    NSLog(@"expirationDate %@",tencentOAuth.expirationDate);
+    NSLog(@"openId %@",tencentOAuth.openId);
+    
+    [self removeLogin];
+}
+
+/**
+ * 登录失败后的回调
+ * \param cancelled 代表用户是否主动退出登录
+ */
+- (void)tencentDidNotLogin:(BOOL)cancelled{
+
+    NSLog(@"tencentDidNotLogin");
+    
+}
+
+/**
+ * 登录时网络有问题的回调
+ */
+- (void)tencentDidNotNetWork{
+
+    NSLog(@"tencentDidNotNetWork");
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    [TencentOAuth HandleOpenURL:url];
     [WXApi handleOpenURL:url delegate:self];
     return [WeiboSDK handleOpenURL:url delegate:self];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
+    [TencentOAuth HandleOpenURL:url];
     [WXApi handleOpenURL:url delegate:self];
     return [WeiboSDK handleOpenURL:url delegate:self ];
 }

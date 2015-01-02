@@ -17,6 +17,9 @@
 #import "UIImage+Utils.h"
 #import "NSString+Utils.h"
 
+#import "EGOImageView.h"
+
+
 // screen width
 #define kAppWidth [UIScreen mainScreen].bounds.size.width
 #define kAppHeight [UIScreen mainScreen].bounds.size.height

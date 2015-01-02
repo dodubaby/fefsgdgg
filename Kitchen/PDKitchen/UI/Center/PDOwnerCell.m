@@ -14,7 +14,7 @@
     
     UILabel *phone;
     
-    UIImageView *avatar;
+    EGOImageView *avatar;
     UILabel *name;
     UIButton *comment;
     
@@ -75,8 +75,8 @@
 //            }
 //        }];
         
-
-        avatar = [[UIImageView alloc] initWithFrame:CGRectMake(35, 15, 45, 45)];
+        avatar = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_owner"]];
+        avatar.frame = CGRectMake(35, 15, 45, 45);
         [back addSubview:avatar];
         avatar.backgroundColor = [UIColor clearColor];
         avatar.layer.borderWidth = 0.5f;

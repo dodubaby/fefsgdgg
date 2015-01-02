@@ -13,12 +13,16 @@
 
 #import "WXApi.h"
 #import "WeiboSDK.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/sdkdef.h>
 
 ////com.sina.weibo.SNWeiboSDKDemo info里面对应包名
 #define kWeiboAppKey         @"2045436852"
 #define kWeiboRedirectURI    @"http://www.sina.com"
 
 #define kWeixinAppID         @"wxd930ea5d5a258f4f"
+
+#define kQQAppID             @"222222";
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,WeiboSDKDelegate>
 
@@ -40,5 +44,8 @@
 
 -(void)loginWeixin;
 -(void)loginWeixinWithviewController:(UIViewController *) vc;
+
+-(void)loginQQ;
+
 @end
 

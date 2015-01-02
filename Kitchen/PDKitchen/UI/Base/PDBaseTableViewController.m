@@ -33,7 +33,7 @@
 
 -(void)setupBackButton{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor greenColor];
+    button.backgroundColor = [UIColor clearColor];
     button.frame = CGRectMake(0, 0, 44, 44);
     [button setImage:[UIImage imageNamed:@"center_back"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];

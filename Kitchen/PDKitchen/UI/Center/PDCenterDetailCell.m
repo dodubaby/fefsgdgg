@@ -11,7 +11,7 @@
 @interface PDCenterDetailCell()
 {
     
-    UIImageView *thumbnail;
+    EGOImageView *thumbnail;
     
     UILabel *name;
     UILabel *price;
@@ -38,8 +38,8 @@
         
         
         //NSLog(@"self.width == %f",self.width);
-        
-        thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 205)];
+        thumbnail = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_food"]];
+        thumbnail.frame =CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 205);
         [self addSubview:thumbnail];
         thumbnail.backgroundColor = [UIColor clearColor];
         thumbnail.layer.borderWidth = 0.5f;
@@ -55,20 +55,31 @@
         person.font = [UIFont systemFontOfSize:13];
         person.textColor = [UIColor colorWithHexString:@"#666666"];
         
-        like = [[UILabel alloc] initWithFrame:CGRectMake(120, person.top, 120, 20)];
+        
+        like = [[UILabel alloc] initWithFrame:CGRectMake(120+30, person.top, 120, 20)];
         [self addSubview:like];
         like.font = [UIFont systemFontOfSize:13];
         like.textColor = [UIColor colorWithHexString:@"#666666"];
+        
+        UIImageView *up = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dt_up"]];
+        [like addSubview:up];
+        up.left = - up.width;
+        up.top = -(up.height - like.height)/2;
         
         price = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth - kCellLeftGap -100, thumbnail.bottom+20, 100, 40)];
         price.textAlignment = NSTextAlignmentRight;
         [self addSubview:price];
         price.font = [UIFont systemFontOfSize:30];
         
-        share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, person.bottom+10, 50, 30)];
+        share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, person.bottom+10, 60, 30)];
         [self addSubview:share];
         [share setTitle:@"分享" forState:UIControlStateNormal];
-        [share setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [share setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+        [share setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
+        share.titleLabel.font = [UIFont systemFontOfSize:13];
+        [share setImage:[UIImage imageNamed:@"dt_share"] forState:UIControlStateNormal];
+        share.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        share.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         
         [share handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:shareWithData:)]) {
@@ -77,10 +88,15 @@
         }];
         
         
-        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, person.bottom+10, 50, 30)];
+        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, person.bottom+10, 60, 30)];
         [self addSubview:favorite];
         [favorite setTitle:@"收藏" forState:UIControlStateNormal];
-        [favorite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [favorite setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+        [favorite setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
+        favorite.titleLabel.font = [UIFont systemFontOfSize:13];
+        [favorite setImage:[UIImage imageNamed:@"dt_favorite"] forState:UIControlStateNormal];
+        favorite.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        favorite.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         
         [favorite handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:favoriteWithData:)]) {
@@ -104,6 +120,8 @@
                 [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
             }
         }];
+        
+        //[self showDebugRect];
     }
     
     return self;

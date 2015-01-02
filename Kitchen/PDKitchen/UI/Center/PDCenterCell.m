@@ -12,8 +12,8 @@
 @interface PDCenterCell()
 {
 
-    UIImageView *thumbnail;
-    UIImageView *avatar;
+    EGOImageView *thumbnail;
+    EGOImageView *avatar;
     
     UILabel *name;
     UILabel *price;
@@ -34,22 +34,21 @@
     if (self) {
         //
         
-        
-        
         //NSLog(@"self.width == %f",self.width);
         
-        thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 205)];
+        thumbnail = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_food"]];
+        thumbnail.frame = CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 205);
         [self addSubview:thumbnail];
         thumbnail.backgroundColor = [UIColor clearColor];
         thumbnail.layer.borderWidth = 0.5f;
         thumbnail.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        avatar = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, thumbnail.bottom + 15, 45, 45)];
+        avatar = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_owner"]];
+        avatar.frame = CGRectMake(kCellLeftGap, thumbnail.bottom + 15, 45, 45);
         [self addSubview:avatar];
         avatar.backgroundColor = [UIColor clearColor];
         avatar.layer.borderWidth = 0.5f;
         avatar.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
-        
         
         name = [[UILabel alloc] initWithFrame:CGRectMake(avatar.right + kCellLeftGap, avatar.top, 120, 20)];
         [self addSubview:name];

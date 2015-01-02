@@ -27,11 +27,7 @@
 -(void)backButtonTaped:(id)sender{
     
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
     [delegate removeLogin];
-    
-    
-
 }
 
 - (void)viewDidLoad {
@@ -41,15 +37,17 @@
     
     [self setupUI];
     
-    [self.view showDebugRect];
+    //[self.view showDebugRect];
 }
 
 -(void)setupUI{
 
     UIView *back1 = [[UIView alloc] initWithFrame:CGRectMake(10, 20+64, kAppWidth - 20, 50)];
     [self.view addSubview:back1];
+    back1.layer.borderWidth = 0.5f;
+    back1.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
     
-    phoneField = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, back1.width - 150, 50)];
+    phoneField = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, back1.width - 140, 50)];
     [back1 addSubview:phoneField];
     phoneField.font = [UIFont systemFontOfSize:15];
     phoneField.textColor = [UIColor colorWithHexString:@"#c14a41"];
@@ -57,13 +55,21 @@
     phoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     sendCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sendCodeButton.frame = CGRectMake(phoneField.right, 0, back1.width - phoneField.width-10, 50);
+    sendCodeButton.frame = CGRectMake(phoneField.right, 0, 130, 50);
     [back1 addSubview:sendCodeButton];
-    sendCodeButton.backgroundColor = [UIColor redColor];
+    sendCodeButton.backgroundColor = [UIColor clearColor];
+    sendCodeButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [sendCodeButton setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    [sendCodeButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
     [sendCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+    [sendCodeButton setImage:[UIImage imageNamed:@"lg_send_code"] forState:UIControlStateNormal];
+    sendCodeButton.titleEdgeInsets = UIEdgeInsetsMake(0, -80, 0, 0);
+    sendCodeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0);
     
     UIView *back2 = [[UIView alloc] initWithFrame:CGRectMake(10, back1.bottom + 10, kAppWidth - 20, 50)];
     [self.view addSubview:back2];
+    back2.layer.borderWidth = 0.5f;
+    back2.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
     
     codeField = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, back2.width - 20, 50)];
     [back2 addSubview:codeField];
@@ -75,14 +81,16 @@
     loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     loginButton.frame = CGRectMake(10, back2.bottom + 15, kAppWidth - 20, 40);
     [self.view addSubview:loginButton];
-    loginButton.backgroundColor = [UIColor redColor];
+    UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:loginButton.size];
+    [loginButton setBackgroundImage:image forState:UIControlStateNormal];
+    loginButton.layer.cornerRadius = 4;
+    loginButton.clipsToBounds = YES;
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+    
     [loginButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
-        [self dismissViewControllerAnimated:YES completion:^{
-            //
-            [self.view findAndResignFirstResponder];
-        }];
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [delegate removeLogin];
     }];
     
     
@@ -130,13 +138,13 @@
                     break;
                 case 2:  // QQ
                 {
-                
+                    [delegate loginQQ];
+                    
                 }
                     break;
                 default:
                     break;
             }
-            
         }];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25+i*(69+10), button.bottom + 8, 69, 20)];
