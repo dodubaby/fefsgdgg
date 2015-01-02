@@ -13,6 +13,8 @@
 {
     
     UIImageView *sortimg;
+    UILabel *sortlab;
+    UIImageView *bgborderimg;
     UIImageView *newmarkimg;
     UILabel *totallab;
     UILabel *everyla[100];
@@ -36,39 +38,59 @@
         //
         NSLog(@"self.width == %f",self.width);
         
-        sortimg = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, 35, 35)];
-        sortimg.backgroundColor=[UIColor grayColor];
-        [self addSubview:sortimg];
         
-        newmarkimg = [[UIImageView alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-20, kCellLeftGap, 20, 20)];
+        sortimg = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, 22.5, 22.5)];
+        sortimg.image=[UIImage imageNamed:@"订单号背景"];
+        [self addSubview:sortimg];
+        sortlab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 22.5, 22.5)];
+        sortlab.backgroundColor=[UIColor clearColor];
+        sortlab.font=[UIFont systemFontOfSize:kAppFontSize];
+        sortlab.textColor=[UIColor colorWithHexString:kAppNormalColor];
+        sortlab.textAlignment=NSTextAlignmentCenter;
+        sortlab.text=@"1";
+        [sortimg addSubview:sortlab];
+
+        newmarkimg = [[UIImageView alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-30, 11+5, 26, 26)];
         [self addSubview:newmarkimg];
-        newmarkimg.backgroundColor = [UIColor grayColor];
+        newmarkimg.image=[UIImage imageNamed:@"新"];
+        newmarkimg.backgroundColor = [UIColor clearColor];
 
         
         NSInteger height=sortimg.bottom;
         for (int i=0; i<5; i++) {
-            everyla[i]=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, height+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
+            everyla[i]=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap*3, height+kCellLeftGap, kAppWidth-kCellLeftGap*6, 20)];
+            everyla[i].font=[UIFont systemFontOfSize:kAppFontSize];
+            everyla[i].textColor=[UIColor colorWithHexString:kAppTitleColor];
             height=everyla[i].bottom;
             [self addSubview:everyla[i]];
         }
-        msglab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, height+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
+        msglab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap*3, height+kCellLeftGap, kAppWidth-kCellLeftGap*6, 20)];
+        msglab.font=[UIFont systemFontOfSize:kAppFontSize];
+        msglab.textColor=[UIColor colorWithHexString:kAppRedColor];
         [self addSubview:msglab];
         
-        timelab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, msglab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
-        [self addSubview:timelab];
-        
-        phonelab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, timelab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
+        phonelab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap*3, msglab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*6, 20)];
+        phonelab.font=[UIFont systemFontOfSize:kAppFontSize];
+        phonelab.textColor=[UIColor colorWithHexString:kAppTitleColor];
         [self addSubview:phonelab];
         
-        addresslab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, phonelab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
+        timelab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap*3, phonelab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*6, 20)];
+        timelab.font=[UIFont systemFontOfSize:kAppFontSize];
+        timelab.textColor=[UIColor colorWithHexString:kAppRedColor];
+        [self addSubview:timelab];
+        
+        addresslab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap*3, timelab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*6, 20)];
+        addresslab.font=[UIFont systemFontOfSize:kAppFontSize];
+        addresslab.textColor=[UIColor colorWithHexString:kAppTitleColor];
         [self addSubview:addresslab];
         
-        totallab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, addresslab.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2, 20)];
+        totallab=[[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap*3, addresslab.bottom+kCellLeftGap*2, kAppWidth-kCellLeftGap*6, 20)];
+        totallab.font=[UIFont systemFontOfSize:kAppFontSize];
+        totallab.textColor=[UIColor colorWithHexString:kAppTitleColor];
         [self addSubview:totallab];
         
         
-        receivebtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap, totallab.bottom+kCellLeftGap, 100, 40)];
-        [self addSubview:receivebtn];
+        receivebtn = [[UIButton alloc] initWithFrame:CGRectMake(3*kCellLeftGap, totallab.bottom+kCellLeftGap, (kAppWidth-8*kCellLeftGap)/3, 40)];
         [receivebtn setTitle:@"接单" forState:UIControlStateNormal];
         [receivebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [receivebtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
@@ -76,9 +98,16 @@
                 [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
             }
         }];
+        receivebtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+        receivebtn.titleLabel.font=[UIFont systemFontOfSize:kAppBtnSize];
+        [receivebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        receivebtn.layer.cornerRadius = kBtnCornerRadius;
+        receivebtn.layer.masksToBounds = YES;
+        receivebtn.layer.borderWidth = 1;
+        receivebtn.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+        [self addSubview:receivebtn];
         
-        finishbtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap+120, totallab.bottom+kCellLeftGap, 120, 40)];
-        [self addSubview:finishbtn];
+        finishbtn = [[UIButton alloc] initWithFrame:CGRectMake(receivebtn.right+kCellLeftGap, totallab.bottom+kCellLeftGap, (kAppWidth-8*kCellLeftGap)/3, 40)];
         [finishbtn setTitle:@"完成" forState:UIControlStateNormal];
         [finishbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [finishbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
@@ -86,9 +115,16 @@
                 [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
             }
         }];
+        finishbtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+        finishbtn.titleLabel.font=[UIFont systemFontOfSize:kAppBtnSize];
+        [finishbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        finishbtn.layer.cornerRadius = kBtnCornerRadius;
+        finishbtn.layer.masksToBounds = YES;
+        finishbtn.layer.borderWidth = 1;
+        finishbtn.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+        [self addSubview:finishbtn];
         
-        cancelbtn = [[UIButton alloc] initWithFrame:CGRectMake(20+kCellLeftGap+240, totallab.bottom+kCellLeftGap, 120, 40)];
-        [self addSubview:cancelbtn];
+        cancelbtn = [[UIButton alloc] initWithFrame:CGRectMake(finishbtn.right+kCellLeftGap, totallab.bottom+kCellLeftGap, (kAppWidth-8*kCellLeftGap)/3, 40)];
         [cancelbtn setTitle:@"确认退单" forState:UIControlStateNormal];
         [cancelbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [cancelbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
@@ -96,6 +132,23 @@
                 [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
             }
         }];
+        cancelbtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+        cancelbtn.titleLabel.font=[UIFont systemFontOfSize:kAppBtnSize];
+        [cancelbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        cancelbtn.layer.cornerRadius = kBtnCornerRadius;
+        cancelbtn.layer.masksToBounds = YES;
+        cancelbtn.layer.borderWidth = 1;
+        cancelbtn.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+        [self addSubview:cancelbtn];
+        
+        bgborderimg=[[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, 11, kAppWidth-kCellLeftGap*2, cancelbtn.bottom+kCellLeftGap)];
+        bgborderimg.backgroundColor=[UIColor clearColor];
+        bgborderimg.layer.cornerRadius = 0;
+        bgborderimg.layer.masksToBounds = YES;
+        bgborderimg.layer.borderWidth = 1;
+        bgborderimg.layer.borderColor = [[UIColor colorWithHexString:kAppLineColor] CGColor];
+        [self addSubview:bgborderimg];
+        [self sendSubviewToBack:bgborderimg];
     }
     
     return self;
@@ -120,7 +173,7 @@
         finishbtn.hidden=YES;
         cancelbtn.hidden=YES;
     }
-    [self showDebugRect];
+    //[self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
@@ -130,7 +183,7 @@
     }else{
         
     }
-    return 270+(20+kCellLeftGap)*4;
+    return 412;
 }
 
 @end

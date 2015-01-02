@@ -21,9 +21,9 @@
     // Override point for customization after application launch.
     PDLoginViewController *controller=[[PDLoginViewController alloc] init];
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:controller];
-    nav.navigationBarHidden=YES;
+    nav.navigationBar.barTintColor=[UIColor whiteColor];
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    _window.backgroundColor = [UIColor redColor];
+    _window.backgroundColor = [UIColor whiteColor];
     _window.rootViewController = nav;
     [_window makeKeyAndVisible];
     
@@ -34,7 +34,7 @@
 {
     PDLoginViewController *controller=[[PDLoginViewController alloc] init];
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:controller];
-    nav.navigationBarHidden=YES;
+    nav.navigationBar.barTintColor=[UIColor whiteColor];
     _window.rootViewController = nav;
     [_window makeKeyAndVisible];
 }
@@ -42,7 +42,7 @@
 {
     PDMainViewController *controller=[[PDMainViewController alloc] init];
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:controller];
-    nav.navigationBarHidden=YES;
+    nav.navigationBar.barTintColor=[UIColor whiteColor];
     _window.rootViewController = nav;
     [_window makeKeyAndVisible];
 }

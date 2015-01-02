@@ -9,7 +9,7 @@
 #import "PDMainViewController.h"
 #import "PDTodayOrderTableViewController.h"
 #import "PDOrderInquiryTableViewController.h"
-#import "PDSettingTableViewController.h"
+#import "PDSettingsViewController.h"
 
 
 @interface PDMainViewController ()
@@ -17,6 +17,11 @@
     UIButton *todayBtn;
     UIButton *orderInquiryBtn;
     UIButton *settingBtn;
+    
+    UIImageView *todayImg;
+    UIImageView *searchImg;
+    UIImageView *setImg;
+    
 }
 @end
 
@@ -25,45 +30,72 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    todayBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 100, 150, 150)];
-    todayBtn.backgroundColor=[UIColor grayColor];
+    UIImageView *navimgview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 38)];
+    navimgview.image=[UIImage imageNamed:@"nav"];
+    self.navigationItem.titleView=navimgview;
+    
+    todayBtn = [[UIButton alloc] initWithFrame:CGRectMake(kGap, 64+kGap*2, kAppWidth-kGap*2, 100)];
+    todayBtn.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:todayBtn];
-    [todayBtn setTitle:@"今日订单" forState:UIControlStateNormal];
-    [todayBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    todayBtn.layer.cornerRadius = 0;
+    todayBtn.layer.masksToBounds = YES;
+    todayBtn.layer.borderWidth = 1;
+    todayBtn.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+    [todayBtn setTitle:@"         今日订单" forState:UIControlStateNormal];
+    [todayBtn setTitleColor:[UIColor colorWithHexString:kAppRedColor] forState:UIControlStateNormal];
+    [todayBtn.titleLabel setFont:[UIFont systemFontOfSize:kAppBtnSize]];
     [todayBtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         PDTodayOrderTableViewController *vc=[[PDTodayOrderTableViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
+    todayImg=[[UIImageView alloc] initWithFrame:CGRectMake(100, 75.0f/2, 25, 25)];
+    todayImg.image=[UIImage imageNamed:@"订单"];
+    [todayBtn addSubview:todayImg];
     
-    orderInquiryBtn = [[UIButton alloc] initWithFrame:CGRectMake(190, 100, 150, 150)];
-    orderInquiryBtn.backgroundColor=[UIColor grayColor];
+    orderInquiryBtn = [[UIButton alloc] initWithFrame:CGRectMake(todayBtn.left, todayBtn.bottom+kGap, kAppWidth-kGap*2, 100)];
+    orderInquiryBtn.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:orderInquiryBtn];
-    [orderInquiryBtn setTitle:@"订单查询" forState:UIControlStateNormal];
-    [orderInquiryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    orderInquiryBtn.layer.cornerRadius = 0;
+    orderInquiryBtn.layer.masksToBounds = YES;
+    orderInquiryBtn.layer.borderWidth = 1;
+    orderInquiryBtn.layer.borderColor = [[UIColor colorWithHexString:kAppLineColor] CGColor];
+    [orderInquiryBtn setTitle:@"         订单查询" forState:UIControlStateNormal];
+    [orderInquiryBtn setTitleColor:[UIColor colorWithHexString:kAppTitleColor] forState:UIControlStateNormal];
+    [orderInquiryBtn.titleLabel setFont:[UIFont systemFontOfSize:kAppBtnSize]];
     [orderInquiryBtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         PDOrderInquiryTableViewController *vc=[[PDOrderInquiryTableViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
+    searchImg=[[UIImageView alloc] initWithFrame:CGRectMake(100, 75.0f/2, 25, 25)];
+    searchImg.image=[UIImage imageNamed:@"搜索"];
+    [orderInquiryBtn addSubview:searchImg];
     
-    settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 260, 150, 150)];
-    settingBtn.backgroundColor=[UIColor grayColor];
+    
+    settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(kGap, kAppHeight-50-kGap, kAppWidth-kGap*2, 50)];
+    settingBtn.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:settingBtn];
-    [settingBtn setTitle:@"设置" forState:UIControlStateNormal];
-    [settingBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    settingBtn.layer.cornerRadius = 0;
+    settingBtn.layer.masksToBounds = YES;
+    settingBtn.layer.borderWidth = 1;
+    settingBtn.layer.borderColor = [[UIColor colorWithHexString:kAppLineColor] CGColor];
+    [settingBtn setTitle:@"     设置" forState:UIControlStateNormal];
+    [settingBtn setTitleColor:[UIColor colorWithHexString:kAppTitleColor] forState:UIControlStateNormal];
+    [settingBtn.titleLabel setFont:[UIFont systemFontOfSize:kAppBtnSize]];
     [settingBtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
-        PDSettingTableViewController *vc=[[PDSettingTableViewController alloc] init];
+        PDSettingsViewController *vc=[[PDSettingsViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-    
+    setImg=[[UIImageView alloc] initWithFrame:CGRectMake(110, 25.0f/2, 25, 25)];
+    setImg.image=[UIImage imageNamed:@"设置"];
+    [settingBtn addSubview:setImg];
     
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

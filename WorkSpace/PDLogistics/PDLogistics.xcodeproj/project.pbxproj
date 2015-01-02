@@ -14,6 +14,7 @@
 		6D7F5E9A1A46B66300B634C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F5E991A46B66300B634C7 /* Images.xcassets */; };
 		6D7F5E9D1A46B66300B634C7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F5E9B1A46B66300B634C7 /* LaunchScreen.xib */; };
 		6D7F5EA91A46B66300B634C7 /* PDLogisticsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7F5EA81A46B66300B634C7 /* PDLogisticsTests.m */; };
+		6DEB46781A5660D9002B2E84 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB46771A5660D9002B2E84 /* 2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		6D7F5EA21A46B66300B634C7 /* PDLogisticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDLogisticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D7F5EA71A46B66300B634C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D7F5EA81A46B66300B634C7 /* PDLogisticsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDLogisticsTests.m; sourceTree = "<group>"; };
+		6DEB46771A5660D9002B2E84 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		6D7F5E8B1A46B66300B634C7 /* PDLogistics */ = {
 			isa = PBXGroup;
 			children = (
+				6DEB46761A5660D0002B2E84 /* ImageSource */,
 				6D7F5E901A46B66300B634C7 /* AppDelegate.h */,
 				6D7F5E911A46B66300B634C7 /* AppDelegate.m */,
 				6D7F5E931A46B66300B634C7 /* ViewController.h */,
@@ -117,6 +120,14 @@
 				6D7F5EA71A46B66300B634C7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DEB46761A5660D0002B2E84 /* ImageSource */ = {
+			isa = PBXGroup;
+			children = (
+				6DEB46771A5660D9002B2E84 /* 2.png */,
+			);
+			path = ImageSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +212,7 @@
 			files = (
 				6D7F5E981A46B66300B634C7 /* Main.storyboard in Resources */,
 				6D7F5E9D1A46B66300B634C7 /* LaunchScreen.xib in Resources */,
+				6DEB46781A5660D9002B2E84 /* 2.png in Resources */,
 				6D7F5E9A1A46B66300B634C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +424,7 @@
 				6D7F5EAE1A46B66300B634C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D7F5EAF1A46B66300B634C7 /* Build configuration list for PBXNativeTarget "PDLogisticsTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +433,7 @@
 				6D7F5EB11A46B66300B634C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

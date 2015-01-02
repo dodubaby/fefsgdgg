@@ -25,49 +25,88 @@
     list=[[NSMutableArray alloc] init];
     [list addObject:[[PDOrderModel alloc] init]];
     [list addObject:[[PDOrderModel alloc] init]];
-    UIBarButtonItem *rightitem=[[UIBarButtonItem alloc] initWithTitle:@"全部订单" style:UIBarButtonItemStylePlain target:self action:@selector(allOrderAciton:)];
-    self.navigationItem.rightBarButtonItem=rightitem;
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor clearColor];
+    button.frame = CGRectMake(0, 0, 26, 40);
+    [button setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    button.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
+    UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
     
+    UILabel *ttitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, kAppWidth, 44)];
+    ttitle.text=@"配送的";
+    ttitle.font=[UIFont systemFontOfSize:kAppFontSize];
+    ttitle.textColor=[UIColor colorWithHexString:kAppNormalColor];
+    ttitle.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=ttitle;
     
-    footer=[[UIView alloc] initWithFrame:CGRectMake(0, kAppHeight-90, kAppWidth, 90)];
-    footer.backgroundColor=[UIColor grayColor];
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
-    UIButton *AMButton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, 100, 40)];
-    AMButton.backgroundColor=[UIColor grayColor];
-    [footer addSubview:AMButton];
-    [AMButton setTitle:@"配送的订单" forState:UIControlStateNormal];
-    [AMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [AMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-        
-    }];
-    UIButton *PMButton = [[UIButton alloc] initWithFrame:CGRectMake(AMButton.right+kCellLeftGap, kCellLeftGap, 100, 40)];
-    PMButton.backgroundColor=[UIColor grayColor];
-    [footer addSubview:PMButton];
-    [PMButton setTitle:@"退款的订单" forState:UIControlStateNormal];
-    [PMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [PMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-        
-    }];
+    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightbutton.backgroundColor = [UIColor clearColor];
+    rightbutton.frame = CGRectMake(0, 0, 64, 44);
+    [rightbutton.titleLabel setFont:[UIFont systemFontOfSize:kAppFontSize]];
+    [rightbutton setTitle:@"全部订单" forState:UIControlStateNormal];
+    rightbutton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
+    [rightbutton setTitleColor:[UIColor colorWithHexString:kAppNormalColor] forState:UIControlStateNormal];
+    [rightbutton addTarget:self action:@selector(allOrderAciton:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * rightbarbutton  = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
+    [self.navigationItem setRightBarButtonItem:rightbarbutton animated:YES];
     
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
-    UIButton *searchutton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-100, PMButton.bottom+kCellLeftGap, 100, 20)];
-    searchutton.backgroundColor=[UIColor grayColor];
+    footer=[[UIView alloc] initWithFrame:CGRectMake(0, kAppHeight-50, kAppWidth, 50)];
+    footer.backgroundColor=[UIColor colorWithRed:0.4000 green:0.4000 blue:0.4000 alpha:1.0f];
+//
+//    UIButton *AMButton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, 100, 40)];
+//    AMButton.backgroundColor=[UIColor grayColor];
+//    [footer addSubview:AMButton];
+//    [AMButton setTitle:@"配送的订单" forState:UIControlStateNormal];
+//    [AMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [AMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+//        
+//    }];
+//    UIButton *PMButton = [[UIButton alloc] initWithFrame:CGRectMake(AMButton.right+kCellLeftGap, kCellLeftGap, 100, 40)];
+//    PMButton.backgroundColor=[UIColor grayColor];
+//    [footer addSubview:PMButton];
+//    [PMButton setTitle:@"退款的订单" forState:UIControlStateNormal];
+//    [PMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [PMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+//        
+//    }];
+//    
+//    
+    UIButton *searchutton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-120, kCellLeftGap/2, 120, 40)];
+    searchutton.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
     [footer addSubview:searchutton];
     [searchutton setTitle:@"查询" forState:UIControlStateNormal];
-    [searchutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [searchutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [searchutton.titleLabel setFont:[UIFont systemFontOfSize:kAppBtnSize]];
     [searchutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
     }];
+    searchutton.layer.cornerRadius = kBtnCornerRadius;
+    searchutton.layer.masksToBounds = YES;
+    searchutton.layer.borderWidth = 1;
+    searchutton.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
     
-    UITextField *input =[[UITextField alloc] initWithFrame:CGRectMake(kCellLeftGap, PMButton.bottom+kCellLeftGap, kAppWidth-kCellLeftGap*2-searchutton.width-20, 20)];
-    input.borderStyle=UITextBorderStyleLine;
+    UITextField *input =[[UITextField alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth-kCellLeftGap*2.5-searchutton.width, 40)];
+    input.borderStyle=UITextBorderStyleNone;
+    input.keyboardType=UIKeyboardTypeNumbersAndPunctuation;
+    input.placeholder=@"输入手机号后4位";
+    input.backgroundColor=[UIColor whiteColor];
     input.delegate=self;
     [footer addSubview:input];
-    
 
     UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
     [keywindow addSubview:footer];
 }
+-(void)backAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -129,7 +168,7 @@
     NSLog(@"%@",userinfo);
     double duration =[[userinfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
-        footer.frame =CGRectMake(0, kAppHeight-90, kAppWidth, 90);
+        footer.frame =CGRectMake(0, kAppHeight-50, kAppWidth, 50);
     } completion:nil];
 }
 
@@ -148,47 +187,39 @@
     // Return the number of rows in the section.
     return list.count;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 80;
-//}
-//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *header=[[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 40)];
-//    header.backgroundColor=[UIColor grayColor];
-//    
-//    UIButton *searchutton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-100, kCellLeftGap, 100, 20)];
-//    searchutton.backgroundColor=[UIColor grayColor];
-//    [header addSubview:searchutton];
-//    [searchutton setTitle:@"查询" forState:UIControlStateNormal];
-//    [searchutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [searchutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//        
-//    }];
-//    
-//    UITextField *input =[[UITextField alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-kCellLeftGap*2-searchutton.width-20, 20)];
-//    input.borderStyle=UITextBorderStyleLine;
-//    [header addSubview:input];
-//    
-//    UIButton *AMButton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, input.bottom+kCellLeftGap, 100, 40)];
-//    AMButton.backgroundColor=[UIColor grayColor];
-//    [header addSubview:AMButton];
-//    [AMButton setTitle:@"配送的订单" forState:UIControlStateNormal];
-//    [AMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [AMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//        
-//    }];
-//    UIButton *PMButton = [[UIButton alloc] initWithFrame:CGRectMake(AMButton.right+kCellLeftGap, input.bottom+kCellLeftGap, 100, 40)];
-//    PMButton.backgroundColor=[UIColor grayColor];
-//    [header addSubview:PMButton];
-//    [PMButton setTitle:@"退款的订单" forState:UIControlStateNormal];
-//    [PMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [PMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//        
-//    }];
-//    
-//    return header;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 60;
+}
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *header=[[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 60)];
+    header.backgroundColor=[UIColor whiteColor];
+    
+    UIButton *AMButton = [[UIButton alloc] initWithFrame:CGRectMake(kGap, kGap, (kAppWidth-2*kGap)/2, 50)];
+    AMButton.backgroundColor=[UIColor whiteColor];
+    [header addSubview:AMButton];
+    [AMButton setTitle:@"配送的订单" forState:UIControlStateNormal];
+    [AMButton.titleLabel setFont:[UIFont systemFontOfSize:kAppFontSize]];
+    [AMButton setTitleColor:[UIColor colorWithHexString:kAppNormalColor] forState:UIControlStateNormal];
+    [AMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        
+    }];
+    UIImageView *gapimg=[[UIImageView alloc] initWithFrame:CGRectMake(AMButton.right, AMButton.top+18, 1, 16)];
+    gapimg.backgroundColor=[UIColor colorWithHexString:kAppLineColor];
+    [header addSubview:gapimg];
+    UIButton *PMButton = [[UIButton alloc] initWithFrame:CGRectMake(AMButton.right+1, kGap, (kAppWidth-2*kGap)/2, 50)];
+    PMButton.backgroundColor=[UIColor whiteColor];
+    [header addSubview:PMButton];
+    [PMButton setTitle:@"退款的订单" forState:UIControlStateNormal];
+    [PMButton setTitleColor:[UIColor colorWithHexString:kAppNormalColor] forState:UIControlStateNormal];
+    [PMButton.titleLabel setFont:[UIFont systemFontOfSize:kAppFontSize]];
+    [PMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        
+    }];
+    
+    return header;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [PDOrderCell cellHeightWithData:nil];
 }

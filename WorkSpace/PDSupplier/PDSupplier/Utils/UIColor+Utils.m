@@ -18,6 +18,7 @@
 }
 
 + (UIColor *)colorWithHexString:(NSString *)hexString{
+    NSLog(@"hexString===%@",hexString);
     NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
     if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
     if ([cString hasPrefix:@"#"]) cString = [cString substringFromIndex:1];

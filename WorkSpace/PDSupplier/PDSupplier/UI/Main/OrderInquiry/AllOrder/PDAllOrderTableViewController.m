@@ -29,6 +29,23 @@
     [list addObject:[[PDOrderModel alloc] init]];
     [list addObject:[[PDOrderModel alloc] init]];
     
+    UIImageView *img=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Back"]];
+    img.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backAction:)];
+    [img addGestureRecognizer:tap];
+    UIBarButtonItem *leftbar=[[UIBarButtonItem alloc] initWithCustomView:img];
+    self.navigationItem.leftBarButtonItem=leftbar;
+    UILabel *ttitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, kAppWidth, 44)];
+    ttitle.text=@"全部订单";
+    ttitle.font=[UIFont systemFontOfSize:kAppFontSize];
+    ttitle.textColor=[UIColor colorWithHexString:kAppNormalColor];
+    ttitle.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=ttitle;
+    
+}
+-(void)backAction:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -50,10 +67,10 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *header=[[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 40)];
-    header.backgroundColor=[UIColor grayColor];
+    header.backgroundColor=[UIColor whiteColor];
 
     UIButton *calendar = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-kCellLeftGap*2, 40)];
-    calendar.backgroundColor=[UIColor grayColor];
+    calendar.backgroundColor=[UIColor whiteColor];
     [header addSubview:calendar];
     [calendar setTitle:@"日历" forState:UIControlStateNormal];
     [calendar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

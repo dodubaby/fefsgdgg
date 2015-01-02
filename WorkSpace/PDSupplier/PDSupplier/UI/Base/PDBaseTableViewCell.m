@@ -15,7 +15,7 @@
     _data = data;
     [self configData:_data];
     
-    [self showDebugRect];
+    //[self showDebugRect];
 }
 
 -(void)configData:(id)data{

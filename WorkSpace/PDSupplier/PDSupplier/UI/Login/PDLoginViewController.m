@@ -10,8 +10,7 @@
 #import "PDRegisterViewController.h"
 #import "PDFindPasswordViewController.h"
 #import "PDUtils.h"
-
-#define kLoginLeftGap 10
+#import "UIColor+Utils.h"
 
 @interface PDLoginViewController ()
 {
@@ -29,34 +28,47 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    logintitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, kAppWidth, 40)];
-    logintitle.text=@"登  录";
-    [self.view addSubview:logintitle];
+
+    logintitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, kAppWidth, 44)];
+    logintitle.text=@"登录";
+    logintitle.font=[UIFont systemFontOfSize:kAppFontSize];
+    logintitle.textColor=[UIColor colorWithHexString:kAppNormalColor];
     logintitle.textAlignment = NSTextAlignmentCenter;
-    usernametfd=[[UITextField alloc] initWithFrame:CGRectMake(40, 100, kAppWidth-80, 40)];
-    usernametfd.borderStyle=UITextBorderStyleLine;
+    self.navigationItem.titleView=logintitle;
+    
+    
+    usernametfd=[[UITextField alloc] initWithFrame:CGRectMake(kGap, 64+kGap*2, kAppWidth-kGap*2, 50)];
+    usernametfd.placeholder=@"请输入手机号";
+    usernametfd.layer.cornerRadius = 0;
+    usernametfd.layer.masksToBounds = YES;
+    usernametfd.layer.borderWidth = 1;
+    usernametfd.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+    usernametfd.font=[UIFont systemFontOfSize:kAppFontSize];
+    usernametfd.textColor=[UIColor colorWithHexString:kAppRedColor];
     [self.view addSubview:usernametfd];
-    passwordtfd=[[UITextField alloc] initWithFrame:CGRectMake(40, 150, kAppWidth-80, 40)];
-    passwordtfd.borderStyle=UITextBorderStyleLine;
+    passwordtfd=[[UITextField alloc] initWithFrame:CGRectMake(kGap, usernametfd.bottom+kGap, kAppWidth-kGap*2, 50)];
+    passwordtfd.layer.cornerRadius = 0;
+    passwordtfd.layer.masksToBounds = YES;
+    passwordtfd.layer.borderWidth = 1;
+    passwordtfd.layer.borderColor = [[UIColor colorWithHexString:kAppLineColor] CGColor];
+    passwordtfd.font=[UIFont systemFontOfSize:kAppFontSize];
+    passwordtfd.textColor=[UIColor colorWithHexString:kAppNormalColor];
+    passwordtfd.placeholder=@"请输入密码";
     [self.view addSubview:passwordtfd];
 
-    forgetbtn = [[UIButton alloc] initWithFrame:CGRectMake(passwordtfd.left, passwordtfd.bottom+kLoginLeftGap, 120, 40)];
-    forgetbtn.backgroundColor=[UIColor grayColor];
-    [self.view addSubview:forgetbtn];
-    [forgetbtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [forgetbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [forgetbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-        //
-        NSLog(@"forgetbtn");
-        PDFindPasswordViewController *controller=[[PDFindPasswordViewController alloc] init];
-        [self.navigationController pushViewController:controller animated:YES];
-    }];
+
     
-    loginbtn = [[UIButton alloc] initWithFrame:CGRectMake(40, forgetbtn.bottom+kLoginLeftGap, 120, 40)];
-    loginbtn.backgroundColor=[UIColor grayColor];
+    loginbtn = [[UIButton alloc] initWithFrame:CGRectMake(passwordtfd.left, passwordtfd.bottom+kGap*1.5, kAppWidth-kGap*2, 40)];
+    loginbtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+    [loginbtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:loginbtn];
-    [loginbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [loginbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginbtn setTitle:@"登录" forState:UIControlStateNormal];
+    loginbtn.layer.cornerRadius = kBtnCornerRadius;
+    loginbtn.layer.masksToBounds = YES;
+    loginbtn.layer.borderWidth = 1;
+    loginbtn.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+    
     [loginbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"login");
@@ -64,11 +76,28 @@
         [app changetoMainViewController];
     }];
     
-    registbtn = [[UIButton alloc] initWithFrame:CGRectMake(220, forgetbtn.bottom+kLoginLeftGap, 120, 40)];
-    registbtn.backgroundColor=[UIColor grayColor];
+    forgetbtn = [[UIButton alloc] initWithFrame:CGRectMake(loginbtn.left, loginbtn.bottom+kGap, 120, 40)];
+    forgetbtn.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:forgetbtn];
+    [forgetbtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+    forgetbtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [forgetbtn.titleLabel setFont:[UIFont systemFontOfSize:kAppFontSize]];
+    [forgetbtn setTitleColor:[UIColor colorWithHexString:kAppNormalColor] forState:UIControlStateNormal];
+    [forgetbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        //
+        NSLog(@"forgetbtn");
+        PDFindPasswordViewController *controller=[[PDFindPasswordViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+    }];
+    
+    
+    registbtn = [[UIButton alloc] initWithFrame:CGRectMake(loginbtn.right-120, loginbtn.bottom+kGap, 120, 40)];
+    registbtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    registbtn.backgroundColor=[UIColor clearColor];
     [self.view addSubview:registbtn];
     [registbtn setTitle:@"注册" forState:UIControlStateNormal];
-    [registbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [registbtn.titleLabel setFont:[UIFont systemFontOfSize:kAppFontSize]];
+    [registbtn setTitleColor:[UIColor colorWithHexString:kAppNormalColor] forState:UIControlStateNormal];
     [registbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"registbtn");
@@ -80,7 +109,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
