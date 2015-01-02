@@ -127,7 +127,8 @@
     [logout setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [logout handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
-        
+        AppDelegate *app=[[UIApplication sharedApplication] delegate];
+        [app changetoLoginViewController];
     }];
 }
 -(void)backAction:(id)sender

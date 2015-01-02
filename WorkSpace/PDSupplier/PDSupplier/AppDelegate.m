@@ -19,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSArray* nibView =  [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:nil options:nil];
+    UIView *lanchScreen=[nibView objectAtIndex:0];
+    lanchScreen.backgroundColor=[UIColor redColor];
+    
     PDLoginViewController *controller=[[PDLoginViewController alloc] init];
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:controller];
     nav.navigationBar.barTintColor=[UIColor whiteColor];
