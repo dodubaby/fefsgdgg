@@ -9,6 +9,9 @@
 #import "PDRightViewController.h"
 #import "PDRightCell.h"
 #import "PDRightFooterView.h"
+#import "PDAddressViewController.h"
+
+#import "AppDelegate.h"
 
 @interface PDRightViewController ()<PDBaseTableViewCellDelegate,PDRightFooterViewDelegate>
 {
@@ -88,9 +91,14 @@
 #pragma mark - PDRightFooterViewDelegate
 
 -(void)pdRightFooterView:(PDRightFooterView *)view submitWithTotal:(CGFloat)totalPrice{
-
     NSLog(@"submit");
 
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    PDAddressViewController *address = [[PDAddressViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:address];
+    [delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
+        //
+    }];
     
 }
 

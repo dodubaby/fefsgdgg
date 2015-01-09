@@ -24,9 +24,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-    
         CGFloat h = [PDAddressCell cellHeightWithData:nil];
-        
+
         back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth-2*kCellLeftGap, h-kCellLeftGap)];
         [self addSubview:back];
         back.layer.borderWidth = 0.5f;
@@ -34,15 +33,18 @@
         
         address = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, back.width - 2*kCellLeftGap, back.height)];
         [back addSubview:address];
+        address.numberOfLines = 2;
         address.font = [UIFont systemFontOfSize:15];
         address.textColor = [UIColor colorWithHexString:@"#333333"];
-        address.text = @"32rtgrgtrtrhtrhtrhrh";
+        address.text = @"我的地址我的地址我的地址我的地我的地址我的地我的地址我的地我的地址我的地";
     }
     return self;
 }
 
 -(void)configData:(id)data{
     
+    [address sizeToFit];
+    address.top = (back.height - address.height)/2;
      //[self showDebugRect];
 }
 

@@ -19,6 +19,15 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我的地址";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self setupBackButton];
+}
+
+-(void)backButtonTaped:(id)sender{
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        //
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
