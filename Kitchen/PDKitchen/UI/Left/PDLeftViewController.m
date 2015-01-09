@@ -114,7 +114,7 @@
         {
             
             
-            if (1) {
+            if (0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
             }else{
             

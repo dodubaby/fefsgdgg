@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "PDConfig.h"
+#import "PDUtils.h"
 #import "AFNetworking.h"
 #import "JSONJoy.h"
+#import "Lockbox.h"
 #import "PDBaseModel.h"
 
 // API path
@@ -21,6 +23,9 @@
 @property (nonatomic,strong) AFHTTPRequestOperationManager *HTTPEngine;
 
 + (PDHTTPEngine *)sharedInstance;
+
+// 包含默认参数. md5(path + 排序keyvalue组合 + password)
+- (NSString *)signWithPath:(NSString *)path params:(NSMutableDictionary *)params password:(NSString *) password;
 
 -(void)loginWithType:(NSNumber *)type
                phone:(NSString *)phone

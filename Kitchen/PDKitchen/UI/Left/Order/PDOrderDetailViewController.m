@@ -31,31 +31,36 @@
     
     self.navigationItem.title = @"我的订单";
     
-    logisticsButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 10+64, 80, 30)];
+    logisticsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 10+64, kAppWidth/2, 40)];
     [self.view addSubview:logisticsButton];
     [logisticsButton setTitle:@"物流动态" forState:UIControlStateNormal];
-    [logisticsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [logisticsButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [logisticsButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [logisticsButton setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    [logisticsButton setTitleColor:[UIColor colorWithHexString:@"#c14a41"] forState:UIControlStateHighlighted];
+    [logisticsButton setTitleColor:[UIColor colorWithHexString:@"#c14a41"] forState:UIControlStateSelected];
     [logisticsButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         [self showLogistics];
     }];
     
-    detailButton = [[UIButton alloc] initWithFrame:CGRectMake(40+90, 10+64, 80, 30)];
+    detailButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth/2, 10+64, kAppWidth/2, 40)];
     [self.view addSubview:detailButton];
     [detailButton setTitle:@"订单详情" forState:UIControlStateNormal];
-    [detailButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [detailButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [detailButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [detailButton setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    [detailButton setTitleColor:[UIColor colorWithHexString:@"#c14a41"] forState:UIControlStateHighlighted];
+    [detailButton setTitleColor:[UIColor colorWithHexString:@"#c14a41"] forState:UIControlStateSelected];
     [detailButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         [self showDetail];
     }];
     
-    orderLogisticsView = [[PDOrderLogisticsView alloc] initWithFrame:CGRectMake(0, 10+64+44, self.view.width, 460)];
+    
+    UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(kAppWidth/2-0.5, 64+20, 1, 20)];
+    [self.view addSubview:line];
+    line.backgroundColor = [UIColor colorWithHexString:@"#333333"];
+    
+    orderLogisticsView = [[PDOrderLogisticsView alloc] initWithFrame:CGRectMake(0, 64+60, self.view.width, kAppHeight - 64-60 -130)];
     [self.view addSubview:orderLogisticsView];
     orderLogisticsView.backgroundColor = [UIColor blueColor];
     
-    orderDetailView = [[PDOrderDetailView alloc] initWithFrame:CGRectMake(0, 10+64+44, self.view.width, 460)];
+    orderDetailView = [[PDOrderDetailView alloc] initWithFrame:CGRectMake(0, 64+60, self.view.width, kAppHeight - 64-60 -130)];
     [self.view addSubview:orderDetailView];
     orderDetailView.backgroundColor = [UIColor greenColor];
     
@@ -82,7 +87,7 @@
     // 默认展示物流信息
     [self showLogistics];
     
-    [self.view showDebugRect];
+    //[self.view showDebugRect];
 }
 
 -(void)showLogistics{

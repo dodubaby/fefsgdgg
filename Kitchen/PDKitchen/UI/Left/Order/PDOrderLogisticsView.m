@@ -7,7 +7,7 @@
 //
 
 #import "PDOrderLogisticsView.h"
-#import "PDBaseTableViewCell.h"
+#import "PDLogisticsCell.h"
 
 @interface PDOrderLogisticsView ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -43,6 +43,7 @@
                 @"4444",nil];
         
         leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, list.count*80) style:UITableViewStylePlain];
+        leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         leftTableView.delegate = self;
         leftTableView.dataSource = self;
         [self addSubview:leftTableView];
@@ -58,7 +59,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    return [PDLogisticsCell cellHeightWithData:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -70,13 +71,20 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PDBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+    PDLogisticsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
-        cell = [[PDBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell = [[PDLogisticsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = list[indexPath.row];
+    //cell.textLabel.text = list[indexPath.row];
+    
+    if (indexPath.row == list.count-1) {
+        cell.isCurrent = @YES;
+    }else{
+        cell.isCurrent = @NO;
+    }
     [cell setData:nil];
+    
     return cell;
 }
 

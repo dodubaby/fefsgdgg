@@ -15,6 +15,7 @@
 #import "UIAlertView+Utils.h"
 #import "UIActionsheet+Utils.h"
 #import "UIImage+Utils.h"
+#import "UIDevice+Utitls.h"
 #import "NSString+Utils.h"
 
 #import "EGOImageView.h"

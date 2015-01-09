@@ -17,6 +17,7 @@
 		3220A6AF1A51A5EC0017656F /* center_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A6AC1A51A5EC0017656F /* center_logo@2x.png */; };
 		3220A6B01A51A5EC0017656F /* center_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A6AD1A51A5EC0017656F /* center_menu@2x.png */; };
 		3220A6B11A51A5EC0017656F /* center_order@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A6AE1A51A5EC0017656F /* center_order@2x.png */; };
+		325658631A601FBF00F9D44C /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
 		326CB71D1A4282DC00D2BADE /* PDRightFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 326CB71C1A4282DC00D2BADE /* PDRightFooterView.m */; };
 		326CB7201A42949800D2BADE /* PDOwnerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 326CB71F1A42949800D2BADE /* PDOwnerCell.m */; };
 		326CB7231A4294AA00D2BADE /* PDCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 326CB7221A4294AA00D2BADE /* PDCommentCell.m */; };
@@ -52,13 +53,15 @@
 		32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C121A441A9F00ABC8B0 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C171A441A9F00ABC8B0 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		32C783151A56B7720051CB60 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
+		32CA7A7B1A5D0E5000BB8CAF /* PDBaseTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */; };
+		32CA7A7F1A5D1B4100BB8CAF /* PDAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CA7A7E1A5D1B4100BB8CAF /* PDAddressCell.m */; };
 		32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */; };
 		32CBFB211A4709D30057EDF6 /* PDBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB201A4709D30057EDF6 /* PDBaseView.m */; };
 		32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */; };
 		32CBFB2A1A470A730057EDF6 /* PDOrderLogisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB291A470A730057EDF6 /* PDOrderLogisticsView.m */; };
 		32CCB2D01A45AFB500CB2BA2 /* PDOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */; };
 		32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */; };
+		32CF65B31A5BC47300D2B4C5 /* PDLogisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CF65B21A5BC47300D2B4C5 /* PDLogisticsCell.m */; };
 		32D0E7C81A415E7C00D1F190 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E7C71A415E7C00D1F190 /* main.m */; };
 		32D0E7CB1A415E7C00D1F190 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E7CA1A415E7C00D1F190 /* AppDelegate.mm */; };
 		32D0E7CE1A415E7C00D1F190 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E7CD1A415E7C00D1F190 /* ViewController.m */; };
@@ -117,6 +120,7 @@
 		32D0E8A11A4276F000D1F190 /* PDCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A01A4276F000D1F190 /* PDCouponCell.m */; };
 		32D0E8A41A4278FB00D1F190 /* PDNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */; };
 		32D0E8A71A427FA300D1F190 /* PDRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A61A427FA300D1F190 /* PDRightCell.m */; };
+		32D6F07E1A5928F7000D20B0 /* UIDevice+Utitls.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */; };
 		32F97AF71A4AAF9C0052B2D3 /* PDCommentsInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AF61A4AAF9C0052B2D3 /* PDCommentsInputViewController.m */; };
 		32F97B1B1A4ABA7F0052B2D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B1A1A4ABA7F0052B2D3 /* SystemConfiguration.framework */; };
 		32F97B1D1A4ABA900052B2D3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B1C1A4ABA900052B2D3 /* libz.dylib */; };
@@ -194,6 +198,10 @@
 		32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
 		32868C161A441A9F00ABC8B0 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 		32868C171A441A9F00ABC8B0 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		32CA7A791A5D0E5000BB8CAF /* PDBaseTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseTextView.h; sourceTree = "<group>"; };
+		32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseTextView.m; sourceTree = "<group>"; };
+		32CA7A7D1A5D1B4100BB8CAF /* PDAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAddressCell.h; sourceTree = "<group>"; };
+		32CA7A7E1A5D1B4100BB8CAF /* PDAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAddressCell.m; sourceTree = "<group>"; };
 		32CBFB091A46FC400057EDF6 /* PDOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderCell.h; sourceTree = "<group>"; };
 		32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderCell.m; sourceTree = "<group>"; };
 		32CBFB1F1A4709D30057EDF6 /* PDBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseView.h; sourceTree = "<group>"; };
@@ -206,6 +214,8 @@
 		32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderViewController.m; sourceTree = "<group>"; };
 		32CCB2D11A45B00400CB2BA2 /* PDOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderDetailViewController.h; sourceTree = "<group>"; };
 		32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderDetailViewController.m; sourceTree = "<group>"; };
+		32CF65B11A5BC47300D2B4C5 /* PDLogisticsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogisticsCell.h; sourceTree = "<group>"; };
+		32CF65B21A5BC47300D2B4C5 /* PDLogisticsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogisticsCell.m; sourceTree = "<group>"; };
 		32D0E7C21A415E7C00D1F190 /* PDKitchen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDKitchen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32D0E7C61A415E7C00D1F190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32D0E7C71A415E7C00D1F190 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -325,6 +335,8 @@
 		32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDNewsCell.m; sourceTree = "<group>"; };
 		32D0E8A51A427FA300D1F190 /* PDRightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRightCell.h; sourceTree = "<group>"; };
 		32D0E8A61A427FA300D1F190 /* PDRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRightCell.m; sourceTree = "<group>"; };
+		32D6F07C1A5928F7000D20B0 /* UIDevice+Utitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Utitls.h"; sourceTree = "<group>"; };
+		32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Utitls.m"; sourceTree = "<group>"; };
 		32F97AF51A4AAF9C0052B2D3 /* PDCommentsInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCommentsInputViewController.h; sourceTree = "<group>"; };
 		32F97AF61A4AAF9C0052B2D3 /* PDCommentsInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCommentsInputViewController.m; sourceTree = "<group>"; };
 		32F97B1A1A4ABA7F0052B2D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -358,7 +370,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32C783151A56B7720051CB60 /* TencentOpenAPI.framework in Frameworks */,
+				325658631A601FBF00F9D44C /* TencentOpenAPI.framework in Frameworks */,
 				3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */,
 				32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */,
 				32F97B3C1A4AC7D30052B2D3 /* Security.framework in Frameworks */,
@@ -554,6 +566,8 @@
 			children = (
 				32CBFB091A46FC400057EDF6 /* PDOrderCell.h */,
 				32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */,
+				32CF65B11A5BC47300D2B4C5 /* PDLogisticsCell.h */,
+				32CF65B21A5BC47300D2B4C5 /* PDLogisticsCell.m */,
 				32CCB2CE1A45AFB500CB2BA2 /* PDOrderViewController.h */,
 				32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */,
 				32CBFB281A470A730057EDF6 /* PDOrderLogisticsView.h */,
@@ -749,6 +763,8 @@
 				32D0E8591A416B1C00D1F190 /* UIAlertView+Utils.m */,
 				32D0E85A1A416B1C00D1F190 /* UIActionSheet+Utils.h */,
 				32D0E85B1A416B1C00D1F190 /* UIActionSheet+Utils.m */,
+				32D6F07C1A5928F7000D20B0 /* UIDevice+Utitls.h */,
+				32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */,
 				3274DDA11A52A8A10079D176 /* UIImage+Utils.h */,
 				3274DDA21A52A8A10079D176 /* UIImage+Utils.m */,
 				326CB7271A42B18E00D2BADE /* NSString+Utils.h */,
@@ -801,6 +817,8 @@
 		32D0E8461A41649700D1F190 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				32CA7A791A5D0E5000BB8CAF /* PDBaseTextView.h */,
+				32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */,
 				32D0E87D1A419B1900D1F190 /* PDBaseTableViewCell.h */,
 				32D0E87E1A419B1900D1F190 /* PDBaseTableViewCell.m */,
 				32CBFB1F1A4709D30057EDF6 /* PDBaseView.h */,
@@ -921,6 +939,8 @@
 		32D0E8981A41A1B400D1F190 /* Address */ = {
 			isa = PBXGroup;
 			children = (
+				32CA7A7D1A5D1B4100BB8CAF /* PDAddressCell.h */,
+				32CA7A7E1A5D1B4100BB8CAF /* PDAddressCell.m */,
 				32D0E89C1A41A1E200D1F190 /* PDAddressViewController.h */,
 				32D0E89D1A41A1E200D1F190 /* PDAddressViewController.m */,
 			);
@@ -1116,6 +1136,7 @@
 				32868C191A441A9F00ABC8B0 /* EGOImageButton.m in Sources */,
 				32D0E8891A41A08000D1F190 /* PDCenterDetailViewController.m in Sources */,
 				32868C181A441A9F00ABC8B0 /* EGOCache.m in Sources */,
+				32CA7A7B1A5D0E5000BB8CAF /* PDBaseTextView.m in Sources */,
 				32F97AF71A4AAF9C0052B2D3 /* PDCommentsInputViewController.m in Sources */,
 				32D0E82C1A41603E00D1F190 /* MMDrawerBarButtonItem.m in Sources */,
 				32D0E87F1A419B1900D1F190 /* PDBaseTableViewCell.m in Sources */,
@@ -1133,6 +1154,7 @@
 				326CB7291A42B18E00D2BADE /* NSString+Utils.m in Sources */,
 				32D0E8791A417DB000D1F190 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				32D0E81B1A41602200D1F190 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				32CF65B31A5BC47300D2B4C5 /* PDLogisticsCell.m in Sources */,
 				32D0E8081A41601200D1F190 /* AFURLSessionManager.m in Sources */,
 				32D0E8921A41A0E300D1F190 /* PDSettingsViewController.m in Sources */,
 				32D0E7CB1A415E7C00D1F190 /* AppDelegate.mm in Sources */,
@@ -1140,12 +1162,14 @@
 				32D0E8731A417B1000D1F190 /* PDLeftViewController.m in Sources */,
 				32D0E84C1A4164D600D1F190 /* PDBaseTableViewController.m in Sources */,
 				326CB7261A4298D900D2BADE /* PDCommentsViewController.m in Sources */,
+				32CA7A7F1A5D1B4100BB8CAF /* PDAddressCell.m in Sources */,
 				32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */,
 				32D0E8551A416A6D00D1F190 /* UIView+Utils.m in Sources */,
 				3274DDA31A52A8A10079D176 /* UIImage+Utils.m in Sources */,
 				32F97B371A4ABF540052B2D3 /* LoveTopTipView.m in Sources */,
 				32D0E88F1A41A0B500D1F190 /* PDNewsDetailViewController.m in Sources */,
 				32D0E7C81A415E7C00D1F190 /* main.m in Sources */,
+				32D6F07E1A5928F7000D20B0 /* UIDevice+Utitls.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,6 +1285,26 @@
 					SDK,
 					2.3.1,
 					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1283,6 +1327,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
 					SDK,
 					2.3.1,

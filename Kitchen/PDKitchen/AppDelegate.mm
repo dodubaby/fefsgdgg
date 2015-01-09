@@ -27,6 +27,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+    NSString *device = [[UIDevice currentDevice] deviceKeychanID];
+    NSLog(@"device == %@",device);
+    
     //向微信注册
     [WXApi registerApp:kWeixinAppID withDescription:@"demo 2.0"];
     

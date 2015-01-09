@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的订单";
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self setupData];
 }

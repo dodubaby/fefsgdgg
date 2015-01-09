@@ -7,11 +7,12 @@
 //
 
 #import "PDCommentsInputViewController.h"
+#import "PDBaseTextView.h"
 
 @interface PDCommentsInputViewController ()
 {
 
-    UITextView *textView;
+    PDBaseTextView *textView;
     
 }
 @end
@@ -34,7 +35,9 @@
                                                                              target:self
                                                                              action:@selector(sendButtonTaped:)];
     
-    textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 260)];
+    textView = [[PDBaseTextView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 260)];
+    textView.placeholderColor = [UIColor colorWithHexString:@"#e6e6e6"];
+    textView.placeholder = @"请输入你的评论";
     [self.view addSubview:textView];
     
     [self.view showDebugRect];
@@ -44,7 +47,7 @@
 -(void)viewDidAppear:(BOOL)animated{
 
     [super viewDidAppear:animated];
-    [textView becomeFirstResponder];
+    //[textView becomeFirstResponder];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{

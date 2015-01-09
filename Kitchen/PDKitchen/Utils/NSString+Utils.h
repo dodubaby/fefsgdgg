@@ -11,6 +11,8 @@
 
 @interface NSString (Utils)
 
+- (NSString*)md5;
+
 - (CGSize)sizeWithFontCompatible:(UIFont *)font;
 - (CGSize)sizeWithFontCompatible:(UIFont *)font
                         forWidth:(CGFloat)width

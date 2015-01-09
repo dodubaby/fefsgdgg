@@ -27,6 +27,30 @@
     return __singleton;
 }
 
+- (NSString *)signWithPath:(NSString *)path params:(NSMutableDictionary *)params password:(NSString *) password{
+
+    NSMutableDictionary *p = [[NSMutableDictionary alloc] initWithDictionary:params];
+
+    // 添加版本，设备ID，平台等公用参数
+    [p setObject:kPDAppVersion forKey:@"version"];
+    NSString *device = [[UIDevice currentDevice] deviceKeychanID];
+    [p setObject:device forKey:@"device"];
+    [p setObject:@"ios" forKey:@"plateform"];
+
+    NSMutableString *sign = [[NSMutableString alloc] init];
+    [sign appendString:path];
+    for (NSString *key in [p keysSortedByValueUsingSelector:@selector(compare:)]) {
+        [sign appendString:[NSString stringWithFormat:@"%@%@",key,p[key]]];
+    }
+    [sign appendString:password];
+    
+    return [sign md5];
+}
+
+- (NSMutableDictionary *)paramWithDictionary:(NSMutableDictionary *)dict{
+
+    return dict;
+}
 
 -(void)loginWithType:(NSNumber *)type
                phone:(NSString *)phone
@@ -46,6 +70,8 @@
     }else{  // 微信微博QQ的 userid
         [parameters setObject:thirdpartID forKey:@"account"];
     }
+    
+    parameters = [self paramWithDictionary:parameters];
 
     [_HTTPEngine POST:kPathOfLogin parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
