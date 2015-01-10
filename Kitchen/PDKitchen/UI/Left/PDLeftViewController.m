@@ -11,6 +11,8 @@
 #import "PDOrderViewController.h"
 #import "PDFavoritesViewController.h"
 #import "PDCouponViewController.h"
+#import "PDAddressViewController.h"
+
 #import "PDNewsViewController.h"
 #import "PDSettingsViewController.h"
 
@@ -37,6 +39,7 @@
             @{@"我的订单":@"menu_order"},
             @{@"我的收藏":@"menu_favorite"},
             @{@"我的优惠券":@"menu_coupon"},
+            @{@"我的地址":@"menu_address"},
             @{@"消息":@"menu_news"},
             @{@"给我评分":@"menu_score"},
             @{@"设置":@"menu_settings"}, nil];
@@ -112,9 +115,7 @@
         case 0:
             //
         {
-            
-            
-            if (0) {
+            if (1) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
             }else{
             
@@ -123,7 +124,6 @@
                 [self pushVC:vc];
 
             }
-            
         }
             break;
         case 1:
@@ -138,7 +138,6 @@
         case 2:
             //
         {
-            
             vc = [PDCouponViewController new];
             vc.title = key;
             [self pushVC:vc];
@@ -147,24 +146,29 @@
         case 3:
             //
         {
-            vc = [PDNewsViewController new];
+            vc = [PDAddressViewController new];
             vc.title = key;
             [self pushVC:vc];
-            
         }
             break;
         case 4:
             //
         {
-
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://baidu.com"]];
-            
+            vc = [PDNewsViewController new];
+            vc.title = key;
+            [self pushVC:vc];
         }
             break;
         case 5:
             //
         {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://baidu.com"]];
             
+        }
+            break;
+        case 6:
+            //
+        {
             vc = [PDSettingsViewController new];
             vc.title = key;
             [self pushVC:vc];

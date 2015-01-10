@@ -118,12 +118,12 @@
 -(void)pdRightFooterView:(PDRightFooterView *)view submitWithTotal:(CGFloat)totalPrice{
     NSLog(@"submit");
 
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    PDAddressViewController *address = [[PDAddressViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:address];
-    [delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
-        //
-    }];
+//    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    PDAddressViewController *address = [[PDAddressViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:address];
+//    [delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
+//        //
+//    }];
     
 }
 

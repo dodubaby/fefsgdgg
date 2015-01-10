@@ -42,7 +42,7 @@
 
 -(void)setupUI{
 
-    UIView *back1 = [[UIView alloc] initWithFrame:CGRectMake(10, 20+64, kAppWidth - 20, 50)];
+    UIView *back1 = [[UIView alloc] initWithFrame:CGRectMake(10, 10+64, kAppWidth - 20, 50)];
     [self.view addSubview:back1];
     back1.layer.borderWidth = 0.5f;
     back1.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
