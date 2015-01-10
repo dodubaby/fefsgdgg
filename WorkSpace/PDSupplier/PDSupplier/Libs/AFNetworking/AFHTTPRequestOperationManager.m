@@ -24,7 +24,7 @@
 
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
-
+#import "UIDevice+Utitls.h"
 #import <Availability.h>
 #import <Security/Security.h>
 
@@ -116,7 +116,15 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:nil];
+    NSString *str=[NSString stringWithFormat:@"%@%@",self.baseURL,URLString];
+    // 添加版本，设备ID，平台等公用参数
+    NSString *versionstr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    [parameters setObject:versionstr forKey:@"version"];
+    NSString *device = [[UIDevice currentDevice] deviceKeychanID];
+    [parameters setObject:device forKey:@"device"];
+    [parameters setObject:@"ios" forKey:@"plateform"];
+    
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:str parameters:parameters error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
 
     [self.operationQueue addOperation:operation];
@@ -146,7 +154,15 @@
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:nil];
+    NSString *str=[NSString stringWithFormat:@"%@%@",self.baseURL,URLString];
+    // 添加版本，设备ID，平台等公用参数
+    NSString *versionstr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    [parameters setObject:versionstr forKey:@"version"];
+    NSString *device = [[UIDevice currentDevice] deviceKeychanID];
+    [parameters setObject:device forKey:@"device"];
+    [parameters setObject:@"ios" forKey:@"plateform"];
+    
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:str parameters:parameters error:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
 
     [self.operationQueue addOperation:operation];

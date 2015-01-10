@@ -11,11 +11,11 @@
 
 #ifdef DEBUG
 
-#define kHttpHost @"baidu.com"
+#define kHttpHost @"http://182.92.170.104/index.php"
 
 #else
 
-#define kHttpHost @"baidu.com"
+#define kHttpHost @"http://182.92.170.104/index.php"
 
 #endif
 

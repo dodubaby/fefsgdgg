@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D068A6E1A6109D3009F4A08 /* neworderin05.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D068A6D1A6109D3009F4A08 /* neworderin05.m4a */; };
 		6D304C031A56A02A00EC5916 /* Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D304C021A56A02A00EC5916 /* Back@2x.png */; };
 		6D304C051A56A7DD00EC5916 /* 发送.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D304C041A56A7DD00EC5916 /* 发送.png */; };
 		6D304C081A56AAD800EC5916 /* PDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D304C071A56AAD800EC5916 /* PDSettingsViewController.m */; };
@@ -22,6 +23,7 @@
 		6D7F5E601A46B65400B634C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7F5E5F1A46B65400B634C7 /* AppDelegate.m */; };
 		6D7F5E681A46B65400B634C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F5E671A46B65400B634C7 /* Images.xcassets */; };
 		6D7F5E771A46B65500B634C7 /* PDSupplierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7F5E761A46B65500B634C7 /* PDSupplierTests.m */; };
+		6D9066421A5AD9F7005C68C9 /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9066411A5AD9F7005C68C9 /* UIImage+Utils.m */; };
 		6DDB5FC11A56ACB600CD2719 /* st_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DDB5FC01A56ACB600CD2719 /* st_refresh@2x.png */; };
 		6DDB5FC31A56B1FE00CD2719 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DDB5FC21A56B1FE00CD2719 /* LaunchScreen.xib */; };
 		6DE1273D1A46BD8B00FB1B49 /* PDHTTPEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE1269B1A46BD8B00FB1B49 /* PDHTTPEngine.m */; };
@@ -96,7 +98,8 @@
 		6DEB468D1A567375002B2E84 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB46821A567375002B2E84 /* 120.png */; };
 		6DEB468E1A567375002B2E84 /* 256.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB46831A567375002B2E84 /* 256.png */; };
 		6DEB468F1A567375002B2E84 /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB46841A567375002B2E84 /* 512.png */; };
-		6DEB46911A56747C002B2E84 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB46901A56747C002B2E84 /* nav.png */; };
+		6DEB46911A56747C002B2E84 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEB46901A56747C002B2E84 /* nav@2x.png */; };
+		6DEC44A61A60D6230011645D /* UIDevice+Utitls.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEC44A51A60D6230011645D /* UIDevice+Utitls.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +113,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D068A6D1A6109D3009F4A08 /* neworderin05.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = neworderin05.m4a; sourceTree = "<group>"; };
 		6D304C021A56A02A00EC5916 /* Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back@2x.png"; sourceTree = "<group>"; };
 		6D304C041A56A7DD00EC5916 /* 发送.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发送.png"; sourceTree = "<group>"; };
 		6D304C061A56AAD800EC5916 /* PDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSettingsViewController.h; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		6D7F5E701A46B65500B634C7 /* PDSupplierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDSupplierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D7F5E751A46B65500B634C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D7F5E761A46B65500B634C7 /* PDSupplierTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDSupplierTests.m; sourceTree = "<group>"; };
+		6D9066401A5AD9F7005C68C9 /* UIImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utils.h"; sourceTree = "<group>"; };
+		6D9066411A5AD9F7005C68C9 /* UIImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utils.m"; sourceTree = "<group>"; };
 		6DDB5FC01A56ACB600CD2719 /* st_refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_refresh@2x.png"; sourceTree = "<group>"; };
 		6DDB5FC21A56B1FE00CD2719 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		6DE126971A46BD8B00FB1B49 /* PDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDConfig.h; sourceTree = "<group>"; };
@@ -270,7 +276,9 @@
 		6DEB46821A567375002B2E84 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
 		6DEB46831A567375002B2E84 /* 256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 256.png; sourceTree = "<group>"; };
 		6DEB46841A567375002B2E84 /* 512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512.png; sourceTree = "<group>"; };
-		6DEB46901A56747C002B2E84 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		6DEB46901A56747C002B2E84 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
+		6DEC44A41A60D6230011645D /* UIDevice+Utitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Utitls.h"; sourceTree = "<group>"; };
+		6DEC44A51A60D6230011645D /* UIDevice+Utitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Utitls.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -624,6 +632,10 @@
 				6DE1273A1A46BD8B00FB1B49 /* UIControl+Utils.m */,
 				6DE1273B1A46BD8B00FB1B49 /* UIView+Utils.h */,
 				6DE1273C1A46BD8B00FB1B49 /* UIView+Utils.m */,
+				6D9066401A5AD9F7005C68C9 /* UIImage+Utils.h */,
+				6D9066411A5AD9F7005C68C9 /* UIImage+Utils.m */,
+				6DEC44A41A60D6230011645D /* UIDevice+Utitls.h */,
+				6DEC44A51A60D6230011645D /* UIDevice+Utitls.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -712,6 +724,7 @@
 		6DEB46611A565F3A002B2E84 /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				6D068A6D1A6109D3009F4A08 /* neworderin05.m4a */,
 				6DEB46681A565F70002B2E84 /* 新.png */,
 				6DEB46631A565F70002B2E84 /* 订单号背景.png */,
 				6DEB46621A565F70002B2E84 /* 订单.png */,
@@ -720,7 +733,7 @@
 				6DEB466A1A565F70002B2E84 /* 左.png */,
 				6DEB46691A565F70002B2E84 /* 右.png */,
 				6DEB46741A56604A002B2E84 /* 3.png */,
-				6DEB46901A56747C002B2E84 /* nav.png */,
+				6DEB46901A56747C002B2E84 /* nav@2x.png */,
 				6D304C021A56A02A00EC5916 /* Back@2x.png */,
 				6D304C041A56A7DD00EC5916 /* 发送.png */,
 				6DDB5FC01A56ACB600CD2719 /* st_refresh@2x.png */,
@@ -841,6 +854,7 @@
 				6DEB46731A565F70002B2E84 /* 左.png in Resources */,
 				6DEB46701A565F70002B2E84 /* 搜索.png in Resources */,
 				6DEB468C1A567375002B2E84 /* 114.png in Resources */,
+				6D068A6E1A6109D3009F4A08 /* neworderin05.m4a in Resources */,
 				6DEB46851A567375002B2E84 /* 29.png in Resources */,
 				6DEB468E1A567375002B2E84 /* 256.png in Resources */,
 				6DEB46751A56604A002B2E84 /* 3.png in Resources */,
@@ -852,7 +866,7 @@
 				6DDB5FC31A56B1FE00CD2719 /* LaunchScreen.xib in Resources */,
 				6DEB46881A567375002B2E84 /* 57.png in Resources */,
 				6DE1275E1A46BD8B00FB1B49 /* SVProgressHUD.bundle in Resources */,
-				6DEB46911A56747C002B2E84 /* nav.png in Resources */,
+				6DEB46911A56747C002B2E84 /* nav@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +902,7 @@
 				6D78195A1A47224F001C5A8D /* VRGCalendarView.m in Sources */,
 				6DE127551A46BD8B00FB1B49 /* JSONJoy.m in Sources */,
 				6D304C081A56AAD800EC5916 /* PDSettingsViewController.m in Sources */,
+				6DEC44A61A60D6230011645D /* UIDevice+Utitls.m in Sources */,
 				6D78194A1A472239001C5A8D /* CalendarViewController.m in Sources */,
 				6DE127451A46BD8B00FB1B49 /* AFURLRequestSerialization.m in Sources */,
 				6DE1275D1A46BD8B00FB1B49 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -909,6 +924,7 @@
 				6DE1277E1A46BD8B00FB1B49 /* UIControl+Utils.m in Sources */,
 				6DE1274A1A46BD8B00FB1B49 /* UIAlertView+AFNetworking.m in Sources */,
 				6DE127831A46BF5C00FB1B49 /* PDLoginViewController.m in Sources */,
+				6D9066421A5AD9F7005C68C9 /* UIImage+Utils.m in Sources */,
 				6D7819561A47224F001C5A8D /* NSDate+convenience.m in Sources */,
 				6DE127401A46BD8B00FB1B49 /* AFHTTPRequestOperationManager.m in Sources */,
 				6D7819591A47224F001C5A8D /* UIView+convenience.m in Sources */,

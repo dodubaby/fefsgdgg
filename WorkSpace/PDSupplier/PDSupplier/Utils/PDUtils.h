@@ -15,7 +15,10 @@
 #import "UIAlertView+Utils.h"
 #import "UIActionsheet+Utils.h"
 #import "NSString+Utils.h"
+#import "UIImage+Utils.h"
+#import "UIDevice+Utitls.h"
 #import "AppDelegate.h"
+
 // screen width
 #define kAppWidth [UIScreen mainScreen].bounds.size.width
 #define kAppHeight [UIScreen mainScreen].bounds.size.height

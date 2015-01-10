@@ -28,23 +28,11 @@
                     <color key="textColor" red="0.85882352939999995" green="0.85882352939999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="6YB-Ek-mbo">
-                    <rect key="frame" x="60" y="317" width="360" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="KOw-8L-GGH"/>
-                        <constraint firstAttribute="width" constant="360" id="UJe-DV-LaX"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="6YB-Ek-mbo" firstAttribute="top" secondItem="iPP-CO-O3U" secondAttribute="bottom" constant="8" id="025-HK-8kD"/>
                 <constraint firstItem="bDJ-78-e9e" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="191" id="Rvr-PG-Rlh"/>
                 <constraint firstItem="iPP-CO-O3U" firstAttribute="top" secondItem="bDJ-78-e9e" secondAttribute="bottom" constant="8" id="YGy-80-0I0"/>
-                <constraint firstAttribute="centerX" secondItem="6YB-Ek-mbo" secondAttribute="centerX" id="cAk-Ii-Drs"/>
                 <constraint firstAttribute="centerX" secondItem="iPP-CO-O3U" secondAttribute="centerX" id="vC4-an-vgB"/>
                 <constraint firstAttribute="centerX" secondItem="bDJ-78-e9e" secondAttribute="centerX" constant="4.5" id="yCs-kh-GaN"/>
             </constraints>

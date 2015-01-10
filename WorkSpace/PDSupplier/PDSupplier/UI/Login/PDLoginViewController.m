@@ -59,7 +59,8 @@
 
     
     loginbtn = [[UIButton alloc] initWithFrame:CGRectMake(passwordtfd.left, passwordtfd.bottom+kGap*1.5, kAppWidth-kGap*2, 40)];
-    loginbtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+    UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:kAppRedColor] size:loginbtn.size];
+    [loginbtn setBackgroundImage:image forState:UIControlStateNormal];
     [loginbtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:loginbtn];
     [loginbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

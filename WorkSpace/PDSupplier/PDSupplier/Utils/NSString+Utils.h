@@ -21,5 +21,8 @@
 - (CGSize)sizeWithFontCompatible:(UIFont *)font
                constrainedToSize:(CGSize)size
                    lineBreakMode:(NSLineBreakMode)lineBreakMode;
+- (NSString*)md5;
+
+
 
 @end

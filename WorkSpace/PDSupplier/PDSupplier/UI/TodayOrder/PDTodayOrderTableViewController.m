@@ -9,6 +9,9 @@
 #import "PDTodayOrderTableViewController.h"
 #import "PDOrderModel.h"
 #import "PDOrderCell.h"
+#import "PDHTTPEngine.h"
+
+
 
 @interface PDTodayOrderTableViewController ()
 {
@@ -41,6 +44,24 @@
     self.navigationItem.titleView=ttitle;
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    // pull
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine getTodayOrderWithKitchenid:@"987654321" type:1 page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+            NSLog(@"model===%@",model);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+        
+    }];
+    //
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
+    
 }
 -(void)backAction:(id)sender
 {

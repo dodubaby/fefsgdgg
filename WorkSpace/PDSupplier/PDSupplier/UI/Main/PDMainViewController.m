@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIImageView *navimgview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 38)];
+    UIImageView *navimgview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     navimgview.image=[UIImage imageNamed:@"nav"];
     self.navigationItem.titleView=navimgview;
     
