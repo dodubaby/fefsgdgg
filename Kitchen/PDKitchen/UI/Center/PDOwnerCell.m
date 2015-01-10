@@ -69,7 +69,7 @@
 //        }];
         
         avatar = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_owner"]];
-        avatar.frame = CGRectMake(35, 15, 45, 45);
+        avatar.frame = CGRectMake(10, 10, 45, 45);
         [back addSubview:avatar];
         avatar.backgroundColor = [UIColor clearColor];
         avatar.layer.borderWidth = 0.5f;
@@ -98,7 +98,7 @@
         about = [[UILabel alloc] initWithFrame:CGRectMake(avatar.left, avatar.bottom +10, back.width-35-10, 20)];
         [back addSubview:about];
         about.numberOfLines = 0;
-        about.font = [UIFont systemFontOfSize:12];
+        about.font = [UIFont systemFontOfSize:13];
         about.textColor = [UIColor colorWithHexString:@"#999999"];
         
         line = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, back.width - 20, 0.5)];

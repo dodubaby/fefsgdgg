@@ -12,7 +12,7 @@
 @interface PDCommentsInputViewController ()
 {
 
-    PDBaseTextView *textView;
+    UITextView *textView;
     
 }
 @end
@@ -29,18 +29,34 @@
     [super viewDidLoad];
     self.navigationItem.title = @"评论";
     [self setupBackButton];
+//    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送"
+//                                                                              style:UIBarButtonItemStylePlain
+//                                                                             target:self
+//                                                                             action:@selector(sendButtonTaped:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送"
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(sendButtonTaped:)];
-    
-    textView = [[PDBaseTextView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 260)];
-    textView.placeholderColor = [UIColor colorWithHexString:@"#e6e6e6"];
-    textView.placeholder = @"请输入你的评论";
+    textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 64+15, kAppWidth-20, 260)];
+//    textView.backgroundColor = [UIColor redColor];
+//    textView.placeholderColor = [UIColor colorWithHexString:@"#e6e6e6"];
+//    textView.placeholder = @"请输入你的评论";
     [self.view addSubview:textView];
+    textView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;
+    textView.layer.borderWidth = 0.5f;
+    textView.clipsToBounds = YES;
     
-    [self.view showDebugRect];
+    
+    UIButton *submit = [[UIButton alloc] initWithFrame:CGRectMake(10, textView.bottom+20, kAppWidth - 20, 40)];
+    [self.view addSubview:submit];
+    UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:submit.size];
+    [submit setBackgroundImage:image forState:UIControlStateNormal];
+    [submit setTitle:@"发送" forState:UIControlStateNormal];
+    submit.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
+    [submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    submit.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+    submit.layer.cornerRadius = 4;
+    submit.clipsToBounds = YES;
+    
+    //[self.view showDebugRect];
 }
 
 

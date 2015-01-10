@@ -18,6 +18,8 @@
     
     NSMutableArray *list;
     PDRightFooterView *footer;
+    
+    UIButton *clearButton;
 }
 
 @end
@@ -36,10 +38,13 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我的收藏";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
+    
     [self setupData];
     
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
-    header.backgroundColor = [UIColor whiteColor];
+    header.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, header.width-110, 44)];
     label.textAlignment = NSTextAlignmentCenter;
@@ -53,6 +58,19 @@
     footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
     footer.delegate = self;
     self.tableView.tableFooterView = footer;
+    
+    
+    clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    clearButton.frame = CGRectMake(85, kAppHeight - 90, 90, 30);
+    [self.view addSubview:clearButton];
+    [clearButton setTitle:@"清空购物车" forState:UIControlStateNormal];
+    
+    [clearButton setTitleColor:[UIColor colorWithHexString:@"#c14a41"] forState:UIControlStateNormal];
+    clearButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+    clearButton.layer.borderWidth = 0.5;
+    clearButton.layer.borderColor = [UIColor colorWithHexString:@"#c14a41"].CGColor;
+    clearButton.layer.cornerRadius = 4; //;
+    clearButton.clipsToBounds = YES;
     
     //[self.view showDebugRect];
 }
@@ -74,6 +92,7 @@
     if (!cell) {
         cell = [[PDRightCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
 
     }
     cell.delegate = self;
