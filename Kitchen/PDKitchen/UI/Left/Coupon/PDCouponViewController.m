@@ -30,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的优惠券";
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self setupBackButton];
     
     [self setupData];
 }

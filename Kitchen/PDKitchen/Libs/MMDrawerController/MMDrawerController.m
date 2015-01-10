@@ -935,13 +935,13 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
 -(void)updateShadowForCenterView{
     UIView * centerView = self.centerContainerView;
     if(self.showsShadow){
-        centerView.layer.masksToBounds = NO;
-        centerView.layer.shadowRadius = MMDrawerDefaultShadowRadius;
-        centerView.layer.shadowOpacity = MMDrawerDefaultShadowOpacity;
-        centerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.centerContainerView.bounds] CGPath];
+//        centerView.layer.masksToBounds = NO;
+//        centerView.layer.shadowRadius = MMDrawerDefaultShadowRadius;
+//        centerView.layer.shadowOpacity = MMDrawerDefaultShadowOpacity;
+//        centerView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.centerContainerView.bounds] CGPath];
     }
     else {
-        centerView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectNull].CGPath;
+        //centerView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectNull].CGPath;
     }
 }
 

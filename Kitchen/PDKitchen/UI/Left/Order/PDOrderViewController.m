@@ -33,6 +33,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self setupData];
+    [self setupBackButton];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

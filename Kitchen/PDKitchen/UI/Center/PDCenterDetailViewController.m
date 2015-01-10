@@ -60,7 +60,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"详情";
+    self.navigationItem.title = @"肉酱面";
     
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -96,25 +96,10 @@
 }
 
 
--(void)setupLeftMenuButton{
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 44, 44);
-    [button setImage:[UIImage imageNamed:@"center_menu"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
-    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
-    
-    //    UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"center_menu"]
-    //                                                                          style:UIBarButtonItemStylePlain
-    //                                                                         target:self
-    //                                                                         action:@selector(leftDrawerButtonPress:)];
-    //    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
-}
 
 -(void)setupRightMenuButton{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 44, 44);
+    button.frame = CGRectMake(0, 0, 30, 40);
     [button setImage:[UIImage imageNamed:@"center_order"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(rightDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * rightDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];

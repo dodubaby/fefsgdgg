@@ -34,7 +34,7 @@
 -(void)setupBackButton{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.backgroundColor = [UIColor clearColor];
-    button.frame = CGRectMake(0, 0, 44, 44);
+    button.frame = CGRectMake(0, 0, 30, 40);
     [button setImage:[UIImage imageNamed:@"center_back"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];

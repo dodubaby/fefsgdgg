@@ -35,20 +35,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的收藏";
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self setupData];
     
-    UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
-    header.textAlignment = NSTextAlignmentCenter;
-    header.font = [UIFont boldSystemFontOfSize:18];
-    header.textColor = [UIColor colorWithHexString:@"#333333"];
-    header.text = @"提交订单";
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    header.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, header.width-110, 44)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont boldSystemFontOfSize:18];
+    label.textColor = [UIColor colorWithHexString:@"#333333"];
+    label.text = @"提交订单";
+    [header addSubview:label];
     
     self.tableView.tableHeaderView = header;
     
     footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
     footer.delegate = self;
     self.tableView.tableFooterView = footer;
+    
+    //[self.view showDebugRect];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

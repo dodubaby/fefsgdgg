@@ -35,8 +35,6 @@
     if (self) {
         //
         
-        
-        
         //NSLog(@"self.width == %f",self.width);
         thumbnail = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_food"]];
         thumbnail.frame =CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 205);
@@ -56,7 +54,7 @@
         person.textColor = [UIColor colorWithHexString:@"#666666"];
         
         
-        like = [[UILabel alloc] initWithFrame:CGRectMake(120+30, person.top, 120, 20)];
+        like = [[UILabel alloc] initWithFrame:CGRectMake(120+15, person.top, 120, 20)];
         [self addSubview:like];
         like.font = [UIFont systemFontOfSize:13];
         like.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -69,7 +67,8 @@
         price = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth - kCellLeftGap -100, thumbnail.bottom+20, 100, 40)];
         price.textAlignment = NSTextAlignmentRight;
         [self addSubview:price];
-        price.font = [UIFont systemFontOfSize:30];
+        price.font = [UIFont systemFontOfSize:24];
+        price.textColor = [UIColor colorWithHexString:@"#666666"];
         
         share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, person.bottom+10, 60, 30)];
         [self addSubview:share];
@@ -88,7 +87,7 @@
         }];
         
         
-        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, person.bottom+10, 60, 30)];
+        favorite = [[UIButton alloc] initWithFrame:CGRectMake(105 + kCellLeftGap, person.bottom+10, 60, 30)];
         [self addSubview:favorite];
         [favorite setTitle:@"收藏" forState:UIControlStateNormal];
         [favorite setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
@@ -105,7 +104,7 @@
         }];
         
         
-        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap,  person.bottom + 10, 90, 30)];
+        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap*2,  person.bottom + 10, 90, 30)];
         [self addSubview:addButton];
         UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:addButton.size];
         [addButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -120,8 +119,6 @@
                 [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
             }
         }];
-        
-        //[self showDebugRect];
     }
     
     return self;
@@ -132,14 +129,13 @@
     name.text = @"肉酱面";
     person.text = @"4234人吃过";
     like.text = @"235人";
-    price.text = @"25.5";
+    price.text = @"¥25.5";
     [price sizeToFit];
-    price.right = kAppWidth - kCellLeftGap;
+    price.right = kAppWidth - 2*kCellLeftGap;
     //    person.text = @"person";
     
     thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
 
-    
     //[self showDebugRect];
 }
 

@@ -9,10 +9,7 @@
 #import "PDBaseTableViewCell.h"
 
 
-#define kCellContent @"2014-12-18 13:14:20.231 PDKitchen[14569:1104800] 拨打\
-2014-12-18 13:14:21.359 PDKitchen[14569:1104800] 立即更新\
-2014-12-18 13:14:31.356 PDKitchen[14569:1104800] submit\
-2014-12-18 13:14:31.614 PDKitchen[14569:1104800] submit"
+#define kCellContent @"你做的饭真的是太好吃了，非常赞！你做的饭真的是太好吃了，非常赞！你做的饭真的是太好吃了，非常赞！"
 
 @interface PDCommentCell : PDBaseTableViewCell
 

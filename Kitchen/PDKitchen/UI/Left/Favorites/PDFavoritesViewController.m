@@ -8,7 +8,7 @@
 
 #import "PDFavoritesViewController.h"
 #import "MMDrawerBarButtonItem.h"
-#import "PDCenterCell.h"
+#import "PDFavoritesCell.h"
 
 #import "PDCenterDetailViewController.h"
 
@@ -32,8 +32,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的收藏";
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    [self setupBackButton];
     [self setupData];
 }
 
@@ -48,13 +49,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [PDCenterCell cellHeightWithData:nil];
+    return [PDFavoritesCell cellHeightWithData:nil];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PDCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+    PDFavoritesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
-        cell = [[PDCenterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell = [[PDFavoritesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
     //cell.textLabel.text = list[indexPath.row];
     [cell setData:nil];

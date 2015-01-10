@@ -63,6 +63,8 @@
                                              rightDrawerViewController:rightSideDrawerViewController];
     [drawerController setMaximumRightDrawerWidth:255];
     [drawerController setMaximumLeftDrawerWidth:165];
+    [drawerController setShowsShadow:NO];
+    [drawerController setShouldStretchDrawer:NO];
     
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];

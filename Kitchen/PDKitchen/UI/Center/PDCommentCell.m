@@ -60,8 +60,8 @@
 
 -(void)configData:(id)data{
 
-    name.text = @"123243534566";
-    time.text = @"3 day ago";
+    name.text = @"138xxxx8090";
+    time.text = @"5分钟前";
     
     content.text = kCellContent;
     [content sizeToFit];

@@ -136,6 +136,7 @@
 		32FACACC1A60CE3200BDE176 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
 		32FACACF1A60DA7500BDE176 /* 菜1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32FACACD1A60DA7500BDE176 /* 菜1.jpg */; };
 		32FACAD01A60DA7500BDE176 /* 厨师.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32FACACE1A60DA7500BDE176 /* 厨师.jpg */; };
+		32FACAD31A60FB1F00BDE176 /* PDFavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FACAD21A60FB1F00BDE176 /* PDFavoritesCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -367,6 +368,8 @@
 		32F97B431A4AC8220052B2D3 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		32FACACD1A60DA7500BDE176 /* 菜1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "菜1.jpg"; sourceTree = "<group>"; };
 		32FACACE1A60DA7500BDE176 /* 厨师.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "厨师.jpg"; sourceTree = "<group>"; };
+		32FACAD11A60FB1F00BDE176 /* PDFavoritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFavoritesCell.h; sourceTree = "<group>"; };
+		32FACAD21A60FB1F00BDE176 /* PDFavoritesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFavoritesCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -936,6 +939,8 @@
 		32D0E8971A41A1A600D1F190 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				32FACAD11A60FB1F00BDE176 /* PDFavoritesCell.h */,
+				32FACAD21A60FB1F00BDE176 /* PDFavoritesCell.m */,
 				32D0E8991A41A1CF00D1F190 /* PDFavoritesViewController.h */,
 				32D0E89A1A41A1CF00D1F190 /* PDFavoritesViewController.m */,
 			);
@@ -1126,6 +1131,7 @@
 				32D0E8391A41611A00D1F190 /* SVProgressHUD.m in Sources */,
 				32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */,
 				32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */,
+				32FACAD31A60FB1F00BDE176 /* PDFavoritesCell.m in Sources */,
 				32D0E8051A41601200D1F190 /* AFURLConnectionOperation.m in Sources */,
 				326CB71D1A4282DC00D2BADE /* PDRightFooterView.m in Sources */,
 				32D0E81E1A41602200D1F190 /* UIButton+AFNetworking.m in Sources */,
@@ -1220,7 +1226,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1240,6 +1247,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1261,7 +1269,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1274,6 +1283,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1283,6 +1293,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
@@ -1319,6 +1331,7 @@
 					arm64,
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1329,6 +1342,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Debug;
@@ -1337,6 +1351,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
@@ -1373,6 +1389,7 @@
 					arm64,
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1383,6 +1400,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Release;

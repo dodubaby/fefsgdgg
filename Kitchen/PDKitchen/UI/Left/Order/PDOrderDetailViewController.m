@@ -31,6 +31,8 @@
     
     self.navigationItem.title = @"我的订单";
     
+    [self setupBackButton];
+    
     logisticsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 10+64, kAppWidth/2, 40)];
     [self.view addSubview:logisticsButton];
     [logisticsButton setTitle:@"物流动态" forState:UIControlStateNormal];

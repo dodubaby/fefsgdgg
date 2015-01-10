@@ -12,8 +12,6 @@
 {
     UIView *back;
     
-    UILabel *phone;
-    
     EGOImageView *avatar;
     UILabel *name;
     UIButton *comment;
@@ -41,12 +39,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        phone = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth - 2*kCellLeftGap, 20)];
-        [self addSubview:phone];
-        phone.font = [UIFont systemFontOfSize:15];
-        phone.textColor = [UIColor colorWithHexString:@"#666666"];
-        
-        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, phone.bottom+10, kAppWidth - 2*10, 250)];
+        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth - 2*10, 250)];
         [self addSubview:back];
         back.layer.borderWidth = 0.5f;
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
@@ -159,8 +152,6 @@
 
 -(void)configData:(id)data{
     
-    phone.text = @"订餐电话：18901234567";
-    
     name.text = @"超级大厨";
     
     age.text = @"43";
@@ -177,13 +168,15 @@
     ageHint.top = hometownHint.top = skillHint.top = age.bottom + 10;
     
     back.height = ageHint.bottom + 10;
+    
+    //[self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
     CGFloat h = 0;
     
     // 电话高度
-    h = h + kCellLeftGap + 20 + 10;
+    h = h  + 20;
     
     // 头像高度
     h = h + 15 +45 + 10;

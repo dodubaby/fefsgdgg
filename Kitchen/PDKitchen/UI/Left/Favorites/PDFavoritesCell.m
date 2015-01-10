@@ -1,17 +1,16 @@
 //
-//  PDCenterCell.m
+//  PDFavoritesCell.m
 //  PDKitchen
 //
-//  Created by bright on 14/12/17.
-//  Copyright (c) 2014年 mtf. All rights reserved.
+//  Created by bright on 15/1/10.
+//  Copyright (c) 2015年 mtf. All rights reserved.
 //
 
-#import "PDCenterCell.h"
+#import "PDFavoritesCell.h"
 
-
-@interface PDCenterCell()
+@interface PDFavoritesCell()
 {
-
+    
     EGOImageView *thumbnail;
     EGOImageView *avatar;
     
@@ -24,12 +23,12 @@
 }
 @end
 
-@implementation PDCenterCell
+@implementation PDFavoritesCell
 
 
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-
+    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
@@ -61,41 +60,18 @@
         price.font = [UIFont systemFontOfSize:24];
         price.textColor = [UIColor colorWithHexString:@"#666666"];
         
-//        person = [[UILabel alloc] initWithFrame:CGRectMake(price.right+kCellLeftGap, thumbnail.bottom+kCellLeftGap, 100, 20)];
-//        [self addSubview:person];
-        
-        from = [[UILabel alloc] initWithFrame:CGRectMake(avatar.right + kCellLeftGap, avatar.top + 22, 120, 20)];
-        [self addSubview:from];
-        from.font = [UIFont systemFontOfSize:13];
-        from.textColor = [UIColor colorWithHexString:@"#666666"];
-        
-        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap, thumbnail.bottom +65, 90, 30)];
-        [self addSubview:addButton];
-        UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:addButton.size];
-        [addButton setBackgroundImage:image forState:UIControlStateNormal];
-        [addButton setTitle:@"加入菜单" forState:UIControlStateNormal];
-        [addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        addButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        addButton.layer.cornerRadius = 4;
-        addButton.clipsToBounds = YES;
-        
-        [addButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
-            }
-        }];
     }
     
     return self;
 }
 
 -(void)configData:(id)data{
-
+    
     name.text = @"红烧鸡腿";
     price.text = @"¥23.5";
     [price sizeToFit];
     price.right = kAppWidth - kCellLeftGap;
-//    person.text = @"person";
+    //    person.text = @"person";
     [person sizeToFit];
     from.text = @"大胡子";
     
@@ -107,7 +83,7 @@
 
 +(CGFloat )cellHeightWithData:(id)data{
     
-    return 10+205+120;
+    return 10+205+70;
     
     //return 210;
 }

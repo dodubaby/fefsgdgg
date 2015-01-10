@@ -47,6 +47,7 @@
         EGOImageView *thumbnail = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_food"]];
         [back addSubview:thumbnail];
         thumbnail.frame = CGRectMake(kCellLeftGap, kCellLeftGap+i*(kCellLeftGap+70), 115, 70);
+        thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
         
         UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(thumbnail.right + kCellLeftGap, thumbnail.top, 200, 20)];
         [back addSubview:name];
@@ -71,7 +72,7 @@
     [back addSubview:total];
     total.font = [UIFont systemFontOfSize:15];
     total.textColor = [UIColor colorWithHexString:@"#c14a41"];
-    total.text = @"143.5";
+    total.text = @"¥143.5";
     
     UILabel *look = [[UILabel alloc] initWithFrame:CGRectMake(back.width - 70 - kCellLeftGap, totalHint.top, 70, 20)];
     [back addSubview:look];
