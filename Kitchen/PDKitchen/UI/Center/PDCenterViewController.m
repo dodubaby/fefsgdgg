@@ -29,6 +29,8 @@
     [list addObject:@"小炒肉"];
     [list addObject:@"小鸡炖蘑菇"];
     [list addObject:@"北京烤鸭"];
+    
+    //[self.navigationController.navigationBar showDebugRect];
 }
 
 - (void)viewDidLoad {
@@ -59,7 +61,7 @@
 -(void)setupLeftMenuButton{
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 44, 44);
+    button.frame = CGRectMake(0, 0, 30, 40);
     [button setImage:[UIImage imageNamed:@"center_menu"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -74,7 +76,7 @@
 
 -(void)setupRightMenuButton{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 44, 44);
+    button.frame = CGRectMake(0, 0, 30, 40);
     [button setImage:[UIImage imageNamed:@"center_order"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(rightDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * rightDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];

@@ -17,7 +17,6 @@
 		3220A6AF1A51A5EC0017656F /* center_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A6AC1A51A5EC0017656F /* center_logo@2x.png */; };
 		3220A6B01A51A5EC0017656F /* center_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A6AD1A51A5EC0017656F /* center_menu@2x.png */; };
 		3220A6B11A51A5EC0017656F /* center_order@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A6AE1A51A5EC0017656F /* center_order@2x.png */; };
-		325658631A601FBF00F9D44C /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
 		326CB71D1A4282DC00D2BADE /* PDRightFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 326CB71C1A4282DC00D2BADE /* PDRightFooterView.m */; };
 		326CB7201A42949800D2BADE /* PDOwnerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 326CB71F1A42949800D2BADE /* PDOwnerCell.m */; };
 		326CB7231A4294AA00D2BADE /* PDCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 326CB7221A4294AA00D2BADE /* PDCommentCell.m */; };
@@ -134,6 +133,9 @@
 		32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B3D1A4AC7DF0052B2D3 /* AdSupport.framework */; };
 		32F97B441A4AC8220052B2D3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B401A4AC8220052B2D3 /* libWeChatSDK.a */; };
 		32F97B451A4AC8220052B2D3 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 32F97B411A4AC8220052B2D3 /* read_me.txt */; };
+		32FACACC1A60CE3200BDE176 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
+		32FACACF1A60DA7500BDE176 /* 菜1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32FACACD1A60DA7500BDE176 /* 菜1.jpg */; };
+		32FACAD01A60DA7500BDE176 /* 厨师.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32FACACE1A60DA7500BDE176 /* 厨师.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -363,6 +365,8 @@
 		32F97B411A4AC8220052B2D3 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		32F97B421A4AC8220052B2D3 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		32F97B431A4AC8220052B2D3 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		32FACACD1A60DA7500BDE176 /* 菜1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "菜1.jpg"; sourceTree = "<group>"; };
+		32FACACE1A60DA7500BDE176 /* 厨师.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "厨师.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,7 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				325658631A601FBF00F9D44C /* TencentOpenAPI.framework in Frameworks */,
+				32FACACC1A60CE3200BDE176 /* TencentOpenAPI.framework in Frameworks */,
 				3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */,
 				32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */,
 				32F97B3C1A4AC7D30052B2D3 /* Security.framework in Frameworks */,
@@ -389,6 +393,8 @@
 		3220A69B1A51A1910017656F /* images */ = {
 			isa = PBXGroup;
 			children = (
+				32FACACD1A60DA7500BDE176 /* 菜1.jpg */,
+				32FACACE1A60DA7500BDE176 /* 厨师.jpg */,
 				3274DDCB1A53DB330079D176 /* common */,
 				3274DDC21A53CF090079D176 /* detail */,
 				3274DDAB1A5300A90079D176 /* login */,
@@ -1049,9 +1055,11 @@
 				32D0E7D11A415E7C00D1F190 /* Main.storyboard in Resources */,
 				3220A6A61A51A1BE0017656F /* menu_favorite@2x.png in Resources */,
 				3220A6AF1A51A5EC0017656F /* center_logo@2x.png in Resources */,
+				32FACACF1A60DA7500BDE176 /* 菜1.jpg in Resources */,
 				3220A6B01A51A5EC0017656F /* center_menu@2x.png in Resources */,
 				3220A6A51A51A1BE0017656F /* menu_coupon@2x.png in Resources */,
 				3274DDCE1A53DB330079D176 /* cm_food@2x.png in Resources */,
+				32FACAD01A60DA7500BDE176 /* 厨师.jpg in Resources */,
 				3220A6AA1A51A1BE0017656F /* menu_settings@2x.png in Resources */,
 				3274DD9D1A5280930079D176 /* center_back@2x.png in Resources */,
 				3274DDCF1A53DB330079D176 /* cm_owner@2x.png in Resources */,
@@ -1305,6 +1313,10 @@
 					SDK,
 					2.3.1,
 					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1327,6 +1339,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
+					SDK,
+					2.3.1,
+					arm64,
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
 					SDK,
 					2.3.1,

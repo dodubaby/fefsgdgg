@@ -166,7 +166,7 @@
     age.text = @"43";
     hometown.text = @"四川";
     skill.text = @"川菜湘菜";
-    
+    avatar.image = [UIImage imageNamed:@"厨师.jpg"];
     about.text = kCellContent;
     [about sizeToFit];
     

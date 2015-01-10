@@ -137,6 +137,9 @@
     price.right = kAppWidth - kCellLeftGap;
     //    person.text = @"person";
     
+    thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
+
+    
     //[self showDebugRect];
 }
 

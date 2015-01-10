@@ -58,7 +58,8 @@
         price = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth - kCellLeftGap -100, thumbnail.bottom+20, 100, 40)];
         price.textAlignment = NSTextAlignmentRight;
         [self addSubview:price];
-        price.font = [UIFont systemFontOfSize:30];
+        price.font = [UIFont systemFontOfSize:24];
+        name.textColor = [UIColor colorWithHexString:@"#666666"];
         
 //        person = [[UILabel alloc] initWithFrame:CGRectMake(price.right+kCellLeftGap, thumbnail.bottom+kCellLeftGap, 100, 20)];
 //        [self addSubview:person];
@@ -68,7 +69,7 @@
         from.font = [UIFont systemFontOfSize:13];
         from.textColor = [UIColor colorWithHexString:@"#666666"];
         
-        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap, avatar.bottom +5, 90, 30)];
+        addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap, thumbnail.bottom +70, 90, 30)];
         [self addSubview:addButton];
         UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:addButton.size];
         [addButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -90,13 +91,16 @@
 
 -(void)configData:(id)data{
 
-    name.text = @"name";
-    price.text = @"price";
+    name.text = @"红烧鸡腿";
+    price.text = @"¥23.5";
     [price sizeToFit];
     price.right = kAppWidth - kCellLeftGap;
 //    person.text = @"person";
     [person sizeToFit];
-    from.text = @"from";
+    from.text = @"大胡子";
+    
+    thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
+    avatar.image = [UIImage imageNamed:@"厨师.jpg"];
     
     //[self showDebugRect];
 }
