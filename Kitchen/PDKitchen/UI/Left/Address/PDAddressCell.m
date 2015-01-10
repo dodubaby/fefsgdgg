@@ -26,7 +26,7 @@
         //
         CGFloat h = [PDAddressCell cellHeightWithData:nil];
 
-        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth-2*kCellLeftGap, h-kCellLeftGap)];
+        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, h-kCellLeftGap)];
         [self addSubview:back];
         back.layer.borderWidth = 0.5f;
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];

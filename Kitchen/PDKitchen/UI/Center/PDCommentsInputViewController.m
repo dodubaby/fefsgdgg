@@ -11,10 +11,9 @@
 
 @interface PDCommentsInputViewController ()
 {
-
     UITextView *textView;
-    
 }
+
 @end
 
 @implementation PDCommentsInputViewController
@@ -29,21 +28,12 @@
     [super viewDidLoad];
     self.navigationItem.title = @"评论";
     [self setupBackButton];
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送"
-//                                                                              style:UIBarButtonItemStylePlain
-//                                                                             target:self
-//                                                                             action:@selector(sendButtonTaped:)];
-    
-    textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 64+15, kAppWidth-20, 260)];
-//    textView.backgroundColor = [UIColor redColor];
-//    textView.placeholderColor = [UIColor colorWithHexString:@"#e6e6e6"];
-//    textView.placeholder = @"请输入你的评论";
+
+    textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 64+10, kAppWidth-20, 200)];
     [self.view addSubview:textView];
     textView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;
     textView.layer.borderWidth = 0.5f;
     textView.clipsToBounds = YES;
-    
     
     UIButton *submit = [[UIButton alloc] initWithFrame:CGRectMake(10, textView.bottom+20, kAppWidth - 20, 40)];
     [self.view addSubview:submit];
@@ -59,11 +49,10 @@
     //[self.view showDebugRect];
 }
 
-
 -(void)viewDidAppear:(BOOL)animated{
 
     [super viewDidAppear:animated];
-    //[textView becomeFirstResponder];
+    [textView becomeFirstResponder];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -10,9 +10,9 @@
 
 @interface PDBaseTextView : UITextView
 
-@property(nonatomic, strong) NSString *placeholder;
-
-@property (nonatomic, strong) UIColor *realTextColor UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIColor *placeholderColor UI_APPEARANCE_SELECTOR;
+//@property(nonatomic, strong) NSString *placeholder;
+//
+//@property (nonatomic, strong) UIColor *realTextColor UI_APPEARANCE_SELECTOR;
+//@property (nonatomic, strong) UIColor *placeholderColor UI_APPEARANCE_SELECTOR;
 
 @end

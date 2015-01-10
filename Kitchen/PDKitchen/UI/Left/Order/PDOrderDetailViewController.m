@@ -19,7 +19,6 @@
     UIButton *logisticsButton;
     UIButton *detailButton;
     
-    UIButton *done;
     UIButton *refund;
 }
 @end
@@ -66,22 +65,17 @@
     [self.view addSubview:orderDetailView];
     orderDetailView.backgroundColor = [UIColor greenColor];
     
-    done = [[UIButton alloc] initWithFrame:CGRectMake((kAppWidth - 130)/2, self.view.height - 130, 130, 40)];
-    [self.view addSubview:done];
-    [done setTitle:@"我已就餐" forState:UIControlStateNormal];
-    [done setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [done setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [done setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    [done handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-
-    }];
     
     refund = [[UIButton alloc] initWithFrame:CGRectMake((kAppWidth - 130)/2, self.view.height - 80, 130, 40)];
     [self.view addSubview:refund];
     [refund setTitle:@"退单" forState:UIControlStateNormal];
-    [refund setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [refund setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [refund setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    refund.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;
+    refund.layer.borderWidth = 0.5f;
+    refund.layer.cornerRadius = 4;
+    refund.clipsToBounds = YES;
+    [refund setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+    [refund setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
+    [refund setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateSelected];
     [refund handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
     }];

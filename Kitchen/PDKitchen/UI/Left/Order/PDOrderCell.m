@@ -40,7 +40,7 @@
     
     [self removeAllSubViews];
     
-    back.frame = CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth - 2*kCellLeftGap, list.count*(kCellLeftGap+70)+40);
+    back.frame = CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth - 2*kCellLeftGap, list.count*(kCellLeftGap+70)+40);
     [self addSubview:back];
     
     for (int i = 0; i<[list count]; i++) {
