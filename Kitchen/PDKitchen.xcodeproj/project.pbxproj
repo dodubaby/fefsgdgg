@@ -35,8 +35,6 @@
 		3274DDB31A5300A90079D176 /* lg_send_code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDAE1A5300A90079D176 /* lg_send_code@2x.png */; };
 		3274DDB41A5300A90079D176 /* lg_weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDAF1A5300A90079D176 /* lg_weibo@2x.png */; };
 		3274DDB51A5300A90079D176 /* lg_weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDB01A5300A90079D176 /* lg_weixin@2x.png */; };
-		3274DDBD1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDBA1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt */; };
-		3274DDBF1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDBC1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDC01A53B2080079D176 /* CoreTelephony.framework */; };
 		3274DDC71A53CF090079D176 /* dt_favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDC31A53CF090079D176 /* dt_favorite@2x.png */; };
 		3274DDC81A53CF090079D176 /* dt_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3274DDC41A53CF090079D176 /* dt_phone@2x.png */; };
@@ -133,7 +131,6 @@
 		32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B3D1A4AC7DF0052B2D3 /* AdSupport.framework */; };
 		32F97B441A4AC8220052B2D3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B401A4AC8220052B2D3 /* libWeChatSDK.a */; };
 		32F97B451A4AC8220052B2D3 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 32F97B411A4AC8220052B2D3 /* read_me.txt */; };
-		32FACACC1A60CE3200BDE176 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */; };
 		32FACACF1A60DA7500BDE176 /* 菜1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32FACACD1A60DA7500BDE176 /* 菜1.jpg */; };
 		32FACAD01A60DA7500BDE176 /* 厨师.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32FACACE1A60DA7500BDE176 /* 厨师.jpg */; };
 		32FACAD31A60FB1F00BDE176 /* PDFavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FACAD21A60FB1F00BDE176 /* PDFavoritesCell.m */; };
@@ -141,6 +138,9 @@
 		32FACAD91A6120B400BDE176 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 32FACAD61A6120B400BDE176 /* Icon.png */; };
 		32FACADA1A6120B400BDE176 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32FACAD71A6120B400BDE176 /* Icon@2x.png */; };
 		32FACADB1A6120B400BDE176 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32FACAD81A6120B400BDE176 /* Icon@3x.png */; };
+		32FACAE01A612B0100BDE176 /* README IOS SDK 2.3.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 32FACADD1A612B0100BDE176 /* README IOS SDK 2.3.1.txt */; };
+		32FACAE11A612B0100BDE176 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FACADE1A612B0100BDE176 /* TencentOpenAPI.framework */; };
+		32FACAE21A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 32FACADF1A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,9 +180,6 @@
 		3274DDAE1A5300A90079D176 /* lg_send_code@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_send_code@2x.png"; sourceTree = "<group>"; };
 		3274DDAF1A5300A90079D176 /* lg_weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_weibo@2x.png"; sourceTree = "<group>"; };
 		3274DDB01A5300A90079D176 /* lg_weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_weixin@2x.png"; sourceTree = "<group>"; };
-		3274DDBA1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README IOS SDK 2.3.1.txt"; sourceTree = "<group>"; };
-		3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
-		3274DDBC1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		3274DDC01A53B2080079D176 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3274DDC31A53CF090079D176 /* dt_favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dt_favorite@2x.png"; sourceTree = "<group>"; };
 		3274DDC41A53CF090079D176 /* dt_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dt_phone@2x.png"; sourceTree = "<group>"; };
@@ -378,6 +375,9 @@
 		32FACAD61A6120B400BDE176 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		32FACAD71A6120B400BDE176 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		32FACAD81A6120B400BDE176 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
+		32FACADD1A612B0100BDE176 /* README IOS SDK 2.3.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README IOS SDK 2.3.1.txt"; sourceTree = "<group>"; };
+		32FACADE1A612B0100BDE176 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		32FACADF1A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,12 +385,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32FACACC1A60CE3200BDE176 /* TencentOpenAPI.framework in Frameworks */,
 				3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */,
 				32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */,
 				32F97B3C1A4AC7D30052B2D3 /* Security.framework in Frameworks */,
 				32F97B441A4AC8220052B2D3 /* libWeChatSDK.a in Frameworks */,
 				32F97B3A1A4AC7C50052B2D3 /* ImageIO.framework in Frameworks */,
+				32FACAE11A612B0100BDE176 /* TencentOpenAPI.framework in Frameworks */,
 				32F97B311A4ABC2E0052B2D3 /* libWeiboSDK.a in Frameworks */,
 				32F97B1F1A4ABA9F0052B2D3 /* libsqlite3.0.dylib in Frameworks */,
 				32F97B1D1A4ABA900052B2D3 /* libz.dylib in Frameworks */,
@@ -487,16 +487,6 @@
 				3274DDB01A5300A90079D176 /* lg_weixin@2x.png */,
 			);
 			path = login;
-			sourceTree = "<group>";
-		};
-		3274DDB91A53AE0A0079D176 /* iOS SDK 2.3.1 arm64 */ = {
-			isa = PBXGroup;
-			children = (
-				3274DDBA1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt */,
-				3274DDBB1A53AE0A0079D176 /* TencentOpenAPI.framework */,
-				3274DDBC1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle */,
-			);
-			path = "iOS SDK 2.3.1 arm64";
 			sourceTree = "<group>";
 		};
 		3274DDC21A53CF090079D176 /* detail */ = {
@@ -657,7 +647,7 @@
 		32D0E7EB1A41600100D1F190 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				3274DDB91A53AE0A0079D176 /* iOS SDK 2.3.1 arm64 */,
+				32FACADC1A612B0100BDE176 /* iOS_SDK_2.3.1_arm64 */,
 				32F97B3F1A4AC8220052B2D3 /* WeChatSDK_1.5 */,
 				32F97B251A4ABC2E0052B2D3 /* libWeiboSDK */,
 				32868C091A441A9F00ABC8B0 /* EGOImageLoader */,
@@ -1009,6 +999,16 @@
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
+		32FACADC1A612B0100BDE176 /* iOS_SDK_2.3.1_arm64 */ = {
+			isa = PBXGroup;
+			children = (
+				32FACADD1A612B0100BDE176 /* README IOS SDK 2.3.1.txt */,
+				32FACADE1A612B0100BDE176 /* TencentOpenAPI.framework */,
+				32FACADF1A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = iOS_SDK_2.3.1_arm64;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1085,10 +1085,10 @@
 				3274DD9B1A527D2A0079D176 /* od_reduce@2x.png in Resources */,
 				32D0E7D61A415E7C00D1F190 /* LaunchScreen.xib in Resources */,
 				3274DD961A5276480079D176 /* st_refresh@2x.png in Resources */,
+				32FACAE01A612B0100BDE176 /* README IOS SDK 2.3.1.txt in Resources */,
 				3220A6A41A51A1BE0017656F /* menu_address@2x.png in Resources */,
 				32F97B321A4ABC2F0052B2D3 /* WeiboSDK.bundle in Resources */,
 				3220A6A81A51A1BE0017656F /* menu_order@2x.png in Resources */,
-				3274DDBF1A53AE0A0079D176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				32F97B381A4ABF540052B2D3 /* top_tip_panel@2x.png in Resources */,
 				3274DD951A5276480079D176 /* st_logo@2x.png in Resources */,
 				3220A6B11A51A5EC0017656F /* center_order@2x.png in Resources */,
@@ -1104,9 +1104,9 @@
 				32FACAD91A6120B400BDE176 /* Icon.png in Resources */,
 				32D0E8381A41611A00D1F190 /* SVProgressHUD.bundle in Resources */,
 				32F97B451A4AC8220052B2D3 /* read_me.txt in Resources */,
+				32FACAE21A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				3274DDB51A5300A90079D176 /* lg_weixin@2x.png in Resources */,
 				3274DDC81A53CF090079D176 /* dt_phone@2x.png in Resources */,
-				3274DDBD1A53AE0A0079D176 /* README IOS SDK 2.3.1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1313,38 +1313,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS_SDK_2.3.1_arm64",
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1371,38 +1340,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
-					"$(PROJECT_DIR)/PDKitchen/Libs/iOS",
-					SDK,
-					2.3.1,
-					arm64,
+					"$(PROJECT_DIR)/PDKitchen/Libs/iOS_SDK_2.3.1_arm64",
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
