@@ -13,7 +13,6 @@
 		6D304C081A56AAD800EC5916 /* PDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D304C071A56AAD800EC5916 /* PDSettingsViewController.m */; };
 		6D7819411A470721001C5A8D /* PDOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7819401A470721001C5A8D /* PDOrderModel.m */; };
 		6D7819441A470C80001C5A8D /* PDOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7819431A470C80001C5A8D /* PDOrderCell.m */; };
-		6D78194A1A472239001C5A8D /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7819491A472239001C5A8D /* CalendarViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6D7819561A47224F001C5A8D /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D78194D1A47224F001C5A8D /* NSDate+convenience.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6D7819571A47224F001C5A8D /* NSMutableArray+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D78194F1A47224F001C5A8D /* NSMutableArray+convenience.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6D7819581A47224F001C5A8D /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7819511A47224F001C5A8D /* UIColor+expanded.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -122,8 +121,6 @@
 		6D7819401A470721001C5A8D /* PDOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderModel.m; sourceTree = "<group>"; };
 		6D7819421A470C80001C5A8D /* PDOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderCell.h; sourceTree = "<group>"; };
 		6D7819431A470C80001C5A8D /* PDOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderCell.m; sourceTree = "<group>"; };
-		6D7819481A472239001C5A8D /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
-		6D7819491A472239001C5A8D /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		6D78194C1A47224F001C5A8D /* NSDate+convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+convenience.h"; sourceTree = "<group>"; };
 		6D78194D1A47224F001C5A8D /* NSDate+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+convenience.m"; sourceTree = "<group>"; };
 		6D78194E1A47224F001C5A8D /* NSMutableArray+convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+convenience.h"; sourceTree = "<group>"; };
@@ -418,8 +415,6 @@
 		6DE1269F1A46BD8B00FB1B49 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				6D7819481A472239001C5A8D /* CalendarViewController.h */,
-				6D7819491A472239001C5A8D /* CalendarViewController.m */,
 				6D78194B1A47224F001C5A8D /* Vurig Calendar */,
 				6DE126A01A46BD8B00FB1B49 /* AFNetworking */,
 				6DE126C61A46BD8B00FB1B49 /* EGOImageLoader */,
@@ -903,7 +898,6 @@
 				6DE127551A46BD8B00FB1B49 /* JSONJoy.m in Sources */,
 				6D304C081A56AAD800EC5916 /* PDSettingsViewController.m in Sources */,
 				6DEC44A61A60D6230011645D /* UIDevice+Utitls.m in Sources */,
-				6D78194A1A472239001C5A8D /* CalendarViewController.m in Sources */,
 				6DE127451A46BD8B00FB1B49 /* AFURLRequestSerialization.m in Sources */,
 				6DE1275D1A46BD8B00FB1B49 /* SVIndefiniteAnimatedView.m in Sources */,
 				6DE127641A46BD8B00FB1B49 /* PDBaseViewController.m in Sources */,

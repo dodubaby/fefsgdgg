@@ -9,10 +9,8 @@
 #import "PDAllOrderTableViewController.h"
 #import "PDOrderModel.h"
 #import "PDOrderCell.h"
-#import "CalendarViewController.h"
-#import "CalendarViewController.h"
 #import "PDHTTPEngine.h"
-
+#import "VRGCalendarView.h"
 
 @interface PDAllOrderTableViewController ()<UITabBarControllerDelegate,VRGCalendarViewDelegate>
 {
@@ -48,6 +46,7 @@
     
     footer=[[UIView alloc] initWithFrame:CGRectMake(0, kAppHeight-50, kAppWidth, 50)];
     footer.backgroundColor=[UIColor colorWithRed:0.4000 green:0.4000 blue:0.4000 alpha:1.0f];
+    UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
     
     UIButton *calendarutton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth-2*kCellLeftGap, 40)];
     calendarutton.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
@@ -58,16 +57,16 @@
     [calendarutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         if (!_iPCalendarControl) {
             _iPCalendarControl =[[UIControl alloc] initWithFrame:(CGRect){0,0,kAppWidth,kAppHeight}];
+            _iPCalendarControl.backgroundColor=[UIColor clearColor];
             NSLog(@"_iPCalendarControl.frame=%@",NSStringFromCGRect(_iPCalendarControl.frame));
-            _iPCalendarControl.backgroundColor =[UIColor clearColor];
-            VRGCalendarView *calendar =  [[VRGCalendarView alloc] init];
+            VRGCalendarView *calendar =  [[VRGCalendarView alloc] initWithFrame:CGRectMake(0, kAppHeight-318, kAppWidth, 318)];
             calendar.tag =100;
             calendar.delegate =self;
             [_iPCalendarControl addSubview:calendar];
             [_iPCalendarControl addTarget:self action:@selector(dismissCalandar:) forControlEvents:UIControlEventTouchUpInside];
         }
         if (!_iPCalendarControl.superview) {
-            [self.view addSubview:_iPCalendarControl];
+            [keywindow addSubview:_iPCalendarControl];
             [(VRGCalendarView *)[_iPCalendarControl viewWithTag:100] reset];
         }
     }];
@@ -76,7 +75,7 @@
     calendarutton.layer.borderWidth = 1;
     calendarutton.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
     
-    UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
+    
     [keywindow addSubview:footer];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.tableView addPullToRefreshWithActionHandler:^{

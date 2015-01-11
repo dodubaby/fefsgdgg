@@ -9,23 +9,14 @@
 
 #import <UIKit/UIKit.h>
 #import "UIColor+expanded.h"
-#import "CalendarViewController.h"
 
 #define kVRGCalendarViewTopBarHeight 60
 
 
-//#define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-//#ifdef isPad  if(isPad){ \
-//  #define kVRGCalendarViewWidth 320  \
-//}els{
-//    #define kVRGCalendarViewWidth 222\
-//}  \
-////
-////#define kVRGCalendarViewWidth 222
-//#endif
-#define kVRGCalendarViewWidth   (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad?320:224)   //gyc orign 320
-#define kVRGCalendarViewDayWidth   (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad?44:30) //gyc orign 44
-#define kVRGCalendarViewDayHeight   (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad?44:30) //gyc orign 44
+
+#define kVRGCalendarViewWidth   [UIScreen mainScreen].bounds.size.width
+#define kVRGCalendarViewDayWidth   40
+#define kVRGCalendarViewDayHeight  40
 
 @protocol VRGCalendarViewDelegate;
 @interface VRGCalendarView : UIView {

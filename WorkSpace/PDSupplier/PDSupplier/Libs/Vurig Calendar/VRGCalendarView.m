@@ -258,7 +258,7 @@
     
     //Touch a specific day
     if (touchPoint.y > kVRGCalendarViewTopBarHeight) {
-        float xLocation = touchPoint.x;
+        float xLocation = touchPoint.x-(kVRGCalendarViewWidth-kVRGCalendarViewDayWidth*7)/2;
         float yLocation = touchPoint.y-kVRGCalendarViewTopBarHeight;
         
         int column = floorf(xLocation/(kVRGCalendarViewDayWidth+2));
@@ -334,7 +334,7 @@
      [self setClearsContextBeforeDrawing: YES];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMMM yyyy"];
+    [formatter setDateFormat:@"yyyy.MM"];
     labelCurrentMonth.text = [formatter stringFromDate:self.currentMonth];
     [labelCurrentMonth sizeToFit];
     labelCurrentMonth.frameX = roundf(self.frame.size.width/2 - labelCurrentMonth.frameWidth/2);
@@ -352,7 +352,7 @@
     
     //Arrows
     int arrowSize = 12;
-    int xmargin = 20;
+    int xmargin = (kVRGCalendarViewWidth-kVRGCalendarViewDayWidth*7)/2;
     int ymargin = 18;
     
     //Arrow Left
@@ -381,7 +381,26 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat=@"EEE";
     //always assume gregorian with monday first
-    NSMutableArray *weekdays = [[NSMutableArray alloc] initWithArray:[dateFormatter shortWeekdaySymbols]];
+    NSMutableArray *eArr=[NSMutableArray arrayWithArray:[dateFormatter shortWeekdaySymbols]];
+    for (int i=0;i<eArr.count;i++) {
+        NSString *str=[eArr objectAtIndex:i];
+        if ([str isEqualToString:@"Mon"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"一"];
+        }else if ([str isEqualToString:@"Tue"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"二"];
+        }else if ([str isEqualToString:@"Wed"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"三"];
+        }else if ([str isEqualToString:@"Thu"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"四"];
+        }else if ([str isEqualToString:@"Fri"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"五"];
+        }else if ([str isEqualToString:@"Sat"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"六"];
+        }else if ([str isEqualToString:@"Sun"]) {
+            [eArr replaceObjectAtIndex:i withObject:@"日"];
+        }
+    }
+    NSMutableArray *weekdays = [[NSMutableArray alloc] initWithArray:eArr];
     [weekdays moveObjectFromIndex:0 toIndex:6];
     
     CGContextSetFillColorWithColor(context,
@@ -389,7 +408,7 @@
     for (int i =0; i<[weekdays count]; i++) {
         NSString *weekdayValue = (NSString *)[weekdays objectAtIndex:i];
         UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:12];
-        [weekdayValue drawInRect:CGRectMake(i*(kVRGCalendarViewDayWidth+2), 40, kVRGCalendarViewDayWidth+2, 20) withFont:font lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        [weekdayValue drawInRect:CGRectMake((kVRGCalendarViewWidth-kVRGCalendarViewDayWidth*7)/2+i*(kVRGCalendarViewDayWidth+2), 40, kVRGCalendarViewDayWidth+2, 20) withFont:font lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
         
     }
     
@@ -401,11 +420,11 @@
     float gridHeight = numRows*(kVRGCalendarViewDayHeight+2)+1;
     CGRect rectangleGrid = CGRectMake(0,kVRGCalendarViewTopBarHeight,self.frame.size.width,gridHeight);
     CGContextAddRect(context, rectangleGrid);
-    CGContextSetFillColorWithColor(context, [UIColor colorWithHexString:@"0xf3f3f3"].CGColor);
-    //CGContextSetFillColorWithColor(context, [UIColor colorWithHexString:@"0xff0000"].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithHexString:@"0xFFFFFF"].CGColor);
     CGContextFillPath(context);
     
-    //Grid white lines
+    
+    /*//Grid white lines
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, 0, kVRGCalendarViewTopBarHeight+1);
@@ -442,13 +461,12 @@
     
     CGContextStrokePath(context);
     
-    CGContextSetAllowsAntialiasing(context, YES);
+    CGContextSetAllowsAntialiasing(context, YES);*/
     
     //Draw days
     CGContextSetFillColorWithColor(context,
                                    [UIColor colorWithHexString:@"0x383838"].CGColor);
     
-    //NSLog(@"currentMonth month = %i, first weekday in month = %i",[self.currentMonth month],[self.currentMonth firstWeekDayInMonth]);
     
     int numBlocks = numRows*7;
     NSDate *previousMonth = [self.currentMonth offsetMonth:-1];
@@ -498,7 +516,7 @@
         int targetDate = i;
         int targetColumn = i%7;
         int targetRow = i/7;
-        int targetX = targetColumn * (kVRGCalendarViewDayWidth+2);
+        int targetX = (kVRGCalendarViewWidth-kVRGCalendarViewDayWidth*7)/2+targetColumn * (kVRGCalendarViewDayWidth+2);
         int targetY = kVRGCalendarViewTopBarHeight + targetRow * (kVRGCalendarViewDayHeight+2);
         
         //draw selected date
@@ -667,12 +685,10 @@
 }
 
 #pragma mark - Init
--(id)init {
-    self = [super initWithFrame:CGRectMake(0, 0, kVRGCalendarViewWidth, 0)];
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        self.contentMode = UIViewContentModeTop;
         self.clipsToBounds=YES;
-        
         isAnimating=NO;
         self.labelCurrentMonth = [[[UILabel alloc] initWithFrame:CGRectMake(34, 0, kVRGCalendarViewWidth-68, 40)]autorelease];
         [self addSubview:labelCurrentMonth];
