@@ -58,6 +58,9 @@
     phonetfd.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
     phonetfd.font=[UIFont systemFontOfSize:kAppFontSize];
     phonetfd.textColor=[UIColor colorWithHexString:kAppRedColor];
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, phonetfd.frame.size.height)];
+    phonetfd.leftView = view1;
+    phonetfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:phonetfd];
     
     
@@ -86,6 +89,9 @@
     codetfd.font=[UIFont systemFontOfSize:kAppFontSize];
     codetfd.textColor=[UIColor colorWithHexString:kAppNormalColor];
     codetfd.placeholder=@"请输入验证码";
+    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, codetfd.frame.size.height)];
+    codetfd.leftView = view2;
+    codetfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:codetfd];
     
     
@@ -98,6 +104,9 @@
     passwordtfd.font=[UIFont systemFontOfSize:kAppFontSize];
     passwordtfd.textColor=[UIColor colorWithHexString:kAppNormalColor];
     passwordtfd.placeholder=@"请输入密码";
+    UIView *view3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, passwordtfd.frame.size.height)];
+    passwordtfd.leftView = view3;
+    passwordtfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:passwordtfd];
 
     submitbtn = [[UIButton alloc] initWithFrame:CGRectMake(kGap, passwordtfd.bottom+kGap, kAppWidth-kGap*2, 40)];

@@ -18,6 +18,7 @@
 {
     NSMutableArray *list;
     UIControl *_iPCalendarControl;
+    UIView *footer;
 }
 @end
 
@@ -42,6 +43,42 @@
     ttitle.textColor=[UIColor colorWithHexString:kAppNormalColor];
     ttitle.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView=ttitle;
+    
+    
+    
+    footer=[[UIView alloc] initWithFrame:CGRectMake(0, kAppHeight-50, kAppWidth, 50)];
+    footer.backgroundColor=[UIColor colorWithRed:0.4000 green:0.4000 blue:0.4000 alpha:1.0f];
+    
+    UIButton *calendarutton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth-2*kCellLeftGap, 40)];
+    calendarutton.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+    [footer addSubview:calendarutton];
+    [calendarutton setTitle:@"日历" forState:UIControlStateNormal];
+    [calendarutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [calendarutton.titleLabel setFont:[UIFont systemFontOfSize:kAppBtnSize]];
+    [calendarutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        if (!_iPCalendarControl) {
+            _iPCalendarControl =[[UIControl alloc] initWithFrame:(CGRect){0,0,kAppWidth,kAppHeight}];
+            NSLog(@"_iPCalendarControl.frame=%@",NSStringFromCGRect(_iPCalendarControl.frame));
+            _iPCalendarControl.backgroundColor =[UIColor clearColor];
+            VRGCalendarView *calendar =  [[VRGCalendarView alloc] init];
+            calendar.tag =100;
+            calendar.delegate =self;
+            [_iPCalendarControl addSubview:calendar];
+            [_iPCalendarControl addTarget:self action:@selector(dismissCalandar:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (!_iPCalendarControl.superview) {
+            [self.view addSubview:_iPCalendarControl];
+            [(VRGCalendarView *)[_iPCalendarControl viewWithTag:100] reset];
+        }
+    }];
+    calendarutton.layer.cornerRadius = kBtnCornerRadius;
+    calendarutton.layer.masksToBounds = YES;
+    calendarutton.layer.borderWidth = 1;
+    calendarutton.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+    
+    UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
+    [keywindow addSubview:footer];
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
         PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
@@ -60,6 +97,17 @@
         //
     }];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
+    [keywindow addSubview:footer];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [footer removeFromSuperview];
+}
 -(void)backAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -77,7 +125,7 @@
     // Return the number of rows in the section.
     return list.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+/*-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 40+kCellLeftGap*2;
 }
@@ -108,7 +156,7 @@
         }
     }];
     return header;
-}
+}*/
 -(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month targetHeight:(float)targetHeight animated:(BOOL)animated{
     
     NSLog(@"%s,%@,select date :%@,labeltitle:%@",__func__,[NSString stringWithFormat:@"%@",calendarView.currentMonth],[NSString stringWithFormat:@"%@",calendarView.selectedDate],calendarView.labelCurrentMonth.text);
