@@ -48,7 +48,8 @@
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
         PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
-        [engine getTodayOrderWithKitchenid:@"987654321" type:1 page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [engine getTodayOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" type:1 page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
             PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
             NSLog(@"model===%@",model);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -138,10 +139,42 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+// 确认订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell confirmOrderWithData:(id)data
+{
+    PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+    [engine confirmOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" orderid:20 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject==%@",responseObject);
+        PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+        NSLog(@"model===%@",model);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
 
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
-    
-    
+// 完成订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell finishOrderWithData:(id)data
+{
+    PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+    [engine finishOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" orderid:20 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject==%@",responseObject);
+        PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+        NSLog(@"model===%@",model);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+// 取消订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell refundOrderWithData:(id)data
+{
+    PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+    [engine refundOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" orderid:20 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject==%@",responseObject);
+        PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+        NSLog(@"model===%@",model);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 @end

@@ -94,8 +94,8 @@
         [receivebtn setTitle:@"接单" forState:UIControlStateNormal];
         [receivebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [receivebtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:confirmOrderWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self confirmOrderWithData:self.data];
             }
         }];
         receivebtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
@@ -111,8 +111,8 @@
         [finishbtn setTitle:@"完成" forState:UIControlStateNormal];
         [finishbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [finishbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:finishOrderWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self finishOrderWithData:self.data];
             }
         }];
         finishbtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
@@ -128,8 +128,8 @@
         [cancelbtn setTitle:@"确认退单" forState:UIControlStateNormal];
         [cancelbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [cancelbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:refundOrderWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self refundOrderWithData:self.data];
             }
         }];
         cancelbtn.backgroundColor=[UIColor colorWithHexString:kAppRedColor];

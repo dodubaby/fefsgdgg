@@ -7,6 +7,8 @@
 //
 
 #import "PDRegisterViewController.h"
+#import "PDHTTPEngine.h"
+
 #define TFDGAP 10
 
 @interface PDRegisterViewController ()
@@ -61,7 +63,12 @@
     [sendcodebtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"forgetBtn");
-        
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine sendverificationWithphone:@"15611350211" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
     }];
     UIImageView *sendimg=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"发送"]];
     [self.view addSubview:sendimg];
@@ -103,6 +110,12 @@
     [submitbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"registBtn");
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine registerWithphone:@"15611350211" verification:@"2887" password:@"123456" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
         
     }];
     

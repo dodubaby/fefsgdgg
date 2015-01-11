@@ -10,6 +10,9 @@
 #import "PDOrderModel.h"
 #import "PDOrderCell.h"
 #import "PDAllOrderTableViewController.h"
+#import "PDHTTPEngine.h"
+
+
 @interface PDOrderInquiryTableViewController ()
 {
     NSMutableArray *list;
@@ -101,6 +104,24 @@
 
     UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
     [keywindow addSubview:footer];
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine searchOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" type:1 phone:@"6308" page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+            PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+            NSLog(@"model===%@",model);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+        
+    }];
+    //
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
+    
 }
 -(void)backAction:(id)sender
 {

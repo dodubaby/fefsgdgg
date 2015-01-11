@@ -32,21 +32,13 @@
 // example
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell;
 
-// 添加订单
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data;
+// 确认订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell confirmOrderWithData:(id)data;
 
-// 减少
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell reduceWithData:(id)data;
-// 增加
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addWithData:(id)data;
+// 完成订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell finishOrderWithData:(id)data;
+// 取消订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell refundOrderWithData:(id)data;
 
-// 分享
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell shareWithData:(id)data;
-
-// 收藏
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell favoriteWithData:(id)data;
-
-// 留言
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell commentWithData:(id)data;
 
 @end

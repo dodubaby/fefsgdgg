@@ -11,6 +11,7 @@
 #import "PDOrderCell.h"
 #import "CalendarViewController.h"
 #import "CalendarViewController.h"
+#import "PDHTTPEngine.h"
 
 
 @interface PDAllOrderTableViewController ()<UITabBarControllerDelegate,VRGCalendarViewDelegate>
@@ -41,7 +42,23 @@
     ttitle.textColor=[UIColor colorWithHexString:kAppNormalColor];
     ttitle.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView=ttitle;
-    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine allOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" start_date:@"2015-01-09" end_date:@"2015-01-10" page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+            PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+            NSLog(@"model===%@",model);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+        
+    }];
+    //
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
 }
 -(void)backAction:(id)sender
 {

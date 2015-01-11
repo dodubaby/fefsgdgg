@@ -52,7 +52,65 @@
     
     return dict;
 }
-
+-(void)sendverificationWithphone:(NSString *)phone
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:phone forKey:@"phone"];
+    parameters = [self paramWithDictionary:parameters];
+    [_HTTPEngine GET:kPathOfSendverification parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+}
+-(void)registerWithphone:(NSString *)phone
+            verification:(NSString*)verification
+                password:(NSString *)password
+                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:phone forKey:@"phone"];
+    [parameters setObject:verification forKey:@"verification"];
+    [parameters setObject:password forKey:@"password"];
+    
+    parameters = [self paramWithDictionary:parameters];
+    
+    [_HTTPEngine GET:kPathOfRegister parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+}
 -(void)loginWithphone:(NSString *)phone
              password:(NSString *)password
              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
@@ -123,31 +181,24 @@
 
 }
 
-- (void)operationFrameWithFrameID:(NSString *)FrameID
-                         devideID:(NSString *)DeviceID
-                             name:(NSString *)Name
-                           action:(NSString *)Action
-                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
-    
+
+-(void)confirmOrderWithKitchenid:(NSString*)kitchenid
+                         orderid:(NSInteger)orderid
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:FrameID forKey:@"FrameID"];
-    [parameters setObject:DeviceID forKey:@"DeviceID"];
-    [parameters setObject:Name forKey:@"Name"];
-    [parameters setObject:Action forKey:@"Action"];
-    
-    [_HTTPEngine POST:@"" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [parameters setObject:kitchenid forKey:@"kitchenid"];
+    [parameters setObject:[NSNumber numberWithInteger:orderid] forKey:@"order_id"];
+    parameters = [self paramWithDictionary:parameters];
+    [_HTTPEngine GET:kPathOfConfirm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //
-        PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"result   %@",result);
-        
-        int code = [result[@"Header"][@"Code"] intValue];
-        NSString *msg = result[@"Header"][@"Message"];
-        if (code == 200) {
-            success(operation,responseObject);
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
         }else{
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
@@ -160,7 +211,144 @@
         
         failure(operation,error);
     }];
+    
 }
-
+-(void)finishOrderWithKitchenid:(NSString*)kitchenid
+                        orderid:(NSInteger)orderid
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:kitchenid forKey:@"kitchenid"];
+    [parameters setObject:[NSNumber numberWithInteger:orderid] forKey:@"order_id"];
+    parameters = [self paramWithDictionary:parameters];
+    [_HTTPEngine GET:kPathOfFinish parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+    
+}
+-(void)refundOrderWithKitchenid:(NSString*)kitchenid
+                        orderid:(NSInteger)orderid
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:kitchenid forKey:@"kitchenid"];
+    [parameters setObject:[NSNumber numberWithInteger:orderid] forKey:@"order_id"];
+    parameters = [self paramWithDictionary:parameters];
+    [_HTTPEngine GET:kPathOfRefund parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+    
+}
+-(void)searchOrderWithKitchenid:(NSString*)kitchenid
+                           type:(NSInteger)type
+                          phone:(NSString*)phone
+                           page:(NSInteger)page
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:kitchenid forKey:@"kitchenid"];
+    [parameters setObject:[NSNumber numberWithInteger:type] forKey:@"type"];
+    [parameters setObject:phone forKey:@"phone"];
+    [parameters setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
+    parameters = [self paramWithDictionary:parameters];
+    [_HTTPEngine GET:kPathOfSearch parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+    
+}
+-(void)allOrderWithKitchenid:(NSString*)kitchenid
+                  start_date:(NSString*)start_date
+                    end_date:(NSString*)end_date
+                        page:(NSInteger)page
+                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:kitchenid forKey:@"kitchenid"];
+    if (start_date) {
+        [parameters setObject:start_date forKey:@"start_date"];
+    }
+    if (end_date) {
+        [parameters setObject:end_date forKey:@"end_date"];
+    }
+    
+    [parameters setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
+    parameters = [self paramWithDictionary:parameters];
+    [_HTTPEngine GET:kPathOfAll parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        id data = result[@"data"];
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        
+        NSLog(@"%@",error);
+        
+        failure(operation,error);
+    }];
+    
+}
 
 @end

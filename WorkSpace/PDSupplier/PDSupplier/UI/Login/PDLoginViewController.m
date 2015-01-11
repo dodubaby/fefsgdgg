@@ -11,6 +11,7 @@
 #import "PDFindPasswordViewController.h"
 #import "PDUtils.h"
 #import "UIColor+Utils.h"
+#import "PDHTTPEngine.h"
 
 @interface PDLoginViewController ()
 {
@@ -73,6 +74,12 @@
     [loginbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"login");
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine  loginWithphone:@"15611350211" password:@"123456" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
         AppDelegate *app=[[UIApplication sharedApplication] delegate];
         [app changetoMainViewController];
     }];
