@@ -28,6 +28,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic,strong)  MMDrawerController * drawerController;
 
 @property (nonatomic,strong) PDLoginViewController *loginViewController;
 @property (nonatomic,strong) UINavigationController *loginNavViewController;

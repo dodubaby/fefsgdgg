@@ -15,6 +15,12 @@
 
 @implementation PDAddressViewController
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的地址";

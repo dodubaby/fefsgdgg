@@ -20,6 +20,8 @@
     UIButton *loginButton;
 }
 
+@property (nonatomic,strong) NSNumber *code;
+
 @end
 
 @implementation PDLoginViewController
@@ -54,6 +56,8 @@
     phoneField.placeholder = @"手机号";
     phoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
+    phoneField.text = @"18612055976";
+    
     sendCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     sendCodeButton.frame = CGRectMake(phoneField.right, 0, 130, 50);
     [back1 addSubview:sendCodeButton];
@@ -65,6 +69,22 @@
     [sendCodeButton setImage:[UIImage imageNamed:@"lg_send_code"] forState:UIControlStateNormal];
     sendCodeButton.titleEdgeInsets = UIEdgeInsetsMake(0, -80, 0, 0);
     sendCodeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0);
+    
+    [sendCodeButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        // 发送验证码
+        if ([phoneField.text length]>0) {
+            [[PDHTTPEngine sharedInstance] requestVerificationCodeWithPhone:phoneField.text success:^(AFHTTPRequestOperation *operation, NSNumber *code) {
+                //
+                self.code = code;
+                
+                codeField.text = [self.code stringValue];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //
+            }];
+        }
+    }];
+    
     
     UIView *back2 = [[UIView alloc] initWithFrame:CGRectMake(10, back1.bottom + 10, kAppWidth - 20, 50)];
     [self.view addSubview:back2];
@@ -89,10 +109,19 @@
     
     [loginButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
-        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        [delegate removeLogin];
+        
+        [[PDHTTPEngine sharedInstance] loginWithType:@1 phone:phoneField.text account:nil verification:self.code success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            
+            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [delegate removeLogin];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+        
+
     }];
-    
     
     UILabel *otherHint = [[UILabel alloc] initWithFrame:CGRectMake(25, loginButton.bottom+115, 0, 0)];
     otherHint.text = @"合作账号登录";

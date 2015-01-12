@@ -33,6 +33,11 @@
     //[self.navigationController.navigationBar showDebugRect];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideNone];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
@@ -50,6 +55,13 @@
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        NSString *loc = @"116.316376,39.952912";
+        NSNumber *p = @0;
+        [[PDHTTPEngine sharedInstance] appHomeWithLocation:loc page:p success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
     }];
     
     //

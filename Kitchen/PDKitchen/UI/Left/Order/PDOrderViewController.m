@@ -27,6 +27,11 @@
     [list addObject:@"北京烤鸭"];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的订单";

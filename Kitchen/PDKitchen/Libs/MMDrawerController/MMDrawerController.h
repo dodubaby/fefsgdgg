@@ -47,6 +47,14 @@
     - Support container view controllers other than `UINavigationController` as the center view controller. 
  */
 
+// 禁止滑动方向
+typedef NS_ENUM(NSInteger,MMPanDisableSide){
+    MMPanDisableSideNone = 0,
+    MMPanDisableSideLeft,
+    MMPanDisableSideRight,
+    MMPanDisableSideBoth,
+};
+
 typedef NS_ENUM(NSInteger,MMDrawerSide){
     MMDrawerSideNone = 0,
     MMDrawerSideLeft,
@@ -319,5 +327,8 @@ typedef void (^MMDrawerControllerDrawerVisualStateBlock)(MMDrawerController * dr
  @param block A block object to be called that allows the implementer to update visual state properties on the drawer. `percentVisible` represents the amount of the drawer space that is current visible, with drawer space being defined as the edge of the screen to the maxmimum drawer width. Note that you do have access to the drawerController, which will allow you to update things like the anchor point of the side drawer layer. 
  */
 -(void)setDrawerVisualStateBlock:(void(^)(MMDrawerController * drawerController, MMDrawerSide drawerSide, CGFloat percentVisible))drawerVisualStateBlock;
+
+// 禁止滑动方向
+@property (nonatomic,assign) MMPanDisableSide panDisableSide;
 
 @end

@@ -73,8 +73,10 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
 }
 
 @interface MMDrawerCenterContainerView : UIView
+
 @property (nonatomic,assign) MMDrawerOpenCenterInteractionMode centerInteractionMode;
 @property (nonatomic,assign) MMDrawerSide openSide;
+
 @end
 
 @implementation MMDrawerCenterContainerView
@@ -112,6 +114,8 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
 @interface MMDrawerController () <UIGestureRecognizerDelegate>{
     CGFloat _maximumRightDrawerWidth;
     CGFloat _maximumLeftDrawerWidth;
+    
+    UIPanGestureRecognizer * pan;
 }
 
 @property (nonatomic, assign, readwrite) MMDrawerSide openSide;
@@ -125,11 +129,18 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
 
 @implementation MMDrawerController
 
+// 控制滑动
+- (void)setPanEnable:(BOOL) enable{
+    pan.enabled = enable;
+}
+
 -(id)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController rightDrawerViewController:(UIViewController *)rightDrawerViewController{
     NSParameterAssert(centerViewController);
     self = [self init];
     if(self){
 
+        _panDisableSide = MMPanDisableSideNone;
+        
         [self setCenterViewController:centerViewController];
         [self setLeftDrawerViewController:leftDrawerViewController];
         [self setRightDrawerViewController:rightDrawerViewController];
@@ -146,7 +157,7 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
         [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
         [self setCenterHiddenInteractionMode:MMDrawerOpenCenterInteractionModeNavigationBarOnly];
         
-        [self.view setBackgroundColor:[UIColor blackColor]];
+        //[self.view setBackgroundColor:[UIColor blackColor]];
         
         [self setupGestureRecognizers];
     }
@@ -731,6 +742,9 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
 }
 
 -(void)panGesture:(UIPanGestureRecognizer *)panGesture{
+    
+    //MMDrawerSide visibleSide = MMDrawerSideNone;
+    
     switch (panGesture.state) {
         case UIGestureRecognizerStateBegan:
             self.startingPanRect = self.centerContainerView.frame;
@@ -770,11 +784,64 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
             
             [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:percentVisible];
             
+            switch (_panDisableSide) {
+                case MMPanDisableSideNone:
+                    break;
+                case MMPanDisableSideLeft:
+                {
+                    if (_openSide==MMDrawerSideLeft) {
+                        return;
+                    }
+                }
+                    break;
+                case MMPanDisableSideRight:
+                {
+                    if (_openSide==MMDrawerSideRight) {
+                        return;
+                    }
+                }
+                    break;
+                case MMPanDisableSideBoth:
+                {
+                    return;
+                }
+                    break;
+                default:
+                    break;
+            }
+            
             [self.centerContainerView setCenter:CGPointMake(CGRectGetMidX(newFrame), CGRectGetMidY(newFrame))];
             break;
         }
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:{
+            
+            switch (_panDisableSide) {
+                case MMPanDisableSideNone:
+                    break;
+                case MMPanDisableSideLeft:
+                {
+                    if (_openSide==MMDrawerSideLeft) {
+                        return;
+                    }
+                }
+                    break;
+                case MMPanDisableSideRight:
+                {
+                    if (_openSide==MMDrawerSideRight) {
+                        return;
+                    }
+                }
+                    break;
+                case MMPanDisableSideBoth:
+                {
+                    return;
+                }
+                    break;
+                default:
+                    break;
+            }
+            
             self.startingPanRect = CGRectNull;
             CGPoint velocity = [panGesture velocityInView:self.view];
             [self finishAnimationForPanGestureWithXVelocity:velocity.x completion:nil];
@@ -902,7 +969,7 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
 
 #pragma mark - Helpers
 -(void)setupGestureRecognizers{
-    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     [pan setDelegate:self];
     [self.view addGestureRecognizer:pan];
     
@@ -1052,5 +1119,6 @@ static inline CGFloat originXForDrawerOriginAndTargetOriginOffset(CGFloat origin
       CGRectContainsPoint(rightBezelRect, point)) &&
      [self isPointContainedWithinCenterViewContentRect:point]);
 }
+
 
 @end

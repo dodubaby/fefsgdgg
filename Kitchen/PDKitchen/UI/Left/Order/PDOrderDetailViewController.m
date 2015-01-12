@@ -25,6 +25,11 @@
 
 @implementation PDOrderDetailViewController
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

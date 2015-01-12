@@ -18,6 +18,7 @@
 
 #import "PDBaseTableViewCell.h"
 
+#import "PDAccountManager.h"
 
 @interface PDLeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -56,10 +57,20 @@
 -(void)pushVC:(UIViewController *)vc{
 
     UINavigationController *center = (UINavigationController *)self.mm_drawerController.centerViewController;
+    [center popToRootViewControllerAnimated:NO];  // 先返回首页
     [center pushViewController:vc animated:NO];
     [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
         
     }];
+}
+
+// 登陆
+-(BOOL)userLogined{
+    if (![PDAccountManager sharedInstance].isLogined) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
+        return NO;
+    }
+    return YES;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -115,40 +126,43 @@
         case 0:
             //
         {
-            if (1) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
-            }else{
-            
+            if ([self userLogined]) {
                 vc = [PDOrderViewController new];
                 vc.title = key;
                 [self pushVC:vc];
-
             }
+
         }
             break;
         case 1:
             //
         {
-            vc = [PDFavoritesViewController new];
-            vc.title = key;
-            [self pushVC:vc];
+            if ([self userLogined]) {
+                vc = [PDFavoritesViewController new];
+                vc.title = key;
+                [self pushVC:vc];
+            }
             
         }
             break;
         case 2:
             //
         {
-            vc = [PDCouponViewController new];
-            vc.title = key;
-            [self pushVC:vc];
+            if ([self userLogined]) {
+                vc = [PDCouponViewController new];
+                vc.title = key;
+                [self pushVC:vc];
+            }
         }
             break;
         case 3:
             //
         {
-            vc = [PDAddressViewController new];
-            vc.title = key;
-            [self pushVC:vc];
+            if ([self userLogined]) {
+                vc = [PDAddressViewController new];
+                vc.title = key;
+                [self pushVC:vc];
+            }
         }
             break;
         case 4:

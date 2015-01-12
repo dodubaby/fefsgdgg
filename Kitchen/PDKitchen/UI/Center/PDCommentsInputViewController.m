@@ -24,6 +24,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
+    
+    [textView becomeFirstResponder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"评论";
@@ -45,14 +52,22 @@
     submit.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     submit.layer.cornerRadius = 4;
     submit.clipsToBounds = YES;
+    [submit handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        
+        self.foodid = @1;
+        self.cookerid = @1;
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        
+        
+        [[PDHTTPEngine sharedInstance] messageAddwithUserid:userid foodid:self.foodid cookerid:self.cookerid text:@"111" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+    }];
     
     //[self.view showDebugRect];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-
-    [super viewDidAppear:animated];
-    [textView becomeFirstResponder];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{

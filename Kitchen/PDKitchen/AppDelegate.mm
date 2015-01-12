@@ -19,6 +19,9 @@
 {
     TencentOAuth *tencentOAuth;
 }
+
+@property (nonatomic,assign) MMPanDisableSide savedPanDisableSide; // 缓存状态
+
 @end
 
 @implementation AppDelegate
@@ -57,19 +60,19 @@
     
     UINavigationController *leftNav = [[UINavigationController alloc] initWithRootViewController:leftSideDrawerViewController];
     
-    MMDrawerController * drawerController = [[MMDrawerController alloc]
+    _drawerController = [[MMDrawerController alloc]
                                              initWithCenterViewController:navigationController
                                              leftDrawerViewController:leftSideDrawerViewController
                                              rightDrawerViewController:rightSideDrawerViewController];
-    [drawerController setMaximumRightDrawerWidth:255];
-    [drawerController setMaximumLeftDrawerWidth:165];
-    [drawerController setShowsShadow:NO];
-    [drawerController setShouldStretchDrawer:NO];
+    [_drawerController setMaximumRightDrawerWidth:255];
+    [_drawerController setMaximumLeftDrawerWidth:165];
+    [_drawerController setShowsShadow:NO];
+    [_drawerController setShouldStretchDrawer:NO];
     
-    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
-    [drawerController
+    [_drawerController
      setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
          MMDrawerControllerDrawerVisualStateBlock block;
          
@@ -85,8 +88,8 @@
     
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    _window.backgroundColor = [UIColor redColor];
-    _window.rootViewController = drawerController;
+    _window.backgroundColor = [UIColor whiteColor];
+    _window.rootViewController = _drawerController;
     [_window makeKeyAndVisible];
     
     
@@ -97,6 +100,12 @@
 }
 
 -(void)showLogin{
+    
+    // 缓存状态
+    _savedPanDisableSide =_drawerController.panDisableSide;
+    // 禁止滑动
+    [_drawerController setPanDisableSide:MMPanDisableSideBoth];
+    
     
     _loginNavViewController = [[UINavigationController alloc] initWithRootViewController:_loginViewController];
 
@@ -113,6 +122,9 @@
 
 - (void)removeLogin{
 
+    // 还原状态
+    [_drawerController setPanDisableSide:_savedPanDisableSide];
+    
     _loginNavViewController.view.top = 0;
     
     [UIView animateWithDuration:0.3 animations:^{

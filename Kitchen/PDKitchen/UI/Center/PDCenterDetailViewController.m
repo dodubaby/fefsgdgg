@@ -58,6 +58,11 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideLeft];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"肉酱面";
@@ -93,6 +98,12 @@
     
     self.tableView.tableFooterView = moreView;
     
+    
+    [[PDHTTPEngine sharedInstance] appDetailWithFoodID:@1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+    }];
 }
 
 

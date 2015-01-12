@@ -50,6 +50,9 @@
 		32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C121A441A9F00ABC8B0 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C171A441A9F00ABC8B0 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		32C44C811A62A41100415AB0 /* PDModelCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C801A62A41100415AB0 /* PDModelCode.m */; };
+		32C44C851A62A49800415AB0 /* PDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C841A62A49800415AB0 /* PDModel.m */; };
+		32C44C891A62BD0000415AB0 /* PDAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C881A62BD0000415AB0 /* PDAccountManager.m */; };
 		32CA7A7B1A5D0E5000BB8CAF /* PDBaseTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */; };
 		32CA7A7F1A5D1B4100BB8CAF /* PDAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CA7A7E1A5D1B4100BB8CAF /* PDAddressCell.m */; };
 		32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */; };
@@ -202,6 +205,12 @@
 		32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
 		32868C161A441A9F00ABC8B0 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 		32868C171A441A9F00ABC8B0 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		32C44C7F1A62A41100415AB0 /* PDModelCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelCode.h; sourceTree = "<group>"; };
+		32C44C801A62A41100415AB0 /* PDModelCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelCode.m; sourceTree = "<group>"; };
+		32C44C831A62A49800415AB0 /* PDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModel.h; sourceTree = "<group>"; };
+		32C44C841A62A49800415AB0 /* PDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModel.m; sourceTree = "<group>"; };
+		32C44C871A62BD0000415AB0 /* PDAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAccountManager.h; sourceTree = "<group>"; };
+		32C44C881A62BD0000415AB0 /* PDAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAccountManager.m; sourceTree = "<group>"; };
 		32CA7A791A5D0E5000BB8CAF /* PDBaseTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseTextView.h; sourceTree = "<group>"; };
 		32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseTextView.m; sourceTree = "<group>"; };
 		32CA7A7D1A5D1B4100BB8CAF /* PDAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAddressCell.h; sourceTree = "<group>"; };
@@ -572,6 +581,15 @@
 			path = EGOImageView;
 			sourceTree = "<group>";
 		};
+		32C44C861A62BCDE00415AB0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				32C44C871A62BD0000415AB0 /* PDAccountManager.h */,
+				32C44C881A62BD0000415AB0 /* PDAccountManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		32CCB2CD1A45AF8F00CB2BA2 /* Order */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,6 +819,7 @@
 		32D0E8431A4163EF00D1F190 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				32C44C861A62BCDE00415AB0 /* Manager */,
 				32D0E8451A41646D00D1F190 /* HTTPEngine */,
 				32D0E8441A41640900D1F190 /* Model */,
 			);
@@ -810,8 +829,12 @@
 		32D0E8441A41640900D1F190 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				32C44C831A62A49800415AB0 /* PDModel.h */,
+				32C44C841A62A49800415AB0 /* PDModel.m */,
 				32868C061A44174100ABC8B0 /* PDBaseModel.h */,
 				32868C071A44174100ABC8B0 /* PDBaseModel.m */,
+				32C44C7F1A62A41100415AB0 /* PDModelCode.h */,
+				32C44C801A62A41100415AB0 /* PDModelCode.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1125,6 +1148,7 @@
 				32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */,
 				32D0E8A41A4278FB00D1F190 /* PDNewsCell.m in Sources */,
 				32D0E85C1A416B1C00D1F190 /* UIControl+Utils.m in Sources */,
+				32C44C811A62A41100415AB0 /* PDModelCode.m in Sources */,
 				32868C081A44174100ABC8B0 /* PDBaseModel.m in Sources */,
 				32D0E8661A416D9600D1F190 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				32D0E85D1A416B1C00D1F190 /* UIAlertView+Utils.m in Sources */,
@@ -1144,6 +1168,7 @@
 				32868C041A44159300ABC8B0 /* JSONJoy.m in Sources */,
 				32D0E8521A4169E400D1F190 /* UIColor+Utils.m in Sources */,
 				32868C051A44159300ABC8B0 /* README.md in Sources */,
+				32C44C851A62A49800415AB0 /* PDModel.m in Sources */,
 				32D0E8391A41611A00D1F190 /* SVProgressHUD.m in Sources */,
 				32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */,
 				32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */,
@@ -1176,6 +1201,7 @@
 				32D0E8961A41A15500D1F190 /* PDCouponViewController.m in Sources */,
 				32D0E8021A41601200D1F190 /* AFHTTPSessionManager.m in Sources */,
 				32D0E81D1A41602200D1F190 /* UIAlertView+AFNetworking.m in Sources */,
+				32C44C891A62BD0000415AB0 /* PDAccountManager.m in Sources */,
 				32D0E8061A41601200D1F190 /* AFURLRequestSerialization.m in Sources */,
 				32D0E8701A417AFE00D1F190 /* PDCenterViewController.m in Sources */,
 				32D0E87C1A41865500D1F190 /* DemoViewController.m in Sources */,

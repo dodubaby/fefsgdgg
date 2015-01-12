@@ -10,4 +10,7 @@
 
 @interface PDCommentsInputViewController : PDBaseViewController
 
+@property (nonatomic,strong) NSNumber *foodid;
+@property (nonatomic,strong) NSNumber *cookerid;
+
 @end
