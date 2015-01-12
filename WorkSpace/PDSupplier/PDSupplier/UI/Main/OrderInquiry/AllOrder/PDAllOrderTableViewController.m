@@ -9,14 +9,14 @@
 #import "PDAllOrderTableViewController.h"
 #import "PDOrderModel.h"
 #import "PDOrderCell.h"
-#import "CalendarViewController.h"
-#import "CalendarViewController.h"
-
+#import "PDHTTPEngine.h"
+#import "VRGCalendarView.h"
 
 @interface PDAllOrderTableViewController ()<UITabBarControllerDelegate,VRGCalendarViewDelegate>
 {
     NSMutableArray *list;
     UIControl *_iPCalendarControl;
+    UIView *footer;
 }
 @end
 
@@ -42,6 +42,70 @@
     ttitle.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView=ttitle;
     
+    
+    
+    footer=[[UIView alloc] initWithFrame:CGRectMake(0, kAppHeight-50, kAppWidth, 50)];
+    footer.backgroundColor=[UIColor colorWithRed:0.4000 green:0.4000 blue:0.4000 alpha:1.0f];
+    UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
+    
+    UIButton *calendarutton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap/2, kAppWidth-2*kCellLeftGap, 40)];
+    calendarutton.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
+    [footer addSubview:calendarutton];
+    [calendarutton setTitle:@"日历" forState:UIControlStateNormal];
+    [calendarutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [calendarutton.titleLabel setFont:[UIFont systemFontOfSize:kAppBtnSize]];
+    [calendarutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        if (!_iPCalendarControl) {
+            _iPCalendarControl =[[UIControl alloc] initWithFrame:(CGRect){0,0,kAppWidth,kAppHeight}];
+            _iPCalendarControl.backgroundColor=[UIColor clearColor];
+            NSLog(@"_iPCalendarControl.frame=%@",NSStringFromCGRect(_iPCalendarControl.frame));
+            VRGCalendarView *calendar =  [[VRGCalendarView alloc] initWithFrame:CGRectMake(0, kAppHeight-318, kAppWidth, 318)];
+            calendar.tag =100;
+            calendar.delegate =self;
+            [_iPCalendarControl addSubview:calendar];
+            [_iPCalendarControl addTarget:self action:@selector(dismissCalandar:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (!_iPCalendarControl.superview) {
+            [keywindow addSubview:_iPCalendarControl];
+            [(VRGCalendarView *)[_iPCalendarControl viewWithTag:100] reset];
+        }
+    }];
+    calendarutton.layer.cornerRadius = kBtnCornerRadius;
+    calendarutton.layer.masksToBounds = YES;
+    calendarutton.layer.borderWidth = 1;
+    calendarutton.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
+    
+    
+    [keywindow addSubview:footer];
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine allOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" start_date:@"2015-01-09" end_date:@"2015-01-10" page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+            PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+            NSLog(@"model===%@",model);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+        
+    }];
+    //
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
+    [keywindow addSubview:footer];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [footer removeFromSuperview];
 }
 -(void)backAction:(id)sender
 {
@@ -60,7 +124,7 @@
     // Return the number of rows in the section.
     return list.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+/*-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 40+kCellLeftGap*2;
 }
@@ -91,7 +155,7 @@
         }
     }];
     return header;
-}
+}*/
 -(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month targetHeight:(float)targetHeight animated:(BOOL)animated{
     
     NSLog(@"%s,%@,select date :%@,labeltitle:%@",__func__,[NSString stringWithFormat:@"%@",calendarView.currentMonth],[NSString stringWithFormat:@"%@",calendarView.selectedDate],calendarView.labelCurrentMonth.text);

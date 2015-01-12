@@ -10,6 +10,9 @@
 #import "PDOrderModel.h"
 #import "PDOrderCell.h"
 #import "PDAllOrderTableViewController.h"
+#import "PDHTTPEngine.h"
+
+
 @interface PDOrderInquiryTableViewController ()
 {
     NSMutableArray *list;
@@ -54,29 +57,10 @@
     UIBarButtonItem * rightbarbutton  = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
     [self.navigationItem setRightBarButtonItem:rightbarbutton animated:YES];
     
-    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
     footer=[[UIView alloc] initWithFrame:CGRectMake(0, kAppHeight-50, kAppWidth, 50)];
     footer.backgroundColor=[UIColor colorWithRed:0.4000 green:0.4000 blue:0.4000 alpha:1.0f];
-//
-//    UIButton *AMButton = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, 100, 40)];
-//    AMButton.backgroundColor=[UIColor grayColor];
-//    [footer addSubview:AMButton];
-//    [AMButton setTitle:@"配送的订单" forState:UIControlStateNormal];
-//    [AMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [AMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//        
-//    }];
-//    UIButton *PMButton = [[UIButton alloc] initWithFrame:CGRectMake(AMButton.right+kCellLeftGap, kCellLeftGap, 100, 40)];
-//    PMButton.backgroundColor=[UIColor grayColor];
-//    [footer addSubview:PMButton];
-//    [PMButton setTitle:@"退款的订单" forState:UIControlStateNormal];
-//    [PMButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [PMButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//        
-//    }];
-//    
-//    
+    
     UIButton *searchutton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth-kCellLeftGap-120, kCellLeftGap/2, 120, 40)];
     searchutton.backgroundColor=[UIColor colorWithHexString:kAppRedColor];
     [footer addSubview:searchutton];
@@ -97,10 +81,31 @@
     input.placeholder=@"输入手机号后4位";
     input.backgroundColor=[UIColor whiteColor];
     input.delegate=self;
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, input.frame.size.height)];
+    input.leftView = view1;
+    input.leftViewMode = UITextFieldViewModeAlways;
     [footer addSubview:input];
 
     UIWindow *keywindow=[[UIApplication sharedApplication] keyWindow];
     [keywindow addSubview:footer];
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine searchOrderWithKitchenid:@"d97c065066afb1632ca78c02b4b6351b" type:1 phone:@"6308" page:0 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+            PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+            NSLog(@"model===%@",model);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+        
+    }];
+    //
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
+    
 }
 -(void)backAction:(id)sender
 {

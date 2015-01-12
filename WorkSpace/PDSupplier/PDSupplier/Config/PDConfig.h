@@ -19,4 +19,5 @@
 
 #endif
 
+#define DateFormaterString @"yyyy-MM-dd"
 #endif // PDKitchen_PDConfig_h

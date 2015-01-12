@@ -7,6 +7,8 @@
 //
 
 #import "PDRegisterViewController.h"
+#import "PDHTTPEngine.h"
+
 #define TFDGAP 10
 
 @interface PDRegisterViewController ()
@@ -48,6 +50,9 @@
     phonetfd.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
     phonetfd.font=[UIFont systemFontOfSize:kAppFontSize];
     phonetfd.textColor=[UIColor colorWithHexString:kAppRedColor];
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, phonetfd.frame.size.height)];
+    phonetfd.leftView = view1;
+    phonetfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:phonetfd];
     
     
@@ -61,7 +66,12 @@
     [sendcodebtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"forgetBtn");
-        
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine sendverificationWithphone:@"15611350211" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
     }];
     UIImageView *sendimg=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"发送"]];
     [self.view addSubview:sendimg];
@@ -76,6 +86,9 @@
     codetfd.font=[UIFont systemFontOfSize:kAppFontSize];
     codetfd.textColor=[UIColor colorWithHexString:kAppNormalColor];
     codetfd.placeholder=@"请输入验证码";
+    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, codetfd.frame.size.height)];
+    codetfd.leftView = view2;
+    codetfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:codetfd];
     
     
@@ -88,6 +101,9 @@
     passwordtfd.font=[UIFont systemFontOfSize:kAppFontSize];
     passwordtfd.textColor=[UIColor colorWithHexString:kAppNormalColor];
     passwordtfd.placeholder=@"请输入密码";
+    UIView *view3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, passwordtfd.frame.size.height)];
+    passwordtfd.leftView = view3;
+    passwordtfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:passwordtfd];
     
     submitbtn = [[UIButton alloc] initWithFrame:CGRectMake(kGap, passwordtfd.bottom+kGap, kAppWidth-kGap*2, 40)];
@@ -103,6 +119,12 @@
     [submitbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"registBtn");
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine registerWithphone:@"15611350211" verification:@"2887" password:@"123456" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
         
     }];
     

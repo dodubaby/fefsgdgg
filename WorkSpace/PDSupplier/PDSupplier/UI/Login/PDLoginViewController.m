@@ -11,6 +11,7 @@
 #import "PDFindPasswordViewController.h"
 #import "PDUtils.h"
 #import "UIColor+Utils.h"
+#import "PDHTTPEngine.h"
 
 @interface PDLoginViewController ()
 {
@@ -45,7 +46,13 @@
     usernametfd.layer.borderColor = [[UIColor colorWithHexString:kAppRedColor] CGColor];
     usernametfd.font=[UIFont systemFontOfSize:kAppFontSize];
     usernametfd.textColor=[UIColor colorWithHexString:kAppRedColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, usernametfd.frame.size.height)];
+    usernametfd.leftView = view;
+    usernametfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:usernametfd];
+    
+    
+    
     passwordtfd=[[UITextField alloc] initWithFrame:CGRectMake(kGap, usernametfd.bottom+kGap, kAppWidth-kGap*2, 50)];
     passwordtfd.layer.cornerRadius = 0;
     passwordtfd.layer.masksToBounds = YES;
@@ -54,6 +61,9 @@
     passwordtfd.font=[UIFont systemFontOfSize:kAppFontSize];
     passwordtfd.textColor=[UIColor colorWithHexString:kAppNormalColor];
     passwordtfd.placeholder=@"请输入密码";
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextFieldLeft, passwordtfd.frame.size.height)];
+    passwordtfd.leftView = view1;
+    passwordtfd.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:passwordtfd];
 
 
@@ -73,6 +83,12 @@
     [loginbtn handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         NSLog(@"login");
+        PDHTTPEngine *engine=[[PDHTTPEngine alloc] init];
+        [engine  loginWithphone:@"15611350211" password:@"123456" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"responseObject==%@",responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
         AppDelegate *app=[[UIApplication sharedApplication] delegate];
         [app changetoMainViewController];
     }];
