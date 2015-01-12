@@ -43,7 +43,7 @@
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
         
-        [[PDHTTPEngine sharedInstance] messageAllWithFoodid:@1 page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] messageAllWithFoodid:@2 page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //

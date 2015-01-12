@@ -45,6 +45,22 @@
     [self setupData];
     
     //[self.navigationController.navigationBar showDebugRect];
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] newsAllWithUserid:userid page:@0 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+        
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -211,6 +211,42 @@
 // 收藏
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell favoriteWithData:(id)data{
 
+//    // 收藏
+//    if ([self userLogined]) {
+//        NSString *userid = [PDAccountManager sharedInstance].userid;
+//        [[PDHTTPEngine sharedInstance] collectAddWithUserid:userid food_id:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//            //
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            //
+//        }];
+//    }
+    
+    // 删除收藏
+    if ([self userLogined]) {
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] collectDeleteWithUserid:userid food_id:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+    }
+    
+    /*
+    // 点赞
+    if ([self userLogined]) {
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] appLikeWithUserid:userid foodid:@1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+    }
+     */
+
+    
+    // 
+    
 }
 
 // 留言

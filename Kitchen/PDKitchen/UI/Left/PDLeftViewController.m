@@ -64,15 +64,6 @@
     }];
 }
 
-// 登陆
--(BOOL)userLogined{
-    if (![PDAccountManager sharedInstance].isLogined) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
-        return NO;
-    }
-    return YES;
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -168,9 +159,11 @@
         case 4:
             //
         {
-            vc = [PDNewsViewController new];
-            vc.title = key;
-            [self pushVC:vc];
+            if ([self userLogined]) {
+                vc = [PDNewsViewController new];
+                vc.title = key;
+                [self pushVC:vc];
+            }
         }
             break;
         case 5:

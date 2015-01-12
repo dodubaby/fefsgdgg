@@ -43,6 +43,14 @@
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
 }
 
+// 登陆
+-(BOOL)userLogined{
+    if (![PDAccountManager sharedInstance].isLogined) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShowLoginNotificationKey object:nil];
+        return NO;
+    }
+    return YES;
+}
 
 /*
 #pragma mark - Navigation

@@ -86,7 +86,6 @@
             }
         }];
         
-        
         favorite = [[UIButton alloc] initWithFrame:CGRectMake(105 + kCellLeftGap, person.bottom+10, 60, 30)];
         [self addSubview:favorite];
         [favorite setTitle:@"收藏" forState:UIControlStateNormal];

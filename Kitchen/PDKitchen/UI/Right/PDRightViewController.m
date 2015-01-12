@@ -71,8 +71,23 @@
     clearButton.layer.borderColor = [UIColor colorWithHexString:@"#c14a41"].CGColor;
     clearButton.layer.cornerRadius = 4; //;
     clearButton.clipsToBounds = YES;
+    [clearButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+        //
+        
+            if ([self userLogined]) {
+                NSString *userid = [PDAccountManager sharedInstance].userid;
+                [[PDHTTPEngine sharedInstance] cartDeleteWithUserid:userid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+                    //
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    //
+                }];
+            }
+
+        
+    }];
     
     //[self.view showDebugRect];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -125,6 +140,16 @@
 //        //
 //    }];
     
+    // 我的购物车
+    if ([self userLogined]) {
+    
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] cartMyCartWithUserid:userid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+    }
 }
 
 @end

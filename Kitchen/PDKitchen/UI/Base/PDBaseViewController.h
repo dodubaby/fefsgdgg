@@ -18,4 +18,7 @@
 -(void)backButtonTaped:(id)sender;
 -(void)setupBackButton;
 
+// 登陆
+-(BOOL)userLogined;
+
 @end

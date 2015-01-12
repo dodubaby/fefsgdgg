@@ -39,6 +39,23 @@
     
     [self setupData];
     [self setupBackButton];
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        
+        [[PDHTTPEngine sharedInstance] orderMyOrderWithUserid:userid page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+        
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

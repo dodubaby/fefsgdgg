@@ -24,6 +24,13 @@
     // Do any additional setup after loading the view.
     
     [self setupBackButton];
+    
+    NSString *userid = [PDAccountManager sharedInstance].userid;
+    [[PDHTTPEngine sharedInstance] newsDetailWithUserid:userid news_id:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        //
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

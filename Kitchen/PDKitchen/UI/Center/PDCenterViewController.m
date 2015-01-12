@@ -144,8 +144,16 @@
 }
 
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
-
     NSLog(@"add");
+    if ([self userLogined]) {
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        NSString *foodids = @"1*2**2*5";
+        [[PDHTTPEngine sharedInstance] cartAddWithUserid:userid foodids:foodids success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+    }
 }
 
 @end

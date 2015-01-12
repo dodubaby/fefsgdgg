@@ -27,6 +27,23 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self setupBackButton];
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        //
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] addressMyAddressWithUserid:userid page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+        
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //
+    }];
+    
 }
 
 //-(void)backButtonTaped:(id)sender{

@@ -97,6 +97,13 @@
     
     logisticsButton.selected = YES;
     detailButton.selected = NO;
+    
+    NSString *userid = [PDAccountManager sharedInstance].userid;
+    [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        //
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+    }];
 }
 
 -(void)showDetail{
@@ -105,7 +112,13 @@
     
     logisticsButton.selected = NO;
     detailButton.selected = YES;
+    
+    NSString *userid = [PDAccountManager sharedInstance].userid;
+    [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        //
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+    }];
 }
-
 
 @end
