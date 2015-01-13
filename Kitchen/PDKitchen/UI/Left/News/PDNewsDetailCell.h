@@ -1,5 +1,5 @@
 //
-//  PDBaseNewsDetailCell.h
+//  PDNewsDetailCell.h
 //  PDKitchen
 //
 //  Created by bright on 15/1/13.
@@ -8,6 +8,6 @@
 
 #import "PDBaseTableViewCell.h"
 
-@interface PDBaseNewsDetailCell : PDBaseTableViewCell
+@interface PDNewsDetailCell : PDBaseTableViewCell
 
 @end

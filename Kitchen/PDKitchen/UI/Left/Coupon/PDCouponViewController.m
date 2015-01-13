@@ -67,7 +67,13 @@
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        //
+        // 高度不够不用加载更多
+        CGFloat h = [PDCouponCell cellHeightWithData:nil]*weakSelf.dataList.count;
+        if (h<weakSelf.tableView.bounds.size.height) {
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            return;
+        }
+        
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;

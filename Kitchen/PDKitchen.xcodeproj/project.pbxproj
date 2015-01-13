@@ -51,7 +51,7 @@
 		32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C171A441A9F00ABC8B0 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32C43DD21A65623400434499 /* PDModelCoupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C43DD11A65623400434499 /* PDModelCoupon.m */; };
-		32C43DD51A6564E700434499 /* PDBaseNewsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C43DD41A6564E700434499 /* PDBaseNewsDetailCell.m */; };
+		32C43DD51A6564E700434499 /* PDNewsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C43DD41A6564E700434499 /* PDNewsDetailCell.m */; };
 		32C44C811A62A41100415AB0 /* PDModelCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C801A62A41100415AB0 /* PDModelCode.m */; };
 		32C44C851A62A49800415AB0 /* PDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C841A62A49800415AB0 /* PDModel.m */; };
 		32C44C891A62BD0000415AB0 /* PDAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C881A62BD0000415AB0 /* PDAccountManager.m */; };
@@ -214,8 +214,8 @@
 		32868C171A441A9F00ABC8B0 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
 		32C43DD01A65623400434499 /* PDModelCoupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelCoupon.h; sourceTree = "<group>"; };
 		32C43DD11A65623400434499 /* PDModelCoupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelCoupon.m; sourceTree = "<group>"; };
-		32C43DD31A6564E700434499 /* PDBaseNewsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseNewsDetailCell.h; sourceTree = "<group>"; };
-		32C43DD41A6564E700434499 /* PDBaseNewsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseNewsDetailCell.m; sourceTree = "<group>"; };
+		32C43DD31A6564E700434499 /* PDNewsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDNewsDetailCell.h; sourceTree = "<group>"; };
+		32C43DD41A6564E700434499 /* PDNewsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDNewsDetailCell.m; sourceTree = "<group>"; };
 		32C44C7F1A62A41100415AB0 /* PDModelCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelCode.h; sourceTree = "<group>"; };
 		32C44C801A62A41100415AB0 /* PDModelCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelCode.m; sourceTree = "<group>"; };
 		32C44C831A62A49800415AB0 /* PDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModel.h; sourceTree = "<group>"; };
@@ -968,8 +968,8 @@
 				32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */,
 				32D0E88A1A41A0A000D1F190 /* PDNewsViewController.h */,
 				32D0E88B1A41A0A000D1F190 /* PDNewsViewController.m */,
-				32C43DD31A6564E700434499 /* PDBaseNewsDetailCell.h */,
-				32C43DD41A6564E700434499 /* PDBaseNewsDetailCell.m */,
+				32C43DD31A6564E700434499 /* PDNewsDetailCell.h */,
+				32C43DD41A6564E700434499 /* PDNewsDetailCell.m */,
 				32D0E88D1A41A0B500D1F190 /* PDNewsDetailViewController.h */,
 				32D0E88E1A41A0B500D1F190 /* PDNewsDetailViewController.m */,
 			);
@@ -1218,7 +1218,7 @@
 				32D0E81C1A41602200D1F190 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				32D0E8041A41601200D1F190 /* AFSecurityPolicy.m in Sources */,
 				32D0E8821A419B5800D1F190 /* PDCenterCell.m in Sources */,
-				32C43DD51A6564E700434499 /* PDBaseNewsDetailCell.m in Sources */,
+				32C43DD51A6564E700434499 /* PDNewsDetailCell.m in Sources */,
 				32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */,
 				32D0E8651A416D9600D1F190 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				32D0E89E1A41A1E200D1F190 /* PDAddressViewController.m in Sources */,

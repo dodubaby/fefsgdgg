@@ -7,7 +7,7 @@
 //
 
 #import "PDNewsDetailViewController.h"
-#import "PDBaseNewsDetailCell.h"
+#import "PDNewsDetailCell.h"
 
 @interface PDNewsDetailViewController ()
 
@@ -55,13 +55,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [PDBaseNewsDetailCell cellHeightWithData:_newsDetail];
+    return [PDNewsDetailCell cellHeightWithData:_newsDetail];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PDBaseNewsDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+    PDNewsDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
-        cell = [[PDBaseNewsDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell = [[PDNewsDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
     [cell setData:_newsDetail];
     return cell;

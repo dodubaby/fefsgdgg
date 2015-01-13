@@ -70,6 +70,12 @@
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         //
+        CGFloat h = [PDNewsCell cellHeightWithData:nil]*weakSelf.dataList.count;
+        if (h<weakSelf.tableView.bounds.size.height) {
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            return;
+        }
+        
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;

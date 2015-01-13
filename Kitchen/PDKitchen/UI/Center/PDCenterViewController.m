@@ -76,6 +76,12 @@
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         
+        CGFloat h = [PDCenterCell cellHeightWithData:nil]*weakSelf.dataList.count;
+        if (h<weakSelf.tableView.bounds.size.height) {
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            return;
+        }
+        
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *loc = @"116.316376,39.952912";

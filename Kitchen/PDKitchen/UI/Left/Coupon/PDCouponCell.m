@@ -53,7 +53,7 @@
     
     PDModelCoupon *coupon = data;
     
-    price.text = [NSString stringWithFormat:@"¥%@",coupon.price];
+    price.text = [NSString stringWithFormat:@"%@元",coupon.price];
     [price sizeToFit];
     price.top = (back.height - price.height)/2;
     
@@ -62,6 +62,8 @@
     status.top = (back.height - price.height)/2;
     status.right = back.width - kCellLeftGap;
     
+    price.textColor = [UIColor colorWithHexString:@"#c14a41"];
+    status.textColor = [UIColor colorWithHexString:@"#c14a41"];
     
 //    price.text = @"10元";
 //    [price sizeToFit];

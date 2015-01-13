@@ -1,14 +1,14 @@
 //
-//  PDBaseNewsDetailCell.m
+//  PDNewsDetailCell.m
 //  PDKitchen
 //
 //  Created by bright on 15/1/13.
 //  Copyright (c) 2015年 mtf. All rights reserved.
 //
 
-#import "PDBaseNewsDetailCell.h"
+#import "PDNewsDetailCell.h"
 
-@interface PDBaseNewsDetailCell()
+@interface PDNewsDetailCell()
 {
     
     UIView *back;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation PDBaseNewsDetailCell
+@implementation PDNewsDetailCell
 
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
