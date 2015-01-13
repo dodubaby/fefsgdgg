@@ -290,30 +290,16 @@ static inline NSString* cachePathForKey(NSString* directory, NSString* key) {
 #if TARGET_OS_IPHONE
 
 - (UIImage*)imageForKey:(NSString*)key {
-	UIImage* image = nil;
-	
-	@try {
-		image = [NSKeyedUnarchiver unarchiveObjectWithFile:cachePathForKey(_directory, key)];
-	} @catch (NSException* e) {
-		// Surpress any unarchiving exceptions and continue with nil
-	}
-	
-	return image;
+    return [UIImage imageWithContentsOfFile:cachePathForKey(_directory, key)];
 }
 
 - (void)setImage:(UIImage*)anImage forKey:(NSString*)key {
-	[self setImage:anImage forKey:key withTimeoutInterval:self.defaultTimeoutInterval];
+    [self setImage:anImage forKey:key withTimeoutInterval:self.defaultTimeoutInterval];
 }
 
 - (void)setImage:(UIImage*)anImage forKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval {
-	@try {
-		// Using NSKeyedArchiver preserves all information such as scale, orientation, and the proper image format instead of saving everything as pngs
-		[self setData:[NSKeyedArchiver archivedDataWithRootObject:anImage] forKey:key withTimeoutInterval:timeoutInterval];
-	} @catch (NSException* e) {
-		// Something went wrong, but we'll fail silently.
-	}
+    [self setData:UIImagePNGRepresentation(anImage) forKey:key withTimeoutInterval:timeoutInterval];
 }
-
 
 #else
 

@@ -52,7 +52,7 @@
     
     UIViewController * leftSideDrawerViewController = [[PDLeftViewController alloc] init];
     
-    UIViewController * centerViewController = [[PDCenterViewController alloc] initWithStyle:UITableViewStylePlain];
+    UIViewController * centerViewController = [[PDCenterViewController alloc] init];
     
     UIViewController * rightSideDrawerViewController = [[PDRightViewController alloc] init];
     

@@ -31,6 +31,8 @@
     NSMutableArray *list;
 }
 
+@property (nonatomic,strong) PDModelFoodDetail *foodDetail;
+
 @end
 
 @implementation PDCenterDetailViewController
@@ -38,23 +40,37 @@
 
 - (void)setupData{
     
-    list = [[NSMutableArray alloc] init];
-
-    PDDetailCellItem *item = nil;
-    item = [PDDetailCellItem new];
-    item.cellClazz = [PDCenterDetailCell class];
-    [list addObject:item];
+    if (!list) {
+        list = [[NSMutableArray alloc] init];
+    }
+    
+    [list removeAllObjects];
+    
+    if (_foodDetail.detail_object) {
+        PDDetailCellItem *item = [PDDetailCellItem new];
+        item.cellClazz = [PDCenterDetailCell class];
+        item.data = _foodDetail.detail_object;
+        [list addObject:item];
+    }
     
 
-    item = [PDDetailCellItem new];
-    item.cellClazz = [PDOwnerCell class];
-    [list addObject:item];
+    if (_foodDetail.cook_object) {
+    
+        PDDetailCellItem *item = [PDDetailCellItem new];
+        item.cellClazz = [PDOwnerCell class];
+        item.data = _foodDetail.cook_object;
+        [list addObject:item];
+        
+    }
     
     //PDCommentCell
-    for (int i = 0; i<5; i++) {
-        item = [PDDetailCellItem new];
-        item.cellClazz = [PDCommentCell class];
-        [list addObject:item];
+    if (_foodDetail.message_object) {
+        [_foodDetail.message_object enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PDDetailCellItem *item = [PDDetailCellItem new];
+            item.cellClazz = [PDCommentCell class];
+            item.data = obj;
+            [list addObject:item];
+        }];
     }
 }
 
@@ -65,7 +81,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"肉酱面";
+    //self.navigationItem.title = @"肉酱面";
     
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -73,7 +89,7 @@
     [self setupBackButton];
     [self setupRightMenuButton];
     
-    [self setupData];
+//    [self setupData];
     
     UIView *moreView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 44)];
     
@@ -90,23 +106,30 @@
     
     [seeMore handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
-        
         PDCommentsViewController *vc = [[PDCommentsViewController alloc] init];
+        vc.foodid = self.foodid;
         [self.navigationController pushViewController:vc animated:YES];
-        
     }];
     
     self.tableView.tableFooterView = moreView;
     
+    //
     
-    [[PDHTTPEngine sharedInstance] appDetailWithFoodID:@1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    __weak PDCenterDetailViewController *weakSelf = self;
+    
+    [[PDHTTPEngine sharedInstance] appDetailWithFoodID:self.foodid success:^(AFHTTPRequestOperation *operation, PDModelFoodDetail * foodDetail) {
+        
+        NSLog(@"%@",foodDetail);
+        
+        weakSelf.foodDetail = foodDetail;
+        
+        [weakSelf setupData];
+        [weakSelf.tableView reloadData];
         //
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
     }];
 }
-
-
 
 -(void)setupRightMenuButton{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -146,7 +169,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     PDDetailCellItem *item = list[indexPath.row];
-    return [item.cellClazz cellHeightWithData:nil];
+    return [item.cellClazz cellHeightWithData:item.data];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,9 +181,9 @@
         cell = [[item.cellClazz alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass(item.cellClazz)];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    //cell.textLabel.text = list[indexPath.row];
+
     cell.delegate = self;
-    [cell setData:nil];
+    [cell setData:item.data];
     
     if ([cell isKindOfClass:[PDCommentCell class]]) {
         PDCommentCell *commentCell = (PDCommentCell *)cell;
@@ -253,6 +276,8 @@
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell commentWithData:(id)data{
 
     PDCommentsInputViewController *vc = [[PDCommentsInputViewController alloc] init];
+    vc.foodid = self.foodid;
+    vc.cookerid = _foodDetail.cook_object.cooker_id;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

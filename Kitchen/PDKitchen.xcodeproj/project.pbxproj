@@ -50,9 +50,16 @@
 		32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C121A441A9F00ABC8B0 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32868C171A441A9F00ABC8B0 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		32C43DD21A65623400434499 /* PDModelCoupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C43DD11A65623400434499 /* PDModelCoupon.m */; };
+		32C43DD51A6564E700434499 /* PDBaseNewsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C43DD41A6564E700434499 /* PDBaseNewsDetailCell.m */; };
 		32C44C811A62A41100415AB0 /* PDModelCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C801A62A41100415AB0 /* PDModelCode.m */; };
 		32C44C851A62A49800415AB0 /* PDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C841A62A49800415AB0 /* PDModel.m */; };
 		32C44C891A62BD0000415AB0 /* PDAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C44C881A62BD0000415AB0 /* PDAccountManager.m */; };
+		32C7F3DA1A64F4AC0011C580 /* PDModelFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7F3D91A64F4AC0011C580 /* PDModelFood.m */; };
+		32C7F3DD1A64F9520011C580 /* PDModelFoodDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7F3DC1A64F9520011C580 /* PDModelFoodDetail.m */; };
+		32C7F3E01A64FA560011C580 /* PDModelCooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7F3DF1A64FA560011C580 /* PDModelCooker.m */; };
+		32C7F3E31A64FA9E0011C580 /* PDModelMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7F3E21A64FA9E0011C580 /* PDModelMessage.m */; };
+		32C7F40A1A653A0C0011C580 /* PDModelNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7F4091A653A0C0011C580 /* PDModelNews.m */; };
 		32CA7A7B1A5D0E5000BB8CAF /* PDBaseTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */; };
 		32CA7A7F1A5D1B4100BB8CAF /* PDAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CA7A7E1A5D1B4100BB8CAF /* PDAddressCell.m */; };
 		32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB0A1A46FC400057EDF6 /* PDOrderCell.m */; };
@@ -205,12 +212,26 @@
 		32868C141A441A9F00ABC8B0 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
 		32868C161A441A9F00ABC8B0 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 		32868C171A441A9F00ABC8B0 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		32C43DD01A65623400434499 /* PDModelCoupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelCoupon.h; sourceTree = "<group>"; };
+		32C43DD11A65623400434499 /* PDModelCoupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelCoupon.m; sourceTree = "<group>"; };
+		32C43DD31A6564E700434499 /* PDBaseNewsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseNewsDetailCell.h; sourceTree = "<group>"; };
+		32C43DD41A6564E700434499 /* PDBaseNewsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseNewsDetailCell.m; sourceTree = "<group>"; };
 		32C44C7F1A62A41100415AB0 /* PDModelCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelCode.h; sourceTree = "<group>"; };
 		32C44C801A62A41100415AB0 /* PDModelCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelCode.m; sourceTree = "<group>"; };
 		32C44C831A62A49800415AB0 /* PDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModel.h; sourceTree = "<group>"; };
 		32C44C841A62A49800415AB0 /* PDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModel.m; sourceTree = "<group>"; };
 		32C44C871A62BD0000415AB0 /* PDAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAccountManager.h; sourceTree = "<group>"; };
 		32C44C881A62BD0000415AB0 /* PDAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAccountManager.m; sourceTree = "<group>"; };
+		32C7F3D81A64F4AC0011C580 /* PDModelFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelFood.h; sourceTree = "<group>"; };
+		32C7F3D91A64F4AC0011C580 /* PDModelFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelFood.m; sourceTree = "<group>"; };
+		32C7F3DB1A64F9520011C580 /* PDModelFoodDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelFoodDetail.h; sourceTree = "<group>"; };
+		32C7F3DC1A64F9520011C580 /* PDModelFoodDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelFoodDetail.m; sourceTree = "<group>"; };
+		32C7F3DE1A64FA560011C580 /* PDModelCooker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelCooker.h; sourceTree = "<group>"; };
+		32C7F3DF1A64FA560011C580 /* PDModelCooker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelCooker.m; sourceTree = "<group>"; };
+		32C7F3E11A64FA9E0011C580 /* PDModelMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelMessage.h; sourceTree = "<group>"; };
+		32C7F3E21A64FA9E0011C580 /* PDModelMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelMessage.m; sourceTree = "<group>"; };
+		32C7F4081A653A0C0011C580 /* PDModelNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDModelNews.h; sourceTree = "<group>"; };
+		32C7F4091A653A0C0011C580 /* PDModelNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDModelNews.m; sourceTree = "<group>"; };
 		32CA7A791A5D0E5000BB8CAF /* PDBaseTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBaseTextView.h; sourceTree = "<group>"; };
 		32CA7A7A1A5D0E5000BB8CAF /* PDBaseTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBaseTextView.m; sourceTree = "<group>"; };
 		32CA7A7D1A5D1B4100BB8CAF /* PDAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAddressCell.h; sourceTree = "<group>"; };
@@ -835,6 +856,18 @@
 				32868C071A44174100ABC8B0 /* PDBaseModel.m */,
 				32C44C7F1A62A41100415AB0 /* PDModelCode.h */,
 				32C44C801A62A41100415AB0 /* PDModelCode.m */,
+				32C7F3D81A64F4AC0011C580 /* PDModelFood.h */,
+				32C7F3D91A64F4AC0011C580 /* PDModelFood.m */,
+				32C7F3DE1A64FA560011C580 /* PDModelCooker.h */,
+				32C7F3DF1A64FA560011C580 /* PDModelCooker.m */,
+				32C7F3E11A64FA9E0011C580 /* PDModelMessage.h */,
+				32C7F3E21A64FA9E0011C580 /* PDModelMessage.m */,
+				32C7F3DB1A64F9520011C580 /* PDModelFoodDetail.h */,
+				32C7F3DC1A64F9520011C580 /* PDModelFoodDetail.m */,
+				32C7F4081A653A0C0011C580 /* PDModelNews.h */,
+				32C7F4091A653A0C0011C580 /* PDModelNews.m */,
+				32C43DD01A65623400434499 /* PDModelCoupon.h */,
+				32C43DD11A65623400434499 /* PDModelCoupon.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -935,6 +968,8 @@
 				32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */,
 				32D0E88A1A41A0A000D1F190 /* PDNewsViewController.h */,
 				32D0E88B1A41A0A000D1F190 /* PDNewsViewController.m */,
+				32C43DD31A6564E700434499 /* PDBaseNewsDetailCell.h */,
+				32C43DD41A6564E700434499 /* PDBaseNewsDetailCell.m */,
 				32D0E88D1A41A0B500D1F190 /* PDNewsDetailViewController.h */,
 				32D0E88E1A41A0B500D1F190 /* PDNewsDetailViewController.m */,
 			);
@@ -1148,6 +1183,7 @@
 				32868C1A1A441A9F00ABC8B0 /* EGOImageLoadConnection.m in Sources */,
 				32D0E8A41A4278FB00D1F190 /* PDNewsCell.m in Sources */,
 				32D0E85C1A416B1C00D1F190 /* UIControl+Utils.m in Sources */,
+				32C7F3E01A64FA560011C580 /* PDModelCooker.m in Sources */,
 				32C44C811A62A41100415AB0 /* PDModelCode.m in Sources */,
 				32868C081A44174100ABC8B0 /* PDBaseModel.m in Sources */,
 				32D0E8661A416D9600D1F190 /* UIScrollView+SVPullToRefresh.m in Sources */,
@@ -1160,6 +1196,7 @@
 				32D0E85E1A416B1C00D1F190 /* UIActionSheet+Utils.m in Sources */,
 				32D0E82F1A41603E00D1F190 /* UIViewController+MMDrawerController.m in Sources */,
 				32D0E8011A41601200D1F190 /* AFHTTPRequestOperationManager.m in Sources */,
+				32C7F3E31A64FA9E0011C580 /* PDModelMessage.m in Sources */,
 				32D0E8761A417B1E00D1F190 /* PDRightViewController.m in Sources */,
 				32D0E8201A41602200D1F190 /* UIProgressView+AFNetworking.m in Sources */,
 				32D0E8031A41601200D1F190 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1177,9 +1214,11 @@
 				326CB71D1A4282DC00D2BADE /* PDRightFooterView.m in Sources */,
 				32D0E81E1A41602200D1F190 /* UIButton+AFNetworking.m in Sources */,
 				32CBFB2A1A470A730057EDF6 /* PDOrderLogisticsView.m in Sources */,
+				32C43DD21A65623400434499 /* PDModelCoupon.m in Sources */,
 				32D0E81C1A41602200D1F190 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				32D0E8041A41601200D1F190 /* AFSecurityPolicy.m in Sources */,
 				32D0E8821A419B5800D1F190 /* PDCenterCell.m in Sources */,
+				32C43DD51A6564E700434499 /* PDBaseNewsDetailCell.m in Sources */,
 				32868C1C1A441A9F00ABC8B0 /* EGOImageView.m in Sources */,
 				32D0E8651A416D9600D1F190 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				32D0E89E1A41A1E200D1F190 /* PDAddressViewController.m in Sources */,
@@ -1202,6 +1241,7 @@
 				32D0E8021A41601200D1F190 /* AFHTTPSessionManager.m in Sources */,
 				32D0E81D1A41602200D1F190 /* UIAlertView+AFNetworking.m in Sources */,
 				32C44C891A62BD0000415AB0 /* PDAccountManager.m in Sources */,
+				32C7F3DD1A64F9520011C580 /* PDModelFoodDetail.m in Sources */,
 				32D0E8061A41601200D1F190 /* AFURLRequestSerialization.m in Sources */,
 				32D0E8701A417AFE00D1F190 /* PDCenterViewController.m in Sources */,
 				32D0E87C1A41865500D1F190 /* DemoViewController.m in Sources */,
@@ -1220,8 +1260,10 @@
 				326CB7261A4298D900D2BADE /* PDCommentsViewController.m in Sources */,
 				32CA7A7F1A5D1B4100BB8CAF /* PDAddressCell.m in Sources */,
 				32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */,
+				32C7F3DA1A64F4AC0011C580 /* PDModelFood.m in Sources */,
 				32D0E8551A416A6D00D1F190 /* UIView+Utils.m in Sources */,
 				3274DDA31A52A8A10079D176 /* UIImage+Utils.m in Sources */,
+				32C7F40A1A653A0C0011C580 /* PDModelNews.m in Sources */,
 				32F97B371A4ABF540052B2D3 /* LoveTopTipView.m in Sources */,
 				32D0E88F1A41A0B500D1F190 /* PDNewsDetailViewController.m in Sources */,
 				32D0E7C81A415E7C00D1F190 /* main.m in Sources */,

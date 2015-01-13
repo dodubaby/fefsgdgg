@@ -14,6 +14,6 @@
 @property (nonatomic,strong) NSNumber *code;
 @property (nonatomic,strong) NSString *err_msg;
 
-@property (nonatomic,strong) id data;
+//@property (nonatomic,strong) id data;
 
 @end

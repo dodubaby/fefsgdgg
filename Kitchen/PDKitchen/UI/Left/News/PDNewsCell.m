@@ -14,7 +14,7 @@
     
     UIView *back;
     
-    UIImageView *thumbnail;
+    EGOImageView *thumbnail;
     UIImageView *mark;
     
     UILabel *name;
@@ -42,7 +42,9 @@
         
         NSLog(@"self.width == %f",self.width);
         
-        thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 130)];
+        thumbnail = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_food"]];
+        thumbnail.frame = CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 130);
+        
         [self addSubview:thumbnail];
         thumbnail.backgroundColor = [UIColor clearColor];
         thumbnail.layer.borderWidth = 0.5f;
@@ -53,7 +55,7 @@
         mark.backgroundColor = [UIColor clearColor];
         mark.image = [UIImage imageNamed:@"news_mark"];
         
-        name = [[UILabel alloc] initWithFrame:CGRectMake(2*kCellLeftGap, thumbnail.bottom+kCellLeftGap, 120, 20)];
+        name = [[UILabel alloc] initWithFrame:CGRectMake(2*kCellLeftGap, thumbnail.bottom+kCellLeftGap, 220, 20)];
         [self addSubview:name];
         name.font = [UIFont systemFontOfSize:15];
         name.textColor = [UIColor colorWithHexString:@"#666666"];
@@ -77,9 +79,19 @@
 
 -(void)configData:(id)data{
     
-    name.text = @"怎样做用户喜欢？";
-    time.text = @"三天前";
+    PDModelNews *news = (PDModelNews *)data;
+    
+    name.text = news.title;
+    time.text = news.time_str;
     time.right = kAppWidth - 35;
+    
+    if (news.img) {
+        thumbnail.imageURL = [NSURL URLWithString:news.img];
+    }
+    
+//    name.text = @"怎样做用户喜欢？";
+//    time.text = @"三天前";
+//    time.right = kAppWidth - 35;
     //[self showDebugRect];
 }
 

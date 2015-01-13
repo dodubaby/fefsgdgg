@@ -10,12 +10,12 @@
 
 @implementation PDBaseModel
 
-+(JSONJoy*)jsonMapper
-{
-    JSONJoy* mapper = [[JSONJoy alloc] initWithClass:[self class]];
-    // !!!必要时指定array元素类型
-    //[mapper addArrayClassMap:@"photos" class:[Photo class]];
-    return mapper;
-}
+//+(JSONJoy*)jsonMapper
+//{
+//    JSONJoy* mapper = [[JSONJoy alloc] initWithClass:[self class]];
+//    // !!!必要时指定array元素类型
+//    //[mapper addArrayClassMap:@"photos" class:[Photo class]];
+//    return mapper;
+//}
 
 @end

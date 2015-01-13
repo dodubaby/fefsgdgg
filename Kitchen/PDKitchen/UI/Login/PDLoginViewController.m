@@ -77,7 +77,9 @@
                 //
                 self.code = code;
                 
-                codeField.text = [self.code stringValue];
+                if (self.code) {
+                    codeField.text = [self.code stringValue];
+                }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //
@@ -109,18 +111,17 @@
     
     [loginButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
-        
-        [[PDHTTPEngine sharedInstance] loginWithType:@1 phone:phoneField.text account:nil verification:self.code success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //
-            
-            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            [delegate removeLogin];
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //
-        }];
-        
-
+        if ([codeField.text length]>0) {
+            [[PDHTTPEngine sharedInstance] loginWithType:@1 phone:phoneField.text account:nil verification:self.code success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //
+                
+                AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate removeLogin];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //
+            }];
+        }
     }];
     
     UILabel *otherHint = [[UILabel alloc] initWithFrame:CGRectMake(25, loginButton.bottom+115, 0, 0)];

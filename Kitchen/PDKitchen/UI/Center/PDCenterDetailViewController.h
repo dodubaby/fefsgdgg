@@ -11,4 +11,6 @@
 
 @interface PDCenterDetailViewController : PDBaseTableViewController
 
+@property (nonatomic,strong) NSString *foodid;
+
 @end

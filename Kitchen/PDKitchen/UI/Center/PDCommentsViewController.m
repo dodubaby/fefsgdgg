@@ -11,10 +11,11 @@
 
 
 @interface PDCommentsViewController()
-
 {
-    NSMutableArray *list;
+
 }
+@property (nonatomic,strong) NSMutableArray *dataList;
+@property (nonatomic,assign) int currentPage;
 
 @end
 
@@ -22,12 +23,7 @@
 
 
 - (void)setupData{
-    
-    list = [[NSMutableArray alloc] init];
-    
-    [list addObject:@"小炒肉"];
-    [list addObject:@"小鸡炖蘑菇"];
-    [list addObject:@"北京烤鸭"];
+    _dataList = [[NSMutableArray alloc] init];
 }
 
 - (void)viewDidLoad {
@@ -39,22 +35,54 @@
     [self setupBackButton];
     [self setupData];
     
+    __weak PDCommentsViewController *weakSelf = self;
+    
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        weakSelf.currentPage = 0;
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
-        [[PDHTTPEngine sharedInstance] messageAllWithFoodid:@2 page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] messageAllWithFoodid:weakSelf.foodid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            [weakSelf.dataList removeAllObjects];
+            [weakSelf.dataList addObjectsFromArray:list];
+            [weakSelf.tableView reloadData];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
         }];
-        
     }];
     
     //
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         //
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+        
+        [[PDHTTPEngine sharedInstance] messageAllWithFoodid:weakSelf.foodid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            if (list.count>0) {
+                [weakSelf.dataList addObjectsFromArray:list];
+                [weakSelf.tableView reloadData];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        }];
+        
     }];
+    
+    [self.tableView triggerPullToRefresh];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -64,11 +92,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return list.count;
+    return _dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [PDCommentCell cellHeightWithData:nil];
+    return [PDCommentCell cellHeightWithData:_dataList[indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,8 +106,7 @@
     if (!cell) {
         cell = [[PDCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
-    //cell.textLabel.text = list[indexPath.row];
-    [cell setData:nil];
+    [cell setData:_dataList[indexPath.row]];
     
     if (indexPath.row == 0) {
         [cell hiddenLine:YES];

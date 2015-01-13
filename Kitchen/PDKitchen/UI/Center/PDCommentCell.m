@@ -60,18 +60,33 @@
 
 -(void)configData:(id)data{
 
-    name.text = @"138xxxx8090";
-    time.text = @"5分钟前";
     
-    content.text = kCellContent;
+    PDModelMessage *message = (PDModelMessage *)data;
+    
+    name.text = message.phone;
+    time.text = message.time_str;
+    
+    content.width = kAppWidth-4*kCellLeftGap;
+    content.text = message.content;
     [content sizeToFit];
+
+    
+//    name.text = @"138xxxx8090";
+//    time.text = @"5分钟前";
+//    
+//    content.text = kCellContent;
+//    [content sizeToFit];
+    
+    //[self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
     
+    PDModelMessage *message = (PDModelMessage *)data;
+    
     CGFloat h = 3*kCellLeftGap+20;
     
-    CGSize size= [kCellContent sizeWithFontCompatible:[UIFont systemFontOfSize:13]
+    CGSize size= [message.content sizeWithFontCompatible:[UIFont systemFontOfSize:13]
                                              constrainedToSize:CGSizeMake(kAppWidth-4*kCellLeftGap, MAXFLOAT)
                                         lineBreakMode:NSLineBreakByWordWrapping];
                   

@@ -9,5 +9,5 @@
 #import "PDBaseTableViewController.h"
 
 @interface PDCommentsViewController : PDBaseTableViewController
-
+@property (nonatomic,strong) NSString *foodid;
 @end

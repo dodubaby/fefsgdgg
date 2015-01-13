@@ -15,8 +15,12 @@
 
 @interface PDCenterViewController ()<PDBaseTableViewCellDelegate>
 {
-    NSMutableArray *list;
+    
 }
+
+@property (nonatomic,strong) NSMutableArray *dataList;
+
+@property (nonatomic,assign) int currentPage;
 
 @end
 
@@ -24,13 +28,7 @@
 
 
 - (void)setupData{
-
-    list = [[NSMutableArray alloc] init];
-    [list addObject:@"小炒肉"];
-    [list addObject:@"小鸡炖蘑菇"];
-    [list addObject:@"北京烤鸭"];
-    
-    //[self.navigationController.navigationBar showDebugRect];
+    _dataList = [[NSMutableArray alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -42,7 +40,6 @@
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
     
-
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_logo"]];
     self.navigationItem.titleView = logo;
     
@@ -52,22 +49,55 @@
     [self setupRightMenuButton];
     [self setupData];
     
+    __weak PDCenterViewController *weakSelf = self;
+    
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        weakSelf.currentPage = 0;
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         NSString *loc = @"116.316376,39.952912";
-        NSNumber *p = @0;
-        [[PDHTTPEngine sharedInstance] appHomeWithLocation:loc page:p success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [[PDHTTPEngine sharedInstance] appHomeWithLocation:loc page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            [weakSelf.dataList removeAllObjects];
+            [weakSelf.dataList addObjectsFromArray:list];
+            [weakSelf.tableView reloadData];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
         }];
     }];
     
-    //
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        //
+        
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+        
+        NSString *loc = @"116.316376,39.952912";
+        
+        [[PDHTTPEngine sharedInstance] appHomeWithLocation:loc page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            if (list.count>0) {
+                [weakSelf.dataList addObjectsFromArray:list];
+                [weakSelf.tableView reloadData];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        }];
     }];
+    
+    [self.tableView triggerPullToRefresh];
 }
 
 -(void)setupLeftMenuButton{
@@ -78,12 +108,6 @@
     [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
-    
-//    UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"center_menu"]
-//                                                                          style:UIBarButtonItemStylePlain
-//                                                                         target:self
-//                                                                         action:@selector(leftDrawerButtonPress:)];
-//    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
 }
 
 -(void)setupRightMenuButton{
@@ -93,12 +117,6 @@
     [button addTarget:self action:@selector(rightDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * rightDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
-    
-//    UIBarButtonItem * rightDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"center_order"]
-//                                                                                 style:UIBarButtonItemStylePlain
-//                                                                                target:self
-//                                                                                action:@selector(rightDrawerButtonPress:)];
-//    [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
 }
 
 #pragma mark - Button Handlers
@@ -117,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return list.count;
+    return _dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -130,7 +148,7 @@
         cell = [[PDCenterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
     //cell.textLabel.text = list[indexPath.row];
-    [cell setData:nil];
+    [cell setData:_dataList[indexPath.row]];
     cell.delegate = self;
     return cell;
 }
@@ -139,7 +157,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     PDCenterDetailViewController *vc = [[PDCenterDetailViewController alloc] init];
-    vc.title = @"详情";
+    PDModelFood *food = _dataList[indexPath.row];
+    vc.title = food.food_name;
+    vc.foodid = food.food_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

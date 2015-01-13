@@ -67,17 +67,35 @@
 
 -(void)configData:(id)data{
     
-    name.text = @"红烧鸡腿";
-    price.text = @"¥23.5";
+    
+    PDModelFood *food = (PDModelFood *)data;
+    
+    name.text = food.food_name;
+    
+    price.text = [NSString stringWithFormat:@"¥%@",food.price];
     [price sizeToFit];
     price.right = kAppWidth - kCellLeftGap;
-    //    person.text = @"person";
-    [person sizeToFit];
-    from.text = @"大胡子";
+
+    if (food.food_img) {
+        thumbnail.imageURL = [NSURL URLWithString:food.food_img];
+    }
     
-    thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
-    avatar.image = [UIImage imageNamed:@"厨师.jpg"];
+    if (food.cooker_img) {
+        avatar.imageURL = [NSURL URLWithString:food.cooker_img];
+    }
     
+    /*
+     name.text = @"红烧鸡腿";
+     price.text = @"¥23.5";
+     [price sizeToFit];
+     price.right = kAppWidth - kCellLeftGap;
+     //    person.text = @"person";
+     [person sizeToFit];
+     from.text = @"大胡子";
+     
+     thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
+     avatar.image = [UIImage imageNamed:@"厨师.jpg"];
+     */
     //[self showDebugRect];
 }
 

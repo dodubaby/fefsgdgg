@@ -51,14 +51,26 @@
 
 -(void)configData:(id)data{
     
-    price.text = @"10元";
+    PDModelCoupon *coupon = data;
+    
+    price.text = [NSString stringWithFormat:@"¥%@",coupon.price];
     [price sizeToFit];
     price.top = (back.height - price.height)/2;
     
-    status.text = @"1天后过期";
+    status.text = coupon.time_str;
     [status sizeToFit];
     status.top = (back.height - price.height)/2;
     status.right = back.width - kCellLeftGap;
+    
+    
+//    price.text = @"10元";
+//    [price sizeToFit];
+//    price.top = (back.height - price.height)/2;
+//    
+//    status.text = @"1天后过期";
+//    [status sizeToFit];
+//    status.top = (back.height - price.height)/2;
+//    status.right = back.width - kCellLeftGap;
     
     //[self showDebugRect];
 }

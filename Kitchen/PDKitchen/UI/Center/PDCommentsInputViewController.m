@@ -42,6 +42,18 @@
     textView.layer.borderWidth = 0.5f;
     textView.clipsToBounds = YES;
     
+    
+    //self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    //修复textView位置错误
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        UIEdgeInsets insets = textView.contentInset;
+        insets.top = self.navigationController.navigationBar.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height-64;
+        textView.contentInset = insets;
+        textView.scrollIndicatorInsets = insets;
+    }
+    
     UIButton *submit = [[UIButton alloc] initWithFrame:CGRectMake(10, textView.bottom+20, kAppWidth - 20, 40)];
     [self.view addSubview:submit];
     UIImage *image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#c14a41"] size:submit.size];
@@ -54,17 +66,24 @@
     submit.clipsToBounds = YES;
     [submit handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
-        self.foodid = @1;
-        self.cookerid = @1;
+        if ([self userLogined]) {
         
-        NSString *userid = [PDAccountManager sharedInstance].userid;
-        
-        
-        [[PDHTTPEngine sharedInstance] messageAddwithUserid:userid foodid:self.foodid cookerid:self.cookerid text:@"111" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //
-        }];
+            if ([textView.text length]==0) {
+                return ;
+            }
+            
+            NSString *userid = [PDAccountManager sharedInstance].userid;
+            [[PDHTTPEngine sharedInstance] messageAddwithUserid:userid foodid:self.foodid cookerid:self.cookerid text:textView.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //
+                NSLog(@"发送成功");
+
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //
+                NSLog(@"发送失败");
+            }];
+        }
     }];
     
     //[self.view showDebugRect];

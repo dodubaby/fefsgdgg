@@ -125,6 +125,25 @@
 
 -(void)configData:(id)data{
     
+    PDModelFood *food = (PDModelFood *)data;
+    
+    name.text = food.food_name;
+    person.text = [NSString stringWithFormat:@"%@人吃过",food.eat_sum];
+    
+    like.text = [NSString stringWithFormat:@"%@人",food.like_sum ];
+    
+    price.text = [NSString stringWithFormat:@"¥%@",food.price];
+    [price sizeToFit];
+    price.right = kAppWidth - 2*kCellLeftGap;
+    
+    
+    if (food.food_img) {
+        thumbnail.imageURL = [NSURL URLWithString:food.food_img];
+    }
+    
+
+    
+    /*
     name.text = @"肉酱面";
     person.text = @"4234人吃过";
     like.text = @"235人";
@@ -135,6 +154,7 @@
     
     thumbnail.image = [UIImage imageNamed:@"菜1.jpg"];
 
+     */
     //[self showDebugRect];
 }
 

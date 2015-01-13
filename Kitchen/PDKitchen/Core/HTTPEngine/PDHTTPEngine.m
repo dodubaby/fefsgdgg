@@ -137,7 +137,7 @@
 
 -(void)appHomeWithLocation:(NSString *)location
                       page:(NSNumber *)page
-                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                   success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -153,11 +153,20 @@
         NSLog(@"result   %@",result);
         
         long code = [result[@"code"] intValue];
-        NSArray *list = result[@"data"];
         NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            //PDModelFood *fd = [PDModelFood fromJson:obj];
+            PDModelFood *fd = [PDModelFood objectWithJoy:obj];
+            if (fd) {
+                [arr addObject:fd];
+            }
+        }];
         
         if (code == 0) {
-            success(operation,list);
+            success(operation,arr);
         }else{
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
@@ -174,8 +183,8 @@
 }
 
 // 详情
-- (void)appDetailWithFoodID:(NSNumber *)foodid
-                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+- (void)appDetailWithFoodID:(NSString *)foodid
+                    success:(void (^)(AFHTTPRequestOperation *operation, PDModelFoodDetail * foodDetail))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     
@@ -185,20 +194,23 @@
     [_HTTPEngine GET:kPathOfAppDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         
-        PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
+        
         
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
-        //        int code = [result[@"Header"][@"Code"] intValue];
-        //        NSString *msg = result[@"Header"][@"Message"];
-        //        if (code == 200) {
-        //            success(operation,responseObject);
-        //        }else{
-        //            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
-        //            failure(operation,err);
-        //        }
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSDictionary *data = result[@"data"];
         
+        if (code == 0) {
+            //PDModelFoodDetail *detail = [PDModelFoodDetail fromJson:data];
+            PDModelFoodDetail *detail = [PDModelFoodDetail objectWithJoy:data];
+            success(operation,detail);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
@@ -232,8 +244,8 @@
 }
 
 - (void)messageAddwithUserid:(NSString *)userid
-                      foodid:(NSNumber *)foodid
-                    cookerid:(NSNumber *)cookerid
+                      foodid:(NSString *)foodid
+                    cookerid:(NSString *)cookerid
                         text:(NSString *)text
                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
@@ -252,26 +264,23 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
-        //        int code = [result[@"Header"][@"Code"] intValue];
-        //        NSString *msg = result[@"Header"][@"Message"];
-        //        if (code == 200) {
-        //            success(operation,responseObject);
-        //        }else{
-        //            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
-        //            failure(operation,err);
-        //        }
-        
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        if (code == 0) {
+            success(operation,responseObject);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        
         NSLog(@"%@",error);
-        
         failure(operation,error);
     }];
 }
 
 // 留言列表
--(void)messageAllWithFoodid:(NSNumber *)foodid
+-(void)messageAllWithFoodid:(NSString *)foodid
                        page:(NSNumber *)page
                     success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
@@ -287,23 +296,29 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
-        //        int code = [result[@"Header"][@"Code"] intValue];
-        //        NSString *msg = result[@"Header"][@"Message"];
-        //        if (code == 200) {
-        //            success(operation,responseObject);
-        //        }else{
-        //            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
-        //            failure(operation,err);
-        //        }
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
         
+        if (code ==0) {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelMessage *message = [PDModelMessage objectWithJoy:obj];
+                if (message) {
+                    [arr addObject:message];
+                }
+            }];
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        
         NSLog(@"%@",error);
         
         failure(operation,error);
     }];
-    
 }
 
 -(void)cartAddWithUserid:(NSString *)userid
@@ -631,6 +646,25 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            //PDModelFood *fd = [PDModelFood fromJson:obj];
+            PDModelFood *fd = [PDModelFood objectWithJoy:obj];
+            if (fd) {
+                [arr addObject:fd];
+            }
+        }];
+        
+        if (code == 0) {
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
@@ -702,6 +736,25 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PDModelCoupon *cp = [PDModelCoupon objectWithJoy:obj];
+            if (cp) {
+                [arr addObject:cp];
+            }
+        }];
+        
+        if (code == 0) {
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
@@ -724,6 +777,24 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PDModelNews *news = [PDModelNews objectWithJoy:obj];
+            if (news) {
+                [arr addObject:news];
+            }
+        }];
+        if (code == 0) {
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
@@ -736,7 +807,7 @@
 
 -(void)newsDetailWithUserid:(NSString *)userid
                     news_id:(NSNumber *)news_id
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                    success:(void (^)(AFHTTPRequestOperation *operation, PDModelNews *newsDetail))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
@@ -745,7 +816,17 @@
     [_HTTPEngine GET:kPathOfNewsDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
-        
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSDictionary *data = result[@"data"];
+    
+        if (code == 0) {
+            PDModelNews *news = [PDModelNews objectWithJoy:data];
+            success(operation,news);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         

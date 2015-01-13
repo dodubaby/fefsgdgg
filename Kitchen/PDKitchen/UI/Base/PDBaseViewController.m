@@ -20,8 +20,11 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+//    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
+    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

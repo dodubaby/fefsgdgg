@@ -19,6 +19,14 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    //修复下拉刷新位置错误
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        UIEdgeInsets insets = self.tableView.contentInset;
+        insets.top = self.navigationController.navigationBar.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+        self.tableView.contentInset = insets;
+        self.tableView.scrollIndicatorInsets = insets;
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -26,7 +34,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
 
 -(void)backButtonTaped:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];

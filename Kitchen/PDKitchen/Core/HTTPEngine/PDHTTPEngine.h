@@ -12,7 +12,8 @@
 #import "AFNetworking.h"
 #import "JSONJoy.h"
 #import "Lockbox.h"
-#import "PDBaseModel.h"
+
+#import "PDModel.h"
 
 #import "PDAccountManager.h"
 // API path
@@ -137,8 +138,8 @@
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 详情
-- (void)appDetailWithFoodID:(NSNumber *)foodid
-                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+- (void)appDetailWithFoodID:(NSString *)foodid
+                     success:(void (^)(AFHTTPRequestOperation *operation, PDModelFoodDetail * foodDetail))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 点赞
@@ -149,14 +150,14 @@
 
 // 评论
 - (void)messageAddwithUserid:(NSString *)userid
-                      foodid:(NSNumber *)foodid
-                    cookerid:(NSNumber *)cookerid
+                      foodid:(NSString *)foodid
+                    cookerid:(NSString *)cookerid
                         text:(NSString *)text
                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 留言列表
--(void)messageAllWithFoodid:(NSNumber *)foodid
+-(void)messageAllWithFoodid:(NSString *)foodid
                        page:(NSNumber *)page
                     success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
@@ -287,7 +288,7 @@ phone	string	Y	联系电话
 // 消息详情
 -(void)newsDetailWithUserid:(NSString *)userid
                     news_id:(NSNumber *)news_id
-                 success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                 success:(void (^)(AFHTTPRequestOperation *operation, PDModelNews *newsDetail))success
                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // 删除消息
 -(void)newsDelWithUserid:(NSString *)userid

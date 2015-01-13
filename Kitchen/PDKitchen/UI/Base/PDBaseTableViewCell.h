@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PDUtils.h"
+#import "PDModel.h"
 #import "UIKit+AFNetworking.h"
 
 

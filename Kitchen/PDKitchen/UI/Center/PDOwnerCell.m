@@ -152,13 +152,16 @@
 
 -(void)configData:(id)data{
     
-    name.text = @"超级大厨";
-    
-    age.text = @"43";
-    hometown.text = @"四川";
-    skill.text = @"川菜湘菜";
-    avatar.image = [UIImage imageNamed:@"厨师.jpg"];
-    about.text = kCellContent;
+    PDModelCooker *cooker = (PDModelCooker *)data;
+    name.text = cooker.cooker_name;
+    age.text = cooker.age;
+    hometown.text = cooker.cooker_from;
+    skill.text = cooker.specialty;//@"川菜湘菜";
+    //avatar.image = [UIImage imageNamed:@"厨师.jpg"];
+    if (cooker.img) {
+        avatar.imageURL = [NSURL URLWithString:cooker.img];
+    }
+    about.text = cooker.about;
     [about sizeToFit];
     
     line.top = about.bottom +12;
@@ -173,6 +176,9 @@
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
+    
+    PDModelCooker *cooker = (PDModelCooker *)data;
+    
     CGFloat h = 0;
     
     // 电话高度
@@ -182,7 +188,7 @@
     h = h + 15 +45 + 10;
     
     // 介绍高度
-    CGSize size= [kCellContent sizeWithFontCompatible:[UIFont systemFontOfSize:12]
+    CGSize size= [cooker.about sizeWithFontCompatible:[UIFont systemFontOfSize:12]
                                     constrainedToSize:CGSizeMake(kAppWidth-2*kCellLeftGap-35-10, MAXFLOAT)
                                         lineBreakMode:NSLineBreakByWordWrapping];
     h = h + size.height + 10;
