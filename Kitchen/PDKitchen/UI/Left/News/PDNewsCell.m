@@ -71,7 +71,12 @@
         removeButton.top = thumbnail.bottom+kCellLeftGap;
         removeButton.right = kAppWidth - kCellLeftGap;
         [self addSubview:removeButton];
-        
+        [removeButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            //
+            if(self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:deleteNewsWithData:)]){
+                [self.delegate pdBaseTableViewCellDelegate:self deleteNewsWithData:self.data];
+            }
+        }];
     }
     
     return self;

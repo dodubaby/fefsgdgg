@@ -12,8 +12,9 @@
 #import "SVPullToRefresh.h"
 #import "PDHTTPEngine.h"
 #import "UIViewController+MMDrawerController.h"
+#import "PDBaseTableViewCell.h"
 
-@interface PDBaseTableViewController : UITableViewController
+@interface PDBaseTableViewController : UITableViewController<PDBaseTableViewCellDelegate>
 
 -(void)backButtonTaped:(id)sender;
 -(void)setupBackButton;

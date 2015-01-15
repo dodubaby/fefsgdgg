@@ -93,8 +93,11 @@
     [_window makeKeyAndVisible];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLogin) name:kShowLoginNotificationKey object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kShowLoginNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        [self showLogin];
+        
+    }];
     
     return YES;
 }
@@ -106,17 +109,21 @@
     // 禁止滑动
     [_drawerController setPanDisableSide:MMPanDisableSideBoth];
     
-    
     _loginNavViewController = [[UINavigationController alloc] initWithRootViewController:_loginViewController];
 
     [_window.rootViewController addChildViewController:_loginNavViewController];
     [_window.rootViewController.view addSubview:_loginNavViewController.view];
     
     _loginNavViewController.view.top = kAppHeight;
+    
+    
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    
     [UIView animateWithDuration:0.3 animations:^{
         _loginNavViewController.view.top = 0;
     } completion:^(BOOL finished) {
         
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }];
 }
 

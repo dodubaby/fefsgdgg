@@ -130,4 +130,15 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+//// 删除收藏
+//if ([self userLogined]) {
+//    NSString *userid = [PDAccountManager sharedInstance].userid;
+//    [[PDHTTPEngine sharedInstance] collectDeleteWithUserid:userid food_id:@1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        //
+//        NSLog(@"删除收藏成功");
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        //
+//    }];
+//}
+
 @end

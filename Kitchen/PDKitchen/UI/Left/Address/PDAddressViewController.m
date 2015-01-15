@@ -11,15 +11,22 @@
 
 @interface PDAddressViewController ()
 
+@property (nonatomic,strong) NSMutableArray *dataList;
+
+@property (nonatomic,assign) int currentPage;
+
 @end
 
 @implementation PDAddressViewController
+
+- (void)setupData{
+    _dataList = [[NSMutableArray alloc] init];
+}
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,21 +35,62 @@
     
     [self setupBackButton];
     
+    [self setupData];
+    
+    __weak PDAddressViewController *weakSelf = self;
+    
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        weakSelf.currentPage = 0;
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] addressMyAddressWithUserid:userid page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] addressMyAddressWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            [weakSelf.dataList removeAllObjects];
+            [weakSelf.dataList addObjectsFromArray:list];
+            [weakSelf.tableView reloadData];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
         }];
         
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        //
+        // 高度不够不用加载更多
+        CGFloat h = [PDAddressCell cellHeightWithData:nil]*weakSelf.dataList.count;
+        if (h<weakSelf.tableView.bounds.size.height) {
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            return;
+        }
+        
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] addressMyAddressWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            if (list.count>0) {
+                [weakSelf.dataList addObjectsFromArray:list];
+                [weakSelf.tableView reloadData];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        }];
     }];
+    
+    [self.tableView triggerPullToRefresh];
     
 }
 

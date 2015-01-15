@@ -66,6 +66,8 @@
 		32CBFB211A4709D30057EDF6 /* PDBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB201A4709D30057EDF6 /* PDBaseView.m */; };
 		32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */; };
 		32CBFB2A1A470A730057EDF6 /* PDOrderLogisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFB291A470A730057EDF6 /* PDOrderLogisticsView.m */; };
+		32CC67361A6762E100D81D19 /* PDOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CC67351A6762E100D81D19 /* PDOrderManager.m */; };
+		32CC67391A67662200D81D19 /* PDCartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CC67381A67662200D81D19 /* PDCartManager.m */; };
 		32CCB2D01A45AFB500CB2BA2 /* PDOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */; };
 		32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */; };
 		32CF65B31A5BC47300D2B4C5 /* PDLogisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CF65B21A5BC47300D2B4C5 /* PDLogisticsCell.m */; };
@@ -244,6 +246,10 @@
 		32CBFB261A470A4A0057EDF6 /* PDOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderDetailView.m; sourceTree = "<group>"; };
 		32CBFB281A470A730057EDF6 /* PDOrderLogisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderLogisticsView.h; sourceTree = "<group>"; };
 		32CBFB291A470A730057EDF6 /* PDOrderLogisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderLogisticsView.m; sourceTree = "<group>"; };
+		32CC67341A6762E100D81D19 /* PDOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderManager.h; sourceTree = "<group>"; };
+		32CC67351A6762E100D81D19 /* PDOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderManager.m; sourceTree = "<group>"; };
+		32CC67371A67662200D81D19 /* PDCartManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCartManager.h; sourceTree = "<group>"; };
+		32CC67381A67662200D81D19 /* PDCartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCartManager.m; sourceTree = "<group>"; };
 		32CCB2CE1A45AFB500CB2BA2 /* PDOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderViewController.h; sourceTree = "<group>"; };
 		32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderViewController.m; sourceTree = "<group>"; };
 		32CCB2D11A45B00400CB2BA2 /* PDOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderDetailViewController.h; sourceTree = "<group>"; };
@@ -607,6 +613,10 @@
 			children = (
 				32C44C871A62BD0000415AB0 /* PDAccountManager.h */,
 				32C44C881A62BD0000415AB0 /* PDAccountManager.m */,
+				32CC67371A67662200D81D19 /* PDCartManager.h */,
+				32CC67381A67662200D81D19 /* PDCartManager.m */,
+				32CC67341A6762E100D81D19 /* PDOrderManager.h */,
+				32CC67351A6762E100D81D19 /* PDOrderManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1227,9 +1237,11 @@
 				32D0E8211A41602200D1F190 /* UIRefreshControl+AFNetworking.m in Sources */,
 				32D0E8221A41602200D1F190 /* UIWebView+AFNetworking.m in Sources */,
 				32D0E82E1A41603E00D1F190 /* MMDrawerVisualState.m in Sources */,
+				32CC67361A6762E100D81D19 /* PDOrderManager.m in Sources */,
 				32868C191A441A9F00ABC8B0 /* EGOImageButton.m in Sources */,
 				32D0E8891A41A08000D1F190 /* PDCenterDetailViewController.m in Sources */,
 				32868C181A441A9F00ABC8B0 /* EGOCache.m in Sources */,
+				32CC67391A67662200D81D19 /* PDCartManager.m in Sources */,
 				32CA7A7B1A5D0E5000BB8CAF /* PDBaseTextView.m in Sources */,
 				32F97AF71A4AAF9C0052B2D3 /* PDCommentsInputViewController.m in Sources */,
 				32D0E82C1A41603E00D1F190 /* MMDrawerBarButtonItem.m in Sources */,

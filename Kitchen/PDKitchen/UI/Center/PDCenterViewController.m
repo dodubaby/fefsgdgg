@@ -13,9 +13,11 @@
 #import "PDCenterDetailViewController.h"
 
 
-@interface PDCenterViewController ()<PDBaseTableViewCellDelegate>
+
+@interface PDCenterViewController ()
 {
-    
+    UILabel *badge;
+    UIImageView *newsMark;
 }
 
 @property (nonatomic,strong) NSMutableArray *dataList;
@@ -104,6 +106,41 @@
     }];
     
     [self.tableView triggerPullToRefresh];
+    
+    // 订单商品数量badge
+    [[NSNotificationCenter defaultCenter] addObserverForName:kCartModifyNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        [self setupBadge];
+    }];
+    
+    // 新消息红点
+    [[NSNotificationCenter defaultCenter] addObserverForName:kNewsHideNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        newsMark.hidden = YES;
+    }];
+}
+
+-(void)setupBadge{
+    
+    NSArray *foods = [PDCartManager sharedInstance].cartList;
+    NSInteger c = 0;
+    for (PDModelFood *fd in foods) {
+        c = c + [fd.count integerValue];
+    }
+    if (c>0) {
+        badge.text = [NSString stringWithFormat:@"%ld",c];
+        badge.hidden = NO;
+        
+        [badge sizeToFit];
+        if (badge.width>20) {
+            badge.frame = CGRectMake(10, 0, badge.width+10, 20);
+        }else{
+            badge.frame = CGRectMake(20, 0, 20, 20);
+        }
+    }else{
+        badge.text = nil;
+        badge.hidden = YES;
+    }
 }
 
 -(void)setupLeftMenuButton{
@@ -114,6 +151,13 @@
     [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
+    
+    newsMark = [[UIImageView alloc] initWithFrame:CGRectMake(17, 8, 7, 7)];
+    [button addSubview:newsMark];
+    newsMark.backgroundColor = [UIColor colorWithHexString:@"#fe8501"];
+    newsMark.layer.cornerRadius = 3.5f;
+    newsMark.layer.masksToBounds = YES;
+    newsMark.hidden = NO;
 }
 
 -(void)setupRightMenuButton{
@@ -123,6 +167,20 @@
     [button addTarget:self action:@selector(rightDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * rightDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
+    
+    badge = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 20, 20)];
+    badge.font = [UIFont systemFontOfSize:12];
+    badge.backgroundColor = [UIColor colorWithHexString:@"#fe8501"];
+    badge.textColor = [UIColor whiteColor];
+    badge.textAlignment = NSTextAlignmentCenter;
+    [button addSubview:badge];
+    badge.layer.cornerRadius = 10.0f;
+    badge.layer.borderWidth = 1.0f;
+    badge.layer.borderColor = [UIColor whiteColor].CGColor;
+    badge.layer.masksToBounds = YES;
+    badge.hidden = YES;
+    
+    [self setupBadge];
 }
 
 #pragma mark - Button Handlers
@@ -169,17 +227,25 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
+// 添加购物车
+
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
     NSLog(@"add");
-    if ([self userLogined]) {
-        NSString *userid = [PDAccountManager sharedInstance].userid;
-        NSString *foodids = @"1*2**2*5";
-        [[PDHTTPEngine sharedInstance] cartAddWithUserid:userid foodids:foodids success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-            //
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //
-        }];
-    }
+    
+    [[PDCartManager sharedInstance] addFood:data];
+    
+
+    
+//    if ([self userLogined]) {
+//        NSString *userid = [PDAccountManager sharedInstance].userid;
+//        NSString *foodids = @"1*2**2*5";
+//        [[PDHTTPEngine sharedInstance] cartAddWithUserid:userid foodids:foodids success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//            //
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            //
+//        }];
+//    }
 }
 
 @end

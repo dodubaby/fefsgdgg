@@ -69,6 +69,12 @@
         if ([self userLogined]) {
         
             if ([textView.text length]==0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:@"请输入评价内容"
+                                                               delegate:nil
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"确定", nil];
+                [alert show];
                 return ;
             }
             

@@ -79,29 +79,29 @@
         // ------
         [reduceButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             //
-            amount--;
-            count.text = [NSString stringWithFormat:@"%ld",amount];
-            
-            NSLog(@"%ld",amount);
+//            amount--;
+//            count.text = [NSString stringWithFormat:@"%ld",amount];
+//            
+//            NSLog(@"%ld",amount);
             
             
             if (self.delegate
                 &&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:reduceWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self reduceWithData:nil];
+                [self.delegate pdBaseTableViewCellDelegate:self reduceWithData:self.data];
             }
         }];
         
         // ++++++
         [addButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             //
-            amount++;
-            count.text = [NSString stringWithFormat:@"%ld",amount];
-            
-            NSLog(@"%ld",amount);
+//            amount++;
+//            count.text = [NSString stringWithFormat:@"%ld",amount];
+//            
+//            NSLog(@"%ld",amount);
             
             if (self.delegate
                 &&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addWithData:nil];
+                [self.delegate pdBaseTableViewCellDelegate:self addWithData:self.data];
             }
         }];
     }
@@ -111,11 +111,21 @@
 
 -(void)configData:(id)data{
     
-    name.text = @"红烧肉红烧肉";
-    price.text = @"¥30";
-    [price sizeToFit];
+    PDModelFood *food = (PDModelFood *)data;
     
-    count.text = [NSString stringWithFormat:@"%ld",amount];
+    name.text = food.food_name;
+    price.text = [NSString stringWithFormat:@"¥%@",food.price];
+    [price sizeToFit];
+    price.height = 20;
+    
+    count.text = [NSString stringWithFormat:@"%@",food.count];
+
+    
+//    name.text = @"红烧肉红烧肉";
+//    price.text = @"¥30";
+//    [price sizeToFit];
+//    
+//    count.text = [NSString stringWithFormat:@"%ld",amount];
     
     //[self showDebugRect];
 }
@@ -123,6 +133,5 @@
 +(CGFloat )cellHeightWithData:(id)data{
     return 55;
 }
-
 
 @end

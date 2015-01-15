@@ -81,7 +81,7 @@
         
         [addButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:self.data];
             }
         }];
     }

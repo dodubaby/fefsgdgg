@@ -118,7 +118,10 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    NSString *str=[NSString stringWithFormat:@"%@%@",self.baseURL,URLString];
+    
+    NSString *baseUrl = [[self.baseURL absoluteString] substringToIndex:[self.baseURL absoluteString].length -1];
+    
+    NSString *str=[NSString stringWithFormat:@"%@%@",baseUrl,URLString];
     // 添加版本，设备ID，平台等公用参数
     NSString *versionstr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     [parameters setObject:versionstr forKey:@"version"];

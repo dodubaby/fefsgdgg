@@ -18,6 +18,6 @@
 @property (nonatomic,strong) NSString *img;
 @property (nonatomic,strong) NSString *specialty;
 
-+(PDModelCooker *)fromJson:(NSDictionary *)jsonDict;
+//+(PDModelCooker *)fromJson:(NSDictionary *)jsonDict;
 
 @end

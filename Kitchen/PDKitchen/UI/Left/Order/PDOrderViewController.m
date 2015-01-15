@@ -50,7 +50,6 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
         }];
-        
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{

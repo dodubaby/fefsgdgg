@@ -16,7 +16,7 @@
     UILabel *name;
     UILabel *price;
     UILabel *person;
-    UILabel *like;
+    UIButton *like;
     
     UIButton *share;
     UIButton *favorite;
@@ -48,21 +48,37 @@
         name.font = [UIFont systemFontOfSize:15];
         name.textColor = [UIColor colorWithHexString:@"#333333"];
         
-        person = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, name.bottom+kCellLeftGap, 100, 20)];
+        person = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, name.bottom+kCellLeftGap, 90, 20)];
         [self addSubview:person];
         person.font = [UIFont systemFontOfSize:13];
         person.textColor = [UIColor colorWithHexString:@"#666666"];
         
         
-        like = [[UILabel alloc] initWithFrame:CGRectMake(120+15, person.top, 120, 20)];
+        like = [[UIButton alloc] initWithFrame:CGRectMake(105 + kCellLeftGap, person.top, 120, 20)];
         [self addSubview:like];
-        like.font = [UIFont systemFontOfSize:13];
-        like.textColor = [UIColor colorWithHexString:@"#666666"];
+        [like setTitle:@"收藏" forState:UIControlStateNormal];
+        [like setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+        [like setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
+        like.titleLabel.font = [UIFont systemFontOfSize:13];
+        [like setImage:[UIImage imageNamed:@"dt_up"] forState:UIControlStateNormal];
+        like.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        like.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
+        [like handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:likeFoodWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self likeFoodWithData:self.data];
+            }
+            
+        }];
         
-        UIImageView *up = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dt_up"]];
-        [like addSubview:up];
-        up.left = - up.width;
-        up.top = -(up.height - like.height)/2;
+//        like = [[UILabel alloc] initWithFrame:CGRectMake(120+15, person.top, 120, 20)];
+//        [self addSubview:like];
+//        like.font = [UIFont systemFontOfSize:13];
+//        like.textColor = [UIColor colorWithHexString:@"#666666"];
+//        
+//        UIImageView *up = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dt_up"]];
+//        [like addSubview:up];
+//        up.left = - up.width;
+//        up.top = -(up.height - like.height)/2;
         
         price = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth - kCellLeftGap -100, thumbnail.bottom+20, 100, 40)];
         price.textAlignment = NSTextAlignmentRight;
@@ -82,7 +98,7 @@
         
         [share handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:shareWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self shareWithData:nil];
+                [self.delegate pdBaseTableViewCellDelegate:self shareWithData:self.data];
             }
         }];
         
@@ -98,7 +114,7 @@
         
         [favorite handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:favoriteWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:nil];
+                [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:self.data];
             }
         }];
         
@@ -115,9 +131,11 @@
         
         [addButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:nil];
+                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:self.data];
             }
         }];
+        
+        
     }
     
     return self;
@@ -130,7 +148,18 @@
     name.text = food.food_name;
     person.text = [NSString stringWithFormat:@"%@人吃过",food.eat_sum];
     
-    like.text = [NSString stringWithFormat:@"%@人",food.like_sum ];
+    NSString *likeText = @"0";
+    if (food.like_sum) {
+       likeText = [NSString stringWithFormat:@"%@人",food.like_sum ];
+    }
+    
+    CGSize size= [likeText sizeWithFontCompatible:[UIFont systemFontOfSize:13]
+                                       constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)
+                                           lineBreakMode:NSLineBreakByWordWrapping];
+    
+    like.width = size.width + 30;
+    [like setTitle:likeText forState:UIControlStateNormal];
+    
     
     price.text = [NSString stringWithFormat:@"¥%@",food.price];
     [price sizeToFit];
@@ -140,8 +169,6 @@
     if (food.food_img) {
         thumbnail.imageURL = [NSURL URLWithString:food.food_img];
     }
-    
-
     
     /*
     name.text = @"肉酱面";

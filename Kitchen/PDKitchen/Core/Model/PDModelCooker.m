@@ -10,24 +10,24 @@
 
 @implementation PDModelCooker
 
-+(PDModelCooker *)fromJson:(NSDictionary *)jsonDict{
-    
-    if (!jsonDict) {
-        return nil;
-    }
-    
-    PDModelCooker *obj = [[PDModelCooker alloc] init];
-    obj.about = jsonDict[@"about"];
-    obj.age = jsonDict[@"age"];
-
-    obj.cooker_from = jsonDict[@"cooker_from"];
-    obj.cooker_id = jsonDict[@"cooker_id"];
-    obj.cooker_name = jsonDict[@"cooker_name"];
-    obj.img = jsonDict[@"img"];
-    obj.specialty = jsonDict[@"specialty"];
-
-    return obj;
-    
-}
+//+(PDModelCooker *)fromJson:(NSDictionary *)jsonDict{
+//    
+//    if (!jsonDict) {
+//        return nil;
+//    }
+//    
+//    PDModelCooker *obj = [[PDModelCooker alloc] init];
+//    obj.about = jsonDict[@"about"];
+//    obj.age = jsonDict[@"age"];
+//
+//    obj.cooker_from = jsonDict[@"cooker_from"];
+//    obj.cooker_id = jsonDict[@"cooker_id"];
+//    obj.cooker_name = jsonDict[@"cooker_name"];
+//    obj.img = jsonDict[@"img"];
+//    obj.specialty = jsonDict[@"specialty"];
+//
+//    return obj;
+//    
+//}
 
 @end

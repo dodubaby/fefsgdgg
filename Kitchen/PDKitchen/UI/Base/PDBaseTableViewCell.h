@@ -33,13 +33,22 @@
 // example
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell;
 
-// 添加订单
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data;
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 // 减少
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell reduceWithData:(id)data;
 // 增加
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addWithData:(id)data;
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+// 添加订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data;
+
+// 赞菜品
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell likeFoodWithData:(id)data;
 
 // 分享
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell shareWithData:(id)data;
@@ -49,5 +58,15 @@
 
 // 留言
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell commentWithData:(id)data;
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+// 删除消息
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell deleteNewsWithData:(id)data;
+
+// 赞消息
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell likeNewsWithData:(id)data;
+
 
 @end

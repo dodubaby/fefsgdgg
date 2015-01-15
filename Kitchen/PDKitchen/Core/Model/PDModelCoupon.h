@@ -12,6 +12,7 @@
 
 @property (nonatomic,strong) NSString *coupon_id;
 @property (nonatomic,strong) NSString *end_time;
+@property (nonatomic,strong) NSString *is_overdue; // bool
 @property (nonatomic,strong) NSString *price;
 @property (nonatomic,strong) NSString *time_str;
 

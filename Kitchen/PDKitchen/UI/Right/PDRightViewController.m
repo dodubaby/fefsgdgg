@@ -27,11 +27,43 @@
 @implementation PDRightViewController
 
 - (void)setupData{
+    if (!list) {
+        list = [[NSMutableArray alloc] init];
+    }
+}
+
+-(void)congfigData{
+
+    [list removeAllObjects];
     
-    list = [[NSMutableArray alloc] init];
-    [list addObject:@"小炒肉"];
-    [list addObject:@"小鸡炖蘑菇"];
-    [list addObject:@"北京烤鸭"];
+    NSArray *cartList = [PDCartManager sharedInstance].cartList;
+    [list addObjectsFromArray:cartList];
+    
+    [self.tableView reloadData];
+    
+    
+    // 总价  // @"3份美食 共计113元";
+    NSInteger c = 0;
+    CGFloat price = 0.0f;
+    
+    for (PDModelFood *fd in list) {
+        
+        c = c + [fd.count integerValue];
+        
+        price = price + [fd.price floatValue]*[fd.count integerValue];
+    }
+    
+    if (c>0) {
+        NSString *str = [NSString stringWithFormat:@"%ld份美食 共计%.02f元",c,price];
+        footer.totalPrice = str;
+        clearButton.hidden = NO;
+        footer.hidden = NO;
+    }else{
+    
+        footer.totalPrice = nil;
+        clearButton.hidden = YES;
+        footer.hidden = YES;
+    }
 }
 
 - (void)viewDidLoad {
@@ -42,6 +74,9 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     
     [self setupData];
+    
+
+    
     
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
     header.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
@@ -57,6 +92,7 @@
     
     footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
     footer.delegate = self;
+    footer.hidden = YES;
     self.tableView.tableFooterView = footer;
     
     
@@ -74,20 +110,48 @@
     [clearButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         
-            if ([self userLogined]) {
-                NSString *userid = [PDAccountManager sharedInstance].userid;
-                [[PDHTTPEngine sharedInstance] cartDeleteWithUserid:userid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-                    //
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    //
-                }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"清空确认"
+                                                        message:@"你还有订单没有提交，确定清除？"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert showWithClickedBlock:^(NSInteger buttonIndex) {
+            switch (buttonIndex) {
+                case 1:
+                {
+                    // 清除购物车
+                    [[PDCartManager sharedInstance] clear];
+                }
+                    break;
+                    
+                default:
+                    break;
             }
+        }];
+        
+        
+//            if ([self userLogined]) {
+//                NSString *userid = [PDAccountManager sharedInstance].userid;
+//                [[PDHTTPEngine sharedInstance] cartDeleteWithUserid:userid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//                    //
+//                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                    //
+//                }];
+//            }
 
         
     }];
     
+    clearButton.hidden = YES;
+    
     //[self.view showDebugRect];
     
+    // 刷新购物车数据
+    [[NSNotificationCenter defaultCenter] addObserverForName:kCartModifyNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        [self congfigData];
+        
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -111,7 +175,7 @@
 
     }
     cell.delegate = self;
-    [cell setData:nil];
+    [cell setData:list[indexPath.row]];
     return cell;
 }
 
@@ -119,13 +183,13 @@
 
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell reduceWithData:(id)data{
 
-    [footer setTotalPrice:123.8];
+    [[PDCartManager sharedInstance] removeFood:data];
+
 }
 
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addWithData:(id)data{
 
-    [footer setTotalPrice:3245.5];
-    
+    [[PDCartManager sharedInstance] addFood:data];
 }
 
 #pragma mark - PDRightFooterViewDelegate
@@ -133,23 +197,34 @@
 -(void)pdRightFooterView:(PDRightFooterView *)view submitWithTotal:(CGFloat)totalPrice{
     NSLog(@"submit");
 
-//    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    PDAddressViewController *address = [[PDAddressViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:address];
-//    [delegate.window.rootViewController presentViewController:nav animated:YES completion:^{
-//        //
-//    }];
-    
-    // 我的购物车
     if ([self userLogined]) {
     
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] cartMyCartWithUserid:userid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-            //
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //
-        }];
+        [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
+                                                  foodids:@"11"
+                                                  address:@"11"
+                                                    phone:@"11"
+                                                 couponid:@"11"
+                                                  eatTime:@"11"
+                                                  message:@"11"
+                                                 sumPrice:@"11" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                     //
+                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                     //
+                                                 }];
+        
     }
+    
+//    // 我的购物车
+//    if ([self userLogined]) {
+//    
+//        NSString *userid = [PDAccountManager sharedInstance].userid;
+//        [[PDHTTPEngine sharedInstance] cartMyCartWithUserid:userid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//            //
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            //
+//        }];
+//    }
 }
 
 @end

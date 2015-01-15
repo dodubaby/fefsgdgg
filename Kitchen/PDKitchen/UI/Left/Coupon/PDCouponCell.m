@@ -62,8 +62,17 @@
     status.top = (back.height - price.height)/2;
     status.right = back.width - kCellLeftGap;
     
-    price.textColor = [UIColor colorWithHexString:@"#c14a41"];
-    status.textColor = [UIColor colorWithHexString:@"#c14a41"];
+    if ([coupon.is_overdue boolValue]) {  // 过期
+        back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
+        price.textColor = [UIColor colorWithHexString:@"#999999"];
+        status.textColor = [UIColor colorWithHexString:@"#999999"];
+    }else{
+        back.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
+        price.textColor = [UIColor colorWithHexString:@"#c14a41"];
+        status.textColor = [UIColor colorWithHexString:@"#c14a41"];
+    }
+    
+
     
 //    price.text = @"10元";
 //    [price sizeToFit];

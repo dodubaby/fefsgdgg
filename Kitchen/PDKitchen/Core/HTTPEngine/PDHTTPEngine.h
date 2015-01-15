@@ -16,6 +16,8 @@
 #import "PDModel.h"
 
 #import "PDAccountManager.h"
+#import "PDCartManager.h"
+
 // API path
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -105,6 +107,8 @@
 #define kPathOfNewsDetail        @"/news/detail"
 // 删除消息
 #define kPathOfNewsDel           @"/news/del"
+// 赞消息
+#define kPathOfNewsLike          @"/news/like"
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -121,14 +125,14 @@
 
 // 验证码
 -(void)requestVerificationCodeWithPhone:(NSString *)phone
-                                success:(void (^)(AFHTTPRequestOperation *operation, NSNumber *code))success
+                                success:(void (^)(AFHTTPRequestOperation *operation, NSString *code))success
                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 登录 (type默认为1；1、手机登录，2、新浪微博，3，微信4、QQ)
 -(void)loginWithType:(NSNumber *)type
                phone:(NSString *)phone
              account:(NSString *)thirdpartid
-        verification:(NSNumber *)verification
+        verification:(NSString *)verification
              success:(void (^)(AFHTTPRequestOperation *operation, NSString *userid))success
              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // 首页列表
@@ -144,7 +148,7 @@
 
 // 点赞
 - (void)appLikeWithUserid:(NSString *)userid
-                   foodid:(NSNumber *)foodid
+                   foodid:(NSString *)foodid
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -192,11 +196,11 @@ sum_price	float	N	总共价格
                   foodids:(NSString *)foodids
                   address:(NSString *)address
                     phone:(NSString *)phone
-                 couponid:(NSNumber *)couponid
+                 couponid:(NSString *)couponid
                   eatTime:(NSString *)eatTime
                   message:(NSString *)message
                  sumPrice:(NSNumber *)sumPrice
-                  success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 订单列表
@@ -264,14 +268,14 @@ phone	string	Y	联系电话
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 //  添加收藏
 -(void)collectAddWithUserid:(NSString *)userid
-                             food_id:(NSNumber *)food_id
-                          success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
-                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                    food_id:(NSString *)food_id
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 //  删除收藏
 -(void)collectDeleteWithUserid:(NSString *)userid
-                    food_id:(NSNumber *)food_id
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                    food_id:(NSString *)food_id
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 我的优惠券
@@ -287,13 +291,18 @@ phone	string	Y	联系电话
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // 消息详情
 -(void)newsDetailWithUserid:(NSString *)userid
-                    news_id:(NSNumber *)news_id
+                    news_id:(NSString *)news_id
                  success:(void (^)(AFHTTPRequestOperation *operation, PDModelNews *newsDetail))success
                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // 删除消息
 -(void)newsDelWithUserid:(NSString *)userid
-                    news_id:(NSNumber *)news_id
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                    news_id:(NSString *)news_id
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+// 赞消息
+-(void)newsLikeWithUserid:(NSString *)userid
+                 news_id:(NSString *)news_id
+                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

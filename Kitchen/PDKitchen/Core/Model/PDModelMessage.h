@@ -16,6 +16,6 @@
 @property (nonatomic,strong) NSString *phone;
 @property (nonatomic,strong) NSString *time_str;
 
-+(PDModelMessage *)fromJson:(NSDictionary *)jsonDict;
+//+(PDModelMessage *)fromJson:(NSDictionary *)jsonDict;
 
 @end

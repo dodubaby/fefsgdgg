@@ -19,32 +19,32 @@
     return mapper;
 }
 
-+(PDModelFoodDetail *)fromJson:(NSDictionary *)jsonDict{
-    
-    if (!jsonDict) {
-        return nil;
-    }
-    
-    PDModelFoodDetail *obj = [[PDModelFoodDetail alloc] init];
-    
-    obj.detail_object = [PDModelFood fromJson:jsonDict[@"detail_object"]];
-    obj.cook_object = [PDModelCooker fromJson:jsonDict[@"cook_object"]];
-    
-    NSArray *list = jsonDict[@"message_object"];
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    
-    if ([list isKindOfClass:[NSArray class]]&&[list count]>0) {
-        [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            PDModelMessage *messsage = [PDModelMessage fromJson:obj];
-            if (messsage) {
-                [arr addObject:messsage];
-            }
-        }];
-    }
-    
-    obj.message_object = arr;
-    
-    return obj;
-}
+//+(PDModelFoodDetail *)fromJson:(NSDictionary *)jsonDict{
+//    
+//    if (!jsonDict) {
+//        return nil;
+//    }
+//    
+//    PDModelFoodDetail *obj = [[PDModelFoodDetail alloc] init];
+//    
+//    obj.detail_object = [PDModelFood fromJson:jsonDict[@"detail_object"]];
+//    obj.cook_object = [PDModelCooker fromJson:jsonDict[@"cook_object"]];
+//    
+//    NSArray *list = jsonDict[@"message_object"];
+//    NSMutableArray *arr = [[NSMutableArray alloc] init];
+//    
+//    if ([list isKindOfClass:[NSArray class]]&&[list count]>0) {
+//        [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//            
+//            PDModelMessage *messsage = [PDModelMessage fromJson:obj];
+//            if (messsage) {
+//                [arr addObject:messsage];
+//            }
+//        }];
+//    }
+//    
+//    obj.message_object = arr;
+//    
+//    return obj;
+//}
 @end

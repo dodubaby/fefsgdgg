@@ -44,29 +44,6 @@
         back.layer.borderWidth = 0.5f;
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        //
-//        share = [[UIButton alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, 50, 30)];
-//        [self addSubview:share];
-//        [share setTitle:@"分享" forState:UIControlStateNormal];
-//        [share setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        
-//        [share handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:shareWithData:)]) {
-//                [self.delegate pdBaseTableViewCellDelegate:self shareWithData:nil];
-//            }
-//        }];
-//        
-//        
-//        favorite = [[UIButton alloc] initWithFrame:CGRectMake(share.right + kCellLeftGap, kCellLeftGap, 50, 30)];
-//        [self addSubview:favorite];
-//        [favorite setTitle:@"收藏" forState:UIControlStateNormal];
-//        [favorite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        
-//        [favorite handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-//            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:favoriteWithData:)]) {
-//                [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:nil];
-//            }
-//        }];
         
         avatar = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_owner"]];
         avatar.frame = CGRectMake(10, 10, 45, 45);

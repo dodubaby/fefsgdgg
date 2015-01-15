@@ -18,13 +18,25 @@
     UITextField *codeField;
     
     UIButton *loginButton;
+    
+    NSInteger second;
 }
 
-@property (nonatomic,strong) NSNumber *code;
+@property (nonatomic,strong) NSString *code;
+
+@property (nonatomic,strong) NSTimer *timer;
 
 @end
 
 @implementation PDLoginViewController
+
+
+-(void)dealloc{
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
 
 -(void)backButtonTaped:(id)sender{
     
@@ -40,6 +52,38 @@
     [self setupUI];
     
     //[self.view showDebugRect];
+}
+
+-(void)tick:(NSTimer *)tm{
+
+    if (second>1) {
+        second -=1;
+
+        NSString *title = [NSString stringWithFormat:@"%ld秒后重发",second];
+        [sendCodeButton setTitle:title forState:UIControlStateNormal];
+    }else{
+    
+        sendCodeButton.enabled = YES;
+        [sendCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+        
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
+- (void)beginTimer{
+
+    second = 59;
+    sendCodeButton.enabled = NO;
+    [sendCodeButton setTitle:@"59秒后重发" forState:UIControlStateNormal];
+    
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                  target:self
+                                                selector:@selector(tick:)
+                                                userInfo:nil
+                                                 repeats:YES];
+    }
 }
 
 -(void)setupUI{
@@ -65,24 +109,47 @@
     sendCodeButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [sendCodeButton setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
     [sendCodeButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
+    [sendCodeButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateDisabled];
+    
     [sendCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
     [sendCodeButton setImage:[UIImage imageNamed:@"lg_send_code"] forState:UIControlStateNormal];
     sendCodeButton.titleEdgeInsets = UIEdgeInsetsMake(0, -80, 0, 0);
     sendCodeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0);
     
+    
+     __weak PDLoginViewController *weakSelf = self;
+    
     [sendCodeButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         // 发送验证码
         if ([phoneField.text length]>0) {
-            [[PDHTTPEngine sharedInstance] requestVerificationCodeWithPhone:phoneField.text success:^(AFHTTPRequestOperation *operation, NSNumber *code) {
+            
+            [weakSelf beginTimer];
+            
+            [[PDHTTPEngine sharedInstance] requestVerificationCodeWithPhone:phoneField.text success:^(AFHTTPRequestOperation *operation, NSString *code) {
                 //
-                self.code = code;
+                
+                NSLog(@"%@",code);
+                
+                weakSelf.code = code;
                 
                 if (self.code) {
-                    codeField.text = [self.code stringValue];
+                    codeField.text = weakSelf.code;
                 }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //
+                
+                NSString *message = error.userInfo[@"Message"];
+                if (!message) {
+                    message = [error localizedDescription];
+                }
+                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:message
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"确定", nil];
+                [alert show];
+                
             }];
         }
     }];

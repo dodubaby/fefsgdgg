@@ -63,10 +63,26 @@
     if (!cell) {
         cell = [[PDNewsDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
+    cell.delegate = self;
     [cell setData:_newsDetail];
     return cell;
 }
 
+// 赞消息
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell likeNewsWithData:(id)data{
+
+    if ([self userLogined]) {
+    
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        PDModelNews *news = (PDModelNews *)data;
+        [[PDHTTPEngine sharedInstance] newsLikeWithUserid:userid news_id:news.news_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"赞成功");
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+        }];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

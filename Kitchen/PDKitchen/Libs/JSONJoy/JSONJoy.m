@@ -353,6 +353,8 @@ static BOOL boxDisabled;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 +(id)objectWithJoy:(id)jsonObj error:(NSError *__autoreleasing *)error
 {
+    [JSONJoy setLoose:NO];
+    [JSONJoy setAutoConvertBOOLs:NO];
     JSONJoy* mapper = [self jsonMapper];
     return [mapper process:jsonObj error:error];
 }

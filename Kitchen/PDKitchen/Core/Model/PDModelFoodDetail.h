@@ -17,7 +17,7 @@
 @property (nonatomic,strong) PDModelCooker *cook_object;
 @property (nonatomic,strong) NSArray       *message_object;
 
-+(PDModelFoodDetail *)fromJson:(NSDictionary *)jsonDict;
+//+(PDModelFoodDetail *)fromJson:(NSDictionary *)jsonDict;
 
 @end
 

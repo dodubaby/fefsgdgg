@@ -25,10 +25,12 @@
 @implementation PDDetailCellItem
 @end
 
-@interface PDCenterDetailViewController()<PDBaseTableViewCellDelegate>
+@interface PDCenterDetailViewController()
 
 {
     NSMutableArray *list;
+    
+    UILabel *badge;
 }
 
 @property (nonatomic,strong) PDModelFoodDetail *foodDetail;
@@ -129,6 +131,35 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
     }];
+    
+    // 订单商品数量badge
+    [[NSNotificationCenter defaultCenter] addObserverForName:kCartModifyNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        [self setupBadge];
+    }];
+}
+
+-(void)setupBadge{
+    
+    NSArray *foods = [PDCartManager sharedInstance].cartList;
+    NSInteger c = 0;
+    for (PDModelFood *fd in foods) {
+        c = c + [fd.count integerValue];
+    }
+    if (c>0) {
+        badge.text = [NSString stringWithFormat:@"%ld",c];
+        badge.hidden = NO;
+        
+        [badge sizeToFit];
+        if (badge.width>20) {
+            badge.frame = CGRectMake(10, 0, badge.width+10, 20);
+        }else{
+            badge.frame = CGRectMake(20, 0, 20, 20);
+        }
+    }else{
+        badge.text = nil;
+        badge.hidden = YES;
+    }
 }
 
 -(void)setupRightMenuButton{
@@ -139,11 +170,19 @@
     UIBarButtonItem * rightDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
     
-    //    UIBarButtonItem * rightDrawerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"center_order"]
-    //                                                                                 style:UIBarButtonItemStylePlain
-    //                                                                                target:self
-    //                                                                                action:@selector(rightDrawerButtonPress:)];
-    //    [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
+    badge = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 20, 20)];
+    badge.font = [UIFont systemFontOfSize:12];
+    badge.backgroundColor = [UIColor colorWithHexString:@"#fe8501"];
+    badge.textColor = [UIColor whiteColor];
+    badge.textAlignment = NSTextAlignmentCenter;
+    [button addSubview:badge];
+    badge.layer.cornerRadius = 10.0f;
+    badge.layer.borderWidth = 1.0f;
+    badge.layer.borderColor = [UIColor whiteColor].CGColor;
+    badge.layer.masksToBounds = YES;
+    badge.hidden = YES;
+    
+    [self setupBadge];
 }
 
 #pragma mark - Button Handlers
@@ -202,6 +241,57 @@
     
 }
 
+
+// 添加订单
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
+    NSLog(@"add");
+    
+    [[PDCartManager sharedInstance] addFood:data];
+    // 通知购物车更改
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCartModifyNotificationKey object:nil];
+    
+//    if ([self userLogined]) {
+//        NSString *userid = [PDAccountManager sharedInstance].userid;
+//        NSString *foodids = @"1*2**2*5";
+//        [[PDHTTPEngine sharedInstance] cartAddWithUserid:userid foodids:foodids success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//            //
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            //
+//        }];
+//    }
+}
+
+// 赞菜品
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell likeFoodWithData:(id)data{
+    
+    PDModelFood *fd = (PDModelFood *)data;
+    // 点赞
+    if ([self userLogined]) {
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] appLikeWithUserid:userid foodid:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            NSLog(@"点赞成功");
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSString *message = error.userInfo[@"Message"];
+            if (!message) {
+                message = [error localizedDescription];
+            }
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+        }];
+    }
+    
+}
+
+
 // 分享
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell shareWithData:(id)data{
 
@@ -234,42 +324,49 @@
 // 收藏
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell favoriteWithData:(id)data{
 
+    PDModelFood *fd = (PDModelFood *)data;
 //    // 收藏
 //    if ([self userLogined]) {
 //        NSString *userid = [PDAccountManager sharedInstance].userid;
-//        [[PDHTTPEngine sharedInstance] collectAddWithUserid:userid food_id:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//        [[PDHTTPEngine sharedInstance] collectAddWithUserid:userid food_id:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //            //
+//            NSLog(@"收藏成功");
+//            
 //        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //            //
+//            NSString *message = error.userInfo[@"Message"];
+//            if (!message) {
+//                message = [error localizedDescription];
+//            }
+//            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                             message:message
+//                                                            delegate:nil
+//                                                   cancelButtonTitle:nil
+//                                                   otherButtonTitles:@"确定", nil];
+//            [alert show];
 //        }];
 //    }
     
-    // 删除收藏
     if ([self userLogined]) {
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] collectDeleteWithUserid:userid food_id:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] collectDeleteWithUserid:userid food_id:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //
+            NSLog(@"取消收藏成功");
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
+            NSString *message = error.userInfo[@"Message"];
+            if (!message) {
+                message = [error localizedDescription];
+            }
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
         }];
     }
-    
-    /*
-    // 点赞
-    if ([self userLogined]) {
-        
-        NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] appLikeWithUserid:userid foodid:@1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //
-        }];
-    }
-     */
-
-    
-    // 
-    
 }
 
 // 留言

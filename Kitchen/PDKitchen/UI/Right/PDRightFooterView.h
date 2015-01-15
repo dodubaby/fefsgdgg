@@ -14,7 +14,7 @@
 @interface PDRightFooterView : UIView
 
 @property (nonatomic,weak) id<PDRightFooterViewDelegate> delegate;
-@property (nonatomic,assign) CGFloat totalPrice;
+@property (nonatomic,assign) NSString *totalPrice;
 @end
 
 

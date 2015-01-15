@@ -16,7 +16,6 @@
     UILabel *price;
     UIButton *submit;
     
-    
 }
 
 @end
@@ -37,7 +36,7 @@
         price.textAlignment = NSTextAlignmentRight;
         price.font = [UIFont systemFontOfSize:15];
         price.textColor = [UIColor colorWithHexString:@"#666666"];
-        price.text = @"3份美食 共计113元";
+        price.text = nil;
         
         submit = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 30)];
         [self addSubview:submit];
@@ -52,7 +51,7 @@
         
         [submit handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdRightFooterView:submitWithTotal:)]) {
-                [self.delegate pdRightFooterView:self submitWithTotal:self.totalPrice];
+                [self.delegate pdRightFooterView:self submitWithTotal:0];
             }
         }];
         
@@ -62,10 +61,12 @@
     return self;
 }
 
--(void)setTotalPrice:(CGFloat)totalPrice{
-
+-(void)setTotalPrice:(NSString *)totalPrice{
     _totalPrice = totalPrice;
-    price.text = [NSString stringWithFormat: @"3份美食 共计113元"];
+    
+    price.text = _totalPrice;
+    
+    [self setNeedsLayout];
 }
 
 -(void)layoutSubviews{

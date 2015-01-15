@@ -112,6 +112,21 @@
     [logout handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出？" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        
+        [alert showWithClickedBlock:^(NSInteger buttonIndex) {
+            switch (buttonIndex) {
+                case 1:
+                    //
+                {
+                    [PDAccountManager sharedInstance].userid = nil;
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                    break;
+                default:
+                    break;
+            }
+        }];
     }];
 }
 

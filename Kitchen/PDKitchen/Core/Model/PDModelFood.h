@@ -22,6 +22,9 @@
 @property (nonatomic,strong) NSString *like_sum;
 @property (nonatomic,strong) NSString *phone;
 
-+(PDModelFood *)fromJson:(NSDictionary *)jsonDict;
+// 订购数量
+@property (nonatomic,strong) NSNumber *count;
+
+//+(PDModelFood *)fromJson:(NSDictionary *)jsonDict;
 
 @end

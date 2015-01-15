@@ -30,6 +30,9 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+    
+    // 隐藏消息
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNewsHideNotificationKey object:nil];
 }
 
 - (void)viewDidLoad {
@@ -118,6 +121,7 @@
     if (!cell) {
         cell = [[PDNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
+    cell.delegate = self;
     [cell setData:_dataList[indexPath.row]];
     return cell;
 }
@@ -128,6 +132,35 @@
     PDNewsDetailViewController *vc = [[PDNewsDetailViewController alloc] init];
     vc.title = @"消息详情";
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell deleteNewsWithData:(id)data{
+
+    if ([self userLogined]) {
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        PDModelNews *news = (PDModelNews *)data;
+        [[PDHTTPEngine sharedInstance] newsDelWithUserid:userid news_id:news.news_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            
+            PDModelNews *news = (PDModelNews *)data;
+            NSUInteger index  = [_dataList indexOfObject:news];
+            [_dataList removeObjectAtIndex:index];
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+            
+            NSLog(@"删除成功");
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除失败"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+        }];
+    }
 }
 
 @end

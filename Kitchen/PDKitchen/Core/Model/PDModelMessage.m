@@ -10,21 +10,21 @@
 
 @implementation PDModelMessage
 
-+(PDModelMessage *)fromJson:(NSDictionary *)jsonDict{
-    
-    if (!jsonDict) {
-        return nil;
-    }
-    
-    PDModelMessage *obj = [[PDModelMessage alloc] init];
-    obj.content = jsonDict[@"content"];
-    obj.cooker_id = jsonDict[@"cooker_id"];
-    
-    obj.create_time = jsonDict[@"create_time"];
-    obj.phone = jsonDict[@"phone"];
-    obj.time_str = jsonDict[@"time_str"];
-    
-    return obj;
-}
+//+(PDModelMessage *)fromJson:(NSDictionary *)jsonDict{
+//    
+//    if (!jsonDict) {
+//        return nil;
+//    }
+//    
+//    PDModelMessage *obj = [[PDModelMessage alloc] init];
+//    obj.content = jsonDict[@"content"];
+//    obj.cooker_id = jsonDict[@"cooker_id"];
+//    
+//    obj.create_time = jsonDict[@"create_time"];
+//    obj.phone = jsonDict[@"phone"];
+//    obj.time_str = jsonDict[@"time_str"];
+//    
+//    return obj;
+//}
 
 @end

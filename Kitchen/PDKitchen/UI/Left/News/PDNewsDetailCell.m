@@ -23,7 +23,7 @@
     UILabel *content;
     
     UILabel *read;
-    UILabel *like;
+    UIButton *like;
 }
 
 @end
@@ -83,16 +83,22 @@
         read.font = [UIFont systemFontOfSize:15];
         read.textColor = [UIColor colorWithHexString:@"#666666"];
         
-        like = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+        like = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
         [self addSubview:like];
-        like.font = [UIFont systemFontOfSize:15];
-        like.textColor = [UIColor colorWithHexString:@"#666666"];
+        [like setTitle:@"收藏" forState:UIControlStateNormal];
+        [like setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+        [like setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
+        like.titleLabel.font = [UIFont systemFontOfSize:15];
+        [like setImage:[UIImage imageNamed:@"dt_up"] forState:UIControlStateNormal];
+        like.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        like.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         
-        UIImageView *up = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dt_up"]];
-        [like addSubview:up];
-        up.left = - up.width;
-        up.top = -(up.height - like.height)/2;
-        
+        [like handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            //
+            if(self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:likeNewsWithData:)]){
+                [self.delegate pdBaseTableViewCellDelegate:self likeNewsWithData:self.data];
+            }
+        }];
     }
     return self;
 }
@@ -118,11 +124,19 @@
     read.text = [NSString stringWithFormat:@"阅读%@",news.read];
     read.top = content.bottom + 50;
     
-    like.text = [NSString stringWithFormat:@"%@",news.like];
-    [like sizeToFit];
-    like.height = 20;
-    like.top = content.bottom + 50;
-    like.right = kAppWidth - 20;
+    NSString *likeText = @"0";
+    if (news.like) {
+        likeText = news.like;
+    }
+    
+    [like setTitle:likeText forState:UIControlStateNormal];
+    CGSize likeTextSize= [likeText sizeWithFontCompatible:[UIFont systemFontOfSize:13]
+                                constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)
+                                    lineBreakMode:NSLineBreakByWordWrapping];
+    
+    like.width = likeTextSize.width + 30;
+    like.top = read.top - 5;
+    like.right = kAppWidth - 10;
     
     back.height = read.bottom - thumbnail.top+kCellLeftGap;
     
