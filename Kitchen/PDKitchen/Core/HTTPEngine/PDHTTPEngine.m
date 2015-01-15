@@ -117,11 +117,14 @@
         NSLog(@"result   %@",result);
         
         long code = [result[@"code"] longValue];
-        NSString *theUserid = result[@"data"][@"userid"];
+        NSDictionary *data = result[@"data"];
         NSString *msg = result[@"msg"];
         
         if (code == 0) {
-            
+            NSString *theUserid = nil;
+            if (data) {
+                theUserid = data[@"userid"];
+            }
             // 登录成功
             [PDAccountManager sharedInstance].userid = theUserid;
             success(operation,theUserid);

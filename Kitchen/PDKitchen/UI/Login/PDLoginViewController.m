@@ -181,12 +181,21 @@
         if ([codeField.text length]>0) {
             [[PDHTTPEngine sharedInstance] loginWithType:@1 phone:phoneField.text account:nil verification:self.code success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //
-                
                 AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 [delegate removeLogin];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //
+                NSString *message = error.userInfo[@"Message"];
+                if (!message) {
+                    message = [error localizedDescription];
+                }
+                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:message
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"确定", nil];
+                [alert show];
             }];
         }
     }];
