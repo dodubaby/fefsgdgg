@@ -113,10 +113,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
-    self.tableView.tableFooterView = moreView;
-    
     //
-    
     __weak PDCenterDetailViewController *weakSelf = self;
     
     [[PDHTTPEngine sharedInstance] appDetailWithFoodID:self.foodid success:^(AFHTTPRequestOperation *operation, PDModelFoodDetail * foodDetail) {
@@ -127,6 +124,7 @@
         
         [weakSelf setupData];
         [weakSelf.tableView reloadData];
+        weakSelf.tableView.tableFooterView = moreView;
         //
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
