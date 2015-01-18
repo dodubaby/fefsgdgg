@@ -14,7 +14,7 @@
     self = [super init];
     if (self) {
         _HTTPEngine = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHttpHost]];
-        _HTTPEngine.requestSerializer = [[AFJSONRequestSerializer alloc] init];
+        _HTTPEngine.requestSerializer = [[AFHTTPRequestSerializer alloc] init];
         _HTTPEngine.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
     }
     return self;
@@ -60,7 +60,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:phone forKey:@"phone"];
     
-    [_HTTPEngine GET:kPathOfSendVerification parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfSendVerification parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         
         //PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
@@ -109,7 +109,7 @@
     }
     //parameters = [self paramWithDictionary:parameters];
     
-    [_HTTPEngine GET:kPathOfUserLogin parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfUserLogin parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         //PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
         
@@ -154,7 +154,7 @@
     [parameters setObject:location forKey:@"location"];
     [parameters setObject:page forKey:@"page"];
     
-    [_HTTPEngine GET:kPathOfAppHome parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAppHome parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         
         //PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
@@ -201,7 +201,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:foodid forKey:@"food_id"];
     
-    [_HTTPEngine GET:kPathOfAppDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAppDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         
         
@@ -240,7 +240,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:foodid forKey:@"food_id"];
     
-    [_HTTPEngine GET:kPathOfAppLike parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAppLike parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -277,7 +277,7 @@
     [parameters setObject:cookerid forKey:@"cooker_id"];
     [parameters setObject:text forKey:@"text"];
     
-    [_HTTPEngine GET:kPathOfMessageAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfMessageAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         //PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
         
@@ -309,7 +309,7 @@
     [parameters setObject:foodid forKey:@"food_id"];
     [parameters setObject:page forKey:@"page"];
     
-    [_HTTPEngine GET:kPathOfMessageAll parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfMessageAll parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         //PDBaseModel *model = [PDBaseModel objectWithJoy:responseObject];
         
@@ -350,7 +350,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:foodids forKey:@"foodids"];
     
-    [_HTTPEngine GET:kPathOfCartAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCartAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -372,7 +372,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
     
-    [_HTTPEngine GET:kPathOfCartDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCartDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -394,7 +394,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
     
-    [_HTTPEngine GET:kPathOfCartMyCart parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCartMyCart parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -430,7 +430,7 @@
     [parameters setObject:sumPrice forKey:@"sum_price"];
     
     
-    [_HTTPEngine GET:kPathOfOrderAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfOrderAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -466,7 +466,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:page forKey:@"page"];
     
-    [_HTTPEngine GET:kPathOfOrderMyOrder parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfOrderMyOrder parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -490,7 +490,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:orderid forKey:@"order_id"];
     
-    [_HTTPEngine GET:kPathOfOrderLogistics parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfOrderLogistics parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -514,7 +514,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:orderid forKey:@"order_id"];
     
-    [_HTTPEngine GET:kPathOfOrderDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfOrderDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -537,7 +537,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:orderid forKey:@"order_id"];
     
-    [_HTTPEngine GET:kPathOfOrderBack parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfOrderBack parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -561,7 +561,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:page forKey:@"page"];
     
-    [_HTTPEngine GET:kPathOfAddressMyAddress parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAddressMyAddress parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         long code = [result[@"code"] intValue];
@@ -608,7 +608,7 @@
     [parameters setObject:phone forKey:@"phone"];
 
     
-    [_HTTPEngine GET:kPathOfAddressAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAddressAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -646,7 +646,7 @@
     [parameters setObject:phone forKey:@"phone"];
     
     
-    [_HTTPEngine GET:kPathOfAddressEdit parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAddressEdit parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -670,7 +670,7 @@
     [parameters setObject:address_id forKey:@"address_id"];
     
     
-    [_HTTPEngine GET:kPathOfAddressDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfAddressDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -698,7 +698,7 @@
     [parameters setObject:page forKey:@"page"];
     
     
-    [_HTTPEngine GET:kPathOfCollectMyCollect parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCollectMyCollect parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -740,7 +740,7 @@
     [parameters setObject:food_id forKey:@"food_id"];
     
     
-    [_HTTPEngine GET:kPathOfCollectAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCollectAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -772,7 +772,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:food_id forKey:@"food_id"];
     
-    [_HTTPEngine GET:kPathOfCollectDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCollectDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -804,7 +804,7 @@
     [parameters setObject:page forKey:@"page"];
     
     
-    [_HTTPEngine GET:kPathOfCouponMyCoupon parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfCouponMyCoupon parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -845,7 +845,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:page forKey:@"page"];
     
-    [_HTTPEngine GET:kPathOfNewsAll parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfNewsAll parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -885,7 +885,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:news_id forKey:@"news_id"];
     
-    [_HTTPEngine GET:kPathOfNewsDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfNewsDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         long code = [result[@"code"] intValue];
@@ -917,7 +917,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:news_id forKey:@"news_id"];
     
-    [_HTTPEngine GET:kPathOfNewsDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfNewsDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
@@ -949,7 +949,7 @@
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:news_id forKey:@"news_id"];
     
-    [_HTTPEngine GET:kPathOfNewsLike parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_HTTPEngine POST:kPathOfNewsLike parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
