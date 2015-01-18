@@ -24,4 +24,10 @@
     return NO;
 }
 
+-(void)cleanup{
+    _userid = nil;
+    _coupon_count = nil;
+    _news_count = nil;
+}
+
 @end

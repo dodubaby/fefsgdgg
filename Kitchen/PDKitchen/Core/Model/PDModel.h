@@ -23,6 +23,9 @@
 #import "PDModelCooker.h"
 #import "PDModelNews.h"
 #import "PDModelCoupon.h"
+#import "PDModelDistrict.h"
+#import "PDModelAddress.h"
+
 #endif
 
 

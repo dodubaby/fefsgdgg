@@ -33,14 +33,18 @@
     
     __weak PDNewsDetailViewController *weakSelf = self;
     
+    [weakSelf startLoading];
+    
     NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] newsDetailWithUserid:userid news_id:@1 success:^(AFHTTPRequestOperation *operation, PDModelNews *newsDetail) {
+    [[PDHTTPEngine sharedInstance] newsDetailWithUserid:userid news_id:self.newsid success:^(AFHTTPRequestOperation *operation, PDModelNews *newsDetail) {
         //
         weakSelf.newsDetail = newsDetail;
         [weakSelf.tableView reloadData];
         
+        [weakSelf stopLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
+        [weakSelf stopLoading];
     }];
 }
 

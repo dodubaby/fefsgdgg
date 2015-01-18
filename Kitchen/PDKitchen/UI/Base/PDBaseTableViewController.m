@@ -9,6 +9,12 @@
 #import "PDBaseTableViewController.h"
 
 @interface PDBaseTableViewController ()
+{
+//    
+//
+//    UIView *loadingView;
+//    UIImageView *animView;
+}
 
 @end
 
@@ -19,6 +25,11 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
     //修复下拉刷新位置错误
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -27,12 +38,6 @@
         self.tableView.contentInset = insets;
         self.tableView.scrollIndicatorInsets = insets;
     }
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)backButtonTaped:(id)sender{
@@ -57,6 +62,34 @@
     }
     return YES;
 }
+
+//-(void)startLoading{
+//    
+//    if (!loadingView) {
+//        loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, kAppHeight)];
+//        loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+//        
+//        animView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 90, 20)];
+//        [loadingView addSubview:animView];
+//        animView.center = CGPointMake(kAppWidth/2, kAppHeight/2);
+//        animView.animationRepeatCount = -1;
+//        animView.animationDuration = 0.5;
+//        animView.animationImages = @[[UIImage imageNamed:@"loading1"],
+//                                     [UIImage imageNamed:@"loading2"],
+//                                     [UIImage imageNamed:@"loading3"],
+//                                     [UIImage imageNamed:@"loading4"],];
+//        
+//        
+//    }
+//    
+//    [self.view addSubview:loadingView];
+//    [animView startAnimating];
+//}
+//
+//-(void)stopLoading{
+//    [loadingView removeFromSuperview];
+//    [animView stopAnimating];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

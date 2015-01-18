@@ -10,6 +10,7 @@
 #import "PDRightCell.h"
 #import "PDRightFooterView.h"
 #import "PDAddressViewController.h"
+#import "PDOrderSubmitViewController.h"
 
 #import "AppDelegate.h"
 
@@ -25,6 +26,17 @@
 @end
 
 @implementation PDRightViewController
+
+-(void)pushVC:(UIViewController *)vc{
+    
+    UINavigationController *center = (UINavigationController *)self.mm_drawerController.centerViewController;
+    [center popToRootViewControllerAnimated:NO];  // 先返回首页
+    [center pushViewController:vc animated:NO];
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        
+    }];
+}
+
 
 - (void)setupData{
     if (!list) {
@@ -69,19 +81,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的收藏";
+    self.tableView.frame = CGRectMake(0, -20, kAppWidth - 165, kAppHeight);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     self.view.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     
     [self setupData];
     
-
+//    [_drawerController setMaximumRightDrawerWidth:255];
+//    [_drawerController setMaximumLeftDrawerWidth:165];
     
     
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+    
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 64)];
     header.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, header.width-110, 44)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, header.width, 44)];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:18];
     label.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -90,7 +105,7 @@
     
     self.tableView.tableHeaderView = header;
     
-    footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
+    footer = [[PDRightFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 80)];
     footer.delegate = self;
     footer.hidden = YES;
     self.tableView.tableFooterView = footer;
@@ -199,19 +214,24 @@
 
     if ([self userLogined]) {
     
-        NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
-                                                  foodids:@"11"
-                                                  address:@"11"
-                                                    phone:@"11"
-                                                 couponid:@"11"
-                                                  eatTime:@"11"
-                                                  message:@"11"
-                                                 sumPrice:@"11" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                     //
-                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                     //
-                                                 }];
+        
+        PDOrderSubmitViewController *submit = [[PDOrderSubmitViewController alloc] init];
+        [self pushVC:submit];
+        
+        
+//        NSString *userid = [PDAccountManager sharedInstance].userid;
+//        [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
+//                                                  foodids:@"11"
+//                                                  address:@"11"
+//                                                    phone:@"11"
+//                                                 couponid:@"11"
+//                                                  eatTime:@"11"
+//                                                  message:@"11"
+//                                                 sumPrice:@"11" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                                     //
+//                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                                     //
+//                                                 }];
         
     }
     

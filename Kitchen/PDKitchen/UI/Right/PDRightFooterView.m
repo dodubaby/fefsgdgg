@@ -74,6 +74,9 @@
     [super layoutSubviews];
     
     [price sizeToFit];
+    
+    NSLog(@"%f",self.width);
+    
     price.frame = CGRectMake(self.width - price.width - 10, 10, price.width, price.height);
     submit.frame = CGRectMake(self.width - submit.width - 10, price.bottom+10, submit.width, submit.height);
     

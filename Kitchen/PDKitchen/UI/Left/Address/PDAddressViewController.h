@@ -7,7 +7,20 @@
 //
 
 #import "PDBaseTableViewController.h"
+#import "PDAddressDistrictViewController.h"
+
+@protocol PDAddressViewControllerDelegate;
 
 @interface PDAddressViewController : PDBaseTableViewController
+
+@property (nonatomic,weak) id<PDAddressViewControllerDelegate> selectDelegete;
+@property (nonatomic,assign) BOOL isForOrder;
+
+@end
+
+
+@protocol PDAddressViewControllerDelegate <NSObject>
+
+-(void)pdAddressViewController:(UIViewController *)vc didSelectAddress:(PDModelAddress *)address;
 
 @end

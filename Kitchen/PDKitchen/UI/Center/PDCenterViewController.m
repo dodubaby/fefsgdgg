@@ -56,6 +56,9 @@
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        
+        [weakSelf startLoading];
+        
         weakSelf.currentPage = 0;
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         NSString *loc = @"116.316376,39.952912";
@@ -70,9 +73,12 @@
             [weakSelf.dataList addObjectsFromArray:list];
             [weakSelf.tableView reloadData];
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            [weakSelf stopLoading];
         }];
     }];
     
@@ -83,6 +89,8 @@
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
             return;
         }
+        
+        [weakSelf startLoading];
         
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
@@ -99,9 +107,13 @@
                 [weakSelf.tableView reloadData];
             }
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            
+            [weakSelf stopLoading];
         }];
     }];
     

@@ -11,6 +11,8 @@
 #import "PDNewsDetailViewController.h"
 
 
+
+
 @interface PDNewsViewController ()
 {
 }
@@ -50,6 +52,8 @@
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        [weakSelf startLoading];
+        
         weakSelf.currentPage = 0;
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
@@ -64,9 +68,12 @@
             [weakSelf.dataList addObjectsFromArray:list];
             [weakSelf.tableView reloadData];
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            [weakSelf stopLoading];
         }];
         
     }];
@@ -78,6 +85,8 @@
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
             return;
         }
+        
+        [weakSelf startLoading];
         
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
@@ -93,9 +102,12 @@
                 [weakSelf.tableView reloadData];
             }
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            [weakSelf stopLoading];
         }];
     }];
     
@@ -130,6 +142,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     PDNewsDetailViewController *vc = [[PDNewsDetailViewController alloc] init];
+    PDModelNews *news = _dataList[indexPath.row];
+    vc.newsid = news.news_id;
     vc.title = @"消息详情";
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -159,6 +173,7 @@
                                                            delegate:nil
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
         }];
     }
 }

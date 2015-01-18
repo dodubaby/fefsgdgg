@@ -1,14 +1,14 @@
 //
-//  PDAddressCell.m
+//  PDAddressDistrictCell.m
 //  PDKitchen
 //
-//  Created by bright on 15/1/7.
+//  Created by bright on 15/1/18.
 //  Copyright (c) 2015年 mtf. All rights reserved.
 //
 
-#import "PDAddressCell.h"
+#import "PDAddressDistrictCell.h"
 
-@interface PDAddressCell()
+@interface PDAddressDistrictCell()
 {
     UIView *back;
     UILabel *address;
@@ -18,14 +18,14 @@
 }
 @end
 
-@implementation PDAddressCell
+@implementation PDAddressDistrictCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        CGFloat h = [PDAddressCell cellHeightWithData:nil];
-
+        CGFloat h = [PDAddressDistrictCell cellHeightWithData:nil];
+        
         back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, h-kCellLeftGap)];
         [self addSubview:back];
         back.layer.borderWidth = 0.5f;
@@ -42,17 +42,15 @@
 
 -(void)configData:(id)data{
     
-    PDModelAddress *addressData = data;
-    
-    address.text = addressData.address;
-    
+    PDModelDistrict *dt = data;
+    address.text = dt.title;
     [address sizeToFit];
     address.top = (back.height - address.height)/2;
-     //[self showDebugRect];
+    //[self showDebugRect];
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
-
+    
     return 50+kCellLeftGap;
 }
 

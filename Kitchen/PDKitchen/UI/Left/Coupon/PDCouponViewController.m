@@ -45,6 +45,8 @@
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        [weakSelf startLoading];
+        
         weakSelf.currentPage = 0;
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
@@ -59,9 +61,12 @@
             [weakSelf.dataList addObjectsFromArray:list];
             [weakSelf.tableView reloadData];
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            [weakSelf stopLoading];
         }];
         
     }];
@@ -87,10 +92,12 @@
                 [weakSelf.dataList addObjectsFromArray:list];
                 [weakSelf.tableView reloadData];
             }
+            [weakSelf stopLoading];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            [weakSelf stopLoading];
         }];
     }];
     
@@ -119,6 +126,20 @@
     }
     [cell setData:_dataList[indexPath.row]];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    if (_isForOrder) {
+        if (_selectDelegate&&[_selectDelegate respondsToSelector:@selector(pdCouponViewController:didSelectCoupon:)]) {
+            [_selectDelegate pdCouponViewController:self didSelectCoupon:_dataList[indexPath.row]];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

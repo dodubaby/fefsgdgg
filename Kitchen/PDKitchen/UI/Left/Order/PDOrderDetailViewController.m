@@ -64,11 +64,11 @@
     
     orderLogisticsView = [[PDOrderLogisticsView alloc] initWithFrame:CGRectMake(0, 64+60, self.view.width, kAppHeight - 64-60 -130)];
     [self.view addSubview:orderLogisticsView];
-    orderLogisticsView.backgroundColor = [UIColor blueColor];
+    //orderLogisticsView.backgroundColor = [UIColor blueColor];
     
     orderDetailView = [[PDOrderDetailView alloc] initWithFrame:CGRectMake(0, 64+60, self.view.width, kAppHeight - 64-60 -130)];
     [self.view addSubview:orderDetailView];
-    orderDetailView.backgroundColor = [UIColor greenColor];
+    //orderDetailView.backgroundColor = [UIColor greenColor];
     
     
     refund = [[UIButton alloc] initWithFrame:CGRectMake((kAppWidth - 130)/2, self.view.height - 80, 130, 40)];

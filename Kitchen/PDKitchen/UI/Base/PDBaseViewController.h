@@ -21,4 +21,8 @@
 // 登陆
 -(BOOL)userLogined;
 
+
+-(void)startLoading;
+-(void)stopLoading;
+
 @end

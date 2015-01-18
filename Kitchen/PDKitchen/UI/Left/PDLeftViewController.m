@@ -52,6 +52,13 @@
     leftTableView.rowHeight = 50.0f;
     [self.view addSubview:leftTableView];
     leftTableView.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
+    
+    
+    // 新消息红点
+    [[NSNotificationCenter defaultCenter] addObserverForName:kNewsHideNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        [leftTableView reloadData];
+    }];
 }
 
 -(void)pushVC:(UIViewController *)vc{
@@ -83,6 +90,14 @@
         [cell addSubview:line];
         line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
         line.tag = 111;
+        
+        UIImageView *mark = [[UIImageView alloc] initWithFrame:CGRectMake(47, 12, 7, 7)];
+        [cell addSubview:mark];
+        mark.image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#fe8501"]];
+        mark.layer.cornerRadius = 3.5f;
+        mark.layer.masksToBounds = YES;
+        mark.hidden = YES;
+        mark.tag = 222;
     }
     
     UIImageView *line = (UIImageView *)[cell viewWithTag:111];
@@ -90,6 +105,23 @@
         line.hidden = YES;
     }else{
         line.hidden = NO;
+    }
+    
+    UIImageView *mark = (UIImageView *)[cell viewWithTag:222];
+    if (indexPath.row == 2) { // 优惠券
+        NSInteger coupon_count = [[PDAccountManager sharedInstance].coupon_count integerValue];
+        mark.hidden = YES;
+        if (coupon_count>0) {
+            mark.hidden = NO;
+        }
+    }else if(indexPath.row == 4){ // 消息
+        NSInteger news_count = [[PDAccountManager sharedInstance].news_count integerValue];
+        mark.hidden = YES;
+        if (news_count>0) {
+            mark.hidden = NO;
+        }
+    }else{
+        mark.hidden = YES;
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:13];

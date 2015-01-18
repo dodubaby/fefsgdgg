@@ -136,6 +136,8 @@
                     codeField.text = weakSelf.code;
                 }
                 
+                
+                
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //
                 
@@ -183,6 +185,9 @@
                 //
                 AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 [delegate removeLogin];
+                
+                // 发送通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNewsHideNotificationKey object:nil];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //

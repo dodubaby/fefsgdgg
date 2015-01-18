@@ -242,11 +242,11 @@ address	string	Y	详细地址
 phone	string	Y	联系电话
  */
 -(void)addressAddWithUserid:(NSString *)userid
-                    city_id:(NSNumber *)city_id
-                district_id:(NSNumber *)district_id
+                    city_id:(NSString *)city_id
+                district_id:(NSString *)district_id
                     address:(NSString *)address
                       phone:(NSString *)phone
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 //  编辑地址
 -(void)addressEditWithUserid:(NSString *)userid

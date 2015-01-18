@@ -45,6 +45,7 @@
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        [weakSelf startLoading];
         weakSelf.currentPage = 0;
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
@@ -59,9 +60,12 @@
             [weakSelf.dataList addObjectsFromArray:list];
             [weakSelf.tableView reloadData];
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            [weakSelf stopLoading];
         }];
         
     }];
@@ -74,6 +78,7 @@
             return;
         }
         
+        [weakSelf startLoading];
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
@@ -87,10 +92,12 @@
                 [weakSelf.dataList addObjectsFromArray:list];
                 [weakSelf.tableView reloadData];
             }
+            [weakSelf stopLoading];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            [weakSelf stopLoading];
         }];
     }];
     

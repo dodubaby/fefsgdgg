@@ -40,6 +40,8 @@
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        [weakSelf startLoading];
+        
         weakSelf.currentPage = 0;
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
@@ -53,15 +55,21 @@
             [weakSelf.dataList addObjectsFromArray:list];
             [weakSelf.tableView reloadData];
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            
+            [weakSelf stopLoading];
         }];
     }];
     
     //
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         //
+        [weakSelf startLoading];
+        
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         [[PDHTTPEngine sharedInstance] messageAllWithFoodid:weakSelf.foodid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
@@ -75,9 +83,13 @@
                 [weakSelf.tableView reloadData];
             }
             
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            
+            [weakSelf stopLoading];
         }];
         
     }];

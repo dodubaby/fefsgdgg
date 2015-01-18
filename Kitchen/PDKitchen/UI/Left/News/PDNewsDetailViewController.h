@@ -10,4 +10,6 @@
 
 @interface PDNewsDetailViewController : PDBaseTableViewController
 
+@property (nonatomic,strong) NSString *newsid;
+
 @end

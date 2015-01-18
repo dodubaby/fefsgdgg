@@ -116,7 +116,10 @@
     //
     __weak PDCenterDetailViewController *weakSelf = self;
     
+    [self startLoading];
+    
     [[PDHTTPEngine sharedInstance] appDetailWithFoodID:self.foodid success:^(AFHTTPRequestOperation *operation, PDModelFoodDetail * foodDetail) {
+        
         
         NSLog(@"%@",foodDetail);
         
@@ -126,8 +129,11 @@
         [weakSelf.tableView reloadData];
         weakSelf.tableView.tableFooterView = moreView;
         //
+        
+        [weakSelf stopLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
+        [weakSelf stopLoading];
     }];
     
     // 订单商品数量badge

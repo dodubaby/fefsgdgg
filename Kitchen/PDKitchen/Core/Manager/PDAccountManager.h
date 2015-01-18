@@ -14,6 +14,12 @@
 
 @property (nonatomic,assign,readonly) BOOL isLogined; // 是否已经登陆
 
+@property (nonatomic,strong) NSNumber *coupon_count; //
+@property (nonatomic,strong) NSNumber *news_count;   // 消息数量
+
 + (PDAccountManager *)sharedInstance;
+
+// 清理数据
+-(void)cleanup;
 
 @end

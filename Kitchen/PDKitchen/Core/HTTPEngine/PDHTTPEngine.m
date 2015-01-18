@@ -124,7 +124,10 @@
             NSString *theUserid = nil;
             if (data) {
                 theUserid = data[@"userid"];
+                [PDAccountManager sharedInstance].coupon_count = data[@"coupon_count"];
+                [PDAccountManager sharedInstance].news_count = data[@"news_count"];
             }
+            
             // 登录成功
             [PDAccountManager sharedInstance].userid = theUserid;
             success(operation,theUserid);
@@ -561,6 +564,24 @@
     [_HTTPEngine GET:kPathOfAddressMyAddress parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PDModelAddress *ad = [PDModelAddress objectWithJoy:obj];
+            if (ad) {
+                [arr addObject:ad];
+            }
+        }];
+        
+        if (code == 0) {
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
@@ -573,11 +594,11 @@
 }
 
 -(void)addressAddWithUserid:(NSString *)userid
-                    city_id:(NSNumber *)city_id
-                district_id:(NSNumber *)district_id
+                    city_id:(NSString *)city_id
+                district_id:(NSString *)district_id
                     address:(NSString *)address
                       phone:(NSString *)phone
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
@@ -591,15 +612,22 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSDictionary *data = result[@"data"];
+        
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        
         NSLog(@"%@",error);
         
         failure(operation,error);
     }];
-
-    
 }
 
 -(void)addressEditWithUserid:(NSString *)userid
