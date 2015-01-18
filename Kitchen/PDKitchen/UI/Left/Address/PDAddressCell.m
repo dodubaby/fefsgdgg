@@ -31,11 +31,21 @@
         back.layer.borderWidth = 0.5f;
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        address = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, back.width - 2*kCellLeftGap, back.height)];
+        address = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, back.width - 2*kCellLeftGap-20, back.height)];
         [back addSubview:address];
         address.numberOfLines = 2;
         address.font = [UIFont systemFontOfSize:15];
         address.textColor = [UIColor colorWithHexString:@"#333333"];
+        
+        UIButton *deletebutton=[[UIButton alloc] initWithFrame:CGRectMake(address.right, (back.height-20)/2, 20, 20)];
+        [deletebutton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [deletebutton setBackgroundImage:[UIImage imageNamed:@"delete1"] forState:UIControlStateHighlighted];
+        [back addSubview:deletebutton];
+        [deletebutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:deleteAddressWithData:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self deleteAddressWithData:self.data];
+            }
+        }];
     }
     return self;
 }

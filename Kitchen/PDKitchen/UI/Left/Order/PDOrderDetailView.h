@@ -7,11 +7,14 @@
 //
 
 #import "PDBaseView.h"
+#import "PDModelOrderDetail.h"
 
 /**
  *  订单详情
  */
 
 @interface PDOrderDetailView : PDBaseView
+-(void)configData:(PDModelOrderDetail*)orderdetail;
+
 
 @end

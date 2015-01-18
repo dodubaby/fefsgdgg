@@ -63,6 +63,41 @@
     return YES;
 }
 
+-(void)showDefaultView
+{
+    UIView *imageview=[self.tableView viewWithTag:50000];
+    UIView *lab=[self.tableView viewWithTag:60000];
+    if (imageview==nil) {
+        UIImageView *imageview=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav"]];
+        imageview.tag=50000;
+        [self.tableView addSubview:imageview];
+        imageview.center=CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2-60);
+    }
+    if (lab==nil) {
+        UILabel *lab=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
+        lab.backgroundColor=[UIColor clearColor];
+        lab.textAlignment=NSTextAlignmentCenter;
+        lab.text=@"暂无数据";
+        lab.tag=60000;
+        lab.textColor=[UIColor grayColor];
+        lab.center=CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2+50-60);
+        [self.tableView addSubview:lab];
+    }
+    
+}
+-(void)hiddenDefaultView
+{
+    UIView *imageview=[self.tableView viewWithTag:50000];
+    UIView *lab=[self.tableView viewWithTag:60000];
+    if (imageview) {
+        [imageview removeFromSuperview];
+    }
+    if (lab) {
+        [lab removeFromSuperview];
+    }
+}
+
+
 //-(void)startLoading{
 //    
 //    if (!loadingView) {

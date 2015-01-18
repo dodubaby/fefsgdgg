@@ -11,3 +11,4 @@
 @interface PDAddressCell : PDBaseTableViewCell
 
 @end
+

@@ -91,7 +91,8 @@
         line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
         line.tag = 111;
         
-        UIImageView *mark = [[UIImageView alloc] initWithFrame:CGRectMake(47, 12, 7, 7)];
+        //UIImageView *mark = [[UIImageView alloc] initWithFrame:CGRectMake(47, 12, 7, 7)];
+        UIImageView *mark = [[UIImageView alloc] initWithFrame:CGRectMake(40, 16, 7, 7)];
         [cell addSubview:mark];
         mark.image = [UIImage imageWithColor:[UIColor colorWithHexString:@"#fe8501"]];
         mark.layer.cornerRadius = 3.5f;

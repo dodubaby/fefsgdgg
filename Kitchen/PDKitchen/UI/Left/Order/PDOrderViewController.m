@@ -13,18 +13,19 @@
 @interface PDOrderViewController ()
 {
 
-        NSMutableArray *list;
 }
+
+@property (nonatomic,strong) NSMutableArray *dataList;
+
+@property (nonatomic,assign) int currentPage;
+
 @end
 
 @implementation PDOrderViewController
 
 - (void)setupData{
     
-    list = [[NSMutableArray alloc] init];
-    [list addObject:@"小炒肉"];
-    [list addObject:@"小鸡炖蘑菇"];
-    [list addObject:@"北京烤鸭"];
+    _dataList = [[NSMutableArray alloc] init];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -40,21 +41,85 @@
     [self setupData];
     [self setupBackButton];
     
+    
+    __weak PDOrderViewController *weakSelf = self;
+    
     [self.tableView addPullToRefreshWithActionHandler:^{
         //
+        [weakSelf startLoading];
+        
+        weakSelf.currentPage = 0;
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        
-        [[PDHTTPEngine sharedInstance] orderMyOrderWithUserid:userid page:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] orderMyOrderWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            [weakSelf.dataList removeAllObjects];
+            [weakSelf.dataList addObjectsFromArray:list];
+            [weakSelf.tableView reloadData];
+            
+            [weakSelf stopLoading];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            [weakSelf stopLoading];
         }];
+        
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        //
+        // 高度不够不用加载更多
+        CGFloat h = [PDOrderCell cellHeightWithData:nil]*weakSelf.dataList.count;
+        if (h<weakSelf.tableView.bounds.size.height) {
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            return;
+        }
+        
+        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] orderMyOrderWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            
+            weakSelf.currentPage +=1;
+            
+            if (list.count>0) {
+                [weakSelf.dataList addObjectsFromArray:list];
+                [weakSelf.tableView reloadData];
+            }
+            [weakSelf stopLoading];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            [weakSelf stopLoading];
+        }];
     }];
+    
+    [self.tableView triggerPullToRefresh];
+    
+    
+//    [self.tableView addPullToRefreshWithActionHandler:^{
+//        //
+//        
+//        NSString *userid = [PDAccountManager sharedInstance].userid;
+//        
+//        [[PDHTTPEngine sharedInstance] orderMyOrderWithUserid:userid page:@0 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//            //
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            //
+//        }];
+//    }];
+//    
+//    [self.tableView addInfiniteScrollingWithActionHandler:^{
+//        //
+//    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -68,7 +133,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return list.count;
+    return _dataList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,7 +142,7 @@
         cell = [[PDOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
     //cell.textLabel.text = list[indexPath.row];
-    [cell setData:nil];
+    [cell setData:_dataList[indexPath.row]];
     return cell;
 }
 

@@ -218,7 +218,7 @@ sum_price	float	N	总共价格
 // 订单详情
 -(void)orderDetailWithUserid:(NSString *)userid
                         orderid:(NSNumber *)orderid
-                        success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                        success:(void (^)(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 退单

@@ -26,6 +26,10 @@
 #import "PDModelDistrict.h"
 #import "PDModelAddress.h"
 
+#import "PDModelOrder.h"
+#import "PDModelOrderDetail.h"
+#import "PDModelLogistics.h"
+
 #endif
 
 

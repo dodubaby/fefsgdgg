@@ -36,6 +36,9 @@
         address.numberOfLines = 2;
         address.font = [UIFont systemFontOfSize:15];
         address.textColor = [UIColor colorWithHexString:@"#333333"];
+        address.textAlignment = NSTextAlignmentCenter;
+        address.height = 20;
+        address.width = back.width - 2*kCellLeftGap;
     }
     return self;
 }
@@ -50,7 +53,7 @@
         address.text = data;
     }
     
-    [address sizeToFit];
+    //[address sizeToFit];
     address.top = (back.height - address.height)/2;
     //[self showDebugRect];
 }

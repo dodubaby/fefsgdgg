@@ -35,7 +35,7 @@
     if (self) {
         //
         
-        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 140+30)];
+        back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, (kAppWidth-2*kCellLeftGap)*280.0f/680+10+30)];
         [self addSubview:back];
         back.layer.borderWidth = 0.5f;
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
@@ -43,7 +43,7 @@
         NSLog(@"self.width == %f",self.width);
         
         thumbnail = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"cm_food"]];
-        thumbnail.frame = CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 130);
+        thumbnail.frame = CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, (kAppWidth-2*kCellLeftGap)*280.0f/680);
         
         [self addSubview:thumbnail];
         thumbnail.backgroundColor = [UIColor clearColor];
@@ -101,7 +101,7 @@
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
-    return 140+40;
+    return (kAppWidth-2*kCellLeftGap)*280.0f/680+10+40;
 }
 
 

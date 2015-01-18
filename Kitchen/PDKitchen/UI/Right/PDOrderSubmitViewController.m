@@ -80,7 +80,7 @@ PDOrderTimeViewControllerDelegate>
         PDOrderSubmitCellItem *item = [PDOrderSubmitCellItem new];
         item.cellClazz = [PDOrderSubmitCell class];
         item.cellClazz = [PDOrderSubmitCell class];
-        item.data = @"优惠";
+        item.data = @"优惠券";
         
         [_cellItems addObject:item];
     }
@@ -125,6 +125,12 @@ PDOrderTimeViewControllerDelegate>
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"提交订单";
@@ -134,7 +140,23 @@ PDOrderTimeViewControllerDelegate>
     [self setupData];
     
     
+    // 总价  // @"3份美食 共计113元";
+    NSInteger c = 0;
+    CGFloat price = 0.0f;
+    NSArray *fdList = [PDCartManager sharedInstance].cartList;
+    for (PDModelFood *fd in fdList) {
+        c = c + [fd.count integerValue];
+        price = price + [fd.price floatValue]*[fd.count integerValue];
+    }
+    NSString *priceStr = [NSString stringWithFormat:@"%ld份美食 共计%.02f元",c,price];
     
+    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.height - 50-30, kAppWidth-10, 20)];
+    [self.view addSubview:priceLabel];
+    priceLabel.textAlignment = NSTextAlignmentRight;
+    priceLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+    priceLabel.font = [UIFont systemFontOfSize:15];
+    priceLabel.text= priceStr;
+        
     UIView *buttonBack = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - 50, kAppWidth, 50)];
     [self.view addSubview:buttonBack];
     buttonBack.backgroundColor = [UIColor colorWithHexString:@"#666666"];
@@ -168,25 +190,30 @@ PDOrderTimeViewControllerDelegate>
          sum_price	float	N	总共价格
          */
         
-        NSArray *arr = [PDCartManager sharedInstance].cartList;
         
-        NSMutableString *foodids = [[NSMutableString alloc] init];
+        if (!_currentAddress) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"请选择地址"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+            return;
+        }
+        
+        NSArray *arr = [PDCartManager sharedInstance].cartList;
+        NSMutableString *ids = [[NSMutableString alloc] init];
         
         CGFloat totalPrice = 0.0f;
-        
-        
         for (PDModelFood *food in arr) {
-            [foodids appendString:[NSString stringWithFormat:@"%@*%@*",food.food_id,food.count]];
-            
+            [ids appendString:[NSString stringWithFormat:@"%@*%@*",food.food_id,food.count]];
             totalPrice =  totalPrice + [food.count integerValue]*[food.price floatValue];
         }
         
+        NSString *foodids = [ids substringToIndex:ids.length -1];// 去掉最后 *
         
-        foodids = [foodids substringToIndex:foodids.length -1];// 去掉最后 *
-        
-        
-        
-        return;
+        NSLog(@"%@",foodids);
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
         [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
@@ -194,10 +221,20 @@ PDOrderTimeViewControllerDelegate>
                                                   address:_currentAddress.address_id
                                                     phone:@"11"
                                                  couponid:_currentCoupon.coupon_id
-                                                  eatTime:_currentTime
+                                                  eatTime:@"1420613956"
                                                   message:@"11"
                                                  sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                      //
+                                                     
+                                                     UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                                                      message:@"订单提交成功"
+                                                                                                     delegate:nil
+                                                                                            cancelButtonTitle:nil
+                                                                                            otherButtonTitles:@"确定", nil];
+                                                     [alert show];
+                                                     
+                                                     // 清空购物车
+                                                     [[PDCartManager sharedInstance] clear];
                                                      
                                                      
                                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -331,7 +368,7 @@ PDOrderTimeViewControllerDelegate>
     
     _currentCoupon = coupon;
     PDOrderSubmitCellItem *item = _cellItems[1];
-    item.data = [NSString stringWithFormat:@"优惠：%@元",coupon.price];
+    item.data = [NSString stringWithFormat:@"优惠券：%@元",coupon.price];
     [self.tableView reloadData];
 }
 

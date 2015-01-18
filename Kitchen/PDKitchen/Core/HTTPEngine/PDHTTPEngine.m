@@ -421,12 +421,26 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
-    [parameters setObject:foodids forKey:@"foodids"];
+    [parameters setObject:foodids forKey:@"food_ids"];
     [parameters setObject:address forKey:@"address"];
-    [parameters setObject:phone forKey:@"phone"];
-    [parameters setObject:couponid forKey:@"coupon_id"];
-    [parameters setObject:eatTime forKey:@"eat_time"];
-    [parameters setObject:message forKey:@"message"];
+    
+    if (phone) {
+        [parameters setObject:phone forKey:@"phone"];
+    }
+    if(couponid){
+    
+        [parameters setObject:couponid forKey:@"coupon_id"];
+    }
+    
+    if(eatTime){
+    
+        [parameters setObject:eatTime forKey:@"eat_time"];
+    }
+    
+    if (message) {
+        [parameters setObject:message forKey:@"message"];
+    }
+    
     [parameters setObject:sumPrice forKey:@"sum_price"];
     
     
@@ -470,6 +484,27 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        //PDModelOrder
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PDModelOrder *od = [PDModelOrder objectWithJoy:obj];
+            if (od) {
+                [arr addObject:od];
+            }
+        }];
+        
+        if (code == 0) {
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
@@ -494,6 +529,24 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSArray *data = result[@"data"];
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PDModelLogistics *lg = [PDModelOrder objectWithJoy:obj];
+            if (lg) {
+                [arr addObject:lg];
+            }
+        }];
+        
+        if (code == 0) {
+            success(operation,arr);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
@@ -507,7 +560,7 @@
 // 订单详情
 -(void)orderDetailWithUserid:(NSString *)userid
                         orderid:(NSNumber *)orderid
-                        success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                        success:(void (^)(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -518,14 +571,24 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
         
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSDictionary *data = result[@"data"];
+        if (code == 0) {
+            PDModelOrderDetail *deteil = nil;
+            if(data){
+                deteil = [PDModelOrderDetail objectWithJoy:data];
+            }
+            success(operation,deteil);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        
         NSLog(@"%@",error);
-        
         failure(operation,error);
     }];
-    
 }
 
 -(void)orderBackWithUserid:(NSString *)userid

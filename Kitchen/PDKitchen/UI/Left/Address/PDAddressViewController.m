@@ -61,7 +61,11 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+    if(_isForOrder){
+        [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
+    }else{
+        [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+    }
 }
 
 - (void)viewDidLoad {
@@ -280,6 +284,7 @@
     if (!cell) {
         cell = [[PDAddressCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
     }
+    cell.delegate = self;
     [cell setData:_dataList[indexPath.row]];
     return cell;
 }
@@ -296,6 +301,13 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     
+}
+
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell deleteAddressWithData:(id)data
+{
+    [_dataList removeObject:data];
+    NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationBottom];
 }
 
 @end

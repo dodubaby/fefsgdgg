@@ -101,6 +101,8 @@
     NSString *userid = [PDAccountManager sharedInstance].userid;
     [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
         //
+        NSLog(@"%@",list);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
     }];
@@ -113,9 +115,15 @@
     logisticsButton.selected = NO;
     detailButton.selected = YES;
     
+    
+    [orderDetailView configData:nil];
+    
     NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+    [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil) {
         //
+        
+        NSLog(@"deteil == %@",deteil);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
     }];

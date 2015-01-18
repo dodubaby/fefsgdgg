@@ -81,7 +81,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的收藏";
-    self.tableView.frame = CGRectMake(0, -20, kAppWidth - 165, kAppHeight);
+    
+    NSLog(@"kAppWidth %f",kAppWidth);
+    
+
+    // iphone 6  375.000000
+    // 6+ 414.000000
+    // 320
+    
+    
+    CGFloat w = 0;
+    
+    if (kAppWidth>=414) {
+        w = kAppWidth - 165;
+    }else if(kAppWidth>=375){
+    
+        w = kAppWidth- 120;
+    }else{
+        w = kAppWidth- 66;
+    }
+    
+    self.tableView.frame = CGRectMake(0, -20, w, kAppHeight);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#edf2f5"];
@@ -167,6 +187,8 @@
         [self congfigData];
         
     }];
+    
+    //[self.view showDebugRect];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -68,5 +68,9 @@
 // 赞消息
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell likeNewsWithData:(id)data;
 
+// 地址管理
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell deleteAddressWithData:(id)data;
+
+
 
 @end

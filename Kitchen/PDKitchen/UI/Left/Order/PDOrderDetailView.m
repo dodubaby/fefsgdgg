@@ -8,6 +8,16 @@
 
 #import "PDOrderDetailView.h"
 
+@interface PDOrderDetailView ()
+{
+    UILabel *foodlab;
+    UILabel *logisticslab;
+    UILabel *eattimelab;
+    UILabel *priceDetail;
+    UILabel *addresslab;
+    
+}
+@end
 @implementation PDOrderDetailView
 
 
@@ -15,8 +25,41 @@
     self = [super initWithFrame:frame];
     if (self) {
         //
+        int leftinset=24;
+        int updownspace=15;
+        foodlab=[[UILabel alloc] initWithFrame:CGRectMake(leftinset, 30, kAppWidth-2*leftinset, 20)];
+        foodlab.font = [UIFont systemFontOfSize:15];
+        foodlab.textColor = [UIColor colorWithHexString:@"#333333"];
+        logisticslab=[[UILabel alloc] initWithFrame:CGRectMake(leftinset, foodlab.bottom+updownspace, kAppWidth-2*leftinset, 20)];
+        logisticslab.font = [UIFont systemFontOfSize:15];
+        logisticslab.textColor = [UIColor colorWithHexString:@"#333333"];
+        eattimelab=[[UILabel alloc] initWithFrame:CGRectMake(leftinset, logisticslab.bottom+updownspace, kAppWidth-2*leftinset, 20)];
+        eattimelab.font = [UIFont systemFontOfSize:15];
+        eattimelab.textColor = [UIColor colorWithHexString:@"#333333"];
+        priceDetail=[[UILabel alloc] initWithFrame:CGRectMake(leftinset, eattimelab.bottom+updownspace, kAppWidth-2*leftinset, 20)];
+        priceDetail.font = [UIFont systemFontOfSize:15];
+        priceDetail.textColor = [UIColor colorWithHexString:@"#333333"];
+        addresslab=[[UILabel alloc] initWithFrame:CGRectMake(leftinset, priceDetail.bottom+updownspace, kAppWidth-2*leftinset, 20)];
+        addresslab.font = [UIFont systemFontOfSize:15];
+        addresslab.textColor = [UIColor colorWithHexString:@"#333333"];
+        [self addSubview:foodlab];
+        [self addSubview:logisticslab];
+        [self addSubview:eattimelab];
+        [self addSubview:priceDetail];
+        [self addSubview:addresslab];
+        
     }
     return self;
 }
+-(void)configData:(PDModelOrderDetail*)orderdetail
+{
+//    foodlab.text=[NSString stringWithFormat:@"%@ %@元 %@",orderdetail.name,orderdetail.price,orderdetail.sum];
+//    logisticslab.text=[NSString stringWithFormat:@"配送费：%@元",orderdetail.send_price];
+//    eattimelab.text=[NSString stringWithFormat:@"就餐时间：%@",orderdetail.eat_time];
+//    priceDetail.text=[NSString stringWithFormat:@"优惠卷：%@元 还需支付%@元",orderdetail.coupon_price,orderdetail.money];
+//    addresslab.text=[NSString stringWithFormat:@"配送地址：%@",orderdetail.address];
+}
+
+
 
 @end

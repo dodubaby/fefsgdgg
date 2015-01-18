@@ -29,6 +29,9 @@ UITableViewDelegate>
 // 登陆
 -(BOOL)userLogined;
 
+-(void)showDefaultView;
+-(void)hiddenDefaultView;
+
 
 //-(void)startLoading;
 //-(void)stopLoading;

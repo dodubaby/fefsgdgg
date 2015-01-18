@@ -23,7 +23,7 @@
 - (void)setupData{
 
     _dataList = [[NSMutableArray alloc] init];
-    [_dataList addObject:@"6:00"];
+    [_dataList addObject:@"立即配送"];
     [_dataList addObject:@"6:00"];
     [_dataList addObject:@"6:00"];
     [_dataList addObject:@"6:00"];
@@ -35,9 +35,14 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"提交订单";
+    self.navigationItem.title = @"就餐时间";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self setupBackButton];

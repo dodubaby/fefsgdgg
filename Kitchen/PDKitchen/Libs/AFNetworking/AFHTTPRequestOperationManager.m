@@ -172,6 +172,8 @@
     [parameters setObject:device forKey:@"device"];
     [parameters setObject:@"ios" forKey:@"plateform"];
     
+    NSLog(@"parameters == %@",parameters);
+    
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:str parameters:parameters error:nil];
     
 //    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:nil];

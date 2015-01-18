@@ -28,9 +28,12 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+    if(_isForOrder){
+        [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
+    }else{
+        [self.mm_drawerController setPanDisableSide:MMPanDisableSideRight];
+    }
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
