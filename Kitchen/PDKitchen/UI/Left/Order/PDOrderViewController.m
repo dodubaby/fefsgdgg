@@ -56,6 +56,10 @@
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             
+            if ([list count]==0) {
+                [weakSelf showDefaultView];
+            }
+            
             weakSelf.currentPage +=1;
             
             [weakSelf.dataList removeAllObjects];
@@ -104,22 +108,6 @@
     
     [self.tableView triggerPullToRefresh];
     
-    
-//    [self.tableView addPullToRefreshWithActionHandler:^{
-//        //
-//        
-//        NSString *userid = [PDAccountManager sharedInstance].userid;
-//        
-//        [[PDHTTPEngine sharedInstance] orderMyOrderWithUserid:userid page:@0 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-//            //
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            //
-//        }];
-//    }];
-//    
-//    [self.tableView addInfiniteScrollingWithActionHandler:^{
-//        //
-//    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -132,7 +120,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (_dataList.count==0) {
+    }else{
+        [self hiddenDefaultView];
+    }
     return _dataList.count;
 }
 
@@ -150,6 +141,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     PDOrderDetailViewController *vc = [[PDOrderDetailViewController alloc] init];
+    PDModelOrder *od = _dataList[indexPath.row];
+    vc.orderid = od.order_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

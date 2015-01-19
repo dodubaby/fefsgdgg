@@ -10,4 +10,6 @@
 
 @interface PDOrderDetailViewController : PDBaseViewController
 
+@property(nonatomic,strong) NSString *orderid;
+
 @end

@@ -67,10 +67,14 @@
         time.textColor = [UIColor colorWithHexString:@"#999999"];
         
         removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        removeButton.frame = CGRectMake(0, 0, 15, 20);
-        removeButton.top = thumbnail.bottom+kCellLeftGap;
+        removeButton.frame = CGRectMake(0, 0, 30, 30);
+        removeButton.top = thumbnail.bottom+kCellLeftGap-5;
         removeButton.right = kAppWidth - kCellLeftGap;
         [self addSubview:removeButton];
+        
+        [removeButton setBackgroundImage:[UIImage imageNamed:@"news_delete"] forState:UIControlStateNormal];
+        
+        
         [removeButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             //
             if(self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:deleteNewsWithData:)]){
@@ -88,7 +92,7 @@
     
     name.text = news.title;
     time.text = news.time_str;
-    time.right = kAppWidth - 35;
+    time.right = kAppWidth - 38;
     
     if (news.img) {
         thumbnail.imageURL = [NSURL URLWithString:news.img];

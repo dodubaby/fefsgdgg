@@ -12,8 +12,6 @@
 @interface PDOrderLogisticsView ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *leftTableView;
-    
-    NSMutableArray *list;
 }
 
 @end
@@ -24,25 +22,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         //
-        list = [[NSMutableArray alloc] initWithObjects:
-                @"1111",
-                @"2222",
-                @"3333",
-                @"4444",
-                @"1111",
-                @"2222",
-                @"3333",
-                @"4444",
-                @"1111",
-                @"2222",
-                @"3333",
-                @"4444",
-                @"1111",
-                @"2222",
-                @"3333",
-                @"4444",nil];
         
-        leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, list.count*80) style:UITableViewStylePlain];
+        leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, frame.size.height) style:UITableViewStylePlain];
         leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         leftTableView.delegate = self;
         leftTableView.dataSource = self;
@@ -58,6 +39,13 @@
     return self;
 }
 
+
+-(void)setList:(NSMutableArray *)list_{
+
+    _list = list_;
+    [leftTableView reloadData];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [PDLogisticsCell cellHeightWithData:nil];
 }
@@ -67,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return list.count;
+    return _list.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,12 +66,12 @@
     }
     //cell.textLabel.text = list[indexPath.row];
     
-    if (indexPath.row == list.count-1) {
+    if (indexPath.row == _list.count-1) {
         cell.isCurrent = @YES;
     }else{
         cell.isCurrent = @NO;
     }
-    [cell setData:nil];
+    [cell setData:_list[indexPath.row]];
     
     return cell;
 }

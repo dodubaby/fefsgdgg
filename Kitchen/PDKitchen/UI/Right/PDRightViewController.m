@@ -196,6 +196,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (list.count==0) {
+        [self showDefaultView];
+    }else{
+        [self hiddenDefaultView];
+    }
+    
     return list.count;
 }
 

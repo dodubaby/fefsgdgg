@@ -54,6 +54,10 @@
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             
+            if ([list count]==0) {
+                [weakSelf showDefaultView];
+            }
+            
             weakSelf.currentPage +=1;
             
             [weakSelf.dataList removeAllObjects];
@@ -110,7 +114,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (_dataList.count==0) {
+    }else{
+        [self hiddenDefaultView];
+    }
     return _dataList.count;
 }
 

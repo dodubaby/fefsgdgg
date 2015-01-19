@@ -111,6 +111,7 @@ PDOrderTimeViewControllerDelegate>
         PDOrderSubmitCellItem *item = [PDOrderSubmitCellItem new];
         item.cellClazz = [PDOrderSubmitCell class];
         item.data = @"配送费：0元";
+        item.extInfo = @{@"isActive":@YES};
         
         [_cellItems addObject:item];
     }
@@ -135,10 +136,14 @@ PDOrderTimeViewControllerDelegate>
     [super viewDidLoad];
     self.navigationItem.title = @"提交订单";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.height = self.view.height - 50-40;
+    
+    // 为了能起来
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 200)];
+    self.tableView.tableFooterView = footer;
     
     [self setupBackButton];
     [self setupData];
-    
     
     // 总价  // @"3份美食 共计113元";
     NSInteger c = 0;
@@ -150,7 +155,9 @@ PDOrderTimeViewControllerDelegate>
     }
     NSString *priceStr = [NSString stringWithFormat:@"%ld份美食 共计%.02f元",c,price];
     
-    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.height - 50-30, kAppWidth-10, 20)];
+    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.height - 50-40, kAppWidth-10, 40)];
+    priceLabel.userInteractionEnabled = YES;
+    priceLabel.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:priceLabel];
     priceLabel.textAlignment = NSTextAlignmentRight;
     priceLabel.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -215,14 +222,24 @@ PDOrderTimeViewControllerDelegate>
         
         NSLog(@"%@",foodids);
         
+        // 手机
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        PDOrderSubmitPhoneCell *cell = (PDOrderSubmitPhoneCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        NSString *cellPhone = cell.textField.text;
+        
+        // 信息
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:5 inSection:0];
+        PDOrderSubmitRequestCell *cell2 = (PDOrderSubmitRequestCell *)[self.tableView cellForRowAtIndexPath:indexPath2];
+        NSString *message = cell2.textView.text;
+        
         NSString *userid = [PDAccountManager sharedInstance].userid;
         [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
                                                   foodids:foodids
                                                   address:_currentAddress.address_id
-                                                    phone:@"11"
+                                                    phone:cellPhone
                                                  couponid:_currentCoupon.coupon_id
                                                   eatTime:@"1420613956"
-                                                  message:@"11"
+                                                  message:message
                                                  sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                      //
                                                      
@@ -235,6 +252,7 @@ PDOrderTimeViewControllerDelegate>
                                                      
                                                      // 清空购物车
                                                      [[PDCartManager sharedInstance] clear];
+                                                     [self.navigationController popViewControllerAnimated:YES];
                                                      
                                                      
                                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -280,7 +298,7 @@ PDOrderTimeViewControllerDelegate>
         cell = [[item.cellClazz alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+    cell.extInfo = item.extInfo;
     [cell setData:item.data];
     return cell;
 }
@@ -356,6 +374,7 @@ PDOrderTimeViewControllerDelegate>
     _currentAddress = address;
     
     PDOrderSubmitCellItem *item = _cellItems[0];
+    item.extInfo = @{@"isActive":@YES};
     item.data = [NSString stringWithFormat:@"地址：%@",_currentAddress.address];
     [self.tableView reloadData];
     
@@ -368,6 +387,7 @@ PDOrderTimeViewControllerDelegate>
     
     _currentCoupon = coupon;
     PDOrderSubmitCellItem *item = _cellItems[1];
+    item.extInfo = @{@"isActive":@YES};
     item.data = [NSString stringWithFormat:@"优惠券：%@元",coupon.price];
     [self.tableView reloadData];
 }
@@ -378,6 +398,7 @@ PDOrderTimeViewControllerDelegate>
     
     _currentTime = time;
     PDOrderSubmitCellItem *item = _cellItems[3];
+    item.extInfo = @{@"isActive":@YES};
     item.data = [NSString stringWithFormat:@"就餐时间：%@", _currentTime];
     [self.tableView reloadData];
 }

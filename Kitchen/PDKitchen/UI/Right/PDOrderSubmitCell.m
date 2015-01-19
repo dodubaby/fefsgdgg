@@ -40,7 +40,7 @@
         [_back addSubview:address];
         address.numberOfLines = 2;
         address.font = [UIFont systemFontOfSize:15];
-        address.textColor = [UIColor colorWithHexString:@"#333333"];
+        
     }
     return self;
 }
@@ -61,6 +61,14 @@
     
     [address sizeToFit];
     address.top = (_back.height - address.height)/2;
+    
+    
+    BOOL active = [_extInfo[@"isActive"] boolValue];
+    if (active) { // 激活颜色
+        address.textColor = [UIColor colorWithHexString:@"#333333"];
+    }else{
+        address.textColor = [UIColor colorWithHexString:@"#e6e6e6"];
+    }
 }
 
 +(CGFloat )cellHeightWithData:(id)data{
@@ -116,17 +124,18 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        _textView = [[UITextView alloc] initWithFrame:CGRectZero];
+        _textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectZero];
         [self.back addSubview:_textView];
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.textColor = [UIColor colorWithHexString:@"#333333"];
+        _textView.placeholder = @"输入你的额外要求";
     }
     return self;
 }
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    _textView.frame = CGRectMake(kCellLeftGap, 0, self.back.width - 2*kCellLeftGap, self.back.height);
+    _textView.frame = CGRectMake(kCellLeftGap-5, 0, self.back.width - 2*kCellLeftGap+10, self.back.height);
 }
 
 +(CGFloat )cellHeightWithData:(id)data{

@@ -13,7 +13,6 @@
 #import "PDLeftViewController.h"
 #import "PDRightViewController.h"
 
-#import "LoveTopTipView.h"
 
 @interface AppDelegate ()<TencentSessionDelegate>
 {
@@ -203,14 +202,14 @@
         switch (resp.errCode) {
             case WXSuccess:
                 //
-                [[LoveTopTipView shareInstance] showMessage:@"微信分享成功"];
+                
                 break;
             case WXErrCodeUserCancel:
                 //
-                [[LoveTopTipView shareInstance] showMessage:@"微信分享取消"];
+                
                 break;
             default:
-                [[LoveTopTipView shareInstance] showMessage:@"微信分享失败"];
+                
                 break;
         }
         

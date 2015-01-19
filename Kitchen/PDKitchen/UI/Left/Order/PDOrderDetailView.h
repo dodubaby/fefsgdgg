@@ -7,7 +7,7 @@
 //
 
 #import "PDBaseView.h"
-#import "PDModelOrderDetail.h"
+#import "PDModel.h"
 
 /**
  *  订单详情

@@ -13,6 +13,8 @@
 
 @interface PDOrderSubmitCell : PDBaseTableViewCell
 @property (nonatomic,strong) UIView *back;
+
+@property (nonatomic,strong) NSDictionary *extInfo;
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +31,7 @@
 
 @interface PDOrderSubmitRequestCell : PDOrderSubmitCell
 
-@property (nonatomic,strong) UITextView *textView;
+@property (nonatomic,strong) UIPlaceHolderTextView *textView;
 
 @end
 

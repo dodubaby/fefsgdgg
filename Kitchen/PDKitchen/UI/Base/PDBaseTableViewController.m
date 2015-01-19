@@ -68,7 +68,7 @@
     UIView *imageview=[self.tableView viewWithTag:50000];
     UIView *lab=[self.tableView viewWithTag:60000];
     if (imageview==nil) {
-        UIImageView *imageview=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav"]];
+        UIImageView *imageview=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_logo"]];
         imageview.tag=50000;
         [self.tableView addSubview:imageview];
         imageview.center=CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2-60);
@@ -83,8 +83,8 @@
         lab.center=CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2+50-60);
         [self.tableView addSubview:lab];
     }
-    
 }
+
 -(void)hiddenDefaultView
 {
     UIView *imageview=[self.tableView viewWithTag:50000];

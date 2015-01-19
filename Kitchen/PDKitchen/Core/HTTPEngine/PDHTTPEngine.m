@@ -517,7 +517,7 @@
 
 // 物流动态
 -(void)orderLogisticsWithUserid:(NSString *)userid
-                        orderid:(NSNumber *)orderid
+                        orderid:(NSString *)orderid
                         success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
@@ -535,7 +535,7 @@
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
         [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            PDModelLogistics *lg = [PDModelOrder objectWithJoy:obj];
+            PDModelLogistics *lg = [PDModelLogistics objectWithJoy:obj];
             if (lg) {
                 [arr addObject:lg];
             }
@@ -559,7 +559,7 @@
 
 // 订单详情
 -(void)orderDetailWithUserid:(NSString *)userid
-                        orderid:(NSNumber *)orderid
+                        orderid:(NSString *)orderid
                         success:(void (^)(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
@@ -592,8 +592,8 @@
 }
 
 -(void)orderBackWithUserid:(NSString *)userid
-                   orderid:(NSNumber *)orderid
-                   success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                   orderid:(NSString *)orderid
+                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -603,10 +603,18 @@
     [_HTTPEngine POST:kPathOfOrderBack parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSDictionary *data = result[@"data"];
         
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        
         NSLog(@"%@",error);
         
         failure(operation,error);
@@ -724,19 +732,27 @@
 }
 
 -(void)addressDelWithUserid:(NSString *)userid
-                 address_id:(NSNumber *)address_id
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                 address_id:(NSString *)address_id
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
     [parameters setObject:address_id forKey:@"address_id"];
     
-    
     [_HTTPEngine POST:kPathOfAddressDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"result   %@",result);
+        long code = [result[@"code"] intValue];
+        NSString *msg = result[@"msg"];
+        NSDictionary *data = result[@"data"];
         
+        if (code == 0) {
+            success(operation,data);
+        }else{
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         

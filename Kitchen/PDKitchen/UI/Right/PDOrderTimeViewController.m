@@ -25,14 +25,13 @@
     _dataList = [[NSMutableArray alloc] init];
     [_dataList addObject:@"立即配送"];
     [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    [_dataList addObject:@"6:00"];
-    
+    [_dataList addObject:@"7:00"];
+    [_dataList addObject:@"8:00"];
+    [_dataList addObject:@"9:00"];
+    [_dataList addObject:@"10:00"];
+    [_dataList addObject:@"11:00"];
+    [_dataList addObject:@"12:00"];
+    [_dataList addObject:@"13:00"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -73,6 +72,11 @@
         cell = [[PDOrderTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    if (indexPath.row==0) {
+        cell.isFirst = YES;
+    }
+    
     [cell setData:_dataList[indexPath.row]];
     return cell;
 }

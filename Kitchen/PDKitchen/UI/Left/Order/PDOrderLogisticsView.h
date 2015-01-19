@@ -12,4 +12,6 @@
  */
 @interface PDOrderLogisticsView : PDBaseView
 
+@property(nonatomic,strong) NSArray *list;
+
 @end

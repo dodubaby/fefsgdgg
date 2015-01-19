@@ -83,7 +83,28 @@
     [refund setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateSelected];
     [refund handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:@"退单成功"
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSString *message = error.userInfo[@"Message"];
+            if (!message) {
+                message = [error localizedDescription];
+            }
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
+        }];
     }];
+    
     
     // 默认展示物流信息
     [self showLogistics];
@@ -99,12 +120,25 @@
     detailButton.selected = NO;
     
     NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+    [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
         //
         NSLog(@"%@",list);
         
+        if (list) {
+            orderLogisticsView.list = list;
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
+        NSString *message = error.userInfo[@"Message"];
+        if (!message) {
+            message = [error localizedDescription];
+        }
+        UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:message
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:@"确定", nil];
+        [alert show];
     }];
 }
 
@@ -115,17 +149,28 @@
     logisticsButton.selected = NO;
     detailButton.selected = YES;
     
-    
-    [orderDetailView configData:nil];
-    
     NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:@1 success:^(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil) {
+    [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil) {
         //
         
         NSLog(@"deteil == %@",deteil);
         
+        if (deteil) {
+            [orderDetailView configData:deteil];
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
+        NSString *message = error.userInfo[@"Message"];
+        if (!message) {
+            message = [error localizedDescription];
+        }
+        UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:message
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:@"确定", nil];
+        [alert show];
     }];
 }
 

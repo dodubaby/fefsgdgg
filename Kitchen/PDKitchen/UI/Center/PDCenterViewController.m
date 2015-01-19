@@ -67,6 +67,10 @@
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             
+            if ([list count]==0) {
+                [weakSelf showDefaultView];
+            }
+            
             weakSelf.currentPage +=1;
             
             [weakSelf.dataList removeAllObjects];
@@ -74,6 +78,8 @@
             [weakSelf.tableView reloadData];
             
             [weakSelf stopLoading];
+            
+            
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
@@ -128,7 +134,15 @@
     // 新消息红点
     [[NSNotificationCenter defaultCenter] addObserverForName:kNewsHideNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
         //
-        newsMark.hidden = YES;
+        NSNumber *coupon_count = [PDAccountManager sharedInstance].coupon_count;
+        NSNumber *news_count = [PDAccountManager sharedInstance].news_count;
+        
+        // 只要有券或者消息，就显示红点
+        if([coupon_count intValue]>0||[news_count intValue]>0){
+            newsMark.hidden = NO;
+        }else{
+            newsMark.hidden = YES;
+        }
     }];
 }
 
@@ -169,7 +183,7 @@
     newsMark.backgroundColor = [UIColor colorWithHexString:@"#fe8501"];
     newsMark.layer.cornerRadius = 3.5f;
     newsMark.layer.masksToBounds = YES;
-    newsMark.hidden = NO;
+    newsMark.hidden = YES;
 }
 
 -(void)setupRightMenuButton{
@@ -210,7 +224,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (_dataList.count==0) {
+        
+    }else{
+        [self hiddenDefaultView];
+    }
     return _dataList.count;
 }
 
@@ -239,15 +257,33 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 // 添加购物车
 
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
     NSLog(@"add");
     
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth- 100, 300, 90, 30)];
+//    label.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
+//    label.font = [UIFont boldSystemFontOfSize:15];
+//    label.layer.cornerRadius = 4;
+//    label.clipsToBounds = YES;
+//    label.font = [UIFont systemFontOfSize:15];
+//    label.textColor = [UIColor whiteColor];
+//    label.text = @"加入订单";
+//    
+//    [[UIApplication sharedApplication].keyWindow addSubview:label];
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        //
+//        label.center = CGPointMake(kAppWidth - 30, 40);
+//        label.alpha = 0.5;
+//    } completion:^(BOOL finished) {
+//        [label removeFromSuperview];
+//    }];
+    
+    
     [[PDCartManager sharedInstance] addFood:data];
     
-
     
 //    if ([self userLogined]) {
 //        NSString *userid = [PDAccountManager sharedInstance].userid;

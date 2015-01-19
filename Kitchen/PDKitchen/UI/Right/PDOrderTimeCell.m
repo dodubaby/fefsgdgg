@@ -12,7 +12,7 @@
 @interface PDOrderTimeCell()
 {
     UIView *back;
-    UILabel *address;
+    UILabel *content;
     
     
 }
@@ -31,30 +31,34 @@
         back.layer.borderWidth = 0.5f;
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        address = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, back.width - 2*kCellLeftGap, back.height)];
-        [back addSubview:address];
-        address.numberOfLines = 2;
-        address.font = [UIFont systemFontOfSize:15];
-        address.textColor = [UIColor colorWithHexString:@"#333333"];
-        address.textAlignment = NSTextAlignmentCenter;
-        address.height = 20;
-        address.width = back.width - 2*kCellLeftGap;
+        content = [[UILabel alloc] initWithFrame:CGRectMake(kCellLeftGap, 0, back.width - 2*kCellLeftGap, back.height)];
+        [back addSubview:content];
+        content.numberOfLines = 2;
+        content.font = [UIFont systemFontOfSize:15];
+        content.textColor = [UIColor colorWithHexString:@"#333333"];
+        content.textAlignment = NSTextAlignmentCenter;
+        content.height = 20;
+        content.width = back.width - 2*kCellLeftGap;
     }
     return self;
 }
 
 -(void)configData:(id)data{
     
-//    PDModelAddress *addressData = data;
-//    
-//    address.text = addressData.address;
+    if (_isFirst) {
+        back.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
+        content.textColor = [UIColor colorWithHexString:@"#c14a41"];
+    }else{
+        back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
+        content.textColor = [UIColor colorWithHexString:@"#333333"];
+    }
     
     if ([data isKindOfClass:[NSString class]]) {
-        address.text = data;
+        content.text = data;
     }
     
     //[address sizeToFit];
-    address.top = (back.height - address.height)/2;
+    content.top = (back.height - content.height)/2;
     //[self showDebugRect];
 }
 

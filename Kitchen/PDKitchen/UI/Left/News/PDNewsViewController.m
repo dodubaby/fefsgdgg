@@ -11,8 +11,6 @@
 #import "PDNewsDetailViewController.h"
 
 
-
-
 @interface PDNewsViewController ()
 {
 }
@@ -61,6 +59,10 @@
         [[PDHTTPEngine sharedInstance] newsAllWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            
+            if ([list count]==0) {
+                [weakSelf showDefaultView];
+            }
             
             weakSelf.currentPage +=1;
             
@@ -120,7 +122,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (_dataList.count==0) {
+    }else{
+        [self hiddenDefaultView];
+    }
     return _dataList.count;
 }
 

@@ -211,20 +211,20 @@ sum_price	float	N	总共价格
 
 // 物流动态
 -(void)orderLogisticsWithUserid:(NSString *)userid
-                         orderid:(NSNumber *)orderid
+                         orderid:(NSString *)orderid
                       success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 订单详情
 -(void)orderDetailWithUserid:(NSString *)userid
-                        orderid:(NSNumber *)orderid
+                        orderid:(NSString *)orderid
                         success:(void (^)(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 退单
 -(void)orderBackWithUserid:(NSString *)userid
-                     orderid:(NSNumber *)orderid
-                     success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                     orderid:(NSString *)orderid
+                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 我的地址
@@ -241,6 +241,7 @@ district_id	int	Y	区ID
 address	string	Y	详细地址
 phone	string	Y	联系电话
  */
+
 -(void)addressAddWithUserid:(NSString *)userid
                     city_id:(NSString *)city_id
                 district_id:(NSString *)district_id
@@ -258,8 +259,8 @@ phone	string	Y	联系电话
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 //  删除地址
 -(void)addressDelWithUserid:(NSString *)userid
-                 address_id:(NSNumber *)address_id
-                    success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
+                 address_id:(NSString *)address_id
+                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 //  我的收藏
 -(void)collectMyCollectWithUserid:(NSString *)userid

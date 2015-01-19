@@ -90,6 +90,9 @@
         [[PDHTTPEngine sharedInstance] addressMyAddressWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
+            if ([list count]==0) {
+                [weakSelf showDefaultView];
+            }
             
             weakSelf.currentPage +=1;
             
@@ -135,15 +138,17 @@
     [self.tableView triggerPullToRefresh];
      
     
+    inputView = [[PDAddressInputView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 215+50)];
+    inputView.delegate = self;
+    [self.view addSubview:inputView];
+    
+    inputView.hidden = YES;
+    
     UIView *buttonBack = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - 50, kAppWidth, 50)];
     [self.view addSubview:buttonBack];
     buttonBack.backgroundColor = [UIColor colorWithHexString:@"#666666"];
     
-    inputView = [[PDAddressInputView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 215)];
-    inputView.delegate = self;
-    [self.view addSubview:inputView];
-    inputView.bottom = buttonBack.top;
-    inputView.hidden = YES;
+    inputView.bottom = buttonBack.top+50;
     
     // 刷新区域
     [inputView.district setTitle:_currentDistrict.title forState:UIControlStateNormal];
@@ -169,6 +174,9 @@
             inputView.hidden = NO;
             [addButton setTitle:@"添加" forState:UIControlStateNormal];
             isShowAdd = NO;
+            
+            cancelButton.hidden = NO;
+            
         }else{
             // 添加到服务器
             if ([inputView.address.text length]==0) {
@@ -202,8 +210,15 @@
                 isShowAdd = YES;
                 [addButton setTitle:@"添加地址" forState:UIControlStateNormal];
                 [inputView reset];
+                cancelButton.hidden = YES;
+                
                 // 刷新区域
                 [inputView.district setTitle:_currentDistrict.title forState:UIControlStateNormal];
+                
+                
+                // 刷新数据
+                [self.tableView triggerPullToRefresh];
+                
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                                 message:@"地址添加成功"
@@ -211,6 +226,8 @@
                                                       cancelButtonTitle:nil
                                                       otherButtonTitles:@"确定", nil];
                 [alert show];
+                
+                
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //
@@ -239,14 +256,14 @@
     [cancelButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         //
         inputView.hidden = YES;
-        
+        cancelButton.hidden = YES;
         [addButton setTitle:@"添加地址" forState:UIControlStateNormal];
         isShowAdd = YES;
     }];
     
-    [self.view bringSubviewToFront:buttonBack];
-    [self.view bringSubviewToFront:inputView];
+    cancelButton.hidden = YES;
     
+    [self.view bringSubviewToFront:buttonBack];
 }
 
 -(void)pdAddressInputView:(UIView *)addressView districtButtonTaped:(id)sender{
@@ -275,7 +292,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (_dataList.count==0) {
+    }else{
+        [self hiddenDefaultView];
+    }
     return [_dataList count];
 }
 
@@ -292,7 +312,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
     if (_isForOrder) {
         if (_selectDelegete&&[_selectDelegete respondsToSelector:@selector(pdAddressViewController:didSelectAddress:)]) {
             [_selectDelegete pdAddressViewController:self didSelectAddress:_dataList[indexPath.row]];
@@ -300,14 +319,38 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
 }
 
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell deleteAddressWithData:(id)data
 {
-    [_dataList removeObject:data];
-    NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationBottom];
+    
+    PDModelAddress *ad = (PDModelAddress *)data;
+    
+    NSString *userid = [PDAccountManager sharedInstance].userid;
+    [[PDHTTPEngine sharedInstance] addressDelWithUserid:userid address_id:ad.address_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        [_dataList removeObject:data];
+        
+        [self.tableView beginUpdates];
+        NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSString *message = error.userInfo[@"Message"];
+        if (!message) {
+            message = [error localizedDescription];
+        }
+        UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:message
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:@"确定", nil];
+        [alert show];
+        
+    }];
 }
 
 @end

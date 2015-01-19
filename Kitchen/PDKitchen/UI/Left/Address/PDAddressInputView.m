@@ -49,26 +49,36 @@
             }
         }];
         
+        UIView *addressBack = [[UIView alloc] initWithFrame:CGRectMake(10, _city.bottom+10, frame.size.width-20, 50)];
+        [self addSubview:addressBack];
+        addressBack.backgroundColor = [UIColor whiteColor];
+        addressBack.layer.borderWidth = 0.5f;
+        addressBack.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         
-        _address = [[UITextField alloc] initWithFrame:CGRectMake(10, _city.bottom+10, frame.size.width-20, 50)];
+        
+        _address = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, addressBack.width-20, 50)];
         _address.delegate = self;
-        [self addSubview:_address];
+        [addressBack addSubview:_address];
         _address.backgroundColor = [UIColor whiteColor];
         _address.font = [UIFont systemFontOfSize:15];
         _address.textColor = [UIColor colorWithHexString:@"#333333"];
-        _address.layer.borderWidth = 0.5f;
-        _address.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
+
         _address.placeholder = @"详细地址";
         
-        _phone = [[UITextField alloc] initWithFrame:CGRectMake(10, _address.bottom+10, frame.size.width-20, 50)];
+        UIView *phoneBack = [[UIView alloc] initWithFrame:CGRectMake(10, addressBack.bottom+10, frame.size.width-20, 50)];
+        phoneBack.backgroundColor = [UIColor whiteColor];
+        [self addSubview:phoneBack];
+        phoneBack.layer.borderWidth = 0.5f;
+        phoneBack.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
+        
+        _phone = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, phoneBack.width-20, 50)];
         _phone.delegate = self;
-        [self addSubview:_phone];
+        [phoneBack addSubview:_phone];
         _phone.backgroundColor = [UIColor whiteColor];
         _phone.placeholder = @"手机号";
         _phone.font = [UIFont systemFontOfSize:15];
         _phone.textColor = [UIColor colorWithHexString:@"#333333"];
-        _phone.layer.borderWidth = 0.5f;
-        _phone.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
+
     }
     
     return self;
@@ -78,6 +88,10 @@
     [_district setTitle:@"" forState:UIControlStateNormal];
     _address.text = nil;
     _phone.text = nil;
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self findAndResignFirstResponder];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

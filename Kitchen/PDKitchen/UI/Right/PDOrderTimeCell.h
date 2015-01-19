@@ -10,4 +10,6 @@
 
 @interface PDOrderTimeCell : PDBaseTableViewCell
 
+@property (nonatomic,assign) BOOL isFirst;
+
 @end

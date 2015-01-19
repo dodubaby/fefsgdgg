@@ -20,6 +20,7 @@
 
 #import "EGOImageView.h"
 
+#import "UIPlaceHolderTextView.h"
 
 // screen width
 #define kAppWidth [UIScreen mainScreen].bounds.size.width

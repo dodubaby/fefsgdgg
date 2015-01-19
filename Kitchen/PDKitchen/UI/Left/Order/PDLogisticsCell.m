@@ -55,6 +55,8 @@
 -(void)configData:(id)data{
     //[self showDebugRect];
     
+    PDModelLogistics *ls = data;
+    
     if ([_isCurrent boolValue]) { // 选中
         back.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
         time.textColor = [UIColor colorWithHexString:@"#c14a41"];
@@ -67,12 +69,61 @@
         [actionButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     }
     
-    time.text = @"12:23";
-    content.text = @"下单成功";
+//    1、确认订单；
+//    2、中间物流配送；
+//    3、终级物流配送；
+//    4、已就餐；
+    
+    int status = [ls.status intValue];
+    NSString *statusStr = nil;
+    NSString *phoneStr = nil;
+    
+    switch (status) {
+        case 1:
+            //
+        {
+        
+            statusStr = @"确认订单";
+            phoneStr = [NSString stringWithFormat:@"客服：%@",ls.custom];
+        }
+            break;
+        case 2:
+            //
+        {
+        
+            statusStr = @"中间物流配送";
+            phoneStr = [NSString stringWithFormat:@"物流：%@",ls.dispatching];
+        }
+            break;
+        case 3:
+            //
+            statusStr = @"终级物流配送";
+            phoneStr = [NSString stringWithFormat:@"物流：%@",ls.dispatching];
+            break;
+        case 4:
+            //
+            statusStr = @"已就餐";
+            phoneStr = nil;
+            
+            break;
+            
+        default:
+            
+            statusStr = nil;
+            phoneStr = nil;
+            
+            break;
+    }
+    
+    
+    time.text = ls.time;
+    content.text = statusStr;
     [content sizeToFit];
     content.frame = CGRectMake(time.right + kCellLeftGap, time.top, content.width, 40);
     
-    [actionButton setTitle:@"客服：3124325435" forState:UIControlStateNormal];
+    
+
+    [actionButton setTitle:phoneStr forState:UIControlStateNormal];
     [actionButton sizeToFit];
     actionButton.frame = CGRectMake(content.right + kCellLeftGap, time.top, actionButton.width, 40);
 }

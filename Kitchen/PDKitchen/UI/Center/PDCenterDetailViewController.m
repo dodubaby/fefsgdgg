@@ -125,6 +125,12 @@
         
         weakSelf.foodDetail = foodDetail;
         
+        
+        
+        if (!foodDetail) {
+            [self showDefaultView];
+        }
+        
         [weakSelf setupData];
         [weakSelf.tableView reloadData];
         weakSelf.tableView.tableFooterView = moreView;
@@ -206,6 +212,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (list.count==0) {
+        
+    }else{
+        [self hiddenDefaultView];
+    }
     
     return list.count;
 }

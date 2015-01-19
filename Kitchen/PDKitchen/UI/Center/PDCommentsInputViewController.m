@@ -8,10 +8,11 @@
 
 #import "PDCommentsInputViewController.h"
 #import "PDBaseTextView.h"
+//#import "UIPlaceHolderTextView.h"
 
 @interface PDCommentsInputViewController ()
 {
-    UITextView *textView;
+    UIPlaceHolderTextView *textView;
 }
 
 @end
@@ -36,11 +37,13 @@
     self.navigationItem.title = @"评论";
     [self setupBackButton];
 
-    textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 64+10, kAppWidth-20, 200)];
+    textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(10, 64+10, kAppWidth-20, 200)];
     [self.view addSubview:textView];
+    textView.font = [UIFont systemFontOfSize:15];
     textView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;
     textView.layer.borderWidth = 0.5f;
     textView.clipsToBounds = YES;
+    textView.placeholder = @"输入评论内容";
     
     
     //self.automaticallyAdjustsScrollViewInsets = NO;

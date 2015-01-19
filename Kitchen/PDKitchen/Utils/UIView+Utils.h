@@ -33,4 +33,6 @@
 // super view
 - (UIView *)findSuperViewWithClass:(Class)superViewClass;
 
+- (UIImage*)image;
+
 @end
