@@ -185,7 +185,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
         
-        NSLog(@"%@",error);
+        NSLog(@"%@",[error localizedDescription]);
         
         failure(operation,error);
     }];

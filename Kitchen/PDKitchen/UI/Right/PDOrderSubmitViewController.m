@@ -23,7 +23,6 @@
 
 +(PDOrderSubmitCellItem *)itemWithClazz:(Class) clazz data:(id) data;
 
-
 @end
 
 @implementation PDOrderSubmitCellItem
@@ -209,6 +208,34 @@ PDOrderTimeViewControllerDelegate>
             return;
         }
         
+        if (!_currentTime) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"请选择时间"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+            return;
+        }
+        
+        // 手机
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        PDOrderSubmitPhoneCell *cell = (PDOrderSubmitPhoneCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        NSString *cellPhone = cell.textField.text;
+        
+        
+        if (!cellPhone) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"请填写手机号"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+            return;
+        }
+        
         NSArray *arr = [PDCartManager sharedInstance].cartList;
         NSMutableString *ids = [[NSMutableString alloc] init];
         
@@ -217,28 +244,24 @@ PDOrderTimeViewControllerDelegate>
             [ids appendString:[NSString stringWithFormat:@"%@*%@*",food.food_id,food.count]];
             totalPrice =  totalPrice + [food.count integerValue]*[food.price floatValue];
         }
-        
         NSString *foodids = [ids substringToIndex:ids.length -1];// 去掉最后 *
         
         NSLog(@"%@",foodids);
-        
-        // 手机
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-        PDOrderSubmitPhoneCell *cell = (PDOrderSubmitPhoneCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        NSString *cellPhone = cell.textField.text;
         
         // 信息
         NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:5 inSection:0];
         PDOrderSubmitRequestCell *cell2 = (PDOrderSubmitRequestCell *)[self.tableView cellForRowAtIndexPath:indexPath2];
         NSString *message = cell2.textView.text;
         
+        NSString *time = [_currentTime toTimestamp];
+
         NSString *userid = [PDAccountManager sharedInstance].userid;
         [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
                                                   foodids:foodids
-                                                  address:_currentAddress.address_id
+                                                  address:_currentAddress.address
                                                     phone:cellPhone
                                                  couponid:_currentCoupon.coupon_id
-                                                  eatTime:@"1420613956"
+                                                  eatTime:time
                                                   message:message
                                                  sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                      //
@@ -392,7 +415,7 @@ PDOrderTimeViewControllerDelegate>
     [self.tableView reloadData];
 }
 
--(void)pdOrderTimeViewController:(UIViewController *)vc didSelectTime:(id)time{
+-(void)pdOrderTimeViewController:(UIViewController *)vc didSelectTime:(NSString *)time{
 
     NSLog(@"%@",time);
     

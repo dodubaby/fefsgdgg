@@ -11,6 +11,9 @@
 
 @interface NSString (Utils)
 
+
+- (NSString *)toTimestamp;
+
 - (NSString*)md5;
 
 - (CGSize)sizeWithFontCompatible:(UIFont *)font;

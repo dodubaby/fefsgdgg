@@ -157,6 +157,10 @@
 		32D0E8A41A4278FB00D1F190 /* PDNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */; };
 		32D0E8A71A427FA300D1F190 /* PDRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A61A427FA300D1F190 /* PDRightCell.m */; };
 		32D6F07E1A5928F7000D20B0 /* UIDevice+Utitls.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */; };
+		32EB4E8E1A6E41E30064B819 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EB4E8D1A6E41E30064B819 /* NSDate+Utils.m */; };
+		32EB4E911A6E47BD0064B819 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EB4E901A6E47BD0064B819 /* CoreLocation.framework */; };
+		32EB4E971A6E47CD0064B819 /* INTULocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EB4E931A6E47CD0064B819 /* INTULocationManager.m */; };
+		32EB4E981A6E47CD0064B819 /* INTULocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EB4E951A6E47CD0064B819 /* INTULocationRequest.m */; };
 		32F97AF71A4AAF9C0052B2D3 /* PDCommentsInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AF61A4AAF9C0052B2D3 /* PDCommentsInputViewController.m */; };
 		32F97B1B1A4ABA7F0052B2D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B1A1A4ABA7F0052B2D3 /* SystemConfiguration.framework */; };
 		32F97B1D1A4ABA900052B2D3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F97B1C1A4ABA900052B2D3 /* libz.dylib */; };
@@ -442,6 +446,14 @@
 		32D0E8A61A427FA300D1F190 /* PDRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRightCell.m; sourceTree = "<group>"; };
 		32D6F07C1A5928F7000D20B0 /* UIDevice+Utitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Utitls.h"; sourceTree = "<group>"; };
 		32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Utitls.m"; sourceTree = "<group>"; };
+		32EB4E8C1A6E41E30064B819 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		32EB4E8D1A6E41E30064B819 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		32EB4E901A6E47BD0064B819 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		32EB4E921A6E47CD0064B819 /* INTULocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTULocationManager.h; sourceTree = "<group>"; };
+		32EB4E931A6E47CD0064B819 /* INTULocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTULocationManager.m; sourceTree = "<group>"; };
+		32EB4E941A6E47CD0064B819 /* INTULocationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTULocationRequest.h; sourceTree = "<group>"; };
+		32EB4E951A6E47CD0064B819 /* INTULocationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTULocationRequest.m; sourceTree = "<group>"; };
+		32EB4E961A6E47CD0064B819 /* INTULocationRequestDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTULocationRequestDefines.h; sourceTree = "<group>"; };
 		32F97AF51A4AAF9C0052B2D3 /* PDCommentsInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCommentsInputViewController.h; sourceTree = "<group>"; };
 		32F97AF61A4AAF9C0052B2D3 /* PDCommentsInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCommentsInputViewController.m; sourceTree = "<group>"; };
 		32F97B1A1A4ABA7F0052B2D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -483,6 +495,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32EB4E911A6E47BD0064B819 /* CoreLocation.framework in Frameworks */,
 				3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */,
 				32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */,
 				32F97B3C1A4AC7D30052B2D3 /* Security.framework in Frameworks */,
@@ -726,6 +739,7 @@
 		32D0E7B91A415E7C00D1F190 = {
 			isa = PBXGroup;
 			children = (
+				32EB4E901A6E47BD0064B819 /* CoreLocation.framework */,
 				3274DDC01A53B2080079D176 /* CoreTelephony.framework */,
 				32F97B3D1A4AC7DF0052B2D3 /* AdSupport.framework */,
 				32F97B3B1A4AC7D30052B2D3 /* Security.framework */,
@@ -779,6 +793,7 @@
 		32D0E7EB1A41600100D1F190 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				32EB4E8F1A6E47A40064B819 /* LocationManager */,
 				32FACADC1A612B0100BDE176 /* iOS_SDK_2.3.1_arm64 */,
 				32F97B3F1A4AC8220052B2D3 /* WeChatSDK_1.5 */,
 				32F97B251A4ABC2E0052B2D3 /* libWeiboSDK */,
@@ -913,6 +928,8 @@
 				3274DDA21A52A8A10079D176 /* UIImage+Utils.m */,
 				326CB7271A42B18E00D2BADE /* NSString+Utils.h */,
 				326CB7281A42B18E00D2BADE /* NSString+Utils.m */,
+				32EB4E8C1A6E41E30064B819 /* NSDate+Utils.h */,
+				32EB4E8D1A6E41E30064B819 /* NSDate+Utils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1137,6 +1154,18 @@
 			path = Address;
 			sourceTree = "<group>";
 		};
+		32EB4E8F1A6E47A40064B819 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				32EB4E921A6E47CD0064B819 /* INTULocationManager.h */,
+				32EB4E931A6E47CD0064B819 /* INTULocationManager.m */,
+				32EB4E941A6E47CD0064B819 /* INTULocationRequest.h */,
+				32EB4E951A6E47CD0064B819 /* INTULocationRequest.m */,
+				32EB4E961A6E47CD0064B819 /* INTULocationRequestDefines.h */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
 		32F97B251A4ABC2E0052B2D3 /* libWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1307,6 +1336,7 @@
 				32D0E85C1A416B1C00D1F190 /* UIControl+Utils.m in Sources */,
 				32C7F3E01A64FA560011C580 /* PDModelCooker.m in Sources */,
 				32C44C811A62A41100415AB0 /* PDModelCode.m in Sources */,
+				32EB4E971A6E47CD0064B819 /* INTULocationManager.m in Sources */,
 				32868C081A44174100ABC8B0 /* PDBaseModel.m in Sources */,
 				32D0E8661A416D9600D1F190 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				3263F4A01A6B8B7B00CB76DC /* PDAddressDistrictCell.m in Sources */,
@@ -1373,6 +1403,7 @@
 				32CBFB0B1A46FC400057EDF6 /* PDOrderCell.m in Sources */,
 				32D0E8961A41A15500D1F190 /* PDCouponViewController.m in Sources */,
 				32D0E8021A41601200D1F190 /* AFHTTPSessionManager.m in Sources */,
+				32EB4E8E1A6E41E30064B819 /* NSDate+Utils.m in Sources */,
 				32D0E81D1A41602200D1F190 /* UIAlertView+AFNetworking.m in Sources */,
 				32C44C891A62BD0000415AB0 /* PDAccountManager.m in Sources */,
 				32C7F3DD1A64F9520011C580 /* PDModelFoodDetail.m in Sources */,
@@ -1393,6 +1424,7 @@
 				32D0E8731A417B1000D1F190 /* PDLeftViewController.m in Sources */,
 				3263F4D01A6BFF9100CB76DC /* PDModelLogistics.m in Sources */,
 				32D0E84C1A4164D600D1F190 /* PDBaseTableViewController.m in Sources */,
+				32EB4E981A6E47CD0064B819 /* INTULocationRequest.m in Sources */,
 				326CB7261A4298D900D2BADE /* PDCommentsViewController.m in Sources */,
 				32CA7A7F1A5D1B4100BB8CAF /* PDAddressCell.m in Sources */,
 				32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */,

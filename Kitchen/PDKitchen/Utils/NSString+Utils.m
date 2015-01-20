@@ -9,7 +9,39 @@
 #import "NSString+Utils.h"
 #import <CommonCrypto/CommonDigest.h>
 
+#import "NSDate+Utils.h"
+
+
 @implementation NSString (Utils)
+
+- (NSString *)toTimestamp{
+
+    // example 12:30
+    
+    NSArray *arr = [self componentsSeparatedByString:@":"];
+    
+    if ([arr count] == 2) {
+
+        NSInteger hour = [arr[0] integerValue];
+        NSInteger minute = [arr[1] integerValue];
+        
+        NSDate *date = [NSDate date];
+        date = [NSDate convertDateToLocalTime:date]; // 北京时间
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        NSDateComponents *components = [cal components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+        // 设置时分秒
+        [components setHour:hour];
+        [components setMinute:minute];
+        [components setSecond:0];
+        
+        date = [cal dateFromComponents:components];
+        NSLog(@"%@",date);
+        
+        NSNumber *dateNumber = [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+        return [dateNumber stringValue];
+    }
+    return nil;
+}
 
 - (NSString *)md5{
     const char *cStr = [self UTF8String];

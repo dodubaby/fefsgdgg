@@ -25,13 +25,38 @@
     _dataList = [[NSMutableArray alloc] init];
     [_dataList addObject:@"立即配送"];
     [_dataList addObject:@"6:00"];
+    [_dataList addObject:@"6:30"];
     [_dataList addObject:@"7:00"];
+    [_dataList addObject:@"7:30"];
     [_dataList addObject:@"8:00"];
+    [_dataList addObject:@"8:30"];
     [_dataList addObject:@"9:00"];
+    [_dataList addObject:@"9:30"];
     [_dataList addObject:@"10:00"];
+    [_dataList addObject:@"10:30"];
     [_dataList addObject:@"11:00"];
+    [_dataList addObject:@"11:30"];
     [_dataList addObject:@"12:00"];
+    [_dataList addObject:@"12:30"];
     [_dataList addObject:@"13:00"];
+    [_dataList addObject:@"13:30"];
+    [_dataList addObject:@"14:00"];
+    [_dataList addObject:@"14:30"];
+    [_dataList addObject:@"15:00"];
+    [_dataList addObject:@"15:30"];
+    [_dataList addObject:@"16:00"];
+    [_dataList addObject:@"16:30"];
+    [_dataList addObject:@"17:00"];
+    [_dataList addObject:@"17:30"];
+    [_dataList addObject:@"18:00"];
+    [_dataList addObject:@"18:30"];
+    [_dataList addObject:@"19:00"];
+    [_dataList addObject:@"19:30"];
+    [_dataList addObject:@"20:00"];
+    [_dataList addObject:@"20:30"];
+    [_dataList addObject:@"21:00"];
+    [_dataList addObject:@"21:30"];
+    [_dataList addObject:@"22:00"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -75,6 +100,8 @@
     
     if (indexPath.row==0) {
         cell.isFirst = YES;
+    }else{
+        cell.isFirst = NO;
     }
     
     [cell setData:_dataList[indexPath.row]];

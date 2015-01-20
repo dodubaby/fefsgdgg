@@ -12,6 +12,7 @@
 
 #import "PDCenterDetailViewController.h"
 
+#import "INTULocationManager.h"
 
 
 @interface PDCenterViewController ()
@@ -24,6 +25,12 @@
 
 @property (nonatomic,assign) int currentPage;
 
+@property (nonatomic,strong) NSString *locationStr;
+
+@property (nonatomic,strong) CLLocation *location;
+
+@property (nonatomic,assign) BOOL isSimulator;  // 模拟器上用固定地址
+
 @end
 
 @implementation PDCenterViewController
@@ -31,6 +38,15 @@
 
 - (void)setupData{
     _dataList = [[NSMutableArray alloc] init];
+    
+    if ([[UIDevice currentDevice].model hasSuffix:@"Simulator"]) {
+        _isSimulator = YES;
+    }else{
+        _isSimulator = NO;
+    }
+    
+    // 模拟器使用
+    _locationStr = @"116.316376,39.952912";
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -55,15 +71,13 @@
     
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
-        //
         
         [weakSelf startLoading];
         
         weakSelf.currentPage = 0;
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
-        NSString *loc = @"116.316376,39.952912";
         
-        [[PDHTTPEngine sharedInstance] appHomeWithLocation:loc page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             
@@ -79,8 +93,6 @@
             
             [weakSelf stopLoading];
             
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
@@ -88,7 +100,134 @@
         }];
     }];
     
+/*
+    // pull
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        
+        [weakSelf startLoading];
+        
+        if (weakSelf.isSimulator) {  // 模拟器
+            weakSelf.currentPage = 0;
+            NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+            
+            
+            [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+                //
+                [weakSelf.tableView.pullToRefreshView stopAnimating];
+                
+                if ([list count]==0) {
+                    [weakSelf showDefaultView];
+                }
+                
+                weakSelf.currentPage +=1;
+                
+                [weakSelf.dataList removeAllObjects];
+                [weakSelf.dataList addObjectsFromArray:list];
+                [weakSelf.tableView reloadData];
+                
+                [weakSelf stopLoading];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //
+                [weakSelf.tableView.pullToRefreshView stopAnimating];
+                [weakSelf stopLoading];
+            }];
+        }else{  // 真机
+            
+            // 定位刷新
+            INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom timeout:10.0 delayUntilAuthorized:YES block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                if (status == INTULocationStatusSuccess) {
+                    weakSelf.location = currentLocation;
+                    if (currentLocation) {
+                        NSNumber *latitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+                        NSNumber *longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+                        NSString *loc =  [NSString stringWithFormat:@"%@,%@",longitude,latitude];
+                        weakSelf.locationStr = loc;
+                    }
+                    
+                    // 定位成功开始加载
+                    weakSelf.currentPage = 0;
+                    NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+                    
+                    
+                    [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+                        //
+                        [weakSelf.tableView.pullToRefreshView stopAnimating];
+                        
+                        if ([list count]==0) {
+                            [weakSelf showDefaultView];
+                        }
+                        
+                        weakSelf.currentPage +=1;
+                        
+                        [weakSelf.dataList removeAllObjects];
+                        [weakSelf.dataList addObjectsFromArray:list];
+                        [weakSelf.tableView reloadData];
+                        
+                        [weakSelf stopLoading];
+                        
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        //
+                        [weakSelf.tableView.pullToRefreshView stopAnimating];
+                        [weakSelf stopLoading];
+                    }];
+                    
+                }else{   // 定位失败
+                    if (weakSelf.location) { // 真机，有位置信息,开始加载
+                        weakSelf.currentPage = 0;
+                        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+                        
+                        [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+                            //
+                            [weakSelf.tableView.pullToRefreshView stopAnimating];
+                            
+                            if ([list count]==0) {
+                                [weakSelf showDefaultView];
+                            }
+                            
+                            weakSelf.currentPage +=1;
+                            
+                            [weakSelf.dataList removeAllObjects];
+                            [weakSelf.dataList addObjectsFromArray:list];
+                            [weakSelf.tableView reloadData];
+                            
+                            [weakSelf stopLoading];
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            //
+                            [weakSelf.tableView.pullToRefreshView stopAnimating];
+                            [weakSelf stopLoading];
+                        }];
+                    }else{ // 真机，没有位置信息
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:@"无法获取你的位置"
+                                                                       delegate:nil
+                                                              cancelButtonTitle:nil
+                                                              otherButtonTitles:@"确定", nil];
+                        
+                        [alert show];
+                        
+                        [weakSelf.tableView.pullToRefreshView stopAnimating];
+                        [weakSelf stopLoading];
+                        [weakSelf.tableView reloadData];
+                        [weakSelf showDefaultView];
+                    }
+                }
+             }];
+        }
+    }];
+*/
+    
     [self.tableView addInfiniteScrollingWithActionHandler:^{
+        
+        
+        // 真机，定位不成功
+        if (!weakSelf.location&&!weakSelf.isSimulator) {
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            return;
+        }
         
         CGFloat h = [PDCenterCell cellHeightWithData:nil]*weakSelf.dataList.count;
         if (h<weakSelf.tableView.bounds.size.height) {
@@ -100,9 +239,7 @@
         
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
-        NSString *loc = @"116.316376,39.952912";
-        
-        [[PDHTTPEngine sharedInstance] appHomeWithLocation:loc page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
             
@@ -123,7 +260,7 @@
         }];
     }];
     
-    [self.tableView triggerPullToRefresh];
+    
     
     // 订单商品数量badge
     [[NSNotificationCenter defaultCenter] addObserverForName:kCartModifyNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -144,6 +281,9 @@
             newsMark.hidden = YES;
         }
     }];
+    
+
+    [self.tableView triggerPullToRefresh];
 }
 
 -(void)setupBadge{

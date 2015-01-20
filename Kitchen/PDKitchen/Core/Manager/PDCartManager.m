@@ -25,9 +25,7 @@
     return self;
 }
 
-
 -(void)notify{
-
     // 通知购物车更改
     [[NSNotificationCenter defaultCenter] postNotificationName:kCartModifyNotificationKey object:nil];
 }
