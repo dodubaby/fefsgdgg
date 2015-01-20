@@ -182,6 +182,8 @@
 		32FACAE01A612B0100BDE176 /* README IOS SDK 2.3.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 32FACADD1A612B0100BDE176 /* README IOS SDK 2.3.1.txt */; };
 		32FACAE11A612B0100BDE176 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FACADE1A612B0100BDE176 /* TencentOpenAPI.framework */; };
 		32FACAE21A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 32FACADF1A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		6DA94E1F1A6E9C5C00E0FF1F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DA94E1E1A6E9C5C00E0FF1F /* PushConfig.plist */; };
+		6DA94E301A6E9CCF00E0FF1F /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA94E2F1A6E9CCF00E0FF1F /* libPushSDK-1.8.2.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -488,6 +490,9 @@
 		32FACADD1A612B0100BDE176 /* README IOS SDK 2.3.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README IOS SDK 2.3.1.txt"; sourceTree = "<group>"; };
 		32FACADE1A612B0100BDE176 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		32FACADF1A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		6DA94E1E1A6E9C5C00E0FF1F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		6DA94E2E1A6E9CCF00E0FF1F /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		6DA94E2F1A6E9CCF00E0FF1F /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32EB4E911A6E47BD0064B819 /* CoreLocation.framework in Frameworks */,
+				6DA94E301A6E9CCF00E0FF1F /* libPushSDK-1.8.2.a in Frameworks */,
 				3274DDC11A53B2080079D176 /* CoreTelephony.framework in Frameworks */,
 				32F97B3E1A4AC7DF0052B2D3 /* AdSupport.framework in Frameworks */,
 				32F97B3C1A4AC7D30052B2D3 /* Security.framework in Frameworks */,
@@ -739,14 +745,6 @@
 		32D0E7B91A415E7C00D1F190 = {
 			isa = PBXGroup;
 			children = (
-				32EB4E901A6E47BD0064B819 /* CoreLocation.framework */,
-				3274DDC01A53B2080079D176 /* CoreTelephony.framework */,
-				32F97B3D1A4AC7DF0052B2D3 /* AdSupport.framework */,
-				32F97B3B1A4AC7D30052B2D3 /* Security.framework */,
-				32F97B391A4AC7C50052B2D3 /* ImageIO.framework */,
-				32F97B1E1A4ABA9F0052B2D3 /* libsqlite3.0.dylib */,
-				32F97B1C1A4ABA900052B2D3 /* libz.dylib */,
-				32F97B1A1A4ABA7F0052B2D3 /* SystemConfiguration.framework */,
 				32D0E7C41A415E7C00D1F190 /* PDKitchen */,
 				32D0E7C31A415E7C00D1F190 /* Products */,
 			);
@@ -776,6 +774,7 @@
 				32D0E7CF1A415E7C00D1F190 /* Main.storyboard */,
 				32D0E7D21A415E7C00D1F190 /* Images.xcassets */,
 				32D0E7D41A415E7C00D1F190 /* LaunchScreen.xib */,
+				6DA94E201A6E9C7000E0FF1F /* Framework */,
 				32D0E7C51A415E7C00D1F190 /* Supporting Files */,
 			);
 			path = PDKitchen;
@@ -784,6 +783,7 @@
 		32D0E7C51A415E7C00D1F190 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DA94E1E1A6E9C5C00E0FF1F /* PushConfig.plist */,
 				32D0E7C61A415E7C00D1F190 /* Info.plist */,
 				32D0E7C71A415E7C00D1F190 /* main.m */,
 			);
@@ -793,6 +793,7 @@
 		32D0E7EB1A41600100D1F190 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				6DA94E2D1A6E9CCF00E0FF1F /* JPush */,
 				32EB4E8F1A6E47A40064B819 /* LocationManager */,
 				32FACADC1A612B0100BDE176 /* iOS_SDK_2.3.1_arm64 */,
 				32F97B3F1A4AC8220052B2D3 /* WeChatSDK_1.5 */,
@@ -1205,6 +1206,30 @@
 			path = iOS_SDK_2.3.1_arm64;
 			sourceTree = "<group>";
 		};
+		6DA94E201A6E9C7000E0FF1F /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				32EB4E901A6E47BD0064B819 /* CoreLocation.framework */,
+				3274DDC01A53B2080079D176 /* CoreTelephony.framework */,
+				32F97B3D1A4AC7DF0052B2D3 /* AdSupport.framework */,
+				32F97B3B1A4AC7D30052B2D3 /* Security.framework */,
+				32F97B391A4AC7C50052B2D3 /* ImageIO.framework */,
+				32F97B1E1A4ABA9F0052B2D3 /* libsqlite3.0.dylib */,
+				32F97B1C1A4ABA900052B2D3 /* libz.dylib */,
+				32F97B1A1A4ABA7F0052B2D3 /* SystemConfiguration.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		6DA94E2D1A6E9CCF00E0FF1F /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				6DA94E2E1A6E9CCF00E0FF1F /* APService.h */,
+				6DA94E2F1A6E9CCF00E0FF1F /* libPushSDK-1.8.2.a */,
+			);
+			path = JPush;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1311,6 +1336,7 @@
 				3274DD9A1A527D2A0079D176 /* od_add@2x.png in Resources */,
 				32FACAD91A6120B400BDE176 /* Icon.png in Resources */,
 				323F40DA1A6801B000D74239 /* loading2.png in Resources */,
+				6DA94E1F1A6E9C5C00E0FF1F /* PushConfig.plist in Resources */,
 				32D0E8381A41611A00D1F190 /* SVProgressHUD.bundle in Resources */,
 				32F97B451A4AC8220052B2D3 /* read_me.txt in Resources */,
 				32FACAE21A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -1550,6 +1576,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS_SDK_2.3.1_arm64",
+					"$(PROJECT_DIR)/PDKitchen",
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1559,11 +1586,12 @@
 					"$(PROJECT_DIR)/PDKitchen/Libs/WeChat",
 					"$(PROJECT_DIR)/PDKitchen/Libs/libWeiboSDK",
 					"$(PROJECT_DIR)/PDKitchen/Libs/WeChatSDK_1.5",
+					"$(PROJECT_DIR)/PDKitchen/Libs/JPush",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
+				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Debug;
@@ -1577,6 +1605,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS_SDK_2.3.1_arm64",
+					"$(PROJECT_DIR)/PDKitchen",
 				);
 				INFOPLIST_FILE = PDKitchen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1586,11 +1615,12 @@
 					"$(PROJECT_DIR)/PDKitchen/Libs/WeChat",
 					"$(PROJECT_DIR)/PDKitchen/Libs/libWeiboSDK",
 					"$(PROJECT_DIR)/PDKitchen/Libs/WeChatSDK_1.5",
+					"$(PROJECT_DIR)/PDKitchen/Libs/JPush",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
+				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Release;
