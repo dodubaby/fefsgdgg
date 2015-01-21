@@ -16,7 +16,7 @@
 @property (nonatomic,strong) NSString *food_img;
 @property (nonatomic,strong) NSString *food_name;
 @property (nonatomic,strong) NSString *price;
-
+@property (nonatomic,strong) NSString *stock;
 @property (nonatomic,strong) NSString *cooker_id;
 @property (nonatomic,strong) NSString *eat_sum;
 @property (nonatomic,strong) NSString *like_sum;

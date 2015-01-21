@@ -23,9 +23,14 @@
 
 @implementation PDOrderViewController
 
+
 - (void)setupData{
     
     _dataList = [[NSMutableArray alloc] init];
+}
+
+-(void)backButtonTaped:(id)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

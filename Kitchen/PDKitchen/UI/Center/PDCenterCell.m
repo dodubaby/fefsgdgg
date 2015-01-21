@@ -100,7 +100,7 @@
     price.right = kAppWidth - kCellLeftGap;
     //    person.text = @"person";
     [person sizeToFit];
-    from.text = food.cooker_name;
+    from.text = [NSString stringWithFormat:@"还剩%d份",[food.stock intValue]];//food.cooker_name;
     
     if (food.food_img) {
         thumbnail.imageURL = [NSURL URLWithString:food.food_img];

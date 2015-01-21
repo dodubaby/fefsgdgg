@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321E28B41A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E28B31A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.m */; };
+		321E28B71A6F494E003DB1D1 /* od_expand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 321E28B51A6F494E003DB1D1 /* od_expand@2x.png */; };
+		321E28B81A6F494E003DB1D1 /* od_smile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 321E28B61A6F494E003DB1D1 /* od_smile@2x.png */; };
+		321E28BA1A6F4970003DB1D1 /* lg_weixin_pyq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 321E28B91A6F4970003DB1D1 /* lg_weixin_pyq@2x.png */; };
 		3220A6A41A51A1BE0017656F /* menu_address@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A69D1A51A1BE0017656F /* menu_address@2x.png */; };
 		3220A6A51A51A1BE0017656F /* menu_coupon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A69E1A51A1BE0017656F /* menu_coupon@2x.png */; };
 		3220A6A61A51A1BE0017656F /* menu_favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3220A69F1A51A1BE0017656F /* menu_favorite@2x.png */; };
@@ -187,6 +191,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		321E28B21A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderSubmitSuccessViewController.h; sourceTree = "<group>"; };
+		321E28B31A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderSubmitSuccessViewController.m; sourceTree = "<group>"; };
+		321E28B51A6F494E003DB1D1 /* od_expand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "od_expand@2x.png"; sourceTree = "<group>"; };
+		321E28B61A6F494E003DB1D1 /* od_smile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "od_smile@2x.png"; sourceTree = "<group>"; };
+		321E28B91A6F4970003DB1D1 /* lg_weixin_pyq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg_weixin_pyq@2x.png"; sourceTree = "<group>"; };
 		3220A69D1A51A1BE0017656F /* menu_address@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_address@2x.png"; sourceTree = "<group>"; };
 		3220A69E1A51A1BE0017656F /* menu_coupon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_coupon@2x.png"; sourceTree = "<group>"; };
 		3220A69F1A51A1BE0017656F /* menu_favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_favorite@2x.png"; sourceTree = "<group>"; };
@@ -587,6 +596,8 @@
 		3274DD971A527D2A0079D176 /* order */ = {
 			isa = PBXGroup;
 			children = (
+				321E28B51A6F494E003DB1D1 /* od_expand@2x.png */,
+				321E28B61A6F494E003DB1D1 /* od_smile@2x.png */,
 				3274DD981A527D2A0079D176 /* od_add@2x.png */,
 				3274DD991A527D2A0079D176 /* od_reduce@2x.png */,
 			);
@@ -619,6 +630,7 @@
 				3274DDAE1A5300A90079D176 /* lg_send_code@2x.png */,
 				3274DDAF1A5300A90079D176 /* lg_weibo@2x.png */,
 				3274DDB01A5300A90079D176 /* lg_weixin@2x.png */,
+				321E28B91A6F4970003DB1D1 /* lg_weixin_pyq@2x.png */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -1079,14 +1091,16 @@
 				326CB71C1A4282DC00D2BADE /* PDRightFooterView.m */,
 				32D0E8741A417B1E00D1F190 /* PDRightViewController.h */,
 				32D0E8751A417B1E00D1F190 /* PDRightViewController.m */,
-				3263F4AC1A6BA1A300CB76DC /* PDOrderSubmitCell.h */,
-				3263F4AD1A6BA1A300CB76DC /* PDOrderSubmitCell.m */,
-				3263F4A91A6B9F6300CB76DC /* PDOrderSubmitViewController.h */,
-				3263F4AA1A6B9F6300CB76DC /* PDOrderSubmitViewController.m */,
 				3263F4C51A6BB3B300CB76DC /* PDOrderTimeCell.h */,
 				3263F4C61A6BB3B300CB76DC /* PDOrderTimeCell.m */,
 				3263F4C21A6BB17700CB76DC /* PDOrderTimeViewController.h */,
 				3263F4C31A6BB17700CB76DC /* PDOrderTimeViewController.m */,
+				3263F4AC1A6BA1A300CB76DC /* PDOrderSubmitCell.h */,
+				3263F4AD1A6BA1A300CB76DC /* PDOrderSubmitCell.m */,
+				3263F4A91A6B9F6300CB76DC /* PDOrderSubmitViewController.h */,
+				3263F4AA1A6B9F6300CB76DC /* PDOrderSubmitViewController.m */,
+				321E28B21A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.h */,
+				321E28B31A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.m */,
 			);
 			path = Right;
 			sourceTree = "<group>";
@@ -1297,6 +1311,7 @@
 				32FACACF1A60DA7500BDE176 /* 菜1.jpg in Resources */,
 				3220A6B01A51A5EC0017656F /* center_menu@2x.png in Resources */,
 				323F40D91A6801B000D74239 /* loading1.png in Resources */,
+				321E28BA1A6F4970003DB1D1 /* lg_weixin_pyq@2x.png in Resources */,
 				3220A6A51A51A1BE0017656F /* menu_coupon@2x.png in Resources */,
 				32C5BC6D1A6D10B600FCEB10 /* center_order2@2x.png in Resources */,
 				32C5BC6F1A6D10BF00FCEB10 /* center_menu2@2x.png in Resources */,
@@ -1311,6 +1326,7 @@
 				3274DDC71A53CF090079D176 /* dt_favorite@2x.png in Resources */,
 				323F40DC1A6801B000D74239 /* loading4.png in Resources */,
 				3274DD9B1A527D2A0079D176 /* od_reduce@2x.png in Resources */,
+				321E28B81A6F494E003DB1D1 /* od_smile@2x.png in Resources */,
 				32C5BC6B1A6D081C00FCEB10 /* cm_no_data2@2x.png in Resources */,
 				32D0E7D61A415E7C00D1F190 /* LaunchScreen.xib in Resources */,
 				3274DD961A5276480079D176 /* st_refresh@2x.png in Resources */,
@@ -1342,6 +1358,7 @@
 				32FACAE21A612B0100BDE176 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				3274DDB51A5300A90079D176 /* lg_weixin@2x.png in Resources */,
 				3274DDC81A53CF090079D176 /* dt_phone@2x.png in Resources */,
+				321E28B71A6F494E003DB1D1 /* od_expand@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1389,6 +1406,7 @@
 				32D0E8391A41611A00D1F190 /* SVProgressHUD.m in Sources */,
 				32868C1B1A441A9F00ABC8B0 /* EGOImageLoader.m in Sources */,
 				3263F4A81A6B987D00CB76DC /* PDModelAddress.m in Sources */,
+				321E28B41A6F4887003DB1D1 /* PDOrderSubmitSuccessViewController.m in Sources */,
 				3263F4C71A6BB3B400CB76DC /* PDOrderTimeCell.m in Sources */,
 				32CBFB271A470A4A0057EDF6 /* PDOrderDetailView.m in Sources */,
 				3263F4AE1A6BA1A300CB76DC /* PDOrderSubmitCell.m in Sources */,
@@ -1591,7 +1609,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
+				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Debug;
@@ -1620,7 +1638,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
+				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Release;

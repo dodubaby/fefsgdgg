@@ -17,7 +17,7 @@
     
     UILabel *address;
     
-    NSMutableArray *list;
+    UIImageView *arrow;
     
 }
 
@@ -41,6 +41,9 @@
         address.numberOfLines = 2;
         address.font = [UIFont systemFontOfSize:15];
         
+        arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"od_expand"]];
+        [_back addSubview:arrow];
+        
     }
     return self;
 }
@@ -48,6 +51,9 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     _back.height = self.height - kCellLeftGap;
+    
+    arrow.top = (_back.height - arrow.height)/2;
+    arrow.right = _back.width - 5;
 }
 
 -(void)configData:(id)data{
@@ -62,12 +68,19 @@
     [address sizeToFit];
     address.top = (_back.height - address.height)/2;
     
-    
     BOOL active = [_extInfo[@"isActive"] boolValue];
     if (active) { // 激活颜色
         address.textColor = [UIColor colorWithHexString:@"#333333"];
     }else{
         address.textColor = [UIColor colorWithHexString:@"#e6e6e6"];
+    }
+    
+    BOOL isShowArrow = [_extInfo[@"isShowArrow"] boolValue];
+    if (isShowArrow) {
+        [_back bringSubviewToFront:arrow];
+        arrow.hidden = NO;
+    }else{
+        arrow.hidden = YES;
     }
 }
 

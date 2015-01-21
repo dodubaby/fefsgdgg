@@ -11,7 +11,7 @@
 #import "PDAddressViewController.h"
 #import "PDCouponViewController.h"
 #import "PDOrderTimeViewController.h"
-
+#import "PDOrderSubmitSuccessViewController.h"
 
 @interface PDOrderSubmitCellItem : NSObject
 
@@ -68,7 +68,7 @@ PDOrderTimeViewControllerDelegate>
         PDOrderSubmitCellItem *item = [PDOrderSubmitCellItem new];
         item.cellClazz = [PDOrderSubmitCell class];
         item.data = @"地址";
-        
+        item.extInfo = @{@"isShowArrow":@YES};
         [_cellItems addObject:item];
     }
 
@@ -80,7 +80,7 @@ PDOrderTimeViewControllerDelegate>
         item.cellClazz = [PDOrderSubmitCell class];
         item.cellClazz = [PDOrderSubmitCell class];
         item.data = @"优惠券";
-        
+        item.extInfo = @{@"isShowArrow":@YES};
         [_cellItems addObject:item];
     }
 
@@ -100,7 +100,7 @@ PDOrderTimeViewControllerDelegate>
         PDOrderSubmitCellItem *item = [PDOrderSubmitCellItem new];
         item.cellClazz = [PDOrderSubmitCell class];
         item.data = @"就餐时间";
-        
+        item.extInfo = @{@"isShowArrow":@YES};
         [_cellItems addObject:item];
     }
 
@@ -196,21 +196,10 @@ PDOrderTimeViewControllerDelegate>
          sum_price	float	N	总共价格
          */
         
-        
+        // 地址
         if (!_currentAddress) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                             message:@"请选择地址"
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"确定", nil];
-            [alert show];
-            
-            return;
-        }
-        
-        if (!_currentTime) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"请选择时间"
                                                            delegate:nil
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"确定", nil];
@@ -225,9 +214,21 @@ PDOrderTimeViewControllerDelegate>
         NSString *cellPhone = cell.textField.text;
         
         
-        if (!cellPhone) {
+        if ([cellPhone length]==0) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                             message:@"请填写手机号"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+            return;
+        }
+        
+        // 时间
+        if (!_currentTime) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"请选择时间"
                                                            delegate:nil
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"确定", nil];
@@ -256,6 +257,10 @@ PDOrderTimeViewControllerDelegate>
         NSString *time = [_currentTime toTimestamp];
 
         NSString *userid = [PDAccountManager sharedInstance].userid;
+        
+        
+        [self startLoading];
+        
         [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
                                                   foodids:foodids
                                                   address:_currentAddress.address
@@ -265,27 +270,34 @@ PDOrderTimeViewControllerDelegate>
                                                   message:message
                                                  sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                      //
-                                                     
+                                                     /*
+                                                    [self.navigationController popViewControllerAnimated:YES];
                                                      UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
                                                                                                       message:@"订单提交成功"
                                                                                                      delegate:nil
                                                                                             cancelButtonTitle:nil
                                                                                             otherButtonTitles:@"确定", nil];
                                                      [alert show];
+                                                     */
+                                                     
+                                                     [self stopLoading];
                                                      
                                                      // 清空购物车
                                                      [[PDCartManager sharedInstance] clear];
-                                                     [self.navigationController popViewControllerAnimated:YES];
                                                      
+                                                     PDOrderSubmitSuccessViewController *vc = [PDOrderSubmitSuccessViewController new];
+                                                     [self.navigationController pushViewController:vc animated:YES];
                                                      
                                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                      //
+                                                     [self stopLoading];
+                                                     
                                                      NSString *message = error.userInfo[@"Message"];
                                                      if (!message) {
                                                          message = [error localizedDescription];
                                                      }
                                                      UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                                                      message:message
+                                                                                                      message:@"提交失败提示你的订单提交不成功，请重新提交"
                                                                                                      delegate:nil
                                                                                             cancelButtonTitle:nil
                                                                                             otherButtonTitles:@"确定", nil];
@@ -294,7 +306,6 @@ PDOrderTimeViewControllerDelegate>
                                                  }];
 
     }];
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -395,9 +406,9 @@ PDOrderTimeViewControllerDelegate>
     NSLog(@"%@",address);
     
     _currentAddress = address;
-    
+
     PDOrderSubmitCellItem *item = _cellItems[0];
-    item.extInfo = @{@"isActive":@YES};
+    item.extInfo = @{@"isActive":@YES,@"isShowArrow":@YES};
     item.data = [NSString stringWithFormat:@"地址：%@",_currentAddress.address];
     [self.tableView reloadData];
     
@@ -410,7 +421,7 @@ PDOrderTimeViewControllerDelegate>
     
     _currentCoupon = coupon;
     PDOrderSubmitCellItem *item = _cellItems[1];
-    item.extInfo = @{@"isActive":@YES};
+    item.extInfo = @{@"isActive":@YES,@"isShowArrow":@YES};
     item.data = [NSString stringWithFormat:@"优惠券：%@元",coupon.price];
     [self.tableView reloadData];
 }
@@ -421,7 +432,7 @@ PDOrderTimeViewControllerDelegate>
     
     _currentTime = time;
     PDOrderSubmitCellItem *item = _cellItems[3];
-    item.extInfo = @{@"isActive":@YES};
+    item.extInfo = @{@"isActive":@YES,@"isShowArrow":@YES};
     item.data = [NSString stringWithFormat:@"就餐时间：%@", _currentTime];
     [self.tableView reloadData];
 }

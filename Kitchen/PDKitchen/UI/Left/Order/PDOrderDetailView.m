@@ -27,6 +27,11 @@
         //
         int leftinset=24;
         int updownspace=15;
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 0.5)];
+        [self addSubview:line];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6"];
+        
         foodlab=[[UILabel alloc] initWithFrame:CGRectMake(leftinset, 30, kAppWidth-2*leftinset, 20)];
         foodlab.font = [UIFont systemFontOfSize:15];
         foodlab.textColor = [UIColor colorWithHexString:@"#333333"];

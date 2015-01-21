@@ -205,7 +205,14 @@
         }
     }];
     
-    UILabel *otherHint = [[UILabel alloc] initWithFrame:CGRectMake(25, loginButton.bottom+115, 0, 0)];
+    
+    
+    CGFloat offsetY = 0;
+    if (kAppHeight<=480) {
+        offsetY = 30;
+    }
+    
+    UILabel *otherHint = [[UILabel alloc] initWithFrame:CGRectMake(25, loginButton.bottom+115-offsetY, 0, 0)];
     otherHint.text = @"合作账号登录";
     [self.view addSubview:otherHint];
     otherHint.textColor = [UIColor colorWithHexString:@"#666666"];

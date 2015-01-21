@@ -62,7 +62,7 @@
     [self.view addSubview:line];
     line.backgroundColor = [UIColor colorWithHexString:@"#333333"];
     
-    orderLogisticsView = [[PDOrderLogisticsView alloc] initWithFrame:CGRectMake(0, 64+60, self.view.width, kAppHeight - 64-60 -130)];
+    orderLogisticsView = [[PDOrderLogisticsView alloc] initWithFrame:CGRectMake(0, 64+55, self.view.width, kAppHeight - 64-60 -130)];
     [self.view addSubview:orderLogisticsView];
     //orderLogisticsView.backgroundColor = [UIColor blueColor];
     
@@ -83,8 +83,13 @@
     [refund setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateSelected];
     [refund handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
+        [self startLoading];
+        
         NSString *userid = [PDAccountManager sharedInstance].userid;
         [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [self stopLoading];
+            
             UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
                                                              message:@"退单成功"
                                                             delegate:nil
@@ -92,6 +97,9 @@
                                                    otherButtonTitles:@"确定", nil];
             [alert show];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            [self stopLoading];
+            
             NSString *message = error.userInfo[@"Message"];
             if (!message) {
                 message = [error localizedDescription];
@@ -104,7 +112,6 @@
             [alert show];
         }];
     }];
-    
     
     // 默认展示物流信息
     [self showLogistics];
