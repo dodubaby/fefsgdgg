@@ -71,6 +71,10 @@
 // 地址管理
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell deleteAddressWithData:(id)data;
 
+// 开始输入手机号
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell phoneTextFieldDidBeginEditing:(UITextField *)textField;
 
+// 开始输入其它要求
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell requestTextViewDidBeginEditing:(UITextView *)textView;
 
 @end

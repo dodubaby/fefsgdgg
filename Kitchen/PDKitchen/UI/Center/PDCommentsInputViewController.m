@@ -37,7 +37,13 @@
     self.navigationItem.title = @"评论";
     [self setupBackButton];
 
-    textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(10, 64+10, kAppWidth-20, 200)];
+    
+    CGFloat offsetY = 0;
+    if (kAppHeight<=480) {
+        offsetY = 45;
+    }
+    
+    textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(10, 64+10, kAppWidth-20, 130-offsetY)];
     [self.view addSubview:textView];
     textView.font = [UIFont systemFontOfSize:15];
     textView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;

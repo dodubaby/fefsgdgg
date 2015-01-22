@@ -111,6 +111,21 @@
     return self;
 }
 
+-(void)configData:(id)data{
+    
+    [super configData:data];
+    
+    if ([data isKindOfClass:[NSString class]]) {
+        _textField.text = data;
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:phoneTextFieldDidBeginEditing:)]) {
+        [self.delegate pdBaseTableViewCellDelegate:self phoneTextFieldDidBeginEditing:textField];
+    }
+}
+
 -(void)layoutSubviews{
     [super layoutSubviews];
     _textField.frame = CGRectMake(kCellLeftGap, 0, self.back.width - 2*kCellLeftGap, self.back.height);
@@ -141,9 +156,18 @@
         [self.back addSubview:_textView];
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.textColor = [UIColor colorWithHexString:@"#333333"];
-        _textView.placeholder = @"输入你的额外要求";
+        _textView.placeholder = @"输入你的特殊要求";
+        _textView.delegate = self;
     }
     return self;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:requestTextViewDidBeginEditing:)]) {
+        [self.delegate pdBaseTableViewCellDelegate:self requestTextViewDidBeginEditing:textView];
+    }
+    
 }
 
 -(void)layoutSubviews{

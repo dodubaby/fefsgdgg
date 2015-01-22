@@ -241,19 +241,40 @@
         
         [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
-            
-            weakSelf.currentPage +=1;
-            
             if (list.count>0) {
                 [weakSelf.dataList addObjectsFromArray:list];
                 [weakSelf.tableView reloadData];
+                
+                weakSelf.currentPage +=1;
+            }else{ // 没有更多
+            
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 40)];
+                label.backgroundColor = [UIColor whiteColor];
+                label.font = [UIFont systemFontOfSize:15];
+                label.textColor = [UIColor colorWithHexString:@"#666666"];
+                label.textAlignment = NSTextAlignmentCenter;
+                label.text = @"没有更多的菜";
+                
+                
+                [weakSelf.tableView.infiniteScrollingView setCustomView:label forState:SVInfiniteScrollingStateStopped];
+            
             }
             
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
             [weakSelf stopLoading];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 40)];
+            label.backgroundColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:15];
+            label.textColor = [UIColor colorWithHexString:@"#666666"];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.text = @"没有更多的菜";
+
+            [weakSelf.tableView.infiniteScrollingView setCustomView:label forState:SVInfiniteScrollingStateStopped];
+            
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
             
             [weakSelf stopLoading];

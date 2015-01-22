@@ -67,17 +67,22 @@
         loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, kAppHeight)];
         loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
         
-        animView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 90, 20)];
+        animView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
         [loadingView addSubview:animView];
         animView.center = CGPointMake(kAppWidth/2, kAppHeight/2);
         animView.animationRepeatCount = -1;
         animView.animationDuration = 0.5;
-        animView.animationImages = @[[UIImage imageNamed:@"loading1"],
-                                     [UIImage imageNamed:@"loading2"],
-                                     [UIImage imageNamed:@"loading3"],
-                                     [UIImage imageNamed:@"loading4"],];
         
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
         
+        for (int i = 0; i<=29; i++) {
+            
+            NSString *name = [NSString stringWithFormat:@"Preloader_%d",i];
+            
+            [arr addObject:[UIImage imageNamed:name]];
+        }
+        
+        animView.animationImages = arr;
     }
     
     [self.view addSubview:loadingView];

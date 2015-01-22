@@ -43,15 +43,27 @@
     return self;
 }
 
--(void)configData:(id)data{
-    
-    if (_isFirst) {
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+
+    [super setHighlighted:highlighted animated:animated];
+    if (highlighted) {
         back.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
         content.textColor = [UIColor colorWithHexString:@"#c14a41"];
     }else{
         back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
         content.textColor = [UIColor colorWithHexString:@"#333333"];
     }
+}
+
+-(void)configData:(id)data{
+//    
+//    if (_isFirst) {
+//        back.layer.borderColor = [[UIColor colorWithHexString:@"#c14a41"] CGColor];
+//        content.textColor = [UIColor colorWithHexString:@"#c14a41"];
+//    }else{
+//        back.layer.borderColor = [[UIColor colorWithHexString:@"#e6e6e6"] CGColor];
+//        content.textColor = [UIColor colorWithHexString:@"#333333"];
+//    }
     
     if ([data isKindOfClass:[NSString class]]) {
         content.text = data;

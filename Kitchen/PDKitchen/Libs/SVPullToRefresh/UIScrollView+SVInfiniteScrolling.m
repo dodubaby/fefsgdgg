@@ -133,6 +133,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         self.state = SVInfiniteScrollingStateStopped;
         self.enabled = YES;
         
+        
         self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
     }
     

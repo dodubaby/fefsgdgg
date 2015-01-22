@@ -53,6 +53,9 @@ PDOrderTimeViewControllerDelegate>
 @property (nonatomic,strong) PDModelCoupon *currentCoupon;
 @property (nonatomic,strong) NSString *currentTime;
 
+
+@property (nonatomic,assign) BOOL canResignFirstResponder;
+
 @end
 
 
@@ -136,6 +139,9 @@ PDOrderTimeViewControllerDelegate>
     self.navigationItem.title = @"提交订单";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.height = self.view.height - 50-40;
+    
+    
+    _canResignFirstResponder = YES;
     
     // 为了能起来
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 200)];
@@ -332,6 +338,7 @@ PDOrderTimeViewControllerDelegate>
         cell = [[item.cellClazz alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.delegate = self;
     cell.extInfo = item.extInfo;
     [cell setData:item.data];
     return cell;
@@ -339,6 +346,8 @@ PDOrderTimeViewControllerDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.view findAndResignFirstResponder];
     
     switch (indexPath.row) {
         case 0:
@@ -398,7 +407,34 @@ PDOrderTimeViewControllerDelegate>
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
-    [self.view findAndResignFirstResponder];
+    if (_canResignFirstResponder) {
+        [self.view findAndResignFirstResponder];
+    }
+}
+
+// 控制拖动收回键盘
+-(void)enableResignFirstResponder{
+    _canResignFirstResponder = YES;
+}
+
+// 开始输入手机号
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell phoneTextFieldDidBeginEditing:(UITextField *)textField{
+
+    _canResignFirstResponder = NO;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+    [self performSelector:@selector(enableResignFirstResponder) withObject:nil afterDelay:0.3];
+    
+}
+
+// 开始输入其它要求
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell requestTextViewDidBeginEditing:(UITextView *)textView{
+
+    _canResignFirstResponder = NO;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:5 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self performSelector:@selector(enableResignFirstResponder) withObject:nil afterDelay:0.3];
 }
 
 -(void)pdAddressViewController:(UIViewController *)vc didSelectAddress:(PDModelAddress *)address{
@@ -407,11 +443,16 @@ PDOrderTimeViewControllerDelegate>
     
     _currentAddress = address;
 
+    // 地址
     PDOrderSubmitCellItem *item = _cellItems[0];
     item.extInfo = @{@"isActive":@YES,@"isShowArrow":@YES};
     item.data = [NSString stringWithFormat:@"地址：%@",_currentAddress.address];
-    [self.tableView reloadData];
     
+    // 手机
+    PDOrderSubmitCellItem *item2 = _cellItems[2];
+    item2.data = _currentAddress.phone;
+    
+    [self.tableView reloadData];
 }
 
 -(void)pdCouponViewController:(UIViewController *)vc didSelectCoupon:(PDModelCoupon *)coupon{

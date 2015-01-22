@@ -39,14 +39,18 @@
     resultLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     
     
-    
     CGFloat left = 25;
     
     if (kAppWidth<=320) {
         left = 7;
     }
     
-    UILabel *otherHint = [[UILabel alloc] initWithFrame:CGRectMake(left, 320, 0, 0)];
+    CGFloat offsetY = 0;
+    if (kAppHeight<=480) {
+        offsetY = 50;
+    }
+    
+    UILabel *otherHint = [[UILabel alloc] initWithFrame:CGRectMake(left, 320-offsetY, 0, 0)];
     otherHint.text = @"分享到：";
     [self.view addSubview:otherHint];
     otherHint.textColor = [UIColor colorWithHexString:@"#666666"];

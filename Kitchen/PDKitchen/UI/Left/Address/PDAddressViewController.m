@@ -303,6 +303,7 @@
     PDAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
         cell = [[PDAddressCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.delegate = self;
     [cell setData:_dataList[indexPath.row]];

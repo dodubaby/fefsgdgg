@@ -132,6 +132,7 @@
     PDCouponCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     if (!cell) {
         cell = [[PDCouponCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [cell setData:_dataList[indexPath.row]];
     return cell;
