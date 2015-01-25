@@ -113,30 +113,61 @@
         thumbnail.imageURL = [NSURL URLWithString:news.img];
     }
     
+    if ([news.is_read boolValue]) { // 新标签
+        mark.hidden = YES;
+    }else{
+        mark.hidden = NO;
+    }
+    
     CGSize size= [news.contents sizeWithFontCompatible:[UIFont systemFontOfSize:15]
                                      constrainedToSize:CGSizeMake(kAppWidth-4*kCellLeftGap, MAXFLOAT)
                                          lineBreakMode:NSLineBreakByWordWrapping];
     content.height = size.height;
     content.text = news.contents;
     
-    read.text = [NSString stringWithFormat:@"阅读%@",news.read];
-    read.top = content.bottom + 50;
     
-    NSString *likeText = @"0";
-    if (news.like) {
-        likeText = news.like;
+    
+    if (140+40+size.height+50+20+2*kCellLeftGap+kCellLeftGap<kAppHeight-64) { // 小于屏幕高度
+        read.text = [NSString stringWithFormat:@"阅读%@",news.read];
+        read.top = kAppHeight-64-30;
+        
+        NSString *likeText = @"0";
+        if (news.like) {
+            likeText = news.like;
+        }
+        
+        [like setTitle:likeText forState:UIControlStateNormal];
+        CGSize likeTextSize= [likeText sizeWithFontCompatible:[UIFont systemFontOfSize:13]
+                                            constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)
+                                                lineBreakMode:NSLineBreakByWordWrapping];
+        
+        like.width = likeTextSize.width + 30;
+        like.top = read.top - 5;
+        like.right = kAppWidth - 10;
+        
+        back.height = kAppHeight-64-kCellLeftGap;
+        
+    }else{
+    
+        read.text = [NSString stringWithFormat:@"阅读%@",news.read];
+        read.top = content.bottom + 50;
+        
+        NSString *likeText = @"0";
+        if (news.like) {
+            likeText = news.like;
+        }
+        
+        [like setTitle:likeText forState:UIControlStateNormal];
+        CGSize likeTextSize= [likeText sizeWithFontCompatible:[UIFont systemFontOfSize:13]
+                                            constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)
+                                                lineBreakMode:NSLineBreakByWordWrapping];
+        
+        like.width = likeTextSize.width + 30;
+        like.top = read.top - 5;
+        like.right = kAppWidth - 10;
+        
+        back.height = read.bottom - thumbnail.top+kCellLeftGap;
     }
-    
-    [like setTitle:likeText forState:UIControlStateNormal];
-    CGSize likeTextSize= [likeText sizeWithFontCompatible:[UIFont systemFontOfSize:13]
-                                constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)
-                                    lineBreakMode:NSLineBreakByWordWrapping];
-    
-    like.width = likeTextSize.width + 30;
-    like.top = read.top - 5;
-    like.right = kAppWidth - 10;
-    
-    back.height = read.bottom - thumbnail.top+kCellLeftGap;
     
     //[self showDebugRect];
 }
@@ -148,7 +179,12 @@
     CGSize size= [news.contents sizeWithFontCompatible:[UIFont systemFontOfSize:15]
                                     constrainedToSize:CGSizeMake(kAppWidth-4*kCellLeftGap, MAXFLOAT)
                                         lineBreakMode:NSLineBreakByWordWrapping];
-    return 140+40+size.height+50+20+2*kCellLeftGap;
+    if (140+40+size.height+50+20+2*kCellLeftGap+kCellLeftGap<kAppHeight-64) { // 小于屏幕高度
+        
+        return kAppHeight-64+kCellLeftGap;
+    }
+    
+    return 140+40+size.height+50+20+2*kCellLeftGap+kCellLeftGap;
 }
 
 @end

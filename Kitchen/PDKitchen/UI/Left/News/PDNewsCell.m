@@ -54,6 +54,7 @@
         [thumbnail addSubview:mark];
         mark.backgroundColor = [UIColor clearColor];
         mark.image = [UIImage imageNamed:@"news_mark"];
+        mark.hidden = YES;
         
         name = [[UILabel alloc] initWithFrame:CGRectMake(2*kCellLeftGap, thumbnail.bottom+kCellLeftGap, 220, 20)];
         [self addSubview:name];
@@ -96,6 +97,12 @@
     
     if (news.img) {
         thumbnail.imageURL = [NSURL URLWithString:news.img];
+    }
+    
+    if ([news.is_read boolValue]) { // 新标签
+        mark.hidden = YES;
+    }else{
+        mark.hidden = NO;
     }
     
 //    name.text = @"怎样做用户喜欢？";

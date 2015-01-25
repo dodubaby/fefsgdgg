@@ -72,8 +72,6 @@
         status.textColor = [UIColor colorWithHexString:@"#c14a41"];
     }
     
-
-    
 //    price.text = @"10元";
 //    [price sizeToFit];
 //    price.top = (back.height - price.height)/2;

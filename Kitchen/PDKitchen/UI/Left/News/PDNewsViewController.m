@@ -62,13 +62,13 @@
             
             if ([list count]==0) {
                 [weakSelf showDefaultView];
+            }else{
+            
+                weakSelf.currentPage +=1;
+                [weakSelf.dataList removeAllObjects];
+                [weakSelf.dataList addObjectsFromArray:list];
+                [weakSelf.tableView reloadData];
             }
-            
-            weakSelf.currentPage +=1;
-            
-            [weakSelf.dataList removeAllObjects];
-            [weakSelf.dataList addObjectsFromArray:list];
-            [weakSelf.tableView reloadData];
             
             [weakSelf stopLoading];
             

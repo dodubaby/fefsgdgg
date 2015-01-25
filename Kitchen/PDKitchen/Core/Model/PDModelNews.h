@@ -22,5 +22,6 @@
 @property (nonatomic,strong) NSString *like;
 @property (nonatomic,strong) NSString *read;
 
+@property (nonatomic,strong) NSNumber *is_read;// 新标记
 
 @end
