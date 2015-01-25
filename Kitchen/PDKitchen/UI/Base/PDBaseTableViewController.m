@@ -49,6 +49,7 @@
     button.backgroundColor = [UIColor clearColor];
     button.frame = CGRectMake(0, 0, 30, 40);
     [button setImage:[UIImage imageNamed:@"center_back"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"center_back2"] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * leftDrawerButton  = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];

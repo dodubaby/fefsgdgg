@@ -76,6 +76,7 @@
     checkVersion = [[UIButton alloc] initWithFrame:CGRectMake((kAppWidth - 40)/2.0f, 280, 40, 40)];
     [self.view addSubview:checkVersion];
     [checkVersion setImage:[UIImage imageNamed:@"st_refresh"] forState:UIControlStateNormal];
+    [checkVersion setImage:[UIImage imageNamed:@"st_refresh2"] forState:UIControlStateHighlighted];
     [checkVersion setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [checkVersion handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         

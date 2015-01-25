@@ -113,6 +113,7 @@
     
     [sendCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
     [sendCodeButton setImage:[UIImage imageNamed:@"lg_send_code"] forState:UIControlStateNormal];
+    [sendCodeButton setImage:[UIImage imageNamed:@"lg_send_code2"] forState:UIControlStateHighlighted];
     sendCodeButton.titleEdgeInsets = UIEdgeInsetsMake(0, -80, 0, 0);
     sendCodeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0);
     

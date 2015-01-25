@@ -82,6 +82,12 @@
         [[PDHTTPEngine sharedInstance] newsLikeWithUserid:userid news_id:news.news_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //
             NSLog(@"赞成功");
+            
+            NSInteger count = [_newsDetail.like intValue];
+            count +=1;
+            _newsDetail.like = [NSString stringWithFormat:@"%ld",(long)count];
+            [self.tableView reloadData];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
         }];

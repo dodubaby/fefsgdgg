@@ -264,7 +264,7 @@
     
     [[PDCartManager sharedInstance] addFood:data];
     // 通知购物车更改
-    [[NSNotificationCenter defaultCenter] postNotificationName:kCartModifyNotificationKey object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kCartModifyNotificationKey object:nil];
     
 //    if ([self userLogined]) {
 //        NSString *userid = [PDAccountManager sharedInstance].userid;
@@ -288,6 +288,10 @@
         [[PDHTTPEngine sharedInstance] appLikeWithUserid:userid foodid:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //
             NSLog(@"点赞成功");
+            NSInteger count = [_foodDetail.detail_object.like_sum intValue];
+            count +=1;
+            _foodDetail.detail_object.like_sum = [NSString stringWithFormat:@"%ld",(long)count];
+            [self.tableView reloadData];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //

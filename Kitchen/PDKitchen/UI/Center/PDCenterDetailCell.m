@@ -61,6 +61,7 @@
         [like setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
         like.titleLabel.font = [UIFont systemFontOfSize:13];
         [like setImage:[UIImage imageNamed:@"dt_up"] forState:UIControlStateNormal];
+        [like setImage:[UIImage imageNamed:@"dt_up2"] forState:UIControlStateHighlighted];
         like.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         like.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         [like handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
@@ -93,6 +94,7 @@
         [share setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
         share.titleLabel.font = [UIFont systemFontOfSize:13];
         [share setImage:[UIImage imageNamed:@"dt_share"] forState:UIControlStateNormal];
+        [share setImage:[UIImage imageNamed:@"dt_share2"] forState:UIControlStateHighlighted];
         share.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         share.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         
@@ -109,6 +111,7 @@
         [favorite setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
         favorite.titleLabel.font = [UIFont systemFontOfSize:13];
         [favorite setImage:[UIImage imageNamed:@"dt_favorite"] forState:UIControlStateNormal];
+        [favorite setImage:[UIImage imageNamed:@"dt_favorite2"] forState:UIControlStateHighlighted];
         favorite.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         favorite.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         
@@ -117,7 +120,6 @@
                 [self.delegate pdBaseTableViewCellDelegate:self favoriteWithData:self.data];
             }
         }];
-        
         
         addButton = [[UIButton alloc] initWithFrame:CGRectMake(kAppWidth - 90 -kCellLeftGap*2,  person.bottom + 10, 90, 30)];
         [self addSubview:addButton];

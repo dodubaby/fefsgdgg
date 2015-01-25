@@ -36,7 +36,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         back = [[UIView alloc] initWithFrame:CGRectMake(kCellLeftGap, kCellLeftGap, kAppWidth-2*kCellLeftGap, 140+30)];
@@ -70,13 +69,11 @@
         time.font = [UIFont systemFontOfSize:12];
         time.textColor = [UIColor colorWithHexString:@"#999999"];
         
-        //
         content = [[UILabel alloc] initWithFrame:CGRectMake(2*kCellLeftGap, name.bottom+2*kCellLeftGap,kAppWidth-4*kCellLeftGap , 0)];
         [self addSubview:content];
         content.numberOfLines = 0;
         content.font = [UIFont systemFontOfSize:15];
         content.textColor = [UIColor colorWithHexString:@"#666666"];
-        
         
         read = [[UILabel alloc] initWithFrame:CGRectMake(2*kCellLeftGap, 0, 220, 20)];
         [self addSubview:read];
@@ -90,6 +87,7 @@
         [like setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
         like.titleLabel.font = [UIFont systemFontOfSize:15];
         [like setImage:[UIImage imageNamed:@"dt_up"] forState:UIControlStateNormal];
+        [like setImage:[UIImage imageNamed:@"dt_up2"] forState:UIControlStateHighlighted];
         like.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         like.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
         

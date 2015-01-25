@@ -39,7 +39,7 @@
         
         UIButton *deletebutton=[[UIButton alloc] initWithFrame:CGRectMake(address.right, (back.height-20)/2, 20, 20)];
         [deletebutton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-        [deletebutton setBackgroundImage:[UIImage imageNamed:@"delete1"] forState:UIControlStateHighlighted];
+        [deletebutton setBackgroundImage:[UIImage imageNamed:@"delete2"] forState:UIControlStateHighlighted];
         [back addSubview:deletebutton];
         [deletebutton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
             if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:deleteAddressWithData:)]) {

@@ -71,10 +71,12 @@
         reduceButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX, (cellHeight-40)/2, 40, 40)];
         [self addSubview:reduceButton];
         [reduceButton setImage:[UIImage imageNamed:@"od_reduce"] forState:UIControlStateNormal];
+        [reduceButton setImage:[UIImage imageNamed:@"od_reduce2"] forState:UIControlStateHighlighted];
         
         addButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartX+50, (cellHeight-40)/2, 40, 40)];
         [self addSubview:addButton];
         [addButton setImage:[UIImage imageNamed:@"od_add"] forState:UIControlStateNormal];
+        [addButton setImage:[UIImage imageNamed:@"od_add2"] forState:UIControlStateHighlighted];
         
         // ------
         [reduceButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
