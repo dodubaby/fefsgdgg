@@ -17,7 +17,7 @@
 #import "UIImage+Utils.h"
 #import "UIDevice+Utitls.h"
 #import "NSString+Utils.h"
-
+#import "NSDate+Utils.h"
 #import "EGOImageView.h"
 
 #import "UIPlaceHolderTextView.h"

@@ -167,13 +167,16 @@
         NSArray *data = result[@"data"];
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            //PDModelFood *fd = [PDModelFood fromJson:obj];
-            PDModelFood *fd = [PDModelFood objectWithJoy:obj];
-            if (fd) {
-                [arr addObject:fd];
-            }
-        }];
+        
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0) {
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                //PDModelFood *fd = [PDModelFood fromJson:obj];
+                PDModelFood *fd = [PDModelFood objectWithJoy:obj];
+                if (fd) {
+                    [arr addObject:fd];
+                }
+            }];
+        }
         
         if (code == 0) {
             success(operation,arr);
@@ -320,14 +323,16 @@
         NSString *msg = result[@"msg"];
         NSArray *data = result[@"data"];
         
-        if (code ==0) {
-            NSMutableArray *arr = [[NSMutableArray alloc] init];
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
             [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 PDModelMessage *message = [PDModelMessage objectWithJoy:obj];
                 if (message) {
                     [arr addObject:message];
                 }
             }];
+        }
+        if (code ==0) {
             success(operation,arr);
         }else{
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
@@ -489,15 +494,16 @@
         NSArray *data = result[@"data"];
         
         //PDModelOrder
-        
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            PDModelOrder *od = [PDModelOrder objectWithJoy:obj];
-            if (od) {
-                [arr addObject:od];
-            }
-        }];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
         
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelOrder *od = [PDModelOrder objectWithJoy:obj];
+                if (od) {
+                    [arr addObject:od];
+                }
+            }];
+        }
         if (code == 0) {
             success(operation,arr);
         }else{
@@ -534,12 +540,14 @@
         NSArray *data = result[@"data"];
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            PDModelLogistics *lg = [PDModelLogistics objectWithJoy:obj];
-            if (lg) {
-                [arr addObject:lg];
-            }
-        }];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelLogistics *lg = [PDModelLogistics objectWithJoy:obj];
+                if (lg) {
+                    [arr addObject:lg];
+                }
+            }];
+        }
         
         if (code == 0) {
             success(operation,arr);
@@ -640,12 +648,15 @@
         NSArray *data = result[@"data"];
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            PDModelAddress *ad = [PDModelAddress objectWithJoy:obj];
-            if (ad) {
-                [arr addObject:ad];
-            }
-        }];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
+        
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelAddress *ad = [PDModelAddress objectWithJoy:obj];
+                if (ad) {
+                    [arr addObject:ad];
+                }
+            }];
+        }
         
         if (code == 0) {
             success(operation,arr);
@@ -786,13 +797,15 @@
         NSArray *data = result[@"data"];
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            //PDModelFood *fd = [PDModelFood fromJson:obj];
-            PDModelFood *fd = [PDModelFood objectWithJoy:obj];
-            if (fd) {
-                [arr addObject:fd];
-            }
-        }];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
+            
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelFood *fd = [PDModelFood objectWithJoy:obj];
+                if (fd) {
+                    [arr addObject:fd];
+                }
+            }];
+        }
         
         if (code == 0) {
             success(operation,arr);
@@ -892,13 +905,16 @@
         NSArray *data = result[@"data"];
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            PDModelCoupon *cp = [PDModelCoupon objectWithJoy:obj];
-            if (cp) {
-                [arr addObject:cp];
-            }
-        }];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
         
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelCoupon *cp = [PDModelCoupon objectWithJoy:obj];
+                if (cp) {
+                    [arr addObject:cp];
+                }
+            }];
+        }
+
         if (code == 0) {
             success(operation,arr);
         }else{
@@ -933,12 +949,16 @@
         NSArray *data = result[@"data"];
         
         NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            PDModelNews *news = [PDModelNews objectWithJoy:obj];
-            if (news) {
-                [arr addObject:news];
-            }
-        }];
+        if ([data isKindOfClass:[NSArray class]]&&[data count]>0){
+        
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PDModelNews *news = [PDModelNews objectWithJoy:obj];
+                if (news) {
+                    [arr addObject:news];
+                }
+            }];
+        }
+
         if (code == 0) {
             success(operation,arr);
         }else{

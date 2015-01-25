@@ -242,10 +242,10 @@
         [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
             if (list.count>0) {
+                weakSelf.currentPage +=1;
                 [weakSelf.dataList addObjectsFromArray:list];
                 [weakSelf.tableView reloadData];
                 
-                weakSelf.currentPage +=1;
             }else{ // 没有更多
             
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kAppWidth, 40)];

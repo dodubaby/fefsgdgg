@@ -18,6 +18,8 @@
 
 @protocol PDOrderTimeViewControllerDelegate <NSObject>
 
--(void)pdOrderTimeViewController:(UIViewController *)vc didSelectTime:(NSString *)time;
+-(void)pdOrderTimeViewController:(UIViewController *)vc
+                   didSelectTime:(NSDate *)time
+                     displayTime:(NSString *)displayTime;
 
 @end

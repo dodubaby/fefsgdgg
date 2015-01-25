@@ -6,8 +6,16 @@
 //  Copyright (c) 2015年 mtf. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import "PDUtils.h"
 #import "PDCartManager.h"
+
 #import "PDConfig.h"
+
+
+@interface PDCartManager()
+@property (nonatomic,strong) NSDate *lastAddTime;
+@end
 
 @implementation PDCartManager
 
@@ -36,6 +44,42 @@
         return;
     }
     
+    
+    
+    if (_lastAddTime) {
+        
+        NSInteger second = [_lastAddTime timeIntervalSinceNow];
+    
+        NSLog(@"%ld",second);
+        
+        // 大于半小时，提示清空
+        if (second<= -60*30&&[_cartList count]>0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"清空购物车"
+                                                            message:@"你的购物车还有未购买菜品,是否清空？"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"取消"
+                                                  otherButtonTitles:@"清空", nil];
+            
+            [alert showWithClickedBlock:^(NSInteger buttonIndex) {
+                switch (buttonIndex) {
+                    case 0:
+                    {
+                        
+                    }
+                        break;
+                    case 1:
+                    {
+                        [self clear];
+                        return;
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }];
+        }
+    }
+    
     BOOL exist = NO;
     
     for (PDModelFood *fd in _cartList) {
@@ -58,6 +102,7 @@
     
     [self notify];
     
+    _lastAddTime = [NSDate date];
 }
 
 -(void)removeFood:(PDModelFood *)food{

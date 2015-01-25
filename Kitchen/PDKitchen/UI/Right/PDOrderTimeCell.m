@@ -65,10 +65,17 @@
 //        content.textColor = [UIColor colorWithHexString:@"#333333"];
 //    }
     
-    if ([data isKindOfClass:[NSString class]]) {
+    if ([data isKindOfClass:[NSString class]]) { // 立即
         content.text = data;
+    }else if([data isKindOfClass:[NSDate class]]){  // 时间
+        
+        NSDate *date = data;  // 标准时间
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setTimeZone:[NSTimeZone localTimeZone]]; // 本地时间
+        [dateFormatter setDateFormat:@"HH:mm"];
+        NSString *dateStr = [dateFormatter stringFromDate:date];
+        content.text = dateStr;
     }
-    
     //[address sizeToFit];
     content.top = (back.height - content.height)/2;
     //[self showDebugRect];

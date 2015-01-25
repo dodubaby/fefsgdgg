@@ -51,7 +51,8 @@ PDOrderTimeViewControllerDelegate>
 
 @property (nonatomic,strong) PDModelAddress *currentAddress;
 @property (nonatomic,strong) PDModelCoupon *currentCoupon;
-@property (nonatomic,strong) NSString *currentTime;
+@property (nonatomic,strong) NSDate *currentTime;
+@property (nonatomic,strong) NSString *displayTime;
 
 
 @property (nonatomic,assign) BOOL canResignFirstResponder;
@@ -232,7 +233,7 @@ PDOrderTimeViewControllerDelegate>
         }
         
         // 时间
-        if (!_currentTime) {
+        if (!_displayTime) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                             message:@"请选择时间"
                                                            delegate:nil
@@ -260,10 +261,14 @@ PDOrderTimeViewControllerDelegate>
         PDOrderSubmitRequestCell *cell2 = (PDOrderSubmitRequestCell *)[self.tableView cellForRowAtIndexPath:indexPath2];
         NSString *message = cell2.textView.text;
         
-        NSString *time = [_currentTime toTimestamp];
-
-        NSString *userid = [PDAccountManager sharedInstance].userid;
         
+        NSString *time = nil;
+        if (_currentTime) {
+            NSNumber *dateNumber = [NSNumber numberWithDouble:[_currentTime timeIntervalSince1970]];
+            time = [dateNumber stringValue];
+        }
+        
+        NSString *userid = [PDAccountManager sharedInstance].userid;
         
         [self startLoading];
         
@@ -467,14 +472,18 @@ PDOrderTimeViewControllerDelegate>
     [self.tableView reloadData];
 }
 
--(void)pdOrderTimeViewController:(UIViewController *)vc didSelectTime:(NSString *)time{
+-(void)pdOrderTimeViewController:(UIViewController *)vc
+                   didSelectTime:(NSDate *)time
+                     displayTime:(NSString *)displayTime{
 
     NSLog(@"%@",time);
     
     _currentTime = time;
+    _displayTime = displayTime;
+    
     PDOrderSubmitCellItem *item = _cellItems[3];
     item.extInfo = @{@"isActive":@YES,@"isShowArrow":@YES};
-    item.data = [NSString stringWithFormat:@"就餐时间：%@", _currentTime];
+    item.data = [NSString stringWithFormat:@"就餐时间：%@", _displayTime];
     [self.tableView reloadData];
 }
 

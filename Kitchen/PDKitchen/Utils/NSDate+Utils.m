@@ -18,4 +18,11 @@
     
 }
 
+- (NSDate *)localTime
+{
+    NSTimeZone *tz = [NSTimeZone defaultTimeZone];
+    NSInteger seconds = [tz secondsFromGMTForDate:self];
+    return [NSDate dateWithTimeInterval:seconds sinceDate:self];
+}
+
 @end
