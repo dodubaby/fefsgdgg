@@ -15,7 +15,7 @@
 // 电话
 #define kPDPhoneNumber @"010-52369874"
 
-//
+// 模拟器 1 ， 真机 0 开始定位
 #define kForSimulatorUse 1
 
 #ifdef DEBUG
