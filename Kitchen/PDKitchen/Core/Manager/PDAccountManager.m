@@ -7,6 +7,7 @@
 //
 
 #import "PDAccountManager.h"
+#import "PDConfig.h"
 
 @implementation PDAccountManager
 +(PDAccountManager *)sharedInstance{
@@ -28,6 +29,9 @@
     _userid = nil;
     _coupon_count = nil;
     _news_count = nil;
+    
+    // 发送通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNewsHideNotificationKey object:nil];
 }
 
 @end

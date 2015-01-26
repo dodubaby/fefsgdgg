@@ -44,6 +44,13 @@
     
     [self setupData];
     
+    
+    NSString *fromType = nil;
+    
+    if (_isForOrder) {
+        fromType = @"pay";
+    }
+    
     __weak PDCouponViewController *weakSelf = self;
     
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -54,7 +61,7 @@
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] couponMyCouponWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] couponMyCouponWithUserid:userid from:fromType page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
             [weakSelf.tableView.pullToRefreshView stopAnimating];
             if ([list count]==0) {
@@ -89,9 +96,8 @@
         NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] couponMyCouponWithUserid:userid page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+        [[PDHTTPEngine sharedInstance] couponMyCouponWithUserid:userid from:fromType page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //
-            
             if (list.count>0) {
                 weakSelf.currentPage +=1;
                 [weakSelf.dataList addObjectsFromArray:list];

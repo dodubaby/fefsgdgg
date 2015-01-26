@@ -52,6 +52,22 @@
     return dict;
 }
 
+
+-(void)tokenExpireWithCode:(long)code{
+    if (code == 202) { // 登录失效
+        
+        // 清除数据
+        [[PDAccountManager sharedInstance] cleanup];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"登录失效,请重新登录"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
+}
+
 -(void)requestVerificationCodeWithPhone:(NSString *)phone
                                 success:(void (^)(AFHTTPRequestOperation *operation, NSString *code))success
                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
@@ -79,6 +95,7 @@
             }
             success(operation,theCode);
         }else{
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -181,6 +198,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -221,6 +241,8 @@
             PDModelFoodDetail *detail = [PDModelFoodDetail objectWithJoy:data];
             success(operation,detail);
         }else{
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -253,6 +275,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -292,6 +317,9 @@
         if (code == 0) {
             success(operation,responseObject);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -335,6 +363,9 @@
         if (code ==0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -460,6 +491,10 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -507,6 +542,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -552,6 +590,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -589,6 +630,9 @@
             }
             success(operation,deteil);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -618,6 +662,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -661,6 +708,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -701,6 +751,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -761,6 +814,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -810,6 +866,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -843,6 +902,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -875,6 +937,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -887,14 +952,18 @@
 
 // 我的优惠券
 -(void)couponMyCouponWithUserid:(NSString *)userid
+                           from:(NSString *)fromType
                            page:(NSNumber *)page
                         success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:userid forKey:@"userid"];
-    [parameters setObject:page forKey:@"page"];
     
+    if (fromType) {
+        [parameters setObject:fromType forKey:@"from"];
+    }
+    [parameters setObject:page forKey:@"page"];
     
     [_HTTPEngine POST:kPathOfCouponMyCoupon parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -918,6 +987,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -962,6 +1034,9 @@
         if (code == 0) {
             success(operation,arr);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -995,6 +1070,9 @@
             PDModelNews *news = [PDModelNews objectWithJoy:data];
             success(operation,news);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -1027,6 +1105,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -1059,6 +1140,9 @@
         if (code == 0) {
             success(operation,data);
         }else{
+            
+            [self tokenExpireWithCode:code];
+            
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }

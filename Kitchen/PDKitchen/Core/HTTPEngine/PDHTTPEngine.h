@@ -279,9 +279,10 @@ phone	string	Y	联系电话
                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-// 我的优惠券
+// 我的优惠券 （支付添加过滤 from = pay）
 -(void)couponMyCouponWithUserid:(NSString *)userid
-                             page:(NSNumber *)page
+                           from:(NSString *)fromType
+                           page:(NSNumber *)page
                           success:(void (^)(AFHTTPRequestOperation *operation, NSArray *list))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 

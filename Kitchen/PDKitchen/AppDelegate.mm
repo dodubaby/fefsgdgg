@@ -106,6 +106,23 @@
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     
+    
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        //
+        if (status==AFNetworkReachabilityStatusUnknown||status == AFNetworkReachabilityStatusNotReachable) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"你的网络连接已断开"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+        }
+    }];
+    [manager startMonitoring];
+    
     return YES;
 }
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
@@ -116,6 +133,7 @@
     NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
     NSLog(@"userInfo==%@",userInfo);
 }
+
 -(void)showLogin{
     
     // 缓存状态

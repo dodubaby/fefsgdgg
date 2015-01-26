@@ -44,6 +44,8 @@
     }else{
         _isSimulator = NO;
     }
+
+    // _isSimulator = NO;
     
     // 模拟器使用
     _locationStr = @"116.316376,39.952912";
@@ -69,6 +71,7 @@
     
     __weak PDCenterViewController *weakSelf = self;
     
+#if kForSimulatorUse
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         
@@ -99,8 +102,8 @@
             [weakSelf stopLoading];
         }];
     }];
-    
-/*
+#else
+
     // pull
     [self.tableView addPullToRefreshWithActionHandler:^{
         
@@ -117,13 +120,14 @@
                 
                 if ([list count]==0) {
                     [weakSelf showDefaultView];
+                }else{
+                
+                    weakSelf.currentPage +=1;
+                    
+                    [weakSelf.dataList removeAllObjects];
+                    [weakSelf.dataList addObjectsFromArray:list];
+                    [weakSelf.tableView reloadData];
                 }
-                
-                weakSelf.currentPage +=1;
-                
-                [weakSelf.dataList removeAllObjects];
-                [weakSelf.dataList addObjectsFromArray:list];
-                [weakSelf.tableView reloadData];
                 
                 [weakSelf stopLoading];
                 
@@ -157,13 +161,14 @@
                         
                         if ([list count]==0) {
                             [weakSelf showDefaultView];
+                        }else{
+                            
+                            weakSelf.currentPage +=1;
+                            
+                            [weakSelf.dataList removeAllObjects];
+                            [weakSelf.dataList addObjectsFromArray:list];
+                            [weakSelf.tableView reloadData];
                         }
-                        
-                        weakSelf.currentPage +=1;
-                        
-                        [weakSelf.dataList removeAllObjects];
-                        [weakSelf.dataList addObjectsFromArray:list];
-                        [weakSelf.tableView reloadData];
                         
                         [weakSelf stopLoading];
                         
@@ -184,13 +189,14 @@
                             
                             if ([list count]==0) {
                                 [weakSelf showDefaultView];
+                            }else{
+                                
+                                weakSelf.currentPage +=1;
+                                
+                                [weakSelf.dataList removeAllObjects];
+                                [weakSelf.dataList addObjectsFromArray:list];
+                                [weakSelf.tableView reloadData];
                             }
-                            
-                            weakSelf.currentPage +=1;
-                            
-                            [weakSelf.dataList removeAllObjects];
-                            [weakSelf.dataList addObjectsFromArray:list];
-                            [weakSelf.tableView reloadData];
                             
                             [weakSelf stopLoading];
                             
@@ -202,7 +208,7 @@
                     }else{ // 真机，没有位置信息
                         
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                        message:@"无法获取你的位置"
+                                                                        message:@"你的定位服务没有打开：设置》隐私》定位服务开启"
                                                                        delegate:nil
                                                               cancelButtonTitle:nil
                                                               otherButtonTitles:@"确定", nil];
@@ -218,7 +224,8 @@
              }];
         }
     }];
-*/
+    
+#endif
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         
@@ -280,7 +287,6 @@
             [weakSelf stopLoading];
         }];
     }];
-    
     
     
     // 订单商品数量badge

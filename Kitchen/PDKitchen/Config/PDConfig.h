@@ -13,8 +13,10 @@
 #define kPDAppVersion @"1.0"
 
 // 电话
-#define kPDPhoneNumber @"400-400-40000" 
+#define kPDPhoneNumber @"010-52369874"
 
+//
+#define kForSimulatorUse 1
 
 #ifdef DEBUG
 

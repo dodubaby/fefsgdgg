@@ -90,8 +90,11 @@
             
             [self stopLoading];
             
+            
+            NSString *msg = [NSString stringWithFormat:@"请联系客服：%@",kPDPhoneNumber];
+            
             UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                             message:@"退单成功"
+                                                             message:msg
                                                             delegate:nil
                                                    cancelButtonTitle:nil
                                                    otherButtonTitles:@"确定", nil];
