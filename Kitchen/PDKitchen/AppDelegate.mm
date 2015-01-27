@@ -29,6 +29,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    NSString *orderids = @"1";
+    // 1,2,3,4
+    NSArray *arr = [orderids componentsSeparatedByString:@","];
+    
+    NSLog(@"arr == %@",arr);
+    
+    
     
     NSString *device = [[UIDevice currentDevice] deviceKeychanID];
     NSLog(@"device == %@",device);

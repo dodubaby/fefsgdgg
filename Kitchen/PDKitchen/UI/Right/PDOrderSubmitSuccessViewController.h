@@ -10,4 +10,6 @@
 
 @interface PDOrderSubmitSuccessViewController : PDBaseViewController
 
+@property (nonatomic,strong) NSArray *orderList;
+
 @end

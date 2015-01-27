@@ -460,7 +460,7 @@
                   eatTime:(NSString *)eatTime
                   message:(NSString *)message
                  sumPrice:(NSNumber *)sumPrice
-                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  success:(void (^)(AFHTTPRequestOperation *operation, NSArray *orderList))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -499,9 +499,14 @@
         NSDictionary *data = result[@"data"];
         
         if (code == 0) {
-            success(operation,data);
-        }else{
             
+            NSString *orderids = data[@"order_id"];
+            // 1,2,3,4
+            NSArray *arr = [orderids componentsSeparatedByString:@","];
+            
+            NSLog(@"arr == %@",arr);
+            success(operation,arr);
+        }else{
             
             [self tokenExpireWithCode:code];
             

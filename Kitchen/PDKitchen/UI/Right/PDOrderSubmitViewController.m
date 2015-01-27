@@ -13,6 +13,7 @@
 #import "PDOrderTimeViewController.h"
 #import "PDOrderSubmitSuccessViewController.h"
 
+
 @interface PDOrderSubmitCellItem : NSObject
 
 @property (nonatomic,strong) Class cellClazz;         // cell类型
@@ -281,7 +282,7 @@ PDOrderTimeViewControllerDelegate>
                                                      couponid:_currentCoupon.coupon_id
                                                       eatTime:time
                                                       message:message
-                                                     sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                     sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, NSArray *orderList) {
                                                          //
                                                          /*
                                                           [self.navigationController popViewControllerAnimated:YES];
@@ -299,6 +300,7 @@ PDOrderTimeViewControllerDelegate>
                                                          [[PDCartManager sharedInstance] clear];
                                                          
                                                          PDOrderSubmitSuccessViewController *vc = [PDOrderSubmitSuccessViewController new];
+                                                         vc.orderList = orderList;
                                                          [self.navigationController pushViewController:vc animated:YES];
                                                          
                                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -310,7 +312,7 @@ PDOrderTimeViewControllerDelegate>
                                                              message = [error localizedDescription];
                                                          }
                                                          UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                                                          message:@"提交失败提示你的订单提交不成功，请重新提交"
+                                                                                                          message:message
                                                                                                          delegate:nil
                                                                                                 cancelButtonTitle:nil
                                                                                                 otherButtonTitles:@"确定", nil];

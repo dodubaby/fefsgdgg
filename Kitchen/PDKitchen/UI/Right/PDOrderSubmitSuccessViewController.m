@@ -8,6 +8,7 @@
 
 #import "PDOrderSubmitSuccessViewController.h"
 #import "PDOrderViewController.h"
+#import "PDOrderDetailViewController.h"
 #import "AppDelegate.h"
 
 @interface PDOrderSubmitSuccessViewController()
@@ -137,9 +138,16 @@
     addButton.clipsToBounds = YES;
     [addButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         // 我的订单
-        PDOrderViewController *vc = [PDOrderViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-                
+        if ([self.orderList count]==1) {  // 单个进入详情
+            PDOrderDetailViewController *vc = [[PDOrderDetailViewController alloc] init];
+            vc.orderid = self.orderList[0];
+            vc.isForSubmit = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if([self.orderList count]>1){ // 多个进入列表
+            PDOrderViewController *vc = [[PDOrderViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }];
 }
 

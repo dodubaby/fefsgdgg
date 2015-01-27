@@ -25,6 +25,15 @@
 
 @implementation PDOrderDetailViewController
 
+
+- (void)backButtonTaped:(id)sender{
+    if (_isForSubmit) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.mm_drawerController setPanDisableSide:MMPanDisableSideBoth];
@@ -83,37 +92,40 @@
     [refund setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateSelected];
     [refund handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
-        [self startLoading];
-        
-        NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self userLogined]) {
             
-            [self stopLoading];
+            [self startLoading];
             
-            
-            NSString *msg = [NSString stringWithFormat:@"请联系客服：%@",kPDPhoneNumber];
-            
-            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                             message:msg
-                                                            delegate:nil
-                                                   cancelButtonTitle:nil
-                                                   otherButtonTitles:@"确定", nil];
-            [alert show];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-            [self stopLoading];
-            
-            NSString *message = error.userInfo[@"Message"];
-            if (!message) {
-                message = [error localizedDescription];
-            }
-            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                             message:message
-                                                            delegate:nil
-                                                   cancelButtonTitle:nil
-                                                   otherButtonTitles:@"确定", nil];
-            [alert show];
-        }];
+            NSString *userid = [PDAccountManager sharedInstance].userid;
+            [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                [self stopLoading];
+                
+                
+                NSString *msg = [NSString stringWithFormat:@"请联系客服：%@",kPDPhoneNumber];
+                
+                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:msg
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"确定", nil];
+                [alert show];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+                [self stopLoading];
+                
+                NSString *message = error.userInfo[@"Message"];
+                if (!message) {
+                    message = [error localizedDescription];
+                }
+                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:message
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"确定", nil];
+                [alert show];
+            }];
+        }
     }];
     
     // 默认展示物流信息

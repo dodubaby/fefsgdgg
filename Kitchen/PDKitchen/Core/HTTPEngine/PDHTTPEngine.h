@@ -200,7 +200,7 @@ sum_price	float	N	总共价格
                   eatTime:(NSString *)eatTime
                   message:(NSString *)message
                  sumPrice:(NSNumber *)sumPrice
-                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  success:(void (^)(AFHTTPRequestOperation *operation, NSArray *orderList))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // 订单列表

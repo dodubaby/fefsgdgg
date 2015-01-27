@@ -27,7 +27,6 @@
     return __singleton;
 }
 
-
 - (void)setDidUpdateLocationBlock:(PDLocationDidUpdateLocation)block{
 
     if (block) {

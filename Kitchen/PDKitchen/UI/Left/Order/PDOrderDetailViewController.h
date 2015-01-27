@@ -12,4 +12,7 @@
 
 @property(nonatomic,strong) NSString *orderid;
 
+
+@property (nonatomic,assign) BOOL isForSubmit; // 提交订单进入
+
 @end
