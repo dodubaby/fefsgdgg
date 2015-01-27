@@ -129,27 +129,30 @@
     logisticsButton.selected = YES;
     detailButton.selected = NO;
     
-    NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-        //
-        NSLog(@"%@",list);
-        
-        if (list) {
-            orderLogisticsView.list = list;
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //
-        NSString *message = error.userInfo[@"Message"];
-        if (!message) {
-            message = [error localizedDescription];
-        }
-        UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                         message:message
-                                                        delegate:nil
-                                               cancelButtonTitle:nil
-                                               otherButtonTitles:@"确定", nil];
-        [alert show];
-    }];
+    if ([self userLogined]) {
+    
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+            //
+            NSLog(@"%@",list);
+            
+            if (list) {
+                orderLogisticsView.list = list;
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSString *message = error.userInfo[@"Message"];
+            if (!message) {
+                message = [error localizedDescription];
+            }
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
+        }];
+    }
 }
 
 -(void)showDetail{
@@ -159,29 +162,31 @@
     logisticsButton.selected = NO;
     detailButton.selected = YES;
     
-    NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil) {
-        //
-        
-        NSLog(@"deteil == %@",deteil);
-        
-        if (deteil) {
-            [orderDetailView configData:deteil];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //
-        NSString *message = error.userInfo[@"Message"];
-        if (!message) {
-            message = [error localizedDescription];
-        }
-        UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                         message:message
-                                                        delegate:nil
-                                               cancelButtonTitle:nil
-                                               otherButtonTitles:@"确定", nil];
-        [alert show];
-    }];
+    if ([self userLogined]) {
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] orderDetailWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, PDModelOrderDetail *deteil) {
+            //
+            
+            NSLog(@"deteil == %@",deteil);
+            
+            if (deteil) {
+                [orderDetailView configData:deteil];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSString *message = error.userInfo[@"Message"];
+            if (!message) {
+                message = [error localizedDescription];
+            }
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
+        }];
+    }
 }
 
 @end

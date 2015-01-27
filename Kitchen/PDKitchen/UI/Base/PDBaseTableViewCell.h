@@ -45,7 +45,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // 添加订单
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data;
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data button:(UIButton *)addButton;
 
 // 赞菜品
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell likeFoodWithData:(id)data;

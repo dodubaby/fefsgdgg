@@ -270,52 +270,54 @@ PDOrderTimeViewControllerDelegate>
         
         NSString *userid = [PDAccountManager sharedInstance].userid;
         
-        [self startLoading];
+        if ([self userLogined]) {
         
-        [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
-                                                  foodids:foodids
-                                                  address:_currentAddress.address
-                                                    phone:cellPhone
-                                                 couponid:_currentCoupon.coupon_id
-                                                  eatTime:time
-                                                  message:message
-                                                 sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                     //
-                                                     /*
-                                                    [self.navigationController popViewControllerAnimated:YES];
-                                                     UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                                                      message:@"订单提交成功"
-                                                                                                     delegate:nil
-                                                                                            cancelButtonTitle:nil
-                                                                                            otherButtonTitles:@"确定", nil];
-                                                     [alert show];
-                                                     */
-                                                     
-                                                     [self stopLoading];
-                                                     
-                                                     // 清空购物车
-                                                     [[PDCartManager sharedInstance] clear];
-                                                     
-                                                     PDOrderSubmitSuccessViewController *vc = [PDOrderSubmitSuccessViewController new];
-                                                     [self.navigationController pushViewController:vc animated:YES];
-                                                     
-                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                     //
-                                                     [self stopLoading];
-                                                     
-                                                     NSString *message = error.userInfo[@"Message"];
-                                                     if (!message) {
-                                                         message = [error localizedDescription];
-                                                     }
-                                                     UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                                                      message:@"提交失败提示你的订单提交不成功，请重新提交"
-                                                                                                     delegate:nil
-                                                                                            cancelButtonTitle:nil
-                                                                                            otherButtonTitles:@"确定", nil];
-                                                     [alert show];
-                                                     
-                                                 }];
-
+            [self startLoading];
+            
+            [[PDHTTPEngine sharedInstance] orderAddWithUserid:userid
+                                                      foodids:foodids
+                                                      address:_currentAddress.address
+                                                        phone:cellPhone
+                                                     couponid:_currentCoupon.coupon_id
+                                                      eatTime:time
+                                                      message:message
+                                                     sumPrice:[NSNumber numberWithFloat:totalPrice] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                         //
+                                                         /*
+                                                          [self.navigationController popViewControllerAnimated:YES];
+                                                          UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:@"订单提交成功"
+                                                          delegate:nil
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"确定", nil];
+                                                          [alert show];
+                                                          */
+                                                         
+                                                         [self stopLoading];
+                                                         
+                                                         // 清空购物车
+                                                         [[PDCartManager sharedInstance] clear];
+                                                         
+                                                         PDOrderSubmitSuccessViewController *vc = [PDOrderSubmitSuccessViewController new];
+                                                         [self.navigationController pushViewController:vc animated:YES];
+                                                         
+                                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                         //
+                                                         [self stopLoading];
+                                                         
+                                                         NSString *message = error.userInfo[@"Message"];
+                                                         if (!message) {
+                                                             message = [error localizedDescription];
+                                                         }
+                                                         UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                                                          message:@"提交失败提示你的订单提交不成功，请重新提交"
+                                                                                                         delegate:nil
+                                                                                                cancelButtonTitle:nil
+                                                                                                otherButtonTitles:@"确定", nil];
+                                                         [alert show];
+                                                         
+                                                     }];
+        }
     }];
 }
 

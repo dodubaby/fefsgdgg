@@ -426,28 +426,35 @@
 
 // 添加购物车
 
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data button:(UIButton *)addButton{
     NSLog(@"add");
+
+    UIButton *button = addButton;
+    CGRect frame =  [[UIApplication sharedApplication].keyWindow convertRect:button.frame toView:nil];
+
+    NSLog(@"%@",NSStringFromCGRect(frame));
     
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kAppWidth- 100, 300, 90, 30)];
-//    label.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
-//    label.font = [UIFont boldSystemFontOfSize:15];
-//    label.layer.cornerRadius = 4;
-//    label.clipsToBounds = YES;
-//    label.font = [UIFont systemFontOfSize:15];
-//    label.textColor = [UIColor whiteColor];
-//    label.text = @"加入订单";
-//    
-//    [[UIApplication sharedApplication].keyWindow addSubview:label];
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        //
-//        label.center = CGPointMake(kAppWidth - 30, 40);
-//        label.alpha = 0.5;
-//    } completion:^(BOOL finished) {
-//        [label removeFromSuperview];
-//    }];
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.top = label.top +64;
+    label.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
+    label.font = [UIFont boldSystemFontOfSize:15];
+    label.layer.cornerRadius = 4;
+    label.clipsToBounds = YES;
+    label.font = [UIFont systemFontOfSize:15];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"加入订单";
     
+    [[UIApplication sharedApplication].keyWindow addSubview:label];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        //
+        label.center = CGPointMake(kAppWidth - 30, 40);
+        label.transform = CGAffineTransformScale(label.transform,0.2,0.2);
+        label.alpha = 0.5;
+    } completion:^(BOOL finished) {
+        [label removeFromSuperview];
+    }];
     
     [[PDCartManager sharedInstance] addFood:data];
     

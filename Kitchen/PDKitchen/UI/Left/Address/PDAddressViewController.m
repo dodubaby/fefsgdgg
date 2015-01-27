@@ -337,31 +337,35 @@
     
     PDModelAddress *ad = (PDModelAddress *)data;
     
-    NSString *userid = [PDAccountManager sharedInstance].userid;
-    [[PDHTTPEngine sharedInstance] addressDelWithUserid:userid address_id:ad.address_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //
-        
-        [_dataList removeObject:data];
-        
-        [self.tableView beginUpdates];
-        NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView endUpdates];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //
-        NSString *message = error.userInfo[@"Message"];
-        if (!message) {
-            message = [error localizedDescription];
-        }
-        UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                         message:message
-                                                        delegate:nil
-                                               cancelButtonTitle:nil
-                                               otherButtonTitles:@"确定", nil];
-        [alert show];
-        
-    }];
+    if ([self userLogined]) {
+    
+        NSString *userid = [PDAccountManager sharedInstance].userid;
+        [[PDHTTPEngine sharedInstance] addressDelWithUserid:userid address_id:ad.address_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //
+            
+            [_dataList removeObject:data];
+            
+            [self.tableView beginUpdates];
+            NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //
+            NSString *message = error.userInfo[@"Message"];
+            if (!message) {
+                message = [error localizedDescription];
+            }
+            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"确定", nil];
+            [alert show];
+            
+        }];
+    }
+
 }
 
 @end

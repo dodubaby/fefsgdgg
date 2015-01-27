@@ -138,6 +138,7 @@
 		32CC67391A67662200D81D19 /* PDCartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CC67381A67662200D81D19 /* PDCartManager.m */; };
 		32CCB2D01A45AFB500CB2BA2 /* PDOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */; };
 		32CCB2D31A45B00400CB2BA2 /* PDOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */; };
+		32CD4D801A773A0D00D729A4 /* PDLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD4D7F1A773A0D00D729A4 /* PDLocationManager.m */; };
 		32CF65B31A5BC47300D2B4C5 /* PDLogisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CF65B21A5BC47300D2B4C5 /* PDLogisticsCell.m */; };
 		32D0E7C81A415E7C00D1F190 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E7C71A415E7C00D1F190 /* main.m */; };
 		32D0E7CB1A415E7C00D1F190 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E7CA1A415E7C00D1F190 /* AppDelegate.mm */; };
@@ -408,6 +409,8 @@
 		32CCB2CF1A45AFB500CB2BA2 /* PDOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderViewController.m; sourceTree = "<group>"; };
 		32CCB2D11A45B00400CB2BA2 /* PDOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDOrderDetailViewController.h; sourceTree = "<group>"; };
 		32CCB2D21A45B00400CB2BA2 /* PDOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDOrderDetailViewController.m; sourceTree = "<group>"; };
+		32CD4D7E1A773A0D00D729A4 /* PDLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLocationManager.h; sourceTree = "<group>"; };
+		32CD4D7F1A773A0D00D729A4 /* PDLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLocationManager.m; sourceTree = "<group>"; };
 		32CF65B11A5BC47300D2B4C5 /* PDLogisticsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogisticsCell.h; sourceTree = "<group>"; };
 		32CF65B21A5BC47300D2B4C5 /* PDLogisticsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogisticsCell.m; sourceTree = "<group>"; };
 		32D0E7C21A415E7C00D1F190 /* PDKitchen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDKitchen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -842,6 +845,8 @@
 				32CC67381A67662200D81D19 /* PDCartManager.m */,
 				32CC67341A6762E100D81D19 /* PDOrderManager.h */,
 				32CC67351A6762E100D81D19 /* PDOrderManager.m */,
+				32CD4D7E1A773A0D00D729A4 /* PDLocationManager.h */,
+				32CD4D7F1A773A0D00D729A4 /* PDLocationManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1539,6 +1544,7 @@
 				32D0E81F1A41602200D1F190 /* UIImageView+AFNetworking.m in Sources */,
 				32D0E7CE1A415E7C00D1F190 /* ViewController.m in Sources */,
 				32D0E85E1A416B1C00D1F190 /* UIActionSheet+Utils.m in Sources */,
+				32CD4D801A773A0D00D729A4 /* PDLocationManager.m in Sources */,
 				32D0E82F1A41603E00D1F190 /* UIViewController+MMDrawerController.m in Sources */,
 				32D0E8011A41601200D1F190 /* AFHTTPRequestOperationManager.m in Sources */,
 				32C7F3E31A64FA9E0011C580 /* PDModelMessage.m in Sources */,

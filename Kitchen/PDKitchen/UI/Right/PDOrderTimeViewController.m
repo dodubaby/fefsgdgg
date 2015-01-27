@@ -29,7 +29,7 @@
     
     for (int i = 0; i<24; i++) {
         
-        NSDate *tempDate = [date dateByAddingTimeInterval:60*30*i]; // 增加半小时
+        NSDate *tempDate = [date dateByAddingTimeInterval:60*60*i]; // 增加半小时
         
         NSLog(@"tempDate %@",tempDate);
         

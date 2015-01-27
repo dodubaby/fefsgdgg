@@ -132,12 +132,10 @@
         addButton.clipsToBounds = YES;
         
         [addButton handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData:)]) {
-                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:self.data];
+            if (self.delegate&&[self.delegate respondsToSelector:@selector(pdBaseTableViewCellDelegate:addOrderWithData: button:)]) {
+                [self.delegate pdBaseTableViewCellDelegate:self addOrderWithData:self.data button:addButton];
             }
         }];
-        
-        
     }
     
     return self;

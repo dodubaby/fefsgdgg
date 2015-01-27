@@ -259,22 +259,73 @@
 
 
 // 添加订单
--(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data{
+-(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data button:(UIButton *)addButton{
     NSLog(@"add");
     
-    [[PDCartManager sharedInstance] addFood:data];
-    // 通知购物车更改
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kCartModifyNotificationKey object:nil];
+    UIButton *button = addButton;
+    CGRect frame =  [self.view convertRect:button.frame toView:nil];
     
-//    if ([self userLogined]) {
-//        NSString *userid = [PDAccountManager sharedInstance].userid;
-//        NSString *foodids = @"1*2**2*5";
-//        [[PDHTTPEngine sharedInstance] cartAddWithUserid:userid foodids:foodids success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-//            //
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            //
-//        }];
-//    }
+    NSLog(@"%@",NSStringFromCGRect(frame));
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.top = label.top +64;
+    label.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
+    label.font = [UIFont boldSystemFontOfSize:15];
+    label.layer.cornerRadius = 4;
+    label.clipsToBounds = YES;
+    label.font = [UIFont systemFontOfSize:15];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"加入订单";
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:label];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        //
+        label.center = CGPointMake(kAppWidth - 30, 40);
+        label.transform = CGAffineTransformScale(label.transform,0.2,0.2);
+        label.alpha = 0.5;
+    } completion:^(BOOL finished) {
+        [label removeFromSuperview];
+    }];
+    
+    [[PDCartManager sharedInstance] addFood:data];
+    
+    
+    
+//    
+//    CGMutablePathRef path = CGPathCreateMutable();
+//    CGPathMoveToPoint(path, NULL, label.center.x, label.center.y+80);
+//    
+//   // CGAffineTransform trans = CGAffineTransformScale(label.transform,0.2,0.2);
+//    
+//    
+//    CGPathAddQuadCurveToPoint(path, NULL, 312, 184, kAppWidth - 30, 40);
+////    CGPathAddQuadCurveToPoint(path, NULL, 500, 184, 200, 384);
+//    
+//    //CGPathAddArcToPoint(path, NULL, 160, 200, 50, 100, 120);
+//    
+//    //below for the animation
+//    CAKeyframeAnimation * theAnimation;
+//    theAnimation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
+//    theAnimation.delegate = self;
+//    theAnimation.duration = 0.7;
+//    theAnimation.timingFunctions = [NSArray arrayWithObjects:
+//                                    [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear],
+//                                    nil];
+//    theAnimation.path = path;
+//    theAnimation.removedOnCompletion = YES;
+//    theAnimation.fillMode = kCAFillModeForwards;
+//    [label.layer addAnimation:theAnimation forKey:nil];
+//    
+//    
+//    CABasicAnimation * anim = [CABasicAnimation animationWithKeyPath:@"transform"];
+//    anim.fromValue = [NSValue valueWithCGAffineTransform:CGAffineTransformIdentity];
+//    anim.toValue = [NSValue valueWithCGAffineTransform:CGAffineTransformScale(label.transform,0.2,0.2)];
+//    anim.duration = 0.7;
+//    //[label.layer addAnimation:anim forKey:@"222"];
+//    
+//    [[PDCartManager sharedInstance] addFood:data];
 }
 
 // 赞菜品

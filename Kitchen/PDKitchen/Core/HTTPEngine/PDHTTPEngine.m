@@ -262,7 +262,9 @@
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:foodid forKey:@"food_id"];
     
     [_HTTPEngine POST:kPathOfAppLike parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -300,7 +302,9 @@
     
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:foodid forKey:@"food_id"];
     [parameters setObject:cookerid forKey:@"cooker_id"];
     [parameters setObject:text forKey:@"text"];
@@ -383,7 +387,9 @@
                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:foodids forKey:@"foodids"];
     
     [_HTTPEngine POST:kPathOfCartAdd parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -406,7 +412,9 @@
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     
     [_HTTPEngine POST:kPathOfCartDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -456,7 +464,9 @@
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:foodids forKey:@"food_ids"];
     [parameters setObject:address forKey:@"address"];
     
@@ -517,7 +527,9 @@
 
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:page forKey:@"page"];
     
     [_HTTPEngine POST:kPathOfOrderMyOrder parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -566,7 +578,9 @@
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:orderid forKey:@"order_id"];
     
     [_HTTPEngine POST:kPathOfOrderLogistics parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -613,7 +627,9 @@
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:orderid forKey:@"order_id"];
     
     [_HTTPEngine POST:kPathOfOrderDetail parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -649,7 +665,9 @@
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:orderid forKey:@"order_id"];
     
     [_HTTPEngine POST:kPathOfOrderBack parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -684,7 +702,9 @@
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:page forKey:@"page"];
     
     [_HTTPEngine POST:kPathOfAddressMyAddress parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -733,7 +753,9 @@
                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:city_id forKey:@"city_id"];
     [parameters setObject:district_id forKey:@"district_id"];
     [parameters setObject:address forKey:@"address"];
@@ -774,7 +796,9 @@
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:city_id forKey:@"city_id"];
     [parameters setObject:district_id forKey:@"district_id"];
     [parameters setObject:address forKey:@"address"];
@@ -801,7 +825,9 @@
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:address_id forKey:@"address_id"];
     
     [_HTTPEngine POST:kPathOfAddressDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -840,7 +866,9 @@
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:page forKey:@"page"];
     
     
@@ -887,7 +915,9 @@
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:food_id forKey:@"food_id"];
     
     
@@ -923,7 +953,9 @@
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:food_id forKey:@"food_id"];
     
     [_HTTPEngine POST:kPathOfCollectDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -958,7 +990,9 @@
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     
     if (fromType) {
         [parameters setObject:fromType forKey:@"from"];
@@ -1009,7 +1043,9 @@
                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:page forKey:@"page"];
     
     [_HTTPEngine POST:kPathOfNewsAll parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1091,7 +1127,9 @@
                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
     [parameters setObject:news_id forKey:@"news_id"];
     
     [_HTTPEngine POST:kPathOfNewsDel parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1126,7 +1164,11 @@
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:userid forKey:@"userid"];
+    
+    if (userid) {
+        [parameters setObject:userid forKey:@"userid"];
+    }
+    
     [parameters setObject:news_id forKey:@"news_id"];
     
     [_HTTPEngine POST:kPathOfNewsLike parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
