@@ -107,6 +107,7 @@
         _textField.font = [UIFont systemFontOfSize:15];
         _textField.textColor = [UIColor colorWithHexString:@"#333333"];
         _textField.delegate = self;
+        _textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     return self;
 }

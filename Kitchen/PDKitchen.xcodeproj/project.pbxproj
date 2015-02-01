@@ -198,6 +198,7 @@
 		32D0E8A11A4276F000D1F190 /* PDCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A01A4276F000D1F190 /* PDCouponCell.m */; };
 		32D0E8A41A4278FB00D1F190 /* PDNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */; };
 		32D0E8A71A427FA300D1F190 /* PDRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E8A61A427FA300D1F190 /* PDRightCell.m */; };
+		32D138391A7E653D00414107 /* BKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D138371A7E653D00414107 /* BKLocationManager.m */; };
 		32D6F07E1A5928F7000D20B0 /* UIDevice+Utitls.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */; };
 		32EB4E8E1A6E41E30064B819 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EB4E8D1A6E41E30064B819 /* NSDate+Utils.m */; };
 		32EB4E911A6E47BD0064B819 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EB4E901A6E47BD0064B819 /* CoreLocation.framework */; };
@@ -532,6 +533,9 @@
 		32D0E8A31A4278FB00D1F190 /* PDNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDNewsCell.m; sourceTree = "<group>"; };
 		32D0E8A51A427FA300D1F190 /* PDRightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRightCell.h; sourceTree = "<group>"; };
 		32D0E8A61A427FA300D1F190 /* PDRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRightCell.m; sourceTree = "<group>"; };
+		32D138361A7E653D00414107 /* BKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKLocationManager.h; sourceTree = "<group>"; };
+		32D138371A7E653D00414107 /* BKLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKLocationManager.m; sourceTree = "<group>"; };
+		32D138381A7E653D00414107 /* BKMacrosDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKMacrosDefinitions.h; sourceTree = "<group>"; };
 		32D6F07C1A5928F7000D20B0 /* UIDevice+Utitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Utitls.h"; sourceTree = "<group>"; };
 		32D6F07D1A5928F7000D20B0 /* UIDevice+Utitls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Utitls.m"; sourceTree = "<group>"; };
 		32EB4E8C1A6E41E30064B819 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
@@ -1288,6 +1292,9 @@
 		32EB4E8F1A6E47A40064B819 /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
+				32D138361A7E653D00414107 /* BKLocationManager.h */,
+				32D138371A7E653D00414107 /* BKLocationManager.m */,
+				32D138381A7E653D00414107 /* BKMacrosDefinitions.h */,
 				32EB4E921A6E47CD0064B819 /* INTULocationManager.h */,
 				32EB4E931A6E47CD0064B819 /* INTULocationManager.m */,
 				32EB4E941A6E47CD0064B819 /* INTULocationRequest.h */,
@@ -1540,6 +1547,7 @@
 				32D0E85D1A416B1C00D1F190 /* UIAlertView+Utils.m in Sources */,
 				3274DDA01A5282680079D176 /* PDCenterDetailCell.m in Sources */,
 				326CB7201A42949800D2BADE /* PDOwnerCell.m in Sources */,
+				32D138391A7E653D00414107 /* BKLocationManager.m in Sources */,
 				32D0E83D1A4161A500D1F190 /* Lockbox.m in Sources */,
 				32D0E81F1A41602200D1F190 /* UIImageView+AFNetworking.m in Sources */,
 				32D0E7CE1A415E7C00D1F190 /* ViewController.m in Sources */,

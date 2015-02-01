@@ -262,6 +262,17 @@
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data button:(UIButton *)addButton{
     NSLog(@"add");
     
+    PDModelFood *food = (PDModelFood *)data;
+    if ([food.stock integerValue]<=0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"你点的菜库存不足，请选择其它菜品"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"确定", nil];
+        [alert show];
+        return;
+    }
+    
     UIButton *button = addButton;
     CGRect frame =  [self.view convertRect:button.frame toView:nil];
     

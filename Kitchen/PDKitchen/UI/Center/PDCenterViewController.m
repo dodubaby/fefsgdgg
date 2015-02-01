@@ -13,7 +13,8 @@
 #import "PDCenterDetailViewController.h"
 
 #import "INTULocationManager.h"
-
+#import "PDLocationManager.h"
+#import "BKLocationManager.h"
 
 @interface PDCenterViewController ()
 {
@@ -103,8 +104,7 @@
         }];
     }];
 #else
-
-    // pull
+    
     [self.tableView addPullToRefreshWithActionHandler:^{
         
         [weakSelf startLoading];
@@ -121,7 +121,7 @@
                 if ([list count]==0) {
                     [weakSelf showDefaultView];
                 }else{
-                
+                    
                     weakSelf.currentPage +=1;
                     
                     [weakSelf.dataList removeAllObjects];
@@ -138,22 +138,55 @@
             }];
         }else{  // 真机
             
-            // 定位刷新
-            INTULocationManager *locMgr = [INTULocationManager sharedInstance];
-            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom timeout:10.0 delayUntilAuthorized:YES block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-                if (status == INTULocationStatusSuccess) {
-                    weakSelf.location = currentLocation;
-                    if (currentLocation) {
-                        NSNumber *latitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
-                        NSNumber *longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
-                        NSString *loc =  [NSString stringWithFormat:@"%@,%@",longitude,latitude];
-                        weakSelf.locationStr = loc;
+            BKLocationManager *manager = [BKLocationManager sharedManager];
+            [manager setDidUpdateLocationBlock:^(CLLocationManager *manager, CLLocation *newLocation, CLLocation *oldLocation) {
+                //
+                weakSelf.location = newLocation;
+                if (newLocation) {
+                    NSNumber *latitude = [NSNumber numberWithDouble:newLocation.coordinate.latitude];
+                    NSNumber *longitude = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
+                    NSString *loc =  [NSString stringWithFormat:@"%@,%@",longitude,latitude];
+                    weakSelf.locationStr = loc;
+                }
+                
+                // 定位成功开始加载
+                weakSelf.currentPage = 0;
+                NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+                
+                
+                [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+                    //
+                    [weakSelf.tableView.pullToRefreshView stopAnimating];
+                    
+                    if ([list count]==0) {
+                        [weakSelf showDefaultView];
+                    }else{
+                        
+                        weakSelf.currentPage +=1;
+                        
+                        [weakSelf.dataList removeAllObjects];
+                        [weakSelf.dataList addObjectsFromArray:list];
+                        [weakSelf.tableView reloadData];
                     }
                     
-                    // 定位成功开始加载
+                    [weakSelf stopLoading];
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    //
+                    [weakSelf.tableView.pullToRefreshView stopAnimating];
+                    [weakSelf stopLoading];
+                }];
+
+            }];
+            
+            [manager setDidFailBlock:^(CLLocationManager *manager, NSError *error) {
+                //
+                [weakSelf.tableView.pullToRefreshView stopAnimating];
+                [weakSelf stopLoading];
+                
+                if (weakSelf.location) { // 真机，有位置信息,开始加载
                     weakSelf.currentPage = 0;
                     NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
-                    
                     
                     [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
                         //
@@ -177,36 +210,9 @@
                         [weakSelf.tableView.pullToRefreshView stopAnimating];
                         [weakSelf stopLoading];
                     }];
-                    
-                }else{   // 定位失败
-                    if (weakSelf.location) { // 真机，有位置信息,开始加载
-                        weakSelf.currentPage = 0;
-                        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
-                        
-                        [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-                            //
-                            [weakSelf.tableView.pullToRefreshView stopAnimating];
-                            
-                            if ([list count]==0) {
-                                [weakSelf showDefaultView];
-                            }else{
-                                
-                                weakSelf.currentPage +=1;
-                                
-                                [weakSelf.dataList removeAllObjects];
-                                [weakSelf.dataList addObjectsFromArray:list];
-                                [weakSelf.tableView reloadData];
-                            }
-                            
-                            [weakSelf stopLoading];
-                            
-                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            //
-                            [weakSelf.tableView.pullToRefreshView stopAnimating];
-                            [weakSelf stopLoading];
-                        }];
-                    }else{ // 真机，没有位置信息
-                        
+                }else{
+                    // 判断定位服务是否可用
+                    if ([CLLocationManager locationServicesEnabled] == NO){
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                                         message:@"你的定位服务没有打开：设置》隐私》定位服务开启"
                                                                        delegate:nil
@@ -214,18 +220,168 @@
                                                               otherButtonTitles:@"确定", nil];
                         
                         [alert show];
+                    }else{
                         
-                        [weakSelf.tableView.pullToRefreshView stopAnimating];
-                        [weakSelf stopLoading];
-                        [weakSelf.tableView reloadData];
-                        [weakSelf showDefaultView];
+                        CLAuthorizationStatus locationStatus = [CLLocationManager authorizationStatus];
+                        switch (locationStatus)
+                        {
+                            case kCLAuthorizationStatusRestricted:
+                            case kCLAuthorizationStatusDenied:
+                            {
+                               
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                                message:@"你的定位服务没有打开：设置》隐私》定位服务开启"
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:nil
+                                                                      otherButtonTitles:@"确定", nil];
+                                
+                                [alert show];
+
+                                
+                                break;
+                            }
+                                // 未确定
+                            case kCLAuthorizationStatusNotDetermined:
+                            {
+                                break;
+                            }
+                                
+                                // 去哪儿定位服务开启
+                            default:
+                                break;
+                        }
                     }
                 }
-             }];
+            }];
+            [manager startUpdatingLocation];
         }
     }];
-    
+
 #endif
+    
+//
+//    // pull
+//    [self.tableView addPullToRefreshWithActionHandler:^{
+//        
+//        [weakSelf startLoading];
+//        
+//        if (weakSelf.isSimulator) {  // 模拟器
+//            weakSelf.currentPage = 0;
+//            NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+//            
+//            
+//            [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//                //
+//                [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                
+//                if ([list count]==0) {
+//                    [weakSelf showDefaultView];
+//                }else{
+//                
+//                    weakSelf.currentPage +=1;
+//                    
+//                    [weakSelf.dataList removeAllObjects];
+//                    [weakSelf.dataList addObjectsFromArray:list];
+//                    [weakSelf.tableView reloadData];
+//                }
+//                
+//                [weakSelf stopLoading];
+//                
+//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                //
+//                [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                [weakSelf stopLoading];
+//            }];
+//        }else{  // 真机
+//            
+//            // 定位刷新
+//            INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+//            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom timeout:10.0 delayUntilAuthorized:YES block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+//                if (status == INTULocationStatusSuccess) {
+//                    weakSelf.location = currentLocation;
+//                    if (currentLocation) {
+//                        NSNumber *latitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+//                        NSNumber *longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+//                        NSString *loc =  [NSString stringWithFormat:@"%@,%@",longitude,latitude];
+//                        weakSelf.locationStr = loc;
+//                    }
+//                    
+//                    // 定位成功开始加载
+//                    weakSelf.currentPage = 0;
+//                    NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+//                    
+//                    
+//                    [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//                        //
+//                        [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                        
+//                        if ([list count]==0) {
+//                            [weakSelf showDefaultView];
+//                        }else{
+//                            
+//                            weakSelf.currentPage +=1;
+//                            
+//                            [weakSelf.dataList removeAllObjects];
+//                            [weakSelf.dataList addObjectsFromArray:list];
+//                            [weakSelf.tableView reloadData];
+//                        }
+//                        
+//                        [weakSelf stopLoading];
+//                        
+//                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                        //
+//                        [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                        [weakSelf stopLoading];
+//                    }];
+//
+//                }else{   // 定位失败
+//                    if (weakSelf.location) { // 真机，有位置信息,开始加载
+//                        weakSelf.currentPage = 0;
+//                        NSNumber *p = [NSNumber numberWithInt:weakSelf.currentPage];
+//                        
+//                        [[PDHTTPEngine sharedInstance] appHomeWithLocation:weakSelf.locationStr page:p success:^(AFHTTPRequestOperation *operation, NSArray *list) {
+//                            //
+//                            [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                            
+//                            if ([list count]==0) {
+//                                [weakSelf showDefaultView];
+//                            }else{
+//                                
+//                                weakSelf.currentPage +=1;
+//                                
+//                                [weakSelf.dataList removeAllObjects];
+//                                [weakSelf.dataList addObjectsFromArray:list];
+//                                [weakSelf.tableView reloadData];
+//                            }
+//                            
+//                            [weakSelf stopLoading];
+//                            
+//                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                            //
+//                            [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                            [weakSelf stopLoading];
+//                        }];
+//                    }else{ // 真机，没有位置信息
+//                        
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                                        message:@"你的定位服务没有打开：设置》隐私》定位服务开启"
+//                                                                       delegate:nil
+//                                                              cancelButtonTitle:nil
+//                                                              otherButtonTitles:@"确定", nil];
+//                        
+//                        [alert show];
+//
+//                        [weakSelf.tableView.pullToRefreshView stopAnimating];
+//                        [weakSelf stopLoading];
+//                        [weakSelf.tableView reloadData];
+//                        [weakSelf showDefaultView];
+//                    }
+//                }
+//             }];
+//        }
+//    }];
+    
+//#endif
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         
@@ -429,6 +585,18 @@
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data button:(UIButton *)addButton{
     NSLog(@"add");
 
+    PDModelFood *food = (PDModelFood *)data;
+    if ([food.stock integerValue]<=0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"你点的菜库存不足，请选择其它菜品"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"确定", nil];
+        [alert show];
+        
+        return;
+    }
+    
     UIButton *button = addButton;
     CGRect frame =  [[UIApplication sharedApplication].keyWindow convertRect:button.frame toView:nil];
 

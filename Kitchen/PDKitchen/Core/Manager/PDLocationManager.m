@@ -28,14 +28,12 @@
 }
 
 - (void)setDidUpdateLocationBlock:(PDLocationDidUpdateLocation)block{
-
     if (block) {
         _onLocationSuccess = [block copy];
     }
 }
 
 - (void)setDidFailBlock:(PDLocationDidFail)block{
-
     if (block) {
         _onLocationFailure = [block copy];
     }
@@ -44,10 +42,9 @@
 -(void)startUpdate{
 
     self.manager = [[CLLocationManager alloc] init];
-    self.manager.desiredAccuracy  = kCLLocationAccuracyNearestTenMeters;
+    self.manager.desiredAccuracy  = kCLLocationAccuracyHundredMeters;
     self.manager.delegate = self;
 
-    
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
