@@ -177,12 +177,15 @@
                     [weakSelf stopLoading];
                 }];
 
+                [manager stopUpdatingLocation];
             }];
             
             [manager setDidFailBlock:^(CLLocationManager *manager, NSError *error) {
                 //
                 [weakSelf.tableView.pullToRefreshView stopAnimating];
                 [weakSelf stopLoading];
+                
+                [manager stopUpdatingLocation];
                 
                 if (weakSelf.location) { // 真机，有位置信息,开始加载
                     weakSelf.currentPage = 0;

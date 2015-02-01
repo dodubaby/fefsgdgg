@@ -1684,8 +1684,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhen ming (47YZZPWZU3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhen ming (47YZZPWZU3)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1705,7 +1705,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
+				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1727,8 +1727,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhen ming (47YZZPWZU3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhen ming (47YZZPWZU3)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1741,7 +1741,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
+				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1751,8 +1751,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhen ming (47YZZPWZU3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhen ming (47YZZPWZU3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS_SDK_2.3.1_arm64",
@@ -1771,7 +1771,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
+				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Debug;
@@ -1780,8 +1780,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Dilitech Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dilitech Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhen ming (47YZZPWZU3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhen ming (47YZZPWZU3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PDKitchen/Libs/iOS_SDK_2.3.1_arm64",
@@ -1800,7 +1800,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F5FA4688-55EE-44D2-AD90-3A11BC63F80B";
+				PROVISIONING_PROFILE = "a9df4df8-6435-4c2e-bea0-710bae561b35";
 				VALID_ARCHS = "armv7 armv7s armv64 i386 x86_64";
 			};
 			name = Release;
