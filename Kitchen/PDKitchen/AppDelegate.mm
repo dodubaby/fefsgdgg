@@ -123,6 +123,7 @@
     
     return YES;
 }
+
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
     [APService handleRemoteNotification:userInfo];
@@ -130,6 +131,20 @@
     NSDictionary *extras = [userInfo valueForKey:@"extras"];
     NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
     NSLog(@"userInfo==%@",userInfo);
+    
+    if (userInfo[@"news_id"]) {
+        // 刷新消息气泡
+        NSInteger ct = [[PDAccountManager sharedInstance].news_count integerValue]+1;
+        [PDAccountManager sharedInstance].news_count = [NSNumber numberWithInteger:ct];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNewsHideNotificationKey object:nil];
+    }
+    
+    if (userInfo[@"coupon_id"]) {
+        // 刷新优惠券气泡
+        NSInteger ct = [[PDAccountManager sharedInstance].coupon_count integerValue]+1;
+        [PDAccountManager sharedInstance].coupon_count = [NSNumber numberWithInteger:ct];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNewsHideNotificationKey object:nil];
+    }
 }
 
 -(void)showLogin{

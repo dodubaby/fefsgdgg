@@ -44,8 +44,6 @@
         return;
     }
     
-    
-    
     if (_lastAddTime) {
         
         NSInteger second = [_lastAddTime timeIntervalSinceNow];
