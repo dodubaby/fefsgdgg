@@ -13,4 +13,6 @@
 
 @property (nonatomic,strong) NSString *foodid;
 
+@property (nonatomic,assign) NSInteger remainAmount; // 剩余份数
+
 @end

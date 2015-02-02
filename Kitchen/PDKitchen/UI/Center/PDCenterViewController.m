@@ -16,11 +16,19 @@
 #import "PDLocationManager.h"
 #import "BKLocationManager.h"
 
+#import "AppDelegate.h"
+
+
 @interface PDCenterViewController ()
 {
     UILabel *badge;
     UIImageView *newsMark;
+    
+    UILabel *animLabel;
 }
+
+@property (nonatomic,strong) PDModelFood *food; // 将要添加的food
+
 
 @property (nonatomic,strong) NSMutableArray *dataList;
 
@@ -31,6 +39,7 @@
 @property (nonatomic,strong) CLLocation *location;
 
 @property (nonatomic,assign) BOOL isSimulator;  // 模拟器上用固定地址
+
 
 @end
 
@@ -580,65 +589,102 @@
     PDModelFood *food = _dataList[indexPath.row];
     vc.title = food.food_name;
     vc.foodid = food.food_id;
+    vc.remainAmount = [food.stock integerValue];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 // 添加购物车
 
+// 添加订单
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell addOrderWithData:(id)data button:(UIButton *)addButton{
     NSLog(@"add");
-
+    
     PDModelFood *food = (PDModelFood *)data;
-    if ([food.stock integerValue]<=0) {
+    NSInteger ct = 0;
+    for (PDModelFood *fd in [PDCartManager sharedInstance].cartList) {
+        if ([fd.food_id isEqualToString:food.food_id]) {
+            ct = [fd.count integerValue];
+            break;
+        }
+    }
+    
+    if (([food.stock integerValue]-ct)<=0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:@"你点的菜库存不足，请选择其它菜品"
                                                        delegate:nil
                                               cancelButtonTitle:nil
                                               otherButtonTitles:@"确定", nil];
         [alert show];
-        
         return;
     }
     
+    // 缓存food
+    _food = nil;
+    _food = (PDModelFood *)data;
+    
     UIButton *button = addButton;
-    CGRect frame =  [[UIApplication sharedApplication].keyWindow convertRect:button.frame toView:nil];
-
-    NSLog(@"%@",NSStringFromCGRect(frame));
+    CGRect frame =  [cell convertRect:button.frame toView:[UIApplication sharedApplication].keyWindow];
+    //NSLog(@"%@",NSStringFromCGRect(frame));
+    if (!animLabel) {
+        animLabel = [[UILabel alloc] initWithFrame:frame];
+        animLabel.top = animLabel.top +64;
+        animLabel.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
+        animLabel.font = [UIFont boldSystemFontOfSize:15];
+        animLabel.layer.cornerRadius = 4;
+        animLabel.clipsToBounds = YES;
+        animLabel.font = [UIFont systemFontOfSize:15];
+        animLabel.textColor = [UIColor whiteColor];
+        animLabel.textAlignment = NSTextAlignmentCenter;
+        animLabel.text = @"加入菜单";
+    }
     
-    UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.top = label.top +64;
-    label.backgroundColor = [UIColor colorWithHexString:@"#c14a41"];
-    label.font = [UIFont boldSystemFontOfSize:15];
-    label.layer.cornerRadius = 4;
-    label.clipsToBounds = YES;
-    label.font = [UIFont systemFontOfSize:15];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"加入订单";
+    animLabel.frame = frame;
+    animLabel.top = animLabel.top +64;
     
-    [[UIApplication sharedApplication].keyWindow addSubview:label];
+    [[UIApplication sharedApplication].keyWindow addSubview:animLabel];
     
-    [UIView animateWithDuration:0.4 animations:^{
-        //
-        label.center = CGPointMake(kAppWidth - 30, 40);
-        label.transform = CGAffineTransformScale(label.transform,0.2,0.2);
-        label.alpha = 0.5;
-    } completion:^(BOOL finished) {
-        [label removeFromSuperview];
-    }];
+    //    [UIView animateWithDuration:0.4 animations:^{
+    //        //
+    //        label.center = CGPointMake(kAppWidth - 30, 40);
+    //        label.transform = CGAffineTransformScale(label.transform,0.2,0.2);
+    //        label.alpha = 0.5;
+    //    } completion:^(BOOL finished) {
+    //        [label removeFromSuperview];
+    //    }];
     
-    [[PDCartManager sharedInstance] addFood:data];
+    //    [[PDCartManager sharedInstance] addFood:data];
     
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, animLabel.center.x, animLabel.top-44);
+    CGPathAddQuadCurveToPoint(path, NULL, 100, 60, kAppWidth - 30, 40);
     
-//    if ([self userLogined]) {
-//        NSString *userid = [PDAccountManager sharedInstance].userid;
-//        NSString *foodids = @"1*2**2*5";
-//        [[PDHTTPEngine sharedInstance] cartAddWithUserid:userid foodids:foodids success:^(AFHTTPRequestOperation *operation, NSArray *list) {
-//            //
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            //
-//        }];
-//    }
+    CAKeyframeAnimation * theAnimation;
+    theAnimation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
+    theAnimation.path = path;
+    CFRelease(path);
+    path = nil;
+    
+    CGFloat from3DScale = 1;
+    CGFloat to3DScale = 0.3;
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    scaleAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(from3DScale, from3DScale, from3DScale)], [NSValue valueWithCATransform3D:CATransform3DMakeScale(to3DScale, to3DScale, to3DScale)]];
+    scaleAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.delegate = self;
+    group.duration = 0.6;
+    group.fillMode = kCAFillModeForwards;
+    group.removedOnCompletion = NO;
+    group.animations = @[scaleAnimation,theAnimation];
+    [animLabel.layer addAnimation:group forKey:@"position and transform"];
+    
+}
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    if(_food){
+        [[PDCartManager sharedInstance] addFood:_food];
+    }
+    [animLabel removeFromSuperview];
+    
 }
 
 @end

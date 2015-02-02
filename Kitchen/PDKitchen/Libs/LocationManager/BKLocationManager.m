@@ -75,6 +75,11 @@
         _locationManager = [[CLLocationManager alloc] init];
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         self.locationManager.delegate = self;
+        if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        {
+            [self.locationManager requestAlwaysAuthorization]; // 永久授权
+            [self.locationManager requestWhenInUseAuthorization]; //使用中授权
+        }
     }
     
     return self;
