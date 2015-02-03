@@ -100,7 +100,7 @@
     phoneField.placeholder = @"手机号";
     phoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    phoneField.text = @"18612055976";
+    //phoneField.text = @"18612055976";
     
     sendCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     sendCodeButton.frame = CGRectMake(phoneField.right, 0, 130, 50);
