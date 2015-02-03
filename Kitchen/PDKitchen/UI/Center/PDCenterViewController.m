@@ -177,7 +177,6 @@
                         [weakSelf.dataList addObjectsFromArray:list];
                         [weakSelf.tableView reloadData];
                     }
-                    
                     [weakSelf stopLoading];
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -686,5 +685,28 @@
     [animLabel removeFromSuperview];
     
 }
+-(void)showDefaultView
+{
+    UIView *imageview=[self.tableView viewWithTag:50000];
+    UIView *lab=[self.tableView viewWithTag:60000];
+    if (imageview==nil) {
+        UIImageView *imageview=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_logo"]];
+        imageview.tag=50000;
+        [self.tableView addSubview:imageview];
+        imageview.center=CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2-60);
+    }
+    if (lab==nil) {
+        UILabel *lab=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+        lab.backgroundColor=[UIColor clearColor];
+        lab.textAlignment=NSTextAlignmentCenter;
+        lab.text=@"你附近还没有厨房，我们正在拓展中";
+        lab.numberOfLines=2;
+        lab.tag=60000;
+        lab.textColor=[UIColor grayColor];
+        lab.center=CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2+50-60);
+        [self.tableView addSubview:lab];
+    }
+}
+
 
 @end

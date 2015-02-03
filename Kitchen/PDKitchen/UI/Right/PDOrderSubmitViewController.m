@@ -246,16 +246,15 @@ PDOrderTimeViewControllerDelegate>
         }
         
         NSArray *arr = [PDCartManager sharedInstance].cartList;
-        NSMutableString *ids = [[NSMutableString alloc] init];
-        
         CGFloat totalPrice = 0.0f;
+        NSMutableArray *ids=[NSMutableArray array];
         for (PDModelFood *food in arr) {
-            [ids appendString:[NSString stringWithFormat:@"%@*%@*",food.food_id,food.count]];
+            [ids addObject:[NSString stringWithFormat:@"%@*%@",food.food_id,food.count]];
             totalPrice =  totalPrice + [food.count integerValue]*[food.price floatValue];
         }
-        NSString *foodids = [ids substringToIndex:ids.length -1];// 去掉最后 *
+        NSString *foodids = [ids componentsJoinedByString:@"**"];
         
-        NSLog(@"%@",foodids);
+        NSLog(@"foodids==%@",foodids);
         
         // 信息
         NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:5 inSection:0];
