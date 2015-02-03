@@ -936,10 +936,11 @@
         
         if (code == 0) {
             success(operation,data);
-        }else{
-            
+        }else if(code==202){
             [self tokenExpireWithCode:code];
-            
+            NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
+            failure(operation,err);
+        }else{
             NSError *err = [NSError errorWithDomain:kHttpHost code:code userInfo:@{@"Message":msg}];
             failure(operation,err);
         }
@@ -961,7 +962,7 @@
     if (userid) {
         [parameters setObject:userid forKey:@"userid"];
     }
-    [parameters setObject:food_id forKey:@"food_id"];
+    [parameters setObject:food_id forKey:@"collect_id"];
     
     [_HTTPEngine POST:kPathOfCollectDelete parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];

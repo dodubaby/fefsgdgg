@@ -21,7 +21,7 @@
 @property (nonatomic,strong) NSString *eat_sum;
 @property (nonatomic,strong) NSString *like_sum;
 @property (nonatomic,strong) NSString *phone;
-
+@property (nonatomic,strong) NSNumber *is_collect;
 // 订购数量
 @property (nonatomic,strong) NSNumber *count;
 

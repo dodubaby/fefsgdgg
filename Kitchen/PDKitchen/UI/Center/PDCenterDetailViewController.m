@@ -423,47 +423,55 @@
 -(void)pdBaseTableViewCellDelegate:(PDBaseTableViewCell *)cell favoriteWithData:(id)data{
 
     PDModelFood *fd = (PDModelFood *)data;
-//    // 收藏
-//    if ([self userLogined]) {
-//        NSString *userid = [PDAccountManager sharedInstance].userid;
-//        [[PDHTTPEngine sharedInstance] collectAddWithUserid:userid food_id:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            //
-//            NSLog(@"收藏成功");
-//            
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            //
-//            NSString *message = error.userInfo[@"Message"];
-//            if (!message) {
-//                message = [error localizedDescription];
-//            }
-//            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                             message:message
-//                                                            delegate:nil
-//                                                   cancelButtonTitle:nil
-//                                                   otherButtonTitles:@"确定", nil];
-//            [alert show];
-//        }];
-//    }
-    
+    // 收藏
     if ([self userLogined]) {
         NSString *userid = [PDAccountManager sharedInstance].userid;
-        [[PDHTTPEngine sharedInstance] collectDeleteWithUserid:userid food_id:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //
-            NSLog(@"取消收藏成功");
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //
-            NSString *message = error.userInfo[@"Message"];
-            if (!message) {
-                message = [error localizedDescription];
-            }
-            UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                             message:message
-                                                            delegate:nil
-                                                   cancelButtonTitle:nil
-                                                   otherButtonTitles:@"确定", nil];
-            [alert show];
-        }];
+        if ([fd.is_collect integerValue]==0) {
+            [[PDHTTPEngine sharedInstance] collectAddWithUserid:userid food_id:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //
+                NSLog(@"收藏成功");
+                fd.is_collect=[NSNumber numberWithInt:1];
+                NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationFade];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //
+                NSString *message = error.userInfo[@"Message"];
+                if (!message) {
+                    message = [error localizedDescription];
+                }
+                if (error.code==1) {
+                    fd.is_collect=[NSNumber numberWithInt:1];
+                    NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
+                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationFade];
+                }
+                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:message
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"确定", nil];
+                [alert show];
+            }];
+        }else{
+            [[PDHTTPEngine sharedInstance] collectDeleteWithUserid:userid food_id:fd.food_id success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //
+                NSLog(@"取消收藏成功");
+                fd.is_collect=[NSNumber numberWithInt:0];
+                NSIndexPath *indexpath=[self.tableView indexPathForCell:cell];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexpath] withRowAnimation:UITableViewRowAnimationFade];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //
+                NSString *message = error.userInfo[@"Message"];
+                if (!message) {
+                    message = [error localizedDescription];
+                }
+                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:message
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"确定", nil];
+                [alert show];
+            }];
+        }
     }
 }
 

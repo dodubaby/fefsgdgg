@@ -107,6 +107,7 @@
         favorite = [[UIButton alloc] initWithFrame:CGRectMake(105 + kCellLeftGap, person.bottom+10, 60, 30)];
         [self addSubview:favorite];
         [favorite setTitle:@"收藏" forState:UIControlStateNormal];
+        [favorite setTitle:@"已收藏" forState:UIControlStateHighlighted];
         [favorite setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
         [favorite setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateHighlighted];
         favorite.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -168,6 +169,11 @@
     
     if (food.food_img) {
         thumbnail.imageURL = [NSURL URLWithString:food.food_img];
+    }
+    if ([food.is_collect integerValue]==1) {
+        favorite.highlighted=YES;
+    }else{
+        favorite.highlighted=NO;
     }
     
     /*
