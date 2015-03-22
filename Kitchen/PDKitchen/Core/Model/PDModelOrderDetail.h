@@ -59,6 +59,7 @@
 @property(nonatomic,strong) NSString *name;
 @property(nonatomic,strong) NSString *num;
 @property(nonatomic,strong) NSString *price;
+@property(nonatomic,strong) NSString *food_id;
 @end
 
 @interface PDModelOrderOrderObject : NSObject
@@ -72,5 +73,7 @@
 @property(nonatomic,strong) NSString *phone;
 @property(nonatomic,strong) NSString *send_price;
 @property(nonatomic,strong) NSString *sum_price;
+@property(nonatomic,strong) NSString *cooker_id;
+@property(nonatomic,strong) NSString *order_type;
 
 @end

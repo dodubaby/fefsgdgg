@@ -58,12 +58,13 @@
 }
 -(void)configData:(PDModelOrderDetail*)orderdetail
 {
+    _order_detail=orderdetail;
     foodlab.text=[NSString stringWithFormat:@"%@ %@元   x%@",orderdetail.food_object.name,orderdetail.food_object.price,orderdetail.food_object.num];
-    
     logisticslab.text=[NSString stringWithFormat:@"配送费：%@元",orderdetail.order_object.send_price];
     eattimelab.text=[NSString stringWithFormat:@"就餐时间：%@",orderdetail.order_object.eat_time];
     priceDetail.text=[NSString stringWithFormat:@"优惠券：%@元 还需支付%@元",orderdetail.order_object.coupon_price,orderdetail.order_object.money];
     addresslab.text=[NSString stringWithFormat:@"配送地址：%@",orderdetail.order_object.address];
+    
 }
 
 @end

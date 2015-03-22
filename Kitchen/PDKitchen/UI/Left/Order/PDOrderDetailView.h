@@ -16,5 +16,5 @@
 @interface PDOrderDetailView : PDBaseView
 -(void)configData:(PDModelOrderDetail*)orderdetail;
 
-
+@property(nonatomic,strong)PDModelOrderDetail *order_detail;
 @end

@@ -9,6 +9,7 @@
 #import "PDOrderDetailViewController.h"
 #import "PDOrderLogisticsView.h"
 #import "PDOrderDetailView.h"
+#import "PDCommentsInputViewController.h"
 
 @interface PDOrderDetailViewController ()
 {
@@ -93,9 +94,14 @@
     [refund handleControlEvents:UIControlEventTouchUpInside actionBlock:^(id sender) {
         
         if ([self userLogined]) {
-            
             [self startLoading];
-            
+            if ([orderDetailView.order_detail.order_object.order_type integerValue]==2) {
+                PDCommentsInputViewController *vc = [[PDCommentsInputViewController alloc] init];
+                vc.foodid = orderDetailView.order_detail.food_object.food_id;
+                vc.cookerid = orderDetailView.order_detail.order_object.cooker_id;
+                [self.navigationController pushViewController:vc animated:YES];
+                [self stopLoading];
+            }else{
             NSString *userid = [PDAccountManager sharedInstance].userid;
             [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 
@@ -125,9 +131,11 @@
                                                        otherButtonTitles:@"确定", nil];
                 [alert show];
             }];
+            }
         }
     }];
-    
+    //获取按钮状态
+    [self showDetail];
     // 默认展示物流信息
     [self showLogistics];
     
@@ -184,7 +192,11 @@
             if (deteil) {
                 [orderDetailView configData:deteil];
             }
-            
+            if ([deteil.order_object.order_type integerValue]==2) {
+                [refund setTitle:@"留言" forState:UIControlStateNormal];
+            }else{
+                [refund setTitle:@"退单" forState:UIControlStateNormal];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //
             NSString *message = error.userInfo[@"Message"];
