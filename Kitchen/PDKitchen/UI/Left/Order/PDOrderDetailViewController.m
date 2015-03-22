@@ -102,35 +102,31 @@
                 [self.navigationController pushViewController:vc animated:YES];
                 [self stopLoading];
             }else{
-            NSString *userid = [PDAccountManager sharedInstance].userid;
-            [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                [self stopLoading];
-                
-                
-                NSString *msg = [NSString stringWithFormat:@"请联系客服：%@",kPDPhoneNumber];
-                
-                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                 message:msg
-                                                                delegate:nil
-                                                       cancelButtonTitle:nil
-                                                       otherButtonTitles:@"确定", nil];
-                [alert show];
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                
-                [self stopLoading];
-                
-                NSString *message = error.userInfo[@"Message"];
-                if (!message) {
-                    message = [error localizedDescription];
-                }
-                UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                 message:message
-                                                                delegate:nil
-                                                       cancelButtonTitle:nil
-                                                       otherButtonTitles:@"确定", nil];
-                [alert show];
-            }];
+                NSString *userid = [PDAccountManager sharedInstance].userid;
+                [[PDHTTPEngine sharedInstance] orderBackWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    [self stopLoading];
+                    NSString *msg = [NSString stringWithFormat:@"请联系商家：%@",orderDetailView.order_detail.order_object.phone];
+                    UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                     message:msg
+                                                                    delegate:nil
+                                                           cancelButtonTitle:nil
+                                                           otherButtonTitles:@"确定", nil];
+                    [alert show];
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    
+                    [self stopLoading];
+                    
+                    NSString *message = error.userInfo[@"Message"];
+                    if (!message) {
+                        message = [error localizedDescription];
+                    }
+                    UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                     message:message
+                                                                    delegate:nil
+                                                           cancelButtonTitle:nil
+                                                           otherButtonTitles:@"确定", nil];
+                    [alert show];
+                }];
             }
         }
     }];
@@ -150,7 +146,7 @@
     detailButton.selected = NO;
     
     if ([self userLogined]) {
-    
+        
         NSString *userid = [PDAccountManager sharedInstance].userid;
         [[PDHTTPEngine sharedInstance] orderLogisticsWithUserid:userid orderid:_orderid success:^(AFHTTPRequestOperation *operation, NSArray *list) {
             //

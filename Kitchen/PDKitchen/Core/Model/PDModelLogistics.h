@@ -19,5 +19,5 @@
 @property (nonatomic,strong) NSString *dispatching;
 @property (nonatomic,strong) NSString *status;
 @property (nonatomic,strong) NSString *time;
-
+@property (nonatomic,strong) NSString *status_title;
 @end

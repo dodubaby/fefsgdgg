@@ -75,7 +75,7 @@
 //    4、已就餐；
     
     int status = [ls.status intValue];
-    NSString *statusStr = nil;
+    NSString *statusStr = ls.status_title;
     NSString *phoneStr = nil;
     
     switch (status) {
@@ -83,7 +83,7 @@
             //
         {
         
-            statusStr = @"确认订单";
+//            statusStr = @"确认订单";
             phoneStr = [NSString stringWithFormat:@"客服：%@",ls.custom];
         }
             break;
@@ -91,18 +91,18 @@
             //
         {
         
-            statusStr = @"中间物流配送";
+//            statusStr = @"中间物流配送";
             phoneStr = [NSString stringWithFormat:@"物流：%@",ls.dispatching];
         }
             break;
         case 3:
             //
-            statusStr = @"终级物流配送";
+//            statusStr = @"终级物流配送";
             phoneStr = [NSString stringWithFormat:@"物流：%@",ls.dispatching];
             break;
         case 4:
             //
-            statusStr = @"已就餐";
+//            statusStr = @"已就餐";
             phoneStr = nil;
             
             break;
